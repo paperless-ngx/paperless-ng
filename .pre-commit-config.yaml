@@ -55,6 +55,10 @@ repos:
     hooks:
       - id: ruff
       - id: ruff-format
+  - repo: https://github.com/tox-dev/pyproject-fmt
+    rev: "2.0.4"
+    hooks:
+      - id: pyproject-fmt
   # Dockerfile hooks
   - repo: https://github.com/AleksaC/hadolint-py
     rev: v2.12.0.3

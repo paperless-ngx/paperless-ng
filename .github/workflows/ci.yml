@@ -14,9 +14,12 @@ on:
       - 'translations**'
 
 env:
+<<<<<<< HEAD
   # This is the version of pipenv all the steps will use
   # If changing this, change Dockerfile
   DEFAULT_PIP_ENV_VERSION: "2024.4.0"
+=======
+>>>>>>> 088da3afc (Experiment with using uv, initial work)
   # This is the default version of Python to use in most steps which aren't specific
   DEFAULT_PYTHON_VERSION: "3.11"
 
@@ -59,24 +62,23 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.DEFAULT_PYTHON_VERSION }}
-          cache: "pipenv"
-          cache-dependency-path: 'Pipfile.lock'
       -
-        name: Install pipenv
-        run: |
-          pip install --user pipenv==${{ env.DEFAULT_PIP_ENV_VERSION }}
+        name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
       -
         name: Install dependencies
         run: |
-          pipenv --python ${{ steps.setup-python.outputs.python-version }} sync --dev
+          uv sync --python ${{ steps.setup-python.outputs.python-version }} --dev --frozen
       -
         name: List installed Python dependencies
         run: |
-          pipenv --python ${{ steps.setup-python.outputs.python-version }} run pip list
+          uv pip list
       -
         name: Make documentation
         run: |
-          pipenv --python ${{ steps.setup-python.outputs.python-version }} run mkdocs build --config-file ./mkdocs.yml
+          uv run --python ${{ steps.setup-python.outputs.python-version }} mkdocs build --config-file ./mkdocs.yml
       -
         name: Deploy documentation
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -117,12 +119,11 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "${{ matrix.python-version }}"
-          cache: "pipenv"
-          cache-dependency-path: 'Pipfile.lock'
       -
-        name: Install pipenv
-        run: |
-          pip install --user pipenv==${{ env.DEFAULT_PIP_ENV_VERSION }}
+        name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
       -
         name: Install system dependencies
         run: |
@@ -135,12 +136,11 @@ jobs:
       -
         name: Install Python dependencies
         run: |
-          pipenv --python ${{ steps.setup-python.outputs.python-version }} run python --version
-          pipenv --python ${{ steps.setup-python.outputs.python-version }} sync --dev
+          uv sync --python ${{ steps.setup-python.outputs.python-version }} --dev --frozen
       -
         name: List installed Python dependencies
         run: |
-          pipenv --python ${{ steps.setup-python.outputs.python-version }} run pip list
+          uv pip list
       -
         name: Tests
         env:
@@ -151,7 +151,7 @@ jobs:
           PAPERLESS_MAIL_TEST_PASSWD: ${{ secrets.TEST_MAIL_PASSWD }}
         run: |
           cd src/
-          pipenv --python ${{ steps.setup-python.outputs.python-version }} run pytest -ra
+          uv run --python ${{ steps.setup-python.outputs.python-version }} pytest -ra
       -
         name: Upload coverage
         if: ${{ matrix.python-version == env.DEFAULT_PYTHON_VERSION }}
@@ -472,16 +472,15 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.DEFAULT_PYTHON_VERSION }}
-          cache: "pipenv"
-          cache-dependency-path: 'Pipfile.lock'
       -
-        name: Install pipenv + tools
-        run: |
-          pip install --upgrade --user pipenv==${{ env.DEFAULT_PIP_ENV_VERSION }} setuptools wheel
+        name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
       -
         name: Install Python dependencies
         run: |
-          pipenv --python ${{ steps.setup-python.outputs.python-version }} sync --dev
+          uv sync --python ${{ steps.setup-python.outputs.python-version }} --dev --frozen
       -
         name: Install system dependencies
         run: |
@@ -502,17 +501,17 @@ jobs:
       -
         name: Generate requirements file
         run: |
-          pipenv --python ${{ steps.setup-python.outputs.python-version }} requirements > requirements.txt
+           uv export --no-dev --frozen --format requirements-txt
       -
         name: Compile messages
         run: |
           cd src/
-          pipenv --python ${{ steps.setup-python.outputs.python-version }} run python3 manage.py compilemessages
+          uv run --python ${{ steps.setup-python.outputs.python-version }} manage.py compilemessages
       -
         name: Collect static files
         run: |
           cd src/
-          pipenv --python ${{ steps.setup-python.outputs.python-version }} run python3 manage.py collectstatic --no-input
+          uv run --python ${{ steps.setup-python.outputs.python-version }} manage.py collectstatic --no-input
       -
         name: Move files
         run: |
@@ -631,15 +630,15 @@ jobs:
           ref: main
       -
         name: Set up Python
+        id: setup-python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.DEFAULT_PYTHON_VERSION }}
-          cache: "pipenv"
-          cache-dependency-path: 'Pipfile.lock'
       -
-        name: Install pipenv + tools
-        run: |
-          pip install --upgrade --user pipenv==${{ env.DEFAULT_PIP_ENV_VERSION }} setuptools wheel
+        name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
       -
         name: Append Changelog to docs
         id: append-Changelog
@@ -655,7 +654,7 @@ jobs:
           CURRENT_CHANGELOG=`tail --lines +2 changelog.md`
           echo -e "$CURRENT_CHANGELOG" >> changelog-new.md
           mv changelog-new.md changelog.md
-          pipenv run pre-commit run --files changelog.md || true
+          uv run --python ${{ steps.setup-python.outputs.python-version }} pre-commit run --files changelog.md || true
           git config --global user.name "github-actions"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -am "Changelog ${{ needs.publish-release.outputs.version }} - GHA"

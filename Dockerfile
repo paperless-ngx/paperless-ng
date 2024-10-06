@@ -26,23 +26,6 @@ esac
 RUN set -eux \
   && ./node_modules/.bin/ng build --configuration production
 
-# Stage: pipenv-base
-# Purpose: Generates a requirements.txt file for building
-# Comments:
-#  - pipenv dependencies are not left in the final image
-#  - pipenv can't touch the final image somehow
-FROM --platform=$BUILDPLATFORM docker.io/python:3.12-alpine AS pipenv-base
-
-WORKDIR /usr/src/pipenv
-
-COPY Pipfile* ./
-
-RUN set -eux \
-  && echo "Installing pipenv" \
-    && python3 -m pip install --no-cache-dir --upgrade pipenv==2024.4.0 \
-  && echo "Generating requirement.txt" \
-    && pipenv requirements > requirements.txt
-
 # Stage: main-app
 # Purpose: The final image
 # Comments:
@@ -70,7 +53,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     # Ignore warning from Whitenoise
     PYTHONWARNINGS="ignore:::django.http.response:517" \
-    PNGX_CONTAINERIZED=1
+    PNGX_CONTAINERIZED=1 \
+    PATH="/usr/src/paperless/src/.venv/bin:$PATH"
 
 #
 # Begin installation and configuration
@@ -211,7 +195,8 @@ WORKDIR /usr/src/paperless/src/
 
 # Python dependencies
 # Change pretty frequently
-COPY --from=pipenv-base /usr/src/pipenv/requirements.txt ./
+COPY ["pyproject.toml", "uv.lock", "/usr/src/paperless/src/"]
+COPY --from=ghcr.io/astral-sh/uv:0.4 /uv /bin/uv
 
 # Packages needed only for building a few quick Python
 # dependencies
@@ -225,20 +210,25 @@ ARG BUILD_PACKAGES="\
   pkg-config"
 
 # hadolint ignore=DL3042
-RUN --mount=type=cache,target=/root/.cache/pip/,id=pip-cache \
+RUN --mount=type=cache,target=/root/.cache/uv,id=pip-cache \
   set -eux \
   && echo "Installing build system packages" \
     && apt-get update \
-    && apt-get install --yes --quiet --no-install-recommends ${BUILD_PACKAGES} \
-    && python3 -m pip install --no-cache-dir --upgrade wheel \
-  && echo "Installing Python requirements" \
+    && apt-get install --yes --quiet --no-install-recommends ${BUILD_PACKAGES}
+RUN --mount=type=cache,target=/root/.cache/uv,id=pip-cache \
+  set -eux && echo "Installing Python requirements" \
     && curl --fail --silent --show-error --location \
     --output psycopg_c-3.2.3-cp312-cp312-linux_x86_64.whl \
     https://github.com/paperless-ngx/builder/releases/download/psycopg-3.2.3/psycopg_c-3.2.3-cp312-cp312-linux_x86_64.whl \
     && curl --fail --silent --show-error --location \
-    --output psycopg_c-3.2.3-cp312-cp312-linux_aarch64.whl  \
-    https://github.com/paperless-ngx/builder/releases/download/psycopg-3.2.3/psycopg_c-3.2.3-cp312-cp312-linux_aarch64.whl \
-    && python3 -m pip install --default-timeout=1000 --find-links . --requirement requirements.txt \
+    --output psycopg_c-3.2.2-cp312-cp312-linux_aarch64.whl  \
+    https://github.com/paperless-ngx/builder/releases/download/psycopg-3.2.2/psycopg_c-3.2.2-cp312-cp312-linux_aarch64.whl \
+    && uv sync --frozen --no-dev --no-python-downloads --python-preference system --find-links . \
+    && chown -R 1000:1000 . \
+  && echo "Patching whitenoise for compression speedup" \
+    && curl --fail --silent --show-error --location --output 484.patch https://github.com/evansd/whitenoise/pull/484.patch \
+    && patch -d /usr/src/paperless/src/.venv/lib/python3.12/site-packages --verbose -p2 < 484.patch \
+    && rm 484.patch \
   && echo "Installing NLTK data" \
     && python3 -W ignore::RuntimeWarning -m nltk.downloader -d "/usr/share/nltk_data" snowball_data \
     && python3 -W ignore::RuntimeWarning -m nltk.downloader -d "/usr/share/nltk_data" stopwords \
@@ -277,7 +267,7 @@ RUN set -eux \
     && chown --from root:root --changes --recursive paperless:paperless /usr/src/paperless \
   && echo "Collecting static files" \
     && gosu paperless python3 manage.py collectstatic --clear --no-input --link \
-    && gosu paperless python3 manage.py compilemessages
+    && gosu paperless python3 manage.py compilemessages -v 0
 
 VOLUME ["/usr/src/paperless/data", \
         "/usr/src/paperless/media", \
