@@ -3,7 +3,7 @@
     "dockerComposeFile": "docker-compose.devcontainer.sqlite-tika.yml",
     "service": "paperless-development",
     "workspaceFolder": "/usr/src/paperless/paperless-ngx",
-    "postCreateCommand": "pipenv install --dev && pipenv run pre-commit install",
+    "postCreateCommand": "/bin/bash -c uv sync --dev && uv run pre-commit install",
     "customizations": {
         "vscode": {
           "extensions": [

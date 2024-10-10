@@ -43,7 +43,7 @@ services:
     volumes:
       - ..:/usr/src/paperless/paperless-ngx:delegated
       - ../.devcontainer/vscode:/usr/src/paperless/paperless-ngx/.vscode:delegated # VSCode config files
-      - pipenv:/usr/src/paperless/paperless-ngx/.venv
+      - virtualenv:/usr/src/paperless/paperless-ngx/.venv # Virtual environment persisted in volume
       - /usr/src/paperless/paperless-ngx/src/documents/static/frontend # Static frontend files exist only in container
       - /usr/src/paperless/paperless-ngx/src/.pytest_cache
       - /usr/src/paperless/paperless-ngx/.ruff_cache
@@ -80,4 +80,7 @@ services:
     restart: unless-stopped
 
 volumes:
-  pipenv:
+  data:
+  media:
+  redisdata:
+  virtualenv:

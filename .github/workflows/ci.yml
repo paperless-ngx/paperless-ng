@@ -86,7 +86,7 @@ jobs:
           echo "docs.paperless-ngx.com" > "${{ github.workspace }}/docs/CNAME"
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-          pipenv --python ${{ steps.setup-python.outputs.python-version }} run mkdocs gh-deploy --force --no-history
+          uv run --python ${{ steps.setup-python.outputs.python-version }} mkdocs gh-deploy --force --no-history
       -
         name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -527,8 +527,8 @@ jobs:
           for file_name in .dockerignore \
                           .env \
                           Dockerfile \
-                          Pipfile \
-                          Pipfile.lock \
+                          pyproject.toml \
+                          uv.lock \
                           requirements.txt \
                           LICENSE \
                           README.md \

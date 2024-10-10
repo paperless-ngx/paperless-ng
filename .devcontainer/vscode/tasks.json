@@ -5,7 +5,7 @@
 			"label": "Start: Celery Worker",
 			"description": "Start the Celery Worker which processes background and consume tasks",
 			"type": "shell",
-			"command": "pipenv run celery --app paperless worker -l DEBUG",
+			"command": "uv run celery --app paperless worker -l DEBUG",
 			"isBackground": true,
 			"options": {
 				"cwd": "${workspaceFolder}/src"
@@ -61,7 +61,7 @@
 			"label": "Start: Consumer Service (manage.py document_consumer)",
 			"description": "Start the Consumer Service which processes files from a directory",
 			"type": "shell",
-			"command": "pipenv run python manage.py document_consumer",
+			"command": "uv run python manage.py document_consumer",
 			"group": "build",
 			"presentation": {
 				"echo": true,
@@ -80,7 +80,7 @@
 			"label": "Start: Backend Server (manage.py runserver)",
 			"description": "Start the Backend Server which serves the Django API and the compiled Angular frontend",
 			"type": "shell",
-			"command": "pipenv run python manage.py runserver",
+			"command": "uv run python manage.py runserver",
 			"group": "build",
 			"presentation": {
 				"echo": true,
@@ -99,7 +99,7 @@
 			"label": "Maintenance: manage.py migrate",
 			"description": "Apply database migrations",
 			"type": "shell",
-			"command": "pipenv run python manage.py migrate",
+			"command": "uv run python manage.py migrate",
 			"group": "none",
 			"presentation": {
 				"echo": true,
@@ -118,7 +118,7 @@
 			"label": "Maintenance: Build Documentation",
 			"description": "Build the documentation with MkDocs",
 			"type": "shell",
-			"command": "pipenv run mkdocs build --config-file mkdocs.yml && pipenv run mkdocs serve",
+			"command": "uv run mkdocs build --config-file mkdocs.yml && uv run mkdocs serve",
 			"group": "none",
 			"presentation": {
 				"echo": true,
@@ -137,7 +137,7 @@
 			"label": "Maintenance: manage.py createsuperuser",
 			"description": "Create a superuser",
 			"type": "shell",
-			"command": "pipenv run python manage.py createsuperuser",
+			"command": "uv run python manage.py createsuperuser",
 			"group": "none",
 			"presentation": {
 				"echo": true,
@@ -156,7 +156,7 @@
 			"label": "Maintenance: recreate .venv",
 			"description": "Recreate the python virtual environment and install python dependencies",
 			"type": "shell",
-			"command": "rm -R -v .venv/* || pipenv install --dev",
+			"command": "rm -R -v .venv/* || uv install --dev",
 			"group": "none",
 			"presentation": {
 				"echo": true,

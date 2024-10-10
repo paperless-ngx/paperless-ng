@@ -39,6 +39,7 @@ dependencies = [
   "gunicorn~=23.0.0",
   "imap-tools~=1.7.3",
   "inotifyrecursive~=0.3",
+  "jinja2>=3.1.4",
   "langdetect~=1.0.9",
   "mysqlclient~=2.2.4",
   "nltk~=3.9.1",
@@ -64,7 +65,6 @@ dependencies = [
   "whitenoise~=6.7",
   "whoosh~=2.7",
   "zxing-cpp~=2.2.0; platform_machine=='x86_64'",
-  "jinja2>=3.1.4",
 ]
 
 [tool.uv]

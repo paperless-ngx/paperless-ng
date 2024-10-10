@@ -214,9 +214,8 @@ RUN --mount=type=cache,target=/root/.cache/uv,id=pip-cache \
   set -eux \
   && echo "Installing build system packages" \
     && apt-get update \
-    && apt-get install --yes --quiet --no-install-recommends ${BUILD_PACKAGES}
-RUN --mount=type=cache,target=/root/.cache/uv,id=pip-cache \
-  set -eux && echo "Installing Python requirements" \
+    && apt-get install --yes --quiet --no-install-recommends ${BUILD_PACKAGES} \
+  && echo "Installing Python requirements" \
     && curl --fail --silent --show-error --location \
     --output psycopg_c-3.2.3-cp312-cp312-linux_x86_64.whl \
     https://github.com/paperless-ngx/builder/releases/download/psycopg-3.2.3/psycopg_c-3.2.3-cp312-cp312-linux_x86_64.whl \
