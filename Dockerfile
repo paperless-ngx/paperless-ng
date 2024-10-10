@@ -222,8 +222,7 @@ RUN --mount=type=cache,target=/root/.cache/uv,id=pip-cache \
     && curl --fail --silent --show-error --location \
     --output psycopg_c-3.2.2-cp312-cp312-linux_aarch64.whl  \
     https://github.com/paperless-ngx/builder/releases/download/psycopg-3.2.2/psycopg_c-3.2.2-cp312-cp312-linux_aarch64.whl \
-    && uv sync --frozen --no-dev --no-python-downloads --python-preference system --find-links . \
-    && chown -R 1000:1000 . \
+    && gosu 1000:1000 uv sync --frozen --no-dev --no-python-downloads --python-preference system --find-links . \
   && echo "Patching whitenoise for compression speedup" \
     && curl --fail --silent --show-error --location --output 484.patch https://github.com/evansd/whitenoise/pull/484.patch \
     && patch -d /usr/src/paperless/src/.venv/lib/python3.12/site-packages --verbose -p2 < 484.patch \

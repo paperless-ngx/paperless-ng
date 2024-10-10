@@ -501,7 +501,7 @@ jobs:
       -
         name: Generate requirements file
         run: |
-           uv export --no-dev --frozen --format requirements-txt
+           uv export --no-dev --frozen --format requirements-txt | tee requirements.txt
       -
         name: Compile messages
         run: |
