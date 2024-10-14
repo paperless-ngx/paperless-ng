@@ -160,6 +160,19 @@ $ ng build --configuration production
       complicated IF cases. Append `# noqa: E501` to disable this check
       for certain lines.
 
+### Package Management
+
+Paperless uses `uv` to manage packages and virtual environments for both development and production.
+To accomplish some common tasks using `uv`, follow the shortcuts below:
+
+To upgrade all locked packages to the latest allowed versions: `uv lock --upgrade`
+
+To upgrade a single locked package: `uv lock --upgrade-package <package>`
+
+To add a new package: `uv add <package>`
+
+To add a new development package `uv add --dev <package>`
+
 ## Front end development
 
 The front end is built using AngularJS. In order to get started, you need Node.js (version 14.15+) and
