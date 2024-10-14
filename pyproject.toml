@@ -68,6 +68,10 @@ dependencies = [
   "zxing-cpp~=2.2.0; platform_machine=='x86_64'",
 ]
 
+optional-dependencies.supervisor = [
+  "supervisor==4.2.5",
+]
+
 [tool.uv]
 package = false
 dev-dependencies = [

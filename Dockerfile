@@ -30,7 +30,7 @@ RUN set -eux \
 # Purpose: The final image
 # Comments:
 #  - Don't leave anything extra in here
-FROM docker.io/python:3.12-slim-bookworm AS main-app
+FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim AS main-app
 
 LABEL org.opencontainers.image.authors="paperless-ngx team <hello@paperless-ngx.com>"
 LABEL org.opencontainers.image.documentation="https://docs.paperless-ngx.com/"
@@ -140,9 +140,7 @@ RUN set -eux \
         && dpkg --install ./jbig2enc_${JBIG2ENC_VERSION}-1_${TARGETARCH}.deb \
       && echo "Cleaning up image layer" \
         && rm --force --verbose *.deb \
-    && rm --recursive --force --verbose /var/lib/apt/lists/* \
-  && echo "Installing supervisor" \
-    && python3 -m pip install --default-timeout=1000 --upgrade --no-cache-dir supervisor==4.2.5
+    && rm --recursive --force --verbose /var/lib/apt/lists/*
 
 # Copy gunicorn config
 # Changes very infrequently
@@ -196,7 +194,6 @@ WORKDIR /usr/src/paperless/src/
 # Python dependencies
 # Change pretty frequently
 COPY ["pyproject.toml", "uv.lock", "/usr/src/paperless/src/"]
-COPY --from=ghcr.io/astral-sh/uv:0.4 /uv /bin/uv
 
 # Packages needed only for building a few quick Python
 # dependencies
@@ -222,7 +219,7 @@ RUN --mount=type=cache,target=/root/.cache/uv,id=pip-cache \
     && curl --fail --silent --show-error --location \
     --output psycopg_c-3.2.2-cp312-cp312-linux_aarch64.whl  \
     https://github.com/paperless-ngx/builder/releases/download/psycopg-3.2.2/psycopg_c-3.2.2-cp312-cp312-linux_aarch64.whl \
-    && uv sync --frozen --no-dev --no-python-downloads --python-preference system --find-links . \
+    && uv sync --frozen --no-dev --no-python-downloads --python-preference system --extra supervisor --find-links . \
     && chown -R 1000:1000 . \
   && echo "Patching whitenoise for compression speedup" \
     && curl --fail --silent --show-error --location --output 484.patch https://github.com/evansd/whitenoise/pull/484.patch \
