@@ -1036,6 +1036,18 @@ http2 = [
 ]
 
 [[package]]
+name = "httpx-oauth"
+version = "0.15.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "httpx", marker = "sys_platform == 'darwin' or sys_platform == 'linux'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6d/08/b2e0f360e84994ec5c67473cef7198d22ccb2215e5068c0a21182d22baaa/httpx_oauth-0.15.1.tar.gz", hash = "sha256:4094cf0938fc7252b5f5dfd62cd1ab5aee2fcb6734e621942ee17d1af4806b74", size = 41302 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/32/ac/7ed132cb22ed9ca1be2e837834cbe1786d79375b9c6a6f6a595aa1629ec3/httpx_oauth-0.15.1-py3-none-any.whl", hash = "sha256:89b45f250e93e42bbe9631adf349cab0e3d3ced958c07e06651735198d1bdf00", size = 37304 },
+]
+
+[[package]]
 name = "humanize"
 version = "4.11.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1639,6 +1651,7 @@ dependencies = [
     { name = "flower", marker = "sys_platform == 'darwin' or sys_platform == 'linux'" },
     { name = "gotenberg-client", marker = "sys_platform == 'darwin' or sys_platform == 'linux'" },
     { name = "gunicorn", marker = "sys_platform == 'darwin' or sys_platform == 'linux'" },
+    { name = "httpx-oauth", marker = "sys_platform == 'darwin' or sys_platform == 'linux'" },
     { name = "imap-tools", marker = "sys_platform == 'darwin' or sys_platform == 'linux'" },
     { name = "inotifyrecursive", marker = "sys_platform == 'darwin' or sys_platform == 'linux'" },
     { name = "jinja2", marker = "sys_platform == 'darwin' or sys_platform == 'linux'" },
@@ -1715,6 +1728,7 @@ requires-dist = [
     { name = "flower", specifier = "~=2.0.1" },
     { name = "gotenberg-client", specifier = "~=0.6.0" },
     { name = "gunicorn", specifier = "~=23.0.0" },
+    { name = "httpx-oauth", specifier = "~=0.15" },
     { name = "imap-tools", specifier = "~=1.7.3" },
     { name = "inotifyrecursive", specifier = "~=0.3" },
     { name = "jinja2", specifier = ">=3.1.4" },
