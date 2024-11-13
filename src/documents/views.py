@@ -1597,9 +1597,8 @@ class BulkDownloadView(GenericAPIView):
 
         settings.SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
         temp_dir = Path(
-            tempfile.TemporaryDirectory(
+            tempfile.mkdtemp(
                 dir=settings.SCRATCH_DIR,
-                delete=False,
             ),
         )
 
