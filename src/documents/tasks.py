@@ -244,7 +244,7 @@ def update_document_content_maybe_archive_file(document_id):
         with transaction.atomic():
             oldDocument = Document.objects.get(pk=document.pk)
             if parser.get_archive_path():
-                with open(parser.get_archive_path(), "rb") as f:
+                with Path(parser.get_archive_path()).open("rb") as f:
                     checksum = hashlib.md5(f.read()).hexdigest()
                 # I'm going to save first so that in case the file move
                 # fails, the database is rolled back.

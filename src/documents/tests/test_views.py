@@ -1,6 +1,6 @@
-import os
 import tempfile
 from datetime import timedelta
+from pathlib import Path
 
 from django.conf import settings
 from django.contrib.auth.models import Permission
@@ -107,12 +107,12 @@ class TestViews(DirectoriesMixin, TestCase):
 
         content = b"This is a test"
 
-        with open(filename, "wb") as f:
+        with Path(filename).open("wb") as f:
             f.write(content)
 
         doc = Document.objects.create(
             title="none",
-            filename=os.path.basename(filename),
+            filename=Path(filename).name,
             mime_type="application/pdf",
         )
 

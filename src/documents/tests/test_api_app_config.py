@@ -1,5 +1,5 @@
 import json
-import os
+from pathlib import Path
 
 from django.contrib.auth.models import User
 from rest_framework import status
@@ -136,10 +136,7 @@ class TestApiAppConfig(DirectoriesMixin, APITestCase):
         THEN:
             - old app_logo file is deleted
         """
-        with open(
-            os.path.join(os.path.dirname(__file__), "samples", "simple.jpg"),
-            "rb",
-        ) as f:
+        with (Path(__file__).parent / "samples" / "simple.jpg").open("rb") as f:
             self.client.patch(
                 f"{self.ENDPOINT}1/",
                 {
@@ -148,15 +145,12 @@ class TestApiAppConfig(DirectoriesMixin, APITestCase):
             )
         config = ApplicationConfiguration.objects.first()
         old_logo = config.app_logo
-        self.assertTrue(os.path.exists(old_logo.path))
-        with open(
-            os.path.join(os.path.dirname(__file__), "samples", "simple.png"),
-            "rb",
-        ) as f:
+        self.assertTrue(Path(old_logo.path).exists())
+        with (Path(__file__).parent / "samples" / "simple.png").open("rb") as f:
             self.client.patch(
                 f"{self.ENDPOINT}1/",
                 {
                     "app_logo": f,
                 },
             )
-        self.assertFalse(os.path.exists(old_logo.path))
+        self.assertFalse(Path(old_logo.path).exists())
