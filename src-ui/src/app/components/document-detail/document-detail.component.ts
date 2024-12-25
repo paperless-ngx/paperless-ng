@@ -97,7 +97,7 @@ import { TagsComponent } from '../common/input/tags/tags.component'
 import { TextComponent } from '../common/input/text/text.component'
 import { UrlComponent } from '../common/input/url/url.component'
 import { PageHeaderComponent } from '../common/page-header/page-header.component'
-import { ShareLinksDropdownComponent } from '../common/share-links-dropdown/share-links-dropdown.component'
+import { ShareDocumentDropdownComponent } from '../common/share-document-dropdown/share-document-dropdown.component'
 import { DocumentHistoryComponent } from '../document-history/document-history.component'
 import { DocumentNotesComponent } from '../document-notes/document-notes.component'
 import { ComponentWithPermissions } from '../with-permissions/with-permissions.component'
@@ -143,7 +143,7 @@ enum ZoomSetting {
     CustomFieldsDropdownComponent,
     DocumentNotesComponent,
     DocumentHistoryComponent,
-    ShareLinksDropdownComponent,
+    ShareDocumentDropdownComponent,
     CheckComponent,
     DateComponent,
     DocumentLinkComponent,

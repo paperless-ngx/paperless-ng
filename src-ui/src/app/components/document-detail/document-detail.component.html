@@ -76,7 +76,7 @@
     (added)="addField($event)">
   </pngx-custom-fields-dropdown>
 
-  <pngx-share-links-dropdown [documentId]="documentId" [hasArchiveVersion]="!!document?.archived_file_name" [disabled]="!userCanEdit && !userIsOwner" *pngxIfPermissions="{ action: PermissionAction.Add, type: PermissionType.ShareLink }"></pngx-share-links-dropdown>
+  <pngx-share-document-dropdown [documentId]="documentId" [hasArchiveVersion]="!!document?.archived_file_name" [disabled]="!userCanEdit && !userIsOwner"></pngx-share-document-dropdown>
 </pngx-page-header>
 
 <div class="row">

@@ -311,4 +311,19 @@ export class DocumentService extends AbstractPaperlessService<Document> {
   public set searchQuery(query: string) {
     this._searchQuery = query
   }
+
+  emailDocument(
+    documentId: number,
+    addresses: string,
+    subject: string,
+    message: string,
+    useArchiveVersion: boolean
+  ): Observable<any> {
+    return this.http.post(this.getResourceUrl(documentId, 'email'), {
+      addresses: addresses,
+      subject: subject,
+      message: message,
+      use_archive_version: useArchiveVersion,
+    })
+  }
 }

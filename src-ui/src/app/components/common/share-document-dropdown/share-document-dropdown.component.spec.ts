@@ -14,23 +14,30 @@ import { By } from '@angular/platform-browser'
 import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons'
 import { of, throwError } from 'rxjs'
 import { FileVersion, ShareLink } from 'src/app/data/share-link'
+import { IfPermissionsDirective } from 'src/app/directives/if-permissions.directive'
+import { PermissionsService } from 'src/app/services/permissions.service'
+import { DocumentService } from 'src/app/services/rest/document.service'
 import { ShareLinkService } from 'src/app/services/rest/share-link.service'
 import { ToastService } from 'src/app/services/toast.service'
 import { environment } from 'src/environments/environment'
-import { ShareLinksDropdownComponent } from './share-links-dropdown.component'
+import { ShareDocumentDropdownComponent } from './share-document-dropdown.component'
 
-describe('ShareLinksDropdownComponent', () => {
-  let component: ShareLinksDropdownComponent
-  let fixture: ComponentFixture<ShareLinksDropdownComponent>
+describe('ShareDocumentDropdownComponent', () => {
+  let component: ShareDocumentDropdownComponent
+  let fixture: ComponentFixture<ShareDocumentDropdownComponent>
   let shareLinkService: ShareLinkService
+  let documentService: DocumentService
+  let permissionsService: PermissionsService
   let toastService: ToastService
   let httpController: HttpTestingController
   let clipboard: Clipboard
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      declarations: [],
       imports: [
-        ShareLinksDropdownComponent,
+        ShareDocumentDropdownComponent,
+        IfPermissionsDirective,
         NgxBootstrapIconsModule.pick(allIcons),
       ],
       providers: [
@@ -39,12 +46,15 @@ describe('ShareLinksDropdownComponent', () => {
       ],
     })
 
-    fixture = TestBed.createComponent(ShareLinksDropdownComponent)
+    fixture = TestBed.createComponent(ShareDocumentDropdownComponent)
     shareLinkService = TestBed.inject(ShareLinkService)
+    documentService = TestBed.inject(DocumentService)
+    permissionsService = TestBed.inject(PermissionsService)
     toastService = TestBed.inject(ToastService)
     httpController = TestBed.inject(HttpTestingController)
     clipboard = TestBed.inject(Clipboard)
 
+    jest.spyOn(permissionsService, 'currentUserCan').mockReturnValue(true)
     component = fixture.componentInstance
     fixture.detectChanges()
   })
@@ -231,5 +241,22 @@ describe('ShareLinksDropdownComponent', () => {
         'ng-reflect-is-disabled'
       ]
     ).toBeTruthy()
+  })
+
+  it('should support sending document via email, showing error if needed', () => {
+    const toastErrorSpy = jest.spyOn(toastService, 'showError')
+    const toastSuccessSpy = jest.spyOn(toastService, 'showInfo')
+    component.emailAddress = 'hello@paperless-ngx.com'
+    component.emailSubject = 'Hello'
+    component.emailMessage = 'World'
+    jest
+      .spyOn(documentService, 'emailDocument')
+      .mockReturnValue(throwError(() => new Error('Unable to email document')))
+    component.emailDocument()
+    expect(toastErrorSpy).toHaveBeenCalled()
+
+    jest.spyOn(documentService, 'emailDocument').mockReturnValue(of(true))
+    component.emailDocument()
+    expect(toastSuccessSpy).toHaveBeenCalled()
   })
 })

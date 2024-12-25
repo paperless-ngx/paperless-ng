@@ -15,6 +15,7 @@ from dateutil import parser
 from django.conf import settings
 from django.contrib.auth.models import Permission
 from django.contrib.auth.models import User
+from django.core import mail
 from django.core.cache import cache
 from django.db import DataError
 from django.test import override_settings
@@ -2653,6 +2654,153 @@ class TestDocumentApi(DirectoriesMixin, DocumentConsumeDelayMixin, APITestCase):
         doc1.refresh_from_db()
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         self.assertEqual(doc1.tags.count(), 2)
+
+    @override_settings(
+        EMAIL_ENABLED=True,
+        EMAIL_BACKEND="django.core.mail.backends.locmem.EmailBackend",
+    )
+    def test_email_document(self):
+        """
+        GIVEN:
+            - Existing document
+        WHEN:
+            - API request is made to email document action
+        THEN:
+            - Email is sent, with document (original or archive) attached
+        """
+        doc = Document.objects.create(
+            title="test",
+            mime_type="application/pdf",
+            content="this is a document 1",
+            checksum="1",
+            filename="test.pdf",
+            archive_checksum="A",
+            archive_filename="archive.pdf",
+        )
+        doc2 = Document.objects.create(
+            title="test2",
+            mime_type="application/pdf",
+            content="this is a document 2",
+            checksum="2",
+            filename="test2.pdf",
+        )
+
+        archive_file = os.path.join(os.path.dirname(__file__), "samples", "simple.pdf")
+        source_file = os.path.join(os.path.dirname(__file__), "samples", "simple.pdf")
+
+        shutil.copy(archive_file, doc.archive_path)
+        shutil.copy(source_file, doc2.source_path)
+
+        self.client.post(
+            f"/api/documents/{doc.pk}/email/",
+            {
+                "addresses": "hello@paperless-ngx.com",
+                "subject": "test",
+                "message": "hello",
+            },
+        )
+
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].attachments[0][0], "archive.pdf")
+
+        self.client.post(
+            f"/api/documents/{doc2.pk}/email/",
+            {
+                "addresses": "hello@paperless-ngx.com",
+                "subject": "test",
+                "message": "hello",
+                "use_archive_version": False,
+            },
+        )
+
+        self.assertEqual(len(mail.outbox), 2)
+        self.assertEqual(mail.outbox[1].attachments[0][0], "test2.pdf")
+
+    @mock.patch("django.core.mail.message.EmailMessage.send", side_effect=Exception)
+    def test_email_document_errors(self, mocked_send):
+        """
+        GIVEN:
+            - Existing document
+        WHEN:
+            - API request is made to email document action with insufficient permissions
+            - API request is made to email document action with invalid document id
+            - API request is made to email document action with missing data
+            - API request is made to email document action with invalid email address
+            - API request is made to email document action and error occurs during email send
+        THEN:
+            - Error response is returned
+        """
+        user1 = User.objects.create_user(username="test1")
+        user1.user_permissions.add(*Permission.objects.all())
+        user1.save()
+
+        doc = Document.objects.create(
+            title="test",
+            mime_type="application/pdf",
+            content="this is a document 1",
+            checksum="1",
+            filename="test.pdf",
+            archive_checksum="A",
+            archive_filename="archive.pdf",
+        )
+
+        doc2 = Document.objects.create(
+            title="test2",
+            mime_type="application/pdf",
+            content="this is a document 2",
+            checksum="2",
+            owner=self.user,
+        )
+
+        self.client.force_authenticate(user1)
+
+        resp = self.client.post(
+            f"/api/documents/{doc2.pk}/email/",
+            {
+                "addresses": "hello@paperless-ngx.com",
+                "subject": "test",
+                "message": "hello",
+            },
+        )
+        self.assertEqual(resp.status_code, status.HTTP_403_FORBIDDEN)
+
+        resp = self.client.post(
+            "/api/documents/999/email/",
+            {
+                "addresses": "hello@paperless-ngx.com",
+                "subject": "test",
+                "message": "hello",
+            },
+        )
+        self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
+
+        resp = self.client.post(
+            f"/api/documents/{doc.pk}/email/",
+            {
+                "addresses": "hello@paperless-ngx.com",
+            },
+        )
+        self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
+
+        resp = self.client.post(
+            f"/api/documents/{doc.pk}/email/",
+            {
+                "addresses": "hello@paperless-ngx.com,hello",
+                "subject": "test",
+                "message": "hello",
+            },
+        )
+        self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
+
+        resp = self.client.post(
+            f"/api/documents/{doc.pk}/email/",
+            {
+                "addresses": "hello@paperless-ngx.com",
+                "subject": "test",
+                "message": "hello",
+            },
+        )
+        self.assertEqual(resp.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     @mock.patch("django_softdelete.models.SoftDeleteModel.delete")
     def test_warn_on_delete_with_old_uuid_field(self, mocked_delete):

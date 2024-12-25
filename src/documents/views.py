@@ -19,6 +19,7 @@ from django.apps import apps
 from django.conf import settings
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
+from django.core.mail import EmailMessage
 from django.db import connections
 from django.db.migrations.loader import MigrationLoader
 from django.db.migrations.recorder import MigrationRecorder
@@ -38,6 +39,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
 from django.http import HttpResponseForbidden
 from django.http import HttpResponseRedirect
+from django.http import HttpResponseServerError
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.utils.decorators import method_decorator
@@ -847,6 +849,58 @@ class DocumentViewSet(
             )
 
         return Response(sorted(entries, key=lambda x: x["timestamp"], reverse=True))
+
+    @action(methods=["post"], detail=True)
+    def email(self, request, pk=None):
+        try:
+            doc = Document.objects.select_related("owner").get(pk=pk)
+            if request.user is not None and not has_perms_owner_aware(
+                request.user,
+                "view_document",
+                doc,
+            ):
+                return HttpResponseForbidden("Insufficient permissions")
+        except Document.DoesNotExist:
+            raise Http404
+
+        try:
+            if (
+                "addresses" not in request.data
+                or "subject" not in request.data
+                or "message" not in request.data
+            ):
+                return HttpResponseBadRequest("Missing required fields")
+
+            use_archive_version = request.data.get("use_archive_version", True)
+
+            addresses = request.data.get("addresses").split(",")
+            if not all(
+                re.match(r"[^@]+@[^@]+\.[^@]+", address.strip())
+                for address in addresses
+            ):
+                return HttpResponseBadRequest("Invalid email address found")
+
+            email = EmailMessage(
+                subject=request.data.get("subject"),
+                body=request.data.get("message"),
+                to=addresses,
+            )
+            attachment = (
+                doc.archive_path
+                if use_archive_version and doc.has_archive_version
+                else doc.source_path
+            )
+            email.attach_file(attachment)
+            email.send()
+            logger.debug(
+                f"Sent document {doc.id} via email to {addresses}",
+            )
+            return Response({"message": "Email sent"})
+        except Exception as e:
+            logger.warning(f"An error occurred emailing document: {e!s}")
+            return HttpResponseServerError(
+                "Error emailing document, check logs for more detail.",
+            )
 
 
 class UnifiedSearchViewSet(DocumentViewSet):
