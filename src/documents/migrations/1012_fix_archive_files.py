@@ -84,7 +84,7 @@ def source_path(doc):
     return os.path.join(settings.ORIGINALS_DIR, fname)
 
 
-def generate_unique_filename(doc, archive_filename=False):
+def generate_unique_filename(doc, *, archive_filename=False):
     if archive_filename:
         old_filename = doc.archive_filename
         root = settings.ARCHIVE_DIR
@@ -97,7 +97,7 @@ def generate_unique_filename(doc, archive_filename=False):
     while True:
         new_filename = generate_filename(
             doc,
-            counter,
+            counter=counter,
             archive_filename=archive_filename,
         )
         if new_filename == old_filename:
@@ -110,7 +110,7 @@ def generate_unique_filename(doc, archive_filename=False):
             return new_filename
 
 
-def generate_filename(doc, counter=0, append_gpg=True, archive_filename=False):
+def generate_filename(doc, *, counter=0, append_gpg=True, archive_filename=False):
     path = ""
 
     try:

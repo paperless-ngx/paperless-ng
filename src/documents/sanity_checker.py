@@ -57,7 +57,7 @@ class SanityCheckFailedException(Exception):
     pass
 
 
-def check_sanity(progress=False) -> SanityCheckMessages:
+def check_sanity(*, progress=False) -> SanityCheckMessages:
     messages = SanityCheckMessages()
 
     present_files = {

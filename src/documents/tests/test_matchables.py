@@ -23,6 +23,7 @@ class _TestMatchingBase(TestCase):
         match_algorithm: str,
         should_match: Iterable[str],
         no_match: Iterable[str],
+        *,
         case_sensitive: bool = False,
     ):
         for klass in (Tag, Correspondent, DocumentType):

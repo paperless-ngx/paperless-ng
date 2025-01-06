@@ -1609,7 +1609,7 @@ class BulkDownloadView(GenericAPIView):
             strategy_class = ArchiveOnlyStrategy
 
         with zipfile.ZipFile(temp.name, "w", compression) as zipf:
-            strategy = strategy_class(zipf, follow_filename_format)
+            strategy = strategy_class(zipf, follow_formatting=follow_filename_format)
             for document in documents:
                 strategy.add_document(document)
 

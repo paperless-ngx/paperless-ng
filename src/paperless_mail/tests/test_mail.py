@@ -123,7 +123,7 @@ class BogusMailBox(AbstractContextManager):
         if username != self.USERNAME or access_token != self.ACCESS_TOKEN:
             raise MailboxLoginError("BAD", "OK")
 
-    def fetch(self, criteria, mark_seen, charset="", bulk=True):
+    def fetch(self, criteria, mark_seen, charset="", *, bulk=True):
         msg = self.messages
 
         criteria = str(criteria).strip("()").split(" ")
@@ -188,7 +188,7 @@ class BogusMailBox(AbstractContextManager):
             raise Exception
 
 
-def fake_magic_from_buffer(buffer, mime=False):
+def fake_magic_from_buffer(buffer, *, mime=False):
     if mime:
         if "PDF" in str(buffer):
             return "application/pdf"
@@ -204,6 +204,7 @@ class MessageBuilder:
 
     def create_message(
         self,
+        *,
         attachments: int | list[_AttachmentDef] = 1,
         body: str = "",
         subject: str = "the subject",

@@ -233,7 +233,7 @@ class FaultyGenericExceptionParser(_BaseTestParser):
         raise Exception("Generic exception.")
 
 
-def fake_magic_from_file(file, mime=False):
+def fake_magic_from_file(file, *, mime=False):
     if mime:
         if file.name.startswith("invalid_pdf"):
             return "application/octet-stream"

@@ -85,7 +85,7 @@ def get_schema() -> Schema:
     )
 
 
-def open_index(recreate=False) -> FileIndex:
+def open_index(*, recreate=False) -> FileIndex:
     try:
         if exists_in(settings.INDEX_DIR) and not recreate:
             return open_dir(settings.INDEX_DIR, schema=get_schema())
@@ -101,7 +101,7 @@ def open_index(recreate=False) -> FileIndex:
 
 
 @contextmanager
-def open_index_writer(optimize=False) -> AsyncWriter:
+def open_index_writer(*, optimize=False) -> AsyncWriter:
     writer = AsyncWriter(open_index())
 
     try:

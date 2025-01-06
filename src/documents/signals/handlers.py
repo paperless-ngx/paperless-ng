@@ -85,6 +85,7 @@ def _suggestion_printer(
 def set_correspondent(
     sender,
     document: Document,
+    *,
     logging_group=None,
     classifier: DocumentClassifier | None = None,
     replace=False,
@@ -140,6 +141,7 @@ def set_correspondent(
 def set_document_type(
     sender,
     document: Document,
+    *,
     logging_group=None,
     classifier: DocumentClassifier | None = None,
     replace=False,
@@ -196,6 +198,7 @@ def set_document_type(
 def set_tags(
     sender,
     document: Document,
+    *,
     logging_group=None,
     classifier: DocumentClassifier | None = None,
     replace=False,
@@ -251,6 +254,7 @@ def set_tags(
 def set_storage_path(
     sender,
     document: Document,
+    *,
     logging_group=None,
     classifier: DocumentClassifier | None = None,
     replace=False,

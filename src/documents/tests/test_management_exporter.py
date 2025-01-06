@@ -188,7 +188,7 @@ class TestExportImport(
 
         return manifest
 
-    def test_exporter(self, use_filename_format=False):
+    def test_exporter(self, *, use_filename_format=False):
         shutil.rmtree(os.path.join(self.dirs.media_dir, "documents"))
         shutil.copytree(
             os.path.join(os.path.dirname(__file__), "samples", "documents"),
