@@ -425,7 +425,7 @@ def autocomplete(
 
 
 def get_permissions_criterias(user: User | None = None) -> list:
-    user_criterias = [query.Term("has_owner", False)]
+    user_criterias = [query.Term("has_owner", text=False)]
     if user is not None:
         if user.is_superuser:  # superusers see all docs
             user_criterias = []

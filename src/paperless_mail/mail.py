@@ -121,7 +121,7 @@ class MarkReadMailAction(BaseMailAction):
         return {"seen": False}
 
     def post_consume(self, M: MailBox, message_uid: str, parameter: str):
-        M.flag(message_uid, [MailMessageFlags.SEEN], True)
+        M.flag(message_uid, [MailMessageFlags.SEEN], value=True)
 
 
 class MoveMailAction(BaseMailAction):
@@ -142,7 +142,7 @@ class FlagMailAction(BaseMailAction):
         return {"flagged": False}
 
     def post_consume(self, M: MailBox, message_uid: str, parameter: str):
-        M.flag(message_uid, [MailMessageFlags.FLAGGED], True)
+        M.flag(message_uid, [MailMessageFlags.FLAGGED], value=True)
 
 
 class TagMailAction(BaseMailAction):
@@ -188,19 +188,19 @@ class TagMailAction(BaseMailAction):
             M.flag(
                 message_uid,
                 set(itertools.chain(*APPLE_MAIL_TAG_COLORS.values())),
-                False,
+                value=False,
             )
 
             # Set new $MailFlagBits
-            M.flag(message_uid, APPLE_MAIL_TAG_COLORS.get(self.color), True)
+            M.flag(message_uid, APPLE_MAIL_TAG_COLORS.get(self.color), value=True)
 
             # Set the general \Flagged
             # This defaults to the "red" flag in AppleMail and
             # "stars" in Thunderbird or GMail
-            M.flag(message_uid, [MailMessageFlags.FLAGGED], True)
+            M.flag(message_uid, [MailMessageFlags.FLAGGED], value=True)
 
         elif self.keyword:
-            M.flag(message_uid, [self.keyword], True)
+            M.flag(message_uid, [self.keyword], value=True)
 
         else:
             raise MailError("No keyword specified.")

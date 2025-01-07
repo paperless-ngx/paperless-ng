@@ -10,7 +10,7 @@ class TestDelayedQuery(TestCase):
         super().setUp()
         # all tests run without permission criteria, so has_no_owner query will always
         # be appended.
-        self.has_no_owner = query.Or([query.Term("has_owner", False)])
+        self.has_no_owner = query.Or([query.Term("has_owner", text=False)])
 
     def _get_testset__id__in(self, param, field):
         return (
@@ -43,12 +43,12 @@ class TestDelayedQuery(TestCase):
     def test_get_permission_criteria(self):
         # tests contains tuples of user instances and the expected filter
         tests = (
-            (None, [query.Term("has_owner", False)]),
+            (None, [query.Term("has_owner", text=False)]),
             (User(42, username="foo", is_superuser=True), []),
             (
                 User(42, username="foo", is_superuser=False),
                 [
-                    query.Term("has_owner", False),
+                    query.Term("has_owner", text=False),
                     query.Term("owner_id", 42),
                     query.Term("viewer_id", "42"),
                 ],
