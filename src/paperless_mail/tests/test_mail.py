@@ -978,7 +978,7 @@ class TestMail(
             MailError,
             TagMailAction,
             "apple:black",
-            False,
+            supports_gmail_labels=False,
         )
 
     def test_handle_mail_account_tag_applemail(self):

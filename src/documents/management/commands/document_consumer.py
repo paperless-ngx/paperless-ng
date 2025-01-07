@@ -248,15 +248,15 @@ class Command(BaseCommand):
             return
 
         if settings.CONSUMER_POLLING == 0 and INotify:
-            self.handle_inotify(directory, recursive, options["testing"])
+            self.handle_inotify(directory, recursive, is_testing=options["testing"])
         else:
             if INotify is None and settings.CONSUMER_POLLING == 0:  # pragma: no cover
                 logger.warning("Using polling as INotify import failed")
-            self.handle_polling(directory, recursive, options["testing"])
+            self.handle_polling(directory, recursive, is_testing=options["testing"])
 
         logger.debug("Consumer exiting.")
 
-    def handle_polling(self, directory, recursive, is_testing: bool):
+    def handle_polling(self, directory, recursive, *, is_testing: bool):
         logger.info(f"Polling directory for changes: {directory}")
 
         timeout = None
@@ -283,7 +283,7 @@ class Command(BaseCommand):
                 observer.stop()
             observer.join()
 
-    def handle_inotify(self, directory, recursive, is_testing: bool):
+    def handle_inotify(self, directory, recursive, *, is_testing: bool):
         logger.info(f"Using inotify to watch directory for changes: {directory}")
 
         timeout_ms = None

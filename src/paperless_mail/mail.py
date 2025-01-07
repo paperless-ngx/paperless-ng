@@ -150,7 +150,7 @@ class TagMailAction(BaseMailAction):
     A mail action that tags mails after processing.
     """
 
-    def __init__(self, parameter: str, supports_gmail_labels: bool):
+    def __init__(self, parameter: str, *, supports_gmail_labels: bool):
         # The custom tag should look like "apple:<color>"
         if "apple:" in parameter.lower():
             _, self.color = parameter.split(":")
@@ -268,7 +268,7 @@ def apply_mail_action(
             mailbox_login(M, account)
             M.folder.set(rule.folder)
 
-            action = get_rule_action(rule, supports_gmail_labels)
+            action = get_rule_action(rule, supports_gmail_labels=supports_gmail_labels)
             try:
                 action.post_consume(M, message_uid, rule.action_parameter)
             except errors.ImapToolsError:
@@ -356,7 +356,7 @@ def queue_consumption_tasks(
     ).delay()
 
 
-def get_rule_action(rule: MailRule, supports_gmail_labels: bool) -> BaseMailAction:
+def get_rule_action(rule: MailRule, *, supports_gmail_labels: bool) -> BaseMailAction:
     """
     Returns a BaseMailAction instance for the given rule.
     """
@@ -370,12 +370,15 @@ def get_rule_action(rule: MailRule, supports_gmail_labels: bool) -> BaseMailActi
     elif rule.action == MailRule.MailAction.MARK_READ:
         return MarkReadMailAction()
     elif rule.action == MailRule.MailAction.TAG:
-        return TagMailAction(rule.action_parameter, supports_gmail_labels)
+        return TagMailAction(
+            rule.action_parameter,
+            supports_gmail_labels=supports_gmail_labels,
+        )
     else:
         raise NotImplementedError("Unknown action.")  # pragma: no cover
 
 
-def make_criterias(rule: MailRule, supports_gmail_labels: bool):
+def make_criterias(rule: MailRule, *, supports_gmail_labels: bool):
     """
     Returns criteria to be applied to MailBox.fetch for the given rule.
     """
@@ -393,7 +396,10 @@ def make_criterias(rule: MailRule, supports_gmail_labels: bool):
     if rule.filter_body:
         criterias["body"] = rule.filter_body
 
-    rule_query = get_rule_action(rule, supports_gmail_labels).get_criteria()
+    rule_query = get_rule_action(
+        rule,
+        supports_gmail_labels=supports_gmail_labels,
+    ).get_criteria()
     if isinstance(rule_query, dict):
         if len(rule_query) or len(criterias):
             return AND(**rule_query, **criterias)
@@ -564,7 +570,7 @@ class MailAccountHandler(LoggingMixin):
                         total_processed_files += self._handle_mail_rule(
                             M,
                             rule,
-                            supports_gmail_labels,
+                            supports_gmail_labels=supports_gmail_labels,
                         )
                     except Exception as e:
                         self.log.exception(
@@ -589,6 +595,7 @@ class MailAccountHandler(LoggingMixin):
         self,
         M: MailBox,
         rule: MailRule,
+        *,
         supports_gmail_labels: bool,
     ):
         folders = [rule.folder]
@@ -617,7 +624,7 @@ class MailAccountHandler(LoggingMixin):
                 f"does not exist in account {rule.account}",
             ) from err
 
-        criterias = make_criterias(rule, supports_gmail_labels)
+        criterias = make_criterias(rule, supports_gmail_labels=supports_gmail_labels)
 
         self.log.debug(
             f"Rule {rule}: Searching folder with criteria {criterias}",

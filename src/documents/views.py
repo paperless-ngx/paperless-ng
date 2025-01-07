@@ -1873,7 +1873,7 @@ class SharedLinkView(View):
         )
 
 
-def serve_file(doc: Document, use_archive: bool, disposition: str):
+def serve_file(*, doc: Document, use_archive: bool, disposition: str):
     if use_archive:
         file_handle = doc.archive_file
         filename = doc.get_public_filename(archive=True)
