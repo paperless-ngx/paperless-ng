@@ -1,6 +1,9 @@
 import logging
 import os
 import shutil
+from email.encoders import encode_base64
+from email.mime.base import MIMEBase
+from email.utils import encode_rfc2231
 from pathlib import Path
 
 import httpx
@@ -979,9 +982,25 @@ def run_workflows(
             )
             if action.email.include_document:
                 # Something could be renaming the file concurrently so it can't be attached
-                with FileLock(settings.MEDIA_LOCK):
-                    document.refresh_from_db()
-                    email.attach_file(original_file)
+                with FileLock(settings.MEDIA_LOCK), open(original_file, "rb") as f:
+                    file_content = f.read()
+
+                    main_type, sub_type = (
+                        document.mime_type.split("/", 1)
+                        if document.mime_type
+                        else ("application", "octet-stream")
+                    )
+                    mime_part = MIMEBase(main_type, sub_type)
+                    mime_part.set_payload(file_content)
+
+                    encode_base64(mime_part)
+
+                    mime_part.add_header(
+                        "Content-Disposition",
+                        f'attachment; filename="{encode_rfc2231(str(original_file.name))}"',
+                    )
+
+                    email.attach(mime_part)
             n_messages = email.send()
             logger.debug(
                 f"Sent {n_messages} notification email(s) to {action.email.to}",
