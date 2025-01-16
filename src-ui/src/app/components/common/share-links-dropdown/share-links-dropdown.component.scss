@@ -1,0 +1,14 @@
+.share-links-dropdown {
+    min-width: 350px;
+
+    // correct position on mobile
+    @media (max-width: 575.98px) {
+        &.show {
+            margin-left: -175px !important;
+        }
+    }
+}
+
+.copied-badge {
+    right: 7.5em;
+}

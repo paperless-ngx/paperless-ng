@@ -86,6 +86,7 @@ import { CorrespondentEditDialogComponent } from '../common/edit-dialog/correspo
 import { DocumentTypeEditDialogComponent } from '../common/edit-dialog/document-type-edit-dialog/document-type-edit-dialog.component'
 import { EditDialogMode } from '../common/edit-dialog/edit-dialog.component'
 import { StoragePathEditDialogComponent } from '../common/edit-dialog/storage-path-edit-dialog/storage-path-edit-dialog.component'
+import { EmailDocumentDropdownComponent } from '../common/email-document-dropdown/email-document-dropdown.component'
 import { CheckComponent } from '../common/input/check/check.component'
 import { DateComponent } from '../common/input/date/date.component'
 import { DocumentLinkComponent } from '../common/input/document-link/document-link.component'
@@ -97,7 +98,7 @@ import { TagsComponent } from '../common/input/tags/tags.component'
 import { TextComponent } from '../common/input/text/text.component'
 import { UrlComponent } from '../common/input/url/url.component'
 import { PageHeaderComponent } from '../common/page-header/page-header.component'
-import { ShareDocumentDropdownComponent } from '../common/share-document-dropdown/share-document-dropdown.component'
+import { ShareLinksDropdownComponent } from '../common/share-links-dropdown/share-links-dropdown.component'
 import { DocumentHistoryComponent } from '../document-history/document-history.component'
 import { DocumentNotesComponent } from '../document-notes/document-notes.component'
 import { ComponentWithPermissions } from '../with-permissions/with-permissions.component'
@@ -143,7 +144,8 @@ enum ZoomSetting {
     CustomFieldsDropdownComponent,
     DocumentNotesComponent,
     DocumentHistoryComponent,
-    ShareDocumentDropdownComponent,
+    ShareLinksDropdownComponent,
+    EmailDocumentDropdownComponent,
     CheckComponent,
     DateComponent,
     DocumentLinkComponent,

@@ -5,40 +5,33 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap'
 import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons'
 import { first } from 'rxjs'
 import { FileVersion, ShareLink } from 'src/app/data/share-link'
-import { SETTINGS_KEYS } from 'src/app/data/ui-settings'
-import { IfPermissionsDirective } from 'src/app/directives/if-permissions.directive'
-import { DocumentService } from 'src/app/services/rest/document.service'
 import { ShareLinkService } from 'src/app/services/rest/share-link.service'
-import { SettingsService } from 'src/app/services/settings.service'
 import { ToastService } from 'src/app/services/toast.service'
 import { environment } from 'src/environments/environment'
-import { ComponentWithPermissions } from '../../with-permissions/with-permissions.component'
-
-const EXPIRATION_OPTIONS = [
-  { label: $localize`1 day`, value: 1 },
-  { label: $localize`7 days`, value: 7 },
-  { label: $localize`30 days`, value: 30 },
-  { label: $localize`Never`, value: null },
-]
 
 @Component({
-  selector: 'pngx-share-document-dropdown',
-  templateUrl: './share-document-dropdown.component.html',
-  styleUrls: ['./share-document-dropdown.component.scss'],
+  selector: 'pngx-share-links-dropdown',
+  templateUrl: './share-links-dropdown.component.html',
+  styleUrls: ['./share-links-dropdown.component.scss'],
   imports: [
-    IfPermissionsDirective,
     FormsModule,
     ReactiveFormsModule,
     NgbDropdownModule,
     NgxBootstrapIconsModule,
   ],
 })
-export class ShareDocumentDropdownComponent
-  extends ComponentWithPermissions
-  implements OnInit
-{
-  public EXPIRATION_OPTIONS = EXPIRATION_OPTIONS
-  private _documentId: number
+export class ShareLinksDropdownComponent implements OnInit {
+  EXPIRATION_OPTIONS = [
+    { label: $localize`1 day`, value: 1 },
+    { label: $localize`7 days`, value: 7 },
+    { label: $localize`30 days`, value: 30 },
+    { label: $localize`Never`, value: null },
+  ]
+
+  @Input()
+  title = $localize`Share Links`
+
+  _documentId: number
 
   @Input()
   set documentId(id: number) {
@@ -57,7 +50,6 @@ export class ShareDocumentDropdownComponent
   set hasArchiveVersion(value: boolean) {
     this._hasArchiveVersion = value
     this.useArchiveVersion = value
-    this.emailUseArchiveVersion = value
   }
 
   get hasArchiveVersion(): boolean {
@@ -74,21 +66,11 @@ export class ShareDocumentDropdownComponent
 
   useArchiveVersion: boolean = true
 
-  emailLoading: boolean = false
-  emailAddress: string = ''
-  emailSubject: string = ''
-  emailMessage: string = ''
-  emailUseArchiveVersion: boolean = true
-
   constructor(
     private shareLinkService: ShareLinkService,
-    private documentService: DocumentService,
-    private settingsService: SettingsService,
     private toastService: ToastService,
     private clipboard: Clipboard
-  ) {
-    super()
-  }
+  ) {}
 
   ngOnInit(): void {
     if (this._documentId !== undefined) this.refresh()
@@ -184,35 +166,6 @@ export class ShareDocumentDropdownComponent
         error: (e) => {
           this.loading = false
           this.toastService.showError($localize`Error creating link`, 10000, e)
-        },
-      })
-  }
-
-  get emailEnabled(): boolean {
-    return this.settingsService.get(SETTINGS_KEYS.EMAIL_ENABLED)
-  }
-
-  public emailDocument() {
-    this.emailLoading = true
-    this.documentService
-      .emailDocument(
-        this._documentId,
-        this.emailAddress,
-        this.emailSubject,
-        this.emailMessage,
-        this.emailUseArchiveVersion
-      )
-      .subscribe({
-        next: () => {
-          this.emailLoading = false
-          this.emailAddress = ''
-          this.emailSubject = ''
-          this.emailMessage = ''
-          this.toastService.showInfo($localize`Email sent`)
-        },
-        error: (e) => {
-          this.emailLoading = false
-          this.toastService.showError($localize`Error emailing document`, e)
         },
       })
   }

@@ -1,0 +1,32 @@
+<div ngbDropdown>
+    <button class="btn btn-sm btn-outline-primary" id="emailDocumentDropdown" [disabled]="disabled" ngbDropdownToggle>
+      <i-bs name="envelope"></i-bs>
+      <div class="d-none d-sm-inline">&nbsp;<ng-container i18n>Email</ng-container></div>
+    </button>
+    <div ngbDropdownMenu aria-labelledby="emailDocumentDropdown" class="shadow email-document-dropdown p-3">
+        <div class="mb-1">
+            <label for="email" class="form-label small" i18n>Email address(es)</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="emailAddress">
+        </div>
+        <div class="mb-1">
+            <label for="email" class="form-label small" i18n>Subject</label>
+            <input type="email" class="form-control" id="subject" [(ngModel)]="emailSubject">
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label small" i18n>Message</label>
+            <textarea class="form-control" id="message" rows="3" [(ngModel)]="emailMessage"></textarea>
+        </div>
+        <div class="input-group input-group-sm">
+            <div class="input-group-text flex-grow-1">
+            <input class="form-check-input mt-0 me-2" type="checkbox" role="switch" id="useArchiveVersion" [disabled]="!hasArchiveVersion" [(ngModel)]="useArchiveVersion">
+            <label class="form-check-label small w-100 text-start" for="useArchiveVersion" i18n>Use archive version</label>
+            </div>
+            <button type="submit" class="btn btn-sm btn-outline-primary" (click)="emailDocument()" [disabled]="loading || emailAddress.length === 0 || emailMessage.length === 0 || emailSubject.length === 0">
+            @if (loading) {
+                <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+            }
+            <ng-container i18n>Send email</ng-container>
+            </button>
+        </div>
+    </div>
+</div>

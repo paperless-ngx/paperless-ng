@@ -1,0 +1,70 @@
+<div ngbDropdown>
+  <button class="btn btn-sm btn-outline-primary" id="shareLinksDropdown" [disabled]="disabled" ngbDropdownToggle>
+    <i-bs name="link"></i-bs>
+    <div class="d-none d-sm-inline">&nbsp;<ng-container i18n>Share Links</ng-container></div>
+  </button>
+  <div ngbDropdownMenu aria-labelledby="shareLinksDropdown" class="shadow share-links-dropdown">
+    <ul class="list-group list-group-flush">
+      @if (!shareLinks || shareLinks.length === 0) {
+        <li class="list-group-item fst-italic small text-center text-secondary" i18n>
+          No existing links
+        </li>
+      }
+      @for (link of shareLinks; track link) {
+        <li class="list-group-item">
+          <div class="input-group input-group-sm w-100">
+            <input type="text" class="form-control" aria-label="Share link" [value]="getShareUrl(link)" readonly>
+            @if (link.expiration) {
+              <span class="input-group-text">
+                {{ getDaysRemaining(link) }}
+              </span>
+            }
+            <button type="button" class="btn btn-sm btn-outline-primary" (click)="copy(link)">
+                @if (copied !== link.id) {
+                  <i-bs width="1.2em" height="1.2em" name="clipboard-fill"></i-bs>
+                }
+                @if (copied === link.id) {
+                  <i-bs width="1.2em" height="1.2em" name="clipboard-check-fill"></i-bs>
+                }
+                <span class="visually-hidden" i18n>Copy</span>
+              </button>
+              @if (canShare(link)) {
+                <button type="button" class="btn btn-sm btn-outline-primary" (click)="share(link)">
+                  <i-bs width="1.2em" height="1.2em" name="box-arrow-up"></i-bs><span class="visually-hidden" i18n>Share</span>
+                  </button>
+                }
+                <button type="button" class="btn btn-sm btn-outline-danger" (click)="delete(link)">
+                  <i-bs width="1.2em" height="1.2em" name="trash"></i-bs><span class="visually-hidden" i18n>Delete</span>
+                  </button>
+                </div>
+                <span class="badge copied-badge bg-primary small fade ms-4 position-absolute top-50 translate-middle-y pe-none z-3" [class.show]="copied === link.id" i18n>Copied!</span>
+              </li>
+            }
+            <li class="list-group-item pt-3 pb-2">
+              <div class="input-group input-group-sm w-100">
+                <div class="form-check form-switch ms-auto small">
+                  <input class="form-check-input" type="checkbox" role="switch" id="versionSwitch" [disabled]="!hasArchiveVersion" [(ngModel)]="useArchiveVersion">
+                  <label class="form-check-label" for="versionSwitch" i18n>Share archive version</label>
+                </div>
+              </div>
+              <div class="input-group input-group-sm w-100 mt-2">
+                <label class="input-group-text" for="addLink"><ng-container i18n>Expires</ng-container>:</label>
+                <select class="form-select form-select-sm" [(ngModel)]="expirationDays">
+                  @for (option of EXPIRATION_OPTIONS; track option) {
+                    <option [ngValue]="option.value">{{ option.label }}</option>
+                  }
+                </select>
+                <button class="btn btn-sm btn-outline-primary ms-auto" type="button" (click)="createLink()" [disabled]="loading">
+                  @if (loading) {
+                    <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+                  }
+                  @if (!loading) {
+                    <i-bs name="plus"></i-bs>
+                  }
+                  <ng-container i18n>Create</ng-container>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
