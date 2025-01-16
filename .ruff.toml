@@ -38,7 +38,6 @@ ignore = ["DJ001", "SIM105", "RUF012"]
 [lint.per-file-ignores]
 ".github/scripts/*.py" = ["E501", "INP001", "SIM117"]
 "docker/wait-for-redis.py" = ["INP001", "T201"]
-"src/documents/consumer.py" = ["PTH"]  # TODO Enable & remove
 "src/documents/file_handling.py" = ["PTH"]  # TODO Enable & remove
 "src/documents/management/commands/document_consumer.py" = ["PTH"]  # TODO Enable & remove
 "src/documents/management/commands/document_exporter.py" = ["PTH"]  # TODO Enable & remove
@@ -51,8 +50,6 @@ ignore = ["DJ001", "SIM105", "RUF012"]
 "src/documents/signals/handlers.py" = ["PTH"]  # TODO Enable & remove
 "src/documents/tasks.py" = ["PTH"]  # TODO Enable & remove
 "src/documents/tests/test_api_app_config.py" = ["PTH"]  # TODO Enable & remove
-"src/documents/tests/test_api_bulk_download.py" = ["PTH"]  # TODO Enable & remove
-"src/documents/tests/test_api_documents.py" = ["PTH"]  # TODO Enable & remove
 "src/documents/tests/test_classifier.py" = ["PTH"]  # TODO Enable & remove
 "src/documents/tests/test_consumer.py" = ["PTH"]  # TODO Enable & remove
 "src/documents/tests/test_file_handling.py" = ["PTH"]  # TODO Enable & remove
