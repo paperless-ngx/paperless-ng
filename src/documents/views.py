@@ -8,6 +8,9 @@ import tempfile
 import urllib
 import zipfile
 from datetime import datetime
+from email.encoders import encode_base64
+from email.mime.base import MIMEBase
+from email.utils import encode_rfc2231
 from pathlib import Path
 from time import mktime
 from unicodedata import normalize
@@ -890,7 +893,25 @@ class DocumentViewSet(
                 if use_archive_version and doc.has_archive_version
                 else doc.source_path
             )
-            email.attach_file(attachment)
+            with open(attachment, "rb") as f:
+                file_content = f.read()
+
+                main_type, sub_type = (
+                    doc.mime_type.split("/", 1)
+                    if doc.mime_type
+                    else ("application", "octet-stream")
+                )
+                mime_part = MIMEBase(main_type, sub_type)
+                mime_part.set_payload(file_content)
+
+                encode_base64(mime_part)
+
+                mime_part.add_header(
+                    "Content-Disposition",
+                    f'attachment; filename="{encode_rfc2231(str(attachment.name))}"',
+                )
+
+                email.attach(mime_part)
             email.send()
             logger.debug(
                 f"Sent document {doc.id} via email to {addresses}",
