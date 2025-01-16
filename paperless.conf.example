@@ -88,6 +88,11 @@
 #PAPERLESS_TIKA_ENDPOINT=http://localhost:9998
 #PAPERLESS_TIKA_GOTENBERG_ENDPOINT=http://localhost:3000
 
+# Rechnungless settings
+
+#PAPERLESS_RECHNUNGLESS_ENABLED=false
+#PAPERLESS_RECHNUNGLESS_ENDPOINT=http://rechnungless:8080/rechnungless
+
 # Binaries
 
 #PAPERLESS_CONVERT_BINARY=/usr/bin/convert

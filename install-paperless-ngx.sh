@@ -143,6 +143,14 @@ ask "Enable Apache Tika?" "no" "yes no"
 TIKA_ENABLED=$ask_result
 
 echo ""
+echo "Paperless is able to use Mustang Library to support XML files in XInvoice schema"
+echo "This feature requires more resources due to the required services."
+echo ""
+
+ask "Enable Rechnungless XInvoice service?" "no" "yes no"
+RECHNUNGLESS_ENABLED=$ask_result
+
+echo ""
 echo "Specify the default language that most of your documents are written in."
 echo "Use ISO 639-2, (T) variant language codes: "
 echo "https://www.loc.gov/standards/iso639-2/php/code_list.php"
@@ -322,6 +330,10 @@ if [[ $TIKA_ENABLED == "yes" ]] ; then
 	DOCKER_COMPOSE_VERSION="$DOCKER_COMPOSE_VERSION-tika"
 fi
 
+if [[ $RECHNUNGLESS_ENABLED == "yes" ]] ; then
+	wget "https://raw.githubusercontent.com/paperless-ngx/paperless-ngx/main/docker/compose/docker-compose.rechnungless.yml" -O docker-compose.rechnungless.yml
+fi
+
 wget "https://raw.githubusercontent.com/paperless-ngx/paperless-ngx/main/docker/compose/docker-compose.$DOCKER_COMPOSE_VERSION.yml" -O docker-compose.yml
 wget "https://raw.githubusercontent.com/paperless-ngx/paperless-ngx/main/docker/compose/.env" -O .env
 
@@ -391,6 +403,9 @@ if [ "$l1" -eq "$l2" ] ; then
 	sed -i "/^volumes:/d" docker-compose.yml
 fi
 
+if [[ $RECHNUNGLESS_ENABLED == "yes" ]] ; then
+	docker compose -f docker-compose.rechnungless.yml pull
+fi
 
 docker compose pull
 
@@ -404,4 +419,8 @@ fi
 
 docker compose run --rm -e DJANGO_SUPERUSER_PASSWORD="$PASSWORD" webserver createsuperuser --noinput --username "$USERNAME" --email "$EMAIL"
 
-docker compose up --detach
+if [[ $RECHNUNGLESS_ENABLED == "yes" ]] ; then
+	docker compose up -f docker-compose.yml -f docker-compose.rechnungless.yml --detach
+else
+	docker compose up --detach
+fi
