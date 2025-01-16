@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib import admin
 from guardian.admin import GuardedModelAdmin
 
+from documents.models import ArchiveSerialNumberPrefix
 from documents.models import Correspondent
 from documents.models import CustomField
 from documents.models import CustomFieldInstance
@@ -38,6 +39,10 @@ class DocumentTypeAdmin(GuardedModelAdmin):
     list_filter = ("matching_algorithm",)
     list_editable = ("match", "matching_algorithm")
 
+class ArchiveSerialNumberPrefixAdmin(GuardedModelAdmin):
+    list_display = ("name", "owner")
+    list_filter = ("name",)
+    #list_editable = ("name",)
 
 class DocumentAdmin(GuardedModelAdmin):
     search_fields = ("correspondent__name", "title", "content", "tags__name")
@@ -60,6 +65,7 @@ class DocumentAdmin(GuardedModelAdmin):
 
     list_filter = (
         ("mime_type"),
+        ("archive_serial_number_prefix", admin.EmptyFieldListFilter),
         ("archive_serial_number", admin.EmptyFieldListFilter),
         ("archive_filename", admin.EmptyFieldListFilter),
     )
@@ -195,6 +201,7 @@ class CustomFieldInstancesAdmin(GuardedModelAdmin):
 admin.site.register(Correspondent, CorrespondentAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(DocumentType, DocumentTypeAdmin)
+admin.site.register(ArchiveSerialNumberPrefix, ArchiveSerialNumberPrefixAdmin)
 admin.site.register(Document, DocumentAdmin)
 admin.site.register(SavedView, SavedViewAdmin)
 admin.site.register(StoragePath, StoragePathAdmin)

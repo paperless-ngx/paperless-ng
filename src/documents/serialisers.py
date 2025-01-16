@@ -34,6 +34,7 @@ if settings.AUDIT_LOG_ENABLED:
 
 from documents import bulk_edit
 from documents.data_models import DocumentSource
+from documents.models import ArchiveSerialNumberPrefix
 from documents.models import Correspondent
 from documents.models import CustomField
 from documents.models import CustomFieldInstance
@@ -342,6 +343,22 @@ class OwnedObjectListSerializer(serializers.ListSerializer):
         return super().to_representation(documents)
 
 
+
+class ArchiveSerialNumberPrefixSerializer(MatchingModelSerializer, OwnedObjectSerializer):
+    class Meta:
+        model = ArchiveSerialNumberPrefix
+        fields = (
+            "id",
+            "slug",
+            "name",
+            "document_count",
+            "owner",
+            "permissions",
+            "user_can_change",
+            "set_permissions",
+        )
+
+
 class CorrespondentSerializer(MatchingModelSerializer, OwnedObjectSerializer):
     last_correspondence = serializers.DateTimeField(read_only=True, required=False)
 
@@ -361,7 +378,6 @@ class CorrespondentSerializer(MatchingModelSerializer, OwnedObjectSerializer):
             "user_can_change",
             "set_permissions",
         )
-
 
 class DocumentTypeSerializer(MatchingModelSerializer, OwnedObjectSerializer):
     class Meta:
@@ -474,6 +490,9 @@ class TagSerializer(MatchingModelSerializer, OwnedObjectSerializer):
             raise serializers.ValidationError(_("Invalid color."))
         return color
 
+class ArchiveSerialNumberPrefixField(serializers.PrimaryKeyRelatedField):
+    def get_queryset(self):
+        return ArchiveSerialNumberPrefix.objects.all()
 
 class CorrespondentField(serializers.PrimaryKeyRelatedField):
     def get_queryset(self):
@@ -778,6 +797,7 @@ class DocumentSerializer(
     NestedUpdateMixin,
     DynamicFieldsModelSerializer,
 ):
+    archive_serial_number_prefix = ArchiveSerialNumberPrefixField(allow_null=True)
     correspondent = CorrespondentField(allow_null=True)
     tags = TagsField(many=True)
     document_type = DocumentTypeField(allow_null=True)
@@ -832,6 +852,7 @@ class DocumentSerializer(
             and len(str(attrs["archive_serial_number"])) > 0
             and Document.deleted_objects.filter(
                 archive_serial_number=attrs["archive_serial_number"],
+                #archive_serial_number_prefix__prefix=attrs["archive_serial_number_prefix"], # TODO: asn type empty is allowed
             ).exists()
         ):
             raise serializers.ValidationError(
@@ -934,6 +955,7 @@ class DocumentSerializer(
             "modified",
             "added",
             "deleted_at",
+            "archive_serial_number_prefix",
             "archive_serial_number",
             "original_file_name",
             "archived_file_name",

@@ -95,6 +95,13 @@ class MatchingModel(ModelWithOwner):
         return self.name
 
 
+class ArchiveSerialNumberPrefix(ModelWithOwner):
+    name = models.CharField(_("name"), max_length=6)
+
+    def __str__(self):
+        return self.name
+
+
 class Correspondent(MatchingModel):
     class Meta(MatchingModel.Meta):
         verbose_name = _("correspondent")
@@ -270,6 +277,15 @@ class Document(SoftDeleteModel, ModelWithOwner):
         unique=False,
         null=True,
         help_text=_("The original name of the file when it was uploaded"),
+    )
+
+    archive_serial_number_prefix = models.ForeignKey(
+        ArchiveSerialNumberPrefix,
+        blank=True,
+        null=True,
+        related_name="documents",
+        on_delete=models.SET_NULL,
+        verbose_name=_("archive serial number prefix"),
     )
 
     ARCHIVE_SERIAL_NUMBER_MIN: Final[int] = 0

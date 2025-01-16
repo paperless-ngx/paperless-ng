@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs'
+import { AsnPrefix } from './asn-prefix'
 import { Correspondent } from './correspondent'
 import { CustomFieldInstance } from './custom-field-instance'
 import { DocumentNote } from './document-note'
@@ -118,6 +119,10 @@ export interface SearchHit {
 }
 
 export interface Document extends ObjectWithPermissions {
+  archive_serial_number_prefix$?: Observable<AsnPrefix>
+
+  archive_serial_number_prefix?: number
+
   correspondent$?: Observable<Correspondent>
 
   correspondent?: number

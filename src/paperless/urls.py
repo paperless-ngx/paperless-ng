@@ -17,6 +17,7 @@ from django.views.static import serve
 from rest_framework.authtoken import views
 from rest_framework.routers import DefaultRouter
 
+from documents.views import ArchiveSerialNumberPrefixViewSet
 from documents.views import BulkDownloadView
 from documents.views import BulkEditObjectsView
 from documents.views import BulkEditView
@@ -59,6 +60,7 @@ from paperless_mail.views import MailRuleViewSet
 from paperless_mail.views import OauthCallbackView
 
 api_router = DefaultRouter()
+api_router.register(r"asn_prefix", ArchiveSerialNumberPrefixViewSet)
 api_router.register(r"correspondents", CorrespondentViewSet)
 api_router.register(r"document_types", DocumentTypeViewSet)
 api_router.register(r"documents", UnifiedSearchViewSet)

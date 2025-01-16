@@ -92,6 +92,7 @@ from documents.conditionals import thumbnail_last_modified
 from documents.data_models import ConsumableDocument
 from documents.data_models import DocumentMetadataOverrides
 from documents.data_models import DocumentSource
+from documents.filters import ArchiveSerialNumberPrefixFilterSet
 from documents.filters import CorrespondentFilterSet
 from documents.filters import CustomFieldFilterSet
 from documents.filters import DocumentFilterSet
@@ -106,6 +107,7 @@ from documents.matching import match_correspondents
 from documents.matching import match_document_types
 from documents.matching import match_storage_paths
 from documents.matching import match_tags
+from documents.models import ArchiveSerialNumberPrefix
 from documents.models import Correspondent
 from documents.models import CustomField
 from documents.models import Document
@@ -129,6 +131,7 @@ from documents.permissions import get_objects_for_user_owner_aware
 from documents.permissions import has_perms_owner_aware
 from documents.permissions import set_permissions_for_object
 from documents.serialisers import AcknowledgeTasksViewSerializer
+from documents.serialisers import ArchiveSerialNumberPrefixSerializer
 from documents.serialisers import BulkDownloadSerializer
 from documents.serialisers import BulkEditObjectsSerializer
 from documents.serialisers import BulkEditSerializer
@@ -256,6 +259,22 @@ class PermissionsAwareDocumentCountMixin(PassUserMixin):
             .annotate(document_count=Count("documents", filter=filter))
         )
 
+
+class ArchiveSerialNumberPrefixViewSet(ModelViewSet, PermissionsAwareDocumentCountMixin):
+    model = ArchiveSerialNumberPrefix
+
+    queryset = ArchiveSerialNumberPrefix.objects.select_related("owner").order_by(Lower("name"))
+
+    serializer_class = ArchiveSerialNumberPrefixSerializer
+    pagination_class = StandardPagination
+    permission_classes = (IsAuthenticated, PaperlessObjectPermissions)
+    filter_backends = (
+        DjangoFilterBackend,
+        OrderingFilter,
+        ObjectOwnedOrGrantedPermissionsFilter,
+    )
+    filterset_class = ArchiveSerialNumberPrefixFilterSet
+    ordering_fields = ("name")
 
 class CorrespondentViewSet(ModelViewSet, PermissionsAwareDocumentCountMixin):
     model = Correspondent
