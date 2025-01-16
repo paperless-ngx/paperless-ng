@@ -85,6 +85,7 @@ def _suggestion_printer(
 def set_correspondent(
     sender,
     document: Document,
+    *,
     logging_group=None,
     classifier: DocumentClassifier | None = None,
     replace=False,
@@ -140,6 +141,7 @@ def set_correspondent(
 def set_document_type(
     sender,
     document: Document,
+    *,
     logging_group=None,
     classifier: DocumentClassifier | None = None,
     replace=False,
@@ -196,6 +198,7 @@ def set_document_type(
 def set_tags(
     sender,
     document: Document,
+    *,
     logging_group=None,
     classifier: DocumentClassifier | None = None,
     replace=False,
@@ -251,6 +254,7 @@ def set_tags(
 def set_storage_path(
     sender,
     document: Document,
+    *,
     logging_group=None,
     classifier: DocumentClassifier | None = None,
     replace=False,
@@ -353,7 +357,7 @@ def cleanup_document_deletion(sender, instance, **kwargs):
                         f"{filename} could not be deleted: {e}",
                     )
             elif filename and not os.path.isfile(filename):
-                logger.warn(f"Expected {filename} tp exist, but it did not")
+                logger.warning(f"Expected {filename} to exist, but it did not")
 
         delete_empty_directories(
             os.path.dirname(instance.source_path),

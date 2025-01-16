@@ -214,6 +214,7 @@ class RasterisedDocumentParser(DocumentParser):
         mime_type,
         output_file,
         sidecar_file,
+        *,
         safe_fallback=False,
     ):
         if TYPE_CHECKING:

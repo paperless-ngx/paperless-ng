@@ -219,6 +219,7 @@ def reprocess(doc_ids: list[int]) -> Literal["OK"]:
 def set_permissions(
     doc_ids: list[int],
     set_permissions,
+    *,
     owner=None,
     merge=False,
 ) -> Literal["OK"]:
@@ -283,6 +284,7 @@ def rotate(doc_ids: list[int], degrees: int) -> Literal["OK"]:
 
 def merge(
     doc_ids: list[int],
+    *,
     metadata_document_id: int | None = None,
     delete_originals: bool = False,
     user: User | None = None,
@@ -361,6 +363,7 @@ def merge(
 def split(
     doc_ids: list[int],
     pages: list[list[int]],
+    *,
     delete_originals: bool = False,
     user: User | None = None,
 ) -> Literal["OK"]:

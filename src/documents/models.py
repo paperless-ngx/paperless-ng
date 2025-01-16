@@ -337,7 +337,7 @@ class Document(SoftDeleteModel, ModelWithOwner):
     def archive_file(self):
         return open(self.archive_path, "rb")
 
-    def get_public_filename(self, archive=False, counter=0, suffix=None) -> str:
+    def get_public_filename(self, *, archive=False, counter=0, suffix=None) -> str:
         """
         Returns a sanitized filename for the document, not including any paths.
         """

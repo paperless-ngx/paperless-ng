@@ -43,7 +43,7 @@ def delete_empty_directories(directory, root):
         directory = os.path.normpath(os.path.dirname(directory))
 
 
-def generate_unique_filename(doc, archive_filename=False):
+def generate_unique_filename(doc, *, archive_filename=False):
     """
     Generates a unique filename for doc in settings.ORIGINALS_DIR.
 
@@ -77,7 +77,7 @@ def generate_unique_filename(doc, archive_filename=False):
     while True:
         new_filename = generate_filename(
             doc,
-            counter,
+            counter=counter,
             archive_filename=archive_filename,
         )
         if new_filename == old_filename:
@@ -92,6 +92,7 @@ def generate_unique_filename(doc, archive_filename=False):
 
 def generate_filename(
     doc: Document,
+    *,
     counter=0,
     append_gpg=True,
     archive_filename=False,

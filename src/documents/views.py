@@ -1609,7 +1609,7 @@ class BulkDownloadView(GenericAPIView):
             strategy_class = ArchiveOnlyStrategy
 
         with zipfile.ZipFile(temp.name, "w", compression) as zipf:
-            strategy = strategy_class(zipf, follow_filename_format)
+            strategy = strategy_class(zipf, follow_formatting=follow_filename_format)
             for document in documents:
                 strategy.add_document(document)
 
@@ -1873,7 +1873,7 @@ class SharedLinkView(View):
         )
 
 
-def serve_file(doc: Document, use_archive: bool, disposition: str):
+def serve_file(*, doc: Document, use_archive: bool, disposition: str):
     if use_archive:
         file_handle = doc.archive_file
         filename = doc.get_public_filename(archive=True)

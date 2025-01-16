@@ -93,7 +93,7 @@ class ConsumerThreadMixin(DocumentConsumeDelayMixin):
         else:
             print("Consumed a perfectly valid file.")  # noqa: T201
 
-    def slow_write_file(self, target, incomplete=False):
+    def slow_write_file(self, target, *, incomplete=False):
         with open(self.sample_file, "rb") as f:
             pdf_bytes = f.read()
 

@@ -63,7 +63,7 @@ def index_optimize():
     writer.commit(optimize=True)
 
 
-def index_reindex(progress_bar_disable=False):
+def index_reindex(*, progress_bar_disable=False):
     documents = Document.objects.all()
 
     ix = index.open_index(recreate=True)

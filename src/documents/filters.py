@@ -85,7 +85,7 @@ class StoragePathFilterSet(FilterSet):
 
 
 class ObjectFilter(Filter):
-    def __init__(self, exclude=False, in_list=False, field_name=""):
+    def __init__(self, *, exclude=False, in_list=False, field_name=""):
         super().__init__()
         self.exclude = exclude
         self.in_list = in_list

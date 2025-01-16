@@ -133,6 +133,7 @@ def get_parser_class_for_mime_type(mime_type: str) -> type["DocumentParser"] | N
 def run_convert(
     input_file,
     output_file,
+    *,
     density=None,
     scale=None,
     alpha=None,

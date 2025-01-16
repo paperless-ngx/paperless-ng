@@ -32,6 +32,7 @@ extend-select = [
   "RUF",   # https://docs.astral.sh/ruff/rules/#ruff-specific-rules-ruf
   "FLY",   # https://docs.astral.sh/ruff/rules/#flynt-fly
   "PTH",   # https://docs.astral.sh/ruff/rules/#flake8-use-pathlib-pth
+  "FBT",   # https://docs.astral.sh/ruff/rules/#flake8-boolean-trap-fbt
 ]
 ignore = ["DJ001", "SIM105", "RUF012"]
 
