@@ -1,12 +1,8 @@
 import datetime
 import logging
-import os
-import re
-from collections import OrderedDict
 from pathlib import Path
 from typing import Final
 
-import dateutil.parser
 import pathvalidate
 from celery import states
 from django.conf import settings
@@ -541,91 +537,6 @@ class SavedViewFilterRule(models.Model):
 
     def __str__(self) -> str:
         return f"SavedViewFilterRule: {self.rule_type} : {self.value}"
-
-
-# TODO: why is this in the models file?
-# TODO: how about, what is this and where is it documented?
-# It appears to parsing JSON from an environment variable to get a title and date from
-# the filename, if possible, as a higher priority than either document filename or
-# content parsing
-class FileInfo:
-    REGEXES = OrderedDict(
-        [
-            (
-                "created-title",
-                re.compile(
-                    r"^(?P<created>\d{8}(\d{6})?Z) - (?P<title>.*)$",
-                    flags=re.IGNORECASE,
-                ),
-            ),
-            ("title", re.compile(r"(?P<title>.*)$", flags=re.IGNORECASE)),
-        ],
-    )
-
-    def __init__(
-        self,
-        created=None,
-        correspondent=None,
-        title=None,
-        tags=(),
-        extension=None,
-    ):
-        self.created = created
-        self.title = title
-        self.extension = extension
-        self.correspondent = correspondent
-        self.tags = tags
-
-    @classmethod
-    def _get_created(cls, created):
-        try:
-            return dateutil.parser.parse(f"{created[:-1]:0<14}Z")
-        except ValueError:
-            return None
-
-    @classmethod
-    def _get_title(cls, title):
-        return title
-
-    @classmethod
-    def _mangle_property(cls, properties, name):
-        if name in properties:
-            properties[name] = getattr(cls, f"_get_{name}")(properties[name])
-
-    @classmethod
-    def from_filename(cls, filename) -> "FileInfo":
-        # Mutate filename in-place before parsing its components
-        # by applying at most one of the configured transformations.
-        for pattern, repl in settings.FILENAME_PARSE_TRANSFORMS:
-            (filename, count) = pattern.subn(repl, filename)
-            if count:
-                break
-
-        # do this after the transforms so that the transforms can do whatever
-        # with the file extension.
-        filename_no_ext = os.path.splitext(filename)[0]
-
-        if filename_no_ext == filename and filename.startswith("."):
-            # This is a very special case where there is no text before the
-            # file type.
-            # TODO: this should be handled better. The ext is not removed
-            #  because usually, files like '.pdf' are just hidden files
-            #  with the name pdf, but in our case, its more likely that
-            #  there's just no name to begin with.
-            filename = ""
-            # This isn't too bad either, since we'll just not match anything
-            # and return an empty title. TODO: actually, this is kinda bad.
-        else:
-            filename = filename_no_ext
-
-        # Parse filename components.
-        for regex in cls.REGEXES.values():
-            m = regex.match(filename)
-            if m:
-                properties = m.groupdict()
-                cls._mangle_property(properties, "created")
-                cls._mangle_property(properties, "title")
-                return cls(**properties)
 
 
 # Extending User Model Using a One-To-One Link

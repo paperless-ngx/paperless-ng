@@ -3,7 +3,6 @@ import json
 import math
 import multiprocessing
 import os
-import re
 import tempfile
 from os import PathLike
 from pathlib import Path
@@ -1056,11 +1055,6 @@ FILENAME_DATE_ORDER = os.getenv("PAPERLESS_FILENAME_DATE_ORDER")
 # `created` date in the frontend. Duplicates are removed, which can result in
 # fewer dates shown.
 NUMBER_OF_SUGGESTED_DATES = __get_int("PAPERLESS_NUMBER_OF_SUGGESTED_DATES", 3)
-
-# Transformations applied before filename parsing
-FILENAME_PARSE_TRANSFORMS = []
-for t in json.loads(os.getenv("PAPERLESS_FILENAME_PARSE_TRANSFORMS", "[]")):
-    FILENAME_PARSE_TRANSFORMS.append((re.compile(t["pattern"]), t["repl"]))
 
 # Specify the filename format for out files
 FILENAME_FORMAT = os.getenv("PAPERLESS_FILENAME_FORMAT")
