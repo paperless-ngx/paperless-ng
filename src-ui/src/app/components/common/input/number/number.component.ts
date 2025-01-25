@@ -2,11 +2,13 @@ import { Component, forwardRef, Input } from '@angular/core'
 import {
   FormsModule,
   NG_VALUE_ACCESSOR,
-  ReactiveFormsModule,
+  ReactiveFormsModule
 } from '@angular/forms'
 import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons'
 import { DocumentService } from 'src/app/services/rest/document.service'
 import { AbstractInputComponent } from '../abstract-input'
+import { NgSelectModule } from '@ng-select/ng-select'
+import { AsnPrefix } from "../../../../data/asn-prefix";
 
 @Component({
   providers: [
@@ -19,11 +21,17 @@ import { AbstractInputComponent } from '../abstract-input'
   selector: 'pngx-input-number',
   templateUrl: './number.component.html',
   styleUrls: ['./number.component.scss'],
-  imports: [FormsModule, ReactiveFormsModule, NgxBootstrapIconsModule],
+  imports: [FormsModule, ReactiveFormsModule, NgxBootstrapIconsModule, NgSelectModule],
 })
 export class NumberComponent extends AbstractInputComponent<number> {
   @Input()
   showAdd: boolean = true
+
+  @Input()
+  prefix: AsnPrefix[]
+
+  @Input()
+  prefixSelect: number
 
   @Input()
   step: number = 1

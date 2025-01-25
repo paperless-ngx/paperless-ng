@@ -12,6 +12,7 @@ export enum PermissionAction {
 export enum PermissionType {
   Document = '%s_document',
   Tag = '%s_tag',
+  AsnPrefix = '%s_asnprefix',
   Correspondent = '%s_correspondent',
   DocumentType = '%s_documenttype',
   StoragePath = '%s_storagepath',

@@ -28,6 +28,7 @@ from rest_framework import serializers
 from rest_framework.filters import OrderingFilter
 from rest_framework_guardian.filters import ObjectPermissionsFilter
 
+from documents.models import ArchiveSerialNumberPrefix
 from documents.models import Correspondent
 from documents.models import CustomField
 from documents.models import CustomFieldInstance
@@ -64,6 +65,14 @@ class TagFilterSet(FilterSet):
             "name": CHAR_KWARGS,
         }
 
+
+class ArchiveSerialNumberPrefixFilterSet(FilterSet):
+    class Meta:
+        model = ArchiveSerialNumberPrefix
+        fields = {
+            "id": ID_KWARGS,
+            "name": CHAR_KWARGS,
+        }
 
 class DocumentTypeFilterSet(FilterSet):
     class Meta:

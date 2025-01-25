@@ -12,6 +12,14 @@
       </div>
       <div class="position-relative" [class.col-md-9]="horizontal">
         <div class="input-group" [class.is-invalid]="error">
+          @if (prefix) {
+            <ng-select class="form-control"
+              [items]="prefix"
+             bindLabel="name"
+             bindValue="id"
+             [(ngModel)]="prefixSelect"
+            ></ng-select>
+            }
           <input #inputField type="number" class="form-control" [step]="step" [id]="inputId" [(ngModel)]="value" (change)="onChange(value)" [class.is-invalid]="error" [disabled]="disabled">
           @if (showAdd) {
             <button class="btn btn-outline-secondary" type="button" id="button-addon1" (click)="nextAsn()" [disabled]="disabled">+1</button>

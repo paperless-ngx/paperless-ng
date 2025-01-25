@@ -245,6 +245,7 @@ class DelayedQuery:
             "title": "title",
             "correspondent__name": "correspondent",
             "document_type__name": "type",
+            "archive_serial_number_prefix": "asn_prefix",
             "archive_serial_number": "asn",
             "num_notes": "num_notes",
             "owner": "owner",

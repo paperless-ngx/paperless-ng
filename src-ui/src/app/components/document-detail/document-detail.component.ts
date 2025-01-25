@@ -67,6 +67,7 @@ import {
   PermissionsService,
   PermissionType,
 } from 'src/app/services/permissions.service'
+import { AsnPrefixService } from 'src/app/services/rest/asn-prefix.service'
 import { CorrespondentService } from 'src/app/services/rest/correspondent.service'
 import { CustomFieldsService } from 'src/app/services/rest/custom-fields.service'
 import { DocumentTypeService } from 'src/app/services/rest/document-type.service'
@@ -102,6 +103,7 @@ import { DocumentHistoryComponent } from '../document-history/document-history.c
 import { DocumentNotesComponent } from '../document-notes/document-notes.component'
 import { ComponentWithPermissions } from '../with-permissions/with-permissions.component'
 import { MetadataCollapseComponent } from './metadata-collapse/metadata-collapse.component'
+import { AsnPrefix } from "../../data/asn-prefix";
 
 enum DocumentDetailNavIDs {
   Details = 1,
@@ -171,8 +173,7 @@ enum ZoomSetting {
 })
 export class DocumentDetailComponent
   extends ComponentWithPermissions
-  implements OnInit, OnDestroy, DirtyComponent
-{
+  implements OnInit, OnDestroy, DirtyComponent {
   @ViewChild('inputTitle')
   titleInput: TextComponent
 
@@ -200,6 +201,7 @@ export class DocumentDetailComponent
   tiffURL: string
   tiffError: string
 
+  asnPrefix: AsnPrefix[]
   correspondents: Correspondent[]
   documentTypes: DocumentType[]
   storagePaths: StoragePath[]
@@ -211,6 +213,7 @@ export class DocumentDetailComponent
     correspondent: new FormControl(),
     document_type: new FormControl(),
     storage_path: new FormControl(),
+    archive_serial_number_prefix: new FormControl(),
     archive_serial_number: new FormControl(),
     tags: new FormControl([]),
     permissions_form: new FormControl(null),
@@ -258,6 +261,7 @@ export class DocumentDetailComponent
   constructor(
     private documentsService: DocumentService,
     private route: ActivatedRoute,
+    private asnPrefixService: AsnPrefixService,
     private correspondentService: CorrespondentService,
     private documentTypeService: DocumentTypeService,
     private router: Router,
@@ -350,6 +354,17 @@ export class DocumentDetailComponent
     if (
       this.permissionsService.currentUserCan(
         PermissionAction.View,
+        PermissionType.AsnPrefix
+      )
+    ) {
+      this.asnPrefixService
+        .listAll()
+        .pipe(first(), takeUntil(this.unsubscribeNotifier))
+        .subscribe((result) => (this.asnPrefix = result.results))
+    }
+    if (
+      this.permissionsService.currentUserCan(
+        PermissionAction.View,
         PermissionType.DocumentType
       )
     ) {
@@ -403,9 +418,8 @@ export class DocumentDetailComponent
               this.previewText = res.toString()
             },
             error: (err) => {
-              this.previewText = $localize`An error occurred loading content: ${
-                err.message ?? err.toString()
-              }`
+              this.previewText = $localize`An error occurred loading content: ${err.message ?? err.toString()
+                }`
             },
           })
           this.thumbUrl = this.documentsService.getThumbUrl(documentId)
@@ -449,7 +463,7 @@ export class DocumentDetailComponent
                 this.documentForm.get('permissions_form').value['owner']
               openDocument['permissions'] =
                 this.documentForm.get('permissions_form').value[
-                  'set_permissions'
+                'set_permissions'
                 ]
               delete openDocument['permissions_form']
             }
@@ -494,6 +508,7 @@ export class DocumentDetailComponent
             correspondent: doc.correspondent,
             document_type: doc.document_type,
             storage_path: doc.storage_path,
+            archive_serial_number_prefix: doc.archive_serial_number_prefix,
             archive_serial_number: doc.archive_serial_number,
             tags: [...doc.tags],
             permissions_form: {
@@ -796,7 +811,7 @@ export class DocumentDetailComponent
 
   save(close: boolean = false) {
     this.networkActive = true
-    ;(document.activeElement as HTMLElement)?.dispatchEvent(new Event('change'))
+      ; (document.activeElement as HTMLElement)?.dispatchEvent(new Event('change'))
     this.documentsService
       .update(this.document)
       .pipe(first())
@@ -1051,7 +1066,7 @@ export class DocumentDetailComponent
     this.previewZoomScale = ZoomSetting.PageWidth
     this.previewZoomSetting =
       Object.values(ZoomSetting)[
-        Math.min(Object.values(ZoomSetting).length - 1, currentIndex + 1)
+      Math.min(Object.values(ZoomSetting).length - 1, currentIndex + 1)
       ]
   }
 
