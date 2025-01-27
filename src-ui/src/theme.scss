@@ -366,3 +366,52 @@ $form-check-radio-checked-bg-image-dark: url("data:image/svg+xml,<svg xmlns='htt
   }
 
 }
+
+[data-bs-theme="dark-flat"] {
+  body:not(.primary-light):not(.primary-dark) {
+    @include paperless-green-dark-mode;
+
+    .navbar.bg-primary {
+      // navbar is og green in dark mode
+      @include paperless-green;
+    }
+  }
+
+  @include dark-mode;
+
+  .btn-outline-primary, .btn-outline-secondary {
+    border-color: var(--pngx-bg-alt) !important;
+    background-color: var(--pngx-bg-alt) !important;
+    color: var(--bs-body-color) !important;
+  }
+
+  .btn-outline-secondary:hover, .btn-outline-secondary:focus, .btn-outline-secondary:active, .btn-outline-secondary.active {
+    background-color: var(--pngx-bg-darker) !important;
+    color: var(--pngx-body-color-accent) !important;
+  }
+
+  .btn-outline-danger {
+    border-color: var(--pngx-bg-alt) !important;
+    background-color: var(--pngx-bg-alt) !important;
+    color: var(--bs-danger) !important;
+
+    &:hover, &:focus, &.active, &:active {
+      background-color: var(--pngx-bg-darker) !important;
+      color: var(--bs-danger) !important;
+    }
+  }
+
+  .form-control:not(.btn), input, select, textarea,
+  .form-select:not(.is-invalid):not(:disabled), .form-check-input,
+  .ng-select .ng-select-container {
+    background-color: var(--pngx-bg-darker) !important;
+    color: var(--bs-body-color) !important;
+    border-color: var(--pngx-bg-alt) !important;
+  }
+
+  .input-group .input-group-text {
+    background-color: var(--pngx-bg-alt);
+    color: var(--bs-body-color);
+    border-color: var(--pngx-bg-alt);
+  }
+}

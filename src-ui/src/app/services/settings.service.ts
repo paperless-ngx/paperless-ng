@@ -425,6 +425,12 @@ export class SettingsService {
       )
     }
 
+    this._renderer.setAttribute(
+      this.document.documentElement,
+      'data-bs-theme',
+      'dark-flat'
+    )
+
     if (themeColor?.length) {
       const hsl = hexToHsl(themeColor)
       const bgBrightnessEstimate = estimateBrightnessForColor(themeColor)
