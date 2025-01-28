@@ -377,40 +377,7 @@ class RasterisedDocumentParser(DocumentParser):
             sidecar_file,
         )
 
-        try:
-            self.log.debug(f"Calling OCRmyPDF with args: {args}")
-            ocrmypdf.ocr(**args)
-
-            if self.settings.skip_archive_file != ArchiveFileChoices.ALWAYS:
-                self.archive_path = archive_path
-
-            self.text = self.extract_text(sidecar_file, archive_path)
-
-            if not self.text:
-                raise NoTextFoundException("No text was found in the original document")
-        except (DigitalSignatureError, EncryptedPdfError):
-            self.log.warning(
-                "This file is encrypted and/or signed, OCR is impossible. Using "
-                "any text present in the original file.",
-            )
-            if original_has_text:
-                self.text = text_original
-        except SubprocessOutputError as e:
-            if "Ghostscript PDF/A rendering" in str(e):
-                self.log.warning(
-                    "Ghostscript PDF/A rendering failed, consider setting "
-                    "PAPERLESS_OCR_USER_ARGS: '{\"continue_on_soft_render_error\": true}'",
-                )
-
-            raise ParseError(
-                f"SubprocessOutputError: {e!s}. See logs for more information.",
-            ) from e
-        except (NoTextFoundException, InputFileError) as e:
-            self.log.warning(
-                f"Encountered an error while running OCR: {e!s}. "
-                f"Attempting force OCR to get the text.",
-            )
-
+        def safe_fallback_ocr():
             archive_path_fallback = Path(
                 os.path.join(self.tempdir, "archive-fallback.pdf"),
             )
@@ -443,6 +410,45 @@ class RasterisedDocumentParser(DocumentParser):
             except Exception as e:
                 # If this fails, we have a serious issue at hand.
                 raise ParseError(f"{e.__class__.__name__}: {e!s}") from e
+
+        try:
+            self.log.debug(f"Calling OCRmyPDF with args: {args}")
+            ocrmypdf.ocr(**args)
+
+            if self.settings.skip_archive_file != ArchiveFileChoices.ALWAYS:
+                self.archive_path = archive_path
+
+            self.text = self.extract_text(sidecar_file, archive_path)
+
+            if not self.text:
+                raise NoTextFoundException("No text was found in the original document")
+        except (DigitalSignatureError, EncryptedPdfError):
+            self.log.warning(
+                "This file is encrypted and/or signed, OCR is impossible. Using "
+                "any text present in the original file.",
+            )
+            if original_has_text:
+                self.text = text_original
+        except SubprocessOutputError as e:
+            if "Ghostscript rasterizing failed" in str(e):
+                safe_fallback_ocr()
+            else:
+                if "Ghostscript PDF/A rendering" in str(e):
+                    self.log.warning(
+                        "Ghostscript PDF/A rendering failed, consider setting "
+                        "PAPERLESS_OCR_USER_ARGS: '{\"continue_on_soft_render_error\": true}'",
+                    )
+
+                raise ParseError(
+                    f"SubprocessOutputError: {e!s}. See logs for more information.",
+                ) from e
+        except (NoTextFoundException, InputFileError) as e:
+            self.log.warning(
+                f"Encountered an error while running OCR: {e!s}. "
+                f"Attempting force OCR to get the text.",
+            )
+
+            safe_fallback_ocr()
 
         except Exception as e:
             # Anything else is probably serious.
