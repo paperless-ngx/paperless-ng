@@ -2123,11 +2123,16 @@ class SystemStatusView(PassUserMixin):
 
         try:
             celery_ping = celery_app.control.inspect().ping()
+            logger.debug(f"celery_ping: {celery_ping}")
             first_worker_ping = celery_ping[next(iter(celery_ping.keys()))]
+            logger.debug(f"first_worker_ping: {first_worker_ping}")
             if first_worker_ping["ok"] == "pong":
                 celery_active = "OK"
-        except Exception:
+        except Exception as e:
             celery_active = "ERROR"
+            logger.exception(
+                f"System status detected a possible problem while checking celery status: {e}",
+            )
 
         index_error = None
         try:
