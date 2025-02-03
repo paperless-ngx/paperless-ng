@@ -513,8 +513,7 @@ class TestExportImport(
         self.assertIsFile(expected_file)
 
         with ZipFile(expected_file) as zip:
-            # Extras are from the directories, which also appear in the listing
-            self.assertEqual(len(zip.namelist()), 14)
+            self.assertEqual(len(zip.namelist()), 11)
             self.assertIn("manifest.json", zip.namelist())
             self.assertIn("metadata.json", zip.namelist())
 
@@ -565,6 +564,35 @@ class TestExportImport(
             self.assertEqual(len(zip.namelist()), 11)
             self.assertIn("manifest.json", zip.namelist())
             self.assertIn("metadata.json", zip.namelist())
+
+    def test_export_zipped_old_mtime(self):
+        """
+        GIVEN:
+            - Request to export documents to zipfile
+            - One of the documents has an old mtime
+        WHEN:
+            - Documents are exported
+        THEN:
+            - Zipfile is created
+            - Zipfile contains exported files
+        """
+        shutil.rmtree(os.path.join(self.dirs.media_dir, "documents"))
+        shutil.copytree(
+            os.path.join(os.path.dirname(__file__), "samples", "documents"),
+            os.path.join(self.dirs.media_dir, "documents"),
+        )
+        os.utime(self.d1.source_path, (0, 0))
+
+        args = ["document_exporter", self.target, "--zip"]
+
+        call_command(*args)
+
+        expected_file = os.path.join(
+            self.target,
+            f"export-{timezone.localdate().isoformat()}.zip",
+        )
+
+        self.assertIsFile(expected_file)
 
     def test_export_target_not_exists(self):
         """

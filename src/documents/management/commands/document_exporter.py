@@ -4,6 +4,7 @@ import os
 import shutil
 import tempfile
 import time
+import zipfile
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -235,14 +236,20 @@ class Command(CryptMixin, BaseCommand):
                 # We've written everything to the temporary directory in this case,
                 # now make an archive in the original target, with all files stored
                 if self.zip_export and temp_dir is not None:
-                    shutil.make_archive(
-                        os.path.join(
-                            self.original_target,
-                            options["zip_name"],
-                        ),
-                        format="zip",
-                        root_dir=temp_dir.name,
-                    )
+                    zip_path = self.original_target / f"{options['zip_name']}.zip"
+                    with zipfile.ZipFile(
+                        zip_path,
+                        "w",
+                        zipfile.ZIP_DEFLATED,
+                        strict_timestamps=False,
+                    ) as zipf:
+                        for root, _, files in os.walk(temp_dir.name):
+                            for file in files:
+                                file_path = Path(root) / file
+                                zipf.write(
+                                    file_path,
+                                    file_path.relative_to(temp_dir.name),
+                                )
 
         finally:
             # Always cleanup the temporary directory, if one was created
