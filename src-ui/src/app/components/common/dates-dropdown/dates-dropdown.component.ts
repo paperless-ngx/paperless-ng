@@ -9,6 +9,7 @@ import {
 } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import {
+  NgbDate,
   NgbDateAdapter,
   NgbDatepickerModule,
   NgbDropdownModule,
@@ -57,7 +58,10 @@ export enum RelativeDate {
 export class DatesDropdownComponent implements OnInit, OnDestroy {
   public popperOptions = popperOptionsReenablePreventOverflow
 
-  constructor(settings: SettingsService) {
+  constructor(
+    settings: SettingsService,
+    private isoDateAdapter: NgbDateAdapter<string>
+  ) {
     this.datePlaceHolder = settings.getLocalizedDateInputFormat()
   }
 
@@ -95,6 +99,10 @@ export class DatesDropdownComponent implements OnInit, OnDestroy {
 
   @Input()
   createdDateFrom: string
+
+  createdDate: string
+  addedDate: string
+  hoveredDate: NgbDate
 
   @Output()
   createdDateFromChange = new EventEmitter<string>()
@@ -186,6 +194,52 @@ export class DatesDropdownComponent implements OnInit, OnDestroy {
     this.onChange()
   }
 
+  isHovered(date: NgbDate) {
+    const createdDateFromNgbDate = this.createdDateFrom
+      ? NgbDate.from({
+          year: new Date(this.createdDateFrom).getFullYear(),
+          month: new Date(this.createdDateFrom).getMonth() + 1,
+          day: new Date(this.createdDateFrom).getDate(),
+        })
+      : null
+    return (
+      this.createdDateFrom &&
+      !this.createdDateTo &&
+      this.hoveredDate &&
+      date.after(createdDateFromNgbDate) &&
+      date.before(this.hoveredDate)
+    )
+  }
+
+  isInside(date: NgbDate) {
+    const createdDateFromNgbDate = this.createdDateFrom
+      ? NgbDate.from(this.isoDateAdapter.fromModel(this.createdDateFrom))
+      : null
+    const createdDateToNgbDate = this.createdDateTo
+      ? NgbDate.from(this.isoDateAdapter.fromModel(this.createdDateTo))
+      : null
+    return (
+      this.createdDateTo &&
+      date.after(createdDateFromNgbDate) &&
+      date.before(createdDateToNgbDate)
+    )
+  }
+
+  isRange(date: NgbDate) {
+    const createdDateFromNgbDate = this.createdDateFrom
+      ? NgbDate.from(this.isoDateAdapter.fromModel(this.createdDateFrom))
+      : null
+    const createdDateToNgbDate = this.createdDateTo
+      ? NgbDate.from(this.isoDateAdapter.fromModel(this.createdDateTo))
+      : null
+    return (
+      date.equals(createdDateFromNgbDate) ||
+      (this.createdDateTo && date.equals(createdDateToNgbDate)) ||
+      this.isInside(date) ||
+      this.isHovered(date)
+    )
+  }
+
   onChange() {
     this.createdDateToChange.emit(this.createdDateTo)
     this.createdDateFromChange.emit(this.createdDateFrom)
@@ -201,6 +255,50 @@ export class DatesDropdownComponent implements OnInit, OnDestroy {
       addedTo: this.addedDateTo,
       addedRelativeDateID: this.addedRelativeDate,
     })
+  }
+
+  onCreatedChange() {
+    const createdNgbDate = NgbDate.from(
+      this.isoDateAdapter.fromModel(this.createdDate)
+    )
+
+    if (!this.createdDateFrom && !this.createdDateTo) {
+      this.createdDateFrom = this.isoDateAdapter.toModel(createdNgbDate)
+    } else if (
+      this.createdDateFrom &&
+      !this.createdDateTo &&
+      createdNgbDate.after(
+        NgbDate.from(this.isoDateAdapter.fromModel(this.createdDateFrom))
+      )
+    ) {
+      this.createdDateTo = this.isoDateAdapter.toModel(createdNgbDate)
+    } else {
+      this.createdDateTo = null
+      this.createdDateFrom = this.isoDateAdapter.toModel(createdNgbDate)
+    }
+    this.onChangeDebounce()
+  }
+
+  onAddedChange() {
+    const addedNgbDate = NgbDate.from(
+      this.isoDateAdapter.fromModel(this.createdDate)
+    )
+
+    if (!this.addedDateFrom && !this.addedDateTo) {
+      this.addedDateFrom = this.isoDateAdapter.toModel(addedNgbDate)
+    } else if (
+      this.addedDateFrom &&
+      !this.addedDateTo &&
+      addedNgbDate.after(
+        NgbDate.from(this.isoDateAdapter.fromModel(this.addedDateFrom))
+      )
+    ) {
+      this.addedDateTo = this.isoDateAdapter.toModel(addedNgbDate)
+    } else {
+      this.addedDateTo = null
+      this.addedDateFrom = this.isoDateAdapter.toModel(addedNgbDate)
+    }
+    this.onChangeDebounce()
   }
 
   onChangeDebounce() {

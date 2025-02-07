@@ -2,7 +2,7 @@
   white-space: nowrap;
 
   @media(min-width: 768px) {
-    --bs-dropdown-min-width: 40rem;
+    --bs-dropdown-min-width: 38rem;
   }
 
   @media screen and (max-width: 767px) {
@@ -46,4 +46,9 @@
   > .btn {
     border-radius: 0.15rem;
   }
+}
+
+::ng-deep .ngb-dp-day, .day {
+  height: 2.3rem !important;
+  width: 2.3rem !important;
 }
