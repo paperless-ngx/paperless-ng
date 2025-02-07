@@ -1,7 +1,8 @@
 # This file configures pre-commit hooks.
 # See https://pre-commit.com/ for general information
 # See https://pre-commit.com/hooks.html for a listing of possible hooks
-
+default_language_version:
+  python: python3.11
 repos:
   # General hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks

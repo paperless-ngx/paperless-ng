@@ -198,6 +198,18 @@ Docker, this may be the `environment` key of the webserver or a
 containing the configuration parameters. Be sure to use the correct format
 and watch out for indentation if editing the YAML file.
 
+#### [`PAPERLESS_RECHNUNGLESS_ENABLED=<bool>`](#PAPERLESS_RECHNUNGLESS_ENABLED) {#PAPERLESS_RECHNUNGLESS_ENABLED}
+
+: Enable (or disable) the Rechnungless xml to pdf converter and validator.
+
+    Defaults to false.
+
+#### [`PAPERLESS_RECHNUNGLESS_ENDPOINT=<url>`](#PAPERLESS_RECHNUNGLESS_ENDPOINT) {#PAPERLESS_RECHNUNGLESS_ENDPOINT}
+
+: Set the endpoint URL where Paperless can reach your Rechnungless api server.
+
+    Defaults to "<http://rechnungless:8080/rechnungless>".
+
 ## Paths and folders
 
 #### [`PAPERLESS_CONSUMPTION_DIR=<path>`](#PAPERLESS_CONSUMPTION_DIR) {#PAPERLESS_CONSUMPTION_DIR}

@@ -1,0 +1,10 @@
+services:
+  rechnungless:
+    image: marcel2508/rechnungless:latest
+    restart: unless-stopped
+    environment:
+      # REQUIRED FOR APPLE M4 CHIP / MACOS 15.2
+      JAVA_OPTS: -XX:UseSVE=0
+  webserver:
+    environment:
+      PAPERLESS_ENABLE_RECHNUNGLESS: 1

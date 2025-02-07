@@ -1089,6 +1089,16 @@ TIKA_GOTENBERG_ENDPOINT = os.getenv(
 if TIKA_ENABLED:
     INSTALLED_APPS.append("paperless_tika.apps.PaperlessTikaConfig")
 
+# XML / RECHNUNGLESS settings
+RECHNUNGLESS_ENABLED = __get_boolean("PAPERLESS_RECHNUNGLESS_ENABLED", "NO")
+RECHNUNGLESS_ENDPOINT = os.getenv(
+    "PAPERLESS_RECHNUNGLESS_ENDPOINT",
+    "http://rechnungless:8080/rechnungless",
+)
+
+if RECHNUNGLESS_ENABLED:
+    INSTALLED_APPS.append("paperless_xml.apps.PaperlessXMLConfig")
+
 AUDIT_LOG_ENABLED = __get_boolean("PAPERLESS_AUDIT_LOG_ENABLED", "true")
 if AUDIT_LOG_ENABLED:
     INSTALLED_APPS.append("auditlog")
