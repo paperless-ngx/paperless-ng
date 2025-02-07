@@ -57,7 +57,7 @@ tqdm = "*"
 uvicorn = {extras = ["standard"], version = "==0.25.0"}
 watchdog = "~=6.0"
 whitenoise = "~=6.8"
-whoosh = "~=2.7"
+whoosh-reloaded = "*"
 zxing-cpp = "*"
 
 
