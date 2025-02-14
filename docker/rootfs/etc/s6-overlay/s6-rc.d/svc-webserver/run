@@ -4,7 +4,7 @@
 cd ${PAPERLESS_SRC_DIR}
 
 if [[ -n "${USER_IS_NON_ROOT}" ]]; then
-	exec /usr/local/bin/gunicorn -c /usr/src/paperless/gunicorn.conf.py paperless.asgi:application
+	exec python3 /usr/src/paperless/webserver.py
 else
-	exec s6-setuidgid paperless /usr/local/bin/gunicorn -c /usr/src/paperless/gunicorn.conf.py paperless.asgi:application
+	exec s6-setuidgid paperless python3 /usr/src/paperless/webserver.py
 fi

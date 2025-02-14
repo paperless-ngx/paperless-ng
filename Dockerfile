@@ -204,11 +204,10 @@ RUN set -eux \
         && rm --force --verbose *.deb \
     && rm --recursive --force --verbose /var/lib/apt/lists/*
 
-# Copy gunicorn config
+# Copy webserver config
 # Changes very infrequently
 WORKDIR /usr/src/paperless/
-
-COPY --chown=1000:1000 gunicorn.conf.py /usr/src/paperless/gunicorn.conf.py
+COPY --chown=1000:1000 webserver.py /usr/src/paperless/webserver.py
 
 WORKDIR /usr/src/paperless/src/
 
