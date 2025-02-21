@@ -1,18 +1,14 @@
 import os
-import tempfile
 from pathlib import Path
 from unittest import mock
 
+from celery import states
 from django.contrib.auth.models import User
 from django.test import override_settings
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from documents.classifier import ClassifierModelCorruptError
-from documents.classifier import DocumentClassifier
-from documents.classifier import load_classifier
-from documents.models import Document
-from documents.models import Tag
+from documents.models import PaperlessTask
 from paperless import version
 
 
@@ -193,7 +189,6 @@ class TestSystemStatus(APITestCase):
         self.assertEqual(response.data["tasks"]["index_status"], "ERROR")
         self.assertIsNotNone(response.data["tasks"]["index_error"])
 
-    @override_settings(DATA_DIR=Path("/tmp/does_not_exist/data/"))
     def test_system_status_classifier_ok(self):
         """
         GIVEN:
@@ -203,9 +198,11 @@ class TestSystemStatus(APITestCase):
         THEN:
             - The response contains an OK classifier status
         """
-        load_classifier()
-        test_classifier = DocumentClassifier()
-        test_classifier.save()
+        PaperlessTask.objects.create(
+            type=PaperlessTask.TaskType.SCHEDULED_TASK,
+            status=states.SUCCESS,
+            task_name=PaperlessTask.TaskName.TRAIN_CLASSIFIER,
+        )
         self.client.force_login(self.user)
         response = self.client.get(self.ENDPOINT)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -215,73 +212,101 @@ class TestSystemStatus(APITestCase):
     def test_system_status_classifier_warning(self):
         """
         GIVEN:
-            - The classifier does not exist yet
-            - > 0 documents and tags with auto matching exist
+            - No classifier task is found
         WHEN:
             - The user requests the system status
         THEN:
-            - The response contains an WARNING classifier status
+            - The response contains a WARNING classifier status
         """
-        with override_settings(MODEL_FILE=Path("does_not_exist")):
-            Document.objects.create(
-                title="Test Document",
-            )
-            Tag.objects.create(name="Test Tag", matching_algorithm=Tag.MATCH_AUTO)
-            self.client.force_login(self.user)
-            response = self.client.get(self.ENDPOINT)
-            self.assertEqual(response.status_code, status.HTTP_200_OK)
-            self.assertEqual(response.data["tasks"]["classifier_status"], "WARNING")
-            self.assertIsNotNone(response.data["tasks"]["classifier_error"])
+        self.client.force_login(self.user)
+        response = self.client.get(self.ENDPOINT)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            response.data["tasks"]["classifier_status"],
+            "WARNING",
+        )
 
-    @mock.patch(
-        "documents.classifier.load_classifier",
-        side_effect=ClassifierModelCorruptError(),
-    )
-    def test_system_status_classifier_error(self, mock_load_classifier):
+    def test_system_status_classifier_error(self):
         """
         GIVEN:
-            - The classifier does exist but is corrupt
-            - > 0 documents and tags with auto matching exist
+            - An error occurred while loading the classifier
         WHEN:
             - The user requests the system status
         THEN:
             - The response contains an ERROR classifier status
         """
-        with (
-            tempfile.NamedTemporaryFile(
-                dir="/tmp",
-                delete=False,
-            ) as does_exist,
-            override_settings(MODEL_FILE=Path(does_exist.name)),
-        ):
-            Document.objects.create(
-                title="Test Document",
-            )
-            Tag.objects.create(
-                name="Test Tag",
-                matching_algorithm=Tag.MATCH_AUTO,
-            )
-            self.client.force_login(self.user)
-            response = self.client.get(self.ENDPOINT)
-            self.assertEqual(response.status_code, status.HTTP_200_OK)
-            self.assertEqual(
-                response.data["tasks"]["classifier_status"],
-                "ERROR",
-            )
-            self.assertIsNotNone(response.data["tasks"]["classifier_error"])
+        PaperlessTask.objects.create(
+            type=PaperlessTask.TaskType.SCHEDULED_TASK,
+            status=states.FAILURE,
+            task_name=PaperlessTask.TaskName.TRAIN_CLASSIFIER,
+            result="Classifier training failed",
+        )
+        self.client.force_login(self.user)
+        response = self.client.get(self.ENDPOINT)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            response.data["tasks"]["classifier_status"],
+            "ERROR",
+        )
+        self.assertIsNotNone(response.data["tasks"]["classifier_error"])
 
-    def test_system_status_classifier_ok_no_objects(self):
+    def test_system_status_sanity_check_ok(self):
         """
         GIVEN:
-            - The classifier does not exist (and should not)
-            - No documents nor objects with auto matching exist
+            - The sanity check is successful
         WHEN:
             - The user requests the system status
         THEN:
-            - The response contains an OK classifier status
+            - The response contains an OK sanity check status
         """
-        with override_settings(MODEL_FILE=Path("does_not_exist")):
-            self.client.force_login(self.user)
-            response = self.client.get(self.ENDPOINT)
-            self.assertEqual(response.status_code, status.HTTP_200_OK)
-            self.assertEqual(response.data["tasks"]["classifier_status"], "OK")
+        PaperlessTask.objects.create(
+            type=PaperlessTask.TaskType.SCHEDULED_TASK,
+            status=states.SUCCESS,
+            task_name=PaperlessTask.TaskName.CHECK_SANITY,
+        )
+        self.client.force_login(self.user)
+        response = self.client.get(self.ENDPOINT)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["tasks"]["sanity_check_status"], "OK")
+        self.assertIsNone(response.data["tasks"]["sanity_check_error"])
+
+    def test_system_status_sanity_check_warning(self):
+        """
+        GIVEN:
+            - No sanity check task is found
+        WHEN:
+            - The user requests the system status
+        THEN:
+            - The response contains a WARNING sanity check status
+        """
+        self.client.force_login(self.user)
+        response = self.client.get(self.ENDPOINT)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            response.data["tasks"]["sanity_check_status"],
+            "WARNING",
+        )
+
+    def test_system_status_sanity_check_error(self):
+        """
+        GIVEN:
+            - The sanity check failed
+        WHEN:
+            - The user requests the system status
+        THEN:
+            - The response contains an ERROR sanity check status
+        """
+        PaperlessTask.objects.create(
+            type=PaperlessTask.TaskType.SCHEDULED_TASK,
+            status=states.FAILURE,
+            task_name=PaperlessTask.TaskName.CHECK_SANITY,
+            result="5 issues found.",
+        )
+        self.client.force_login(self.user)
+        response = self.client.get(self.ENDPOINT)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            response.data["tasks"]["sanity_check_status"],
+            "ERROR",
+        )
+        self.assertIsNotNone(response.data["tasks"]["sanity_check_error"])

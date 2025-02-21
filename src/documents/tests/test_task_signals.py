@@ -68,7 +68,7 @@ class TestTaskSignalHandler(DirectoriesMixin, TestCase):
         self.assertIsNotNone(task)
         self.assertEqual(headers["id"], task.task_id)
         self.assertEqual("hello-999.pdf", task.task_file_name)
-        self.assertEqual("documents.tasks.consume_file", task.task_name)
+        self.assertEqual(PaperlessTask.TaskName.CONSUME_FILE, task.task_name)
         self.assertEqual(1, task.owner_id)
         self.assertEqual(celery.states.PENDING, task.status)
 

@@ -130,7 +130,7 @@ class TestTasks(DirectoriesMixin, APITestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        response = self.client.get(self.ENDPOINT)
+        response = self.client.get(self.ENDPOINT + "?acknowledged=false")
         self.assertEqual(len(response.data), 0)
 
     def test_tasks_owner_aware(self):
@@ -246,7 +246,7 @@ class TestTasks(DirectoriesMixin, APITestCase):
         PaperlessTask.objects.create(
             task_id=str(uuid.uuid4()),
             task_file_name="test.pdf",
-            task_name="documents.tasks.some_task",
+            task_name=PaperlessTask.TaskName.CONSUME_FILE,
             status=celery.states.SUCCESS,
         )
 
@@ -272,7 +272,7 @@ class TestTasks(DirectoriesMixin, APITestCase):
         PaperlessTask.objects.create(
             task_id=str(uuid.uuid4()),
             task_file_name="anothertest.pdf",
-            task_name="documents.tasks.some_task",
+            task_name=PaperlessTask.TaskName.CONSUME_FILE,
             status=celery.states.SUCCESS,
         )
 

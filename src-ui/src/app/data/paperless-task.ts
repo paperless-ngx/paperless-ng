@@ -1,8 +1,15 @@
 import { ObjectWithId } from './object-with-id'
 
 export enum PaperlessTaskType {
-  // just file tasks, for now
-  File = 'file',
+  Auto = 'auto_task',
+  ScheduledTask = 'scheduled_task',
+  ManualTask = 'manual_task',
+}
+
+export enum PaperlessTaskName {
+  ConsumeFile = 'consume_file',
+  TrainClassifier = 'train_classifier',
+  SanityCheck = 'check_sanity',
 }
 
 export enum PaperlessTaskStatus {
@@ -22,6 +29,8 @@ export interface PaperlessTask extends ObjectWithId {
   task_id: string
 
   task_file_name: string
+
+  task_name: PaperlessTaskName
 
   date_created: Date
 

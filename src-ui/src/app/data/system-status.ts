@@ -32,11 +32,16 @@ export interface SystemStatus {
     redis_status: SystemStatusItemStatus
     redis_error: string
     celery_status: SystemStatusItemStatus
+    celery_url: string
+    celery_error: string
     index_status: SystemStatusItemStatus
     index_last_modified: string // ISO date string
     index_error: string
     classifier_status: SystemStatusItemStatus
     classifier_last_trained: string // ISO date string
     classifier_error: string
+    sanity_check_status: SystemStatusItemStatus
+    sanity_check_last_run: string // ISO date string
+    sanity_check_error: string
   }
 }

@@ -1221,10 +1221,11 @@ def before_task_publish_handler(sender=None, headers=None, body=None, **kwargs):
         user_id = overrides.owner_id if overrides else None
 
         PaperlessTask.objects.create(
+            type=PaperlessTask.TaskType.AUTO,
             task_id=headers["id"],
             status=states.PENDING,
             task_file_name=task_file_name,
-            task_name=headers["task"],
+            task_name=PaperlessTask.TaskName.CONSUME_FILE,
             result=None,
             date_created=timezone.now(),
             date_started=None,

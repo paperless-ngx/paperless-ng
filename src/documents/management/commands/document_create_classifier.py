@@ -10,4 +10,4 @@ class Command(BaseCommand):
     )
 
     def handle(self, *args, **options):
-        train_classifier()
+        train_classifier(scheduled=False)

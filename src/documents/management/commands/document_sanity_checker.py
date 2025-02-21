@@ -12,6 +12,6 @@ class Command(ProgressBarMixin, BaseCommand):
 
     def handle(self, *args, **options):
         self.handle_progress_bar_mixin(**options)
-        messages = check_sanity(progress=self.use_progress_bar)
+        messages = check_sanity(progress=self.use_progress_bar, scheduled=False)
 
         messages.log_messages()

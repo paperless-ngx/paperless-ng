@@ -21,10 +21,12 @@
   --pngx-success-darken-10: hsl(152, 69%, 11%); // based on success #198754
   --pngx-bg-alt: #fff;
   --pngx-bg-darker: var(--bs-gray-100);
-  --pngx-bg-alt2: var(--bs-gray-200);
+  --pngx-bg-alt2: var(--bs-gray-200); // #e9ecef
   --pngx-bg-disabled: #f7f7f7;
   --pngx-focus-alpha: 0.3;
   --pngx-toast-max-width: 360px;
+  --bs-info: var(--pngx-bg-alt2);
+  --bs-info-rgb: 233, 236, 239;
   @media screen and (min-width: 1024px) {
     --pngx-toast-max-width: 450px;
   }
@@ -71,8 +73,15 @@ $form-check-radio-checked-bg-image-dark: url("data:image/svg+xml,<svg xmlns='htt
 }
 
 @mixin dark-mode {
-  --bs-body-color: #{$text-color-dark-bg};
   --pngx-body-color-accent: #{$text-color-dark-bg-accent};
+  --pngx-bg-alt: #242529;
+  --pngx-bg-alt2: #232323;
+  --pngx-bg-darker: #101216;
+  --pngx-bg-disabled: var(--pngx-bg-alt);
+  --pngx-focus-alpha: 0.6;
+  --pngx-primary-faded: var(--pngx-primary-darken-15);
+  --pngx-primary-text-contrast: var(--bs-body-color);
+  --bs-body-color: #{$text-color-dark-bg};
   --bs-secondary-color: #6c757d;
   --bs-danger: #b71631;
   --bs-danger-rgb: 183, 22, 49;
@@ -80,15 +89,10 @@ $form-check-radio-checked-bg-image-dark: url("data:image/svg+xml,<svg xmlns='htt
   --bs-body-bg-rgb: 22, 22, 24;
   --bs-light: #1c1c1f;
   --bs-light-rgb: 28, 28, 31;
+  --bs-info: var(--pngx-bg-alt);
+  --bs-info-rgb: 36, 36, 39;
   --bs-border-color: #47494f;
-  --pngx-bg-alt2: #232323;
-  --pngx-bg-darker: #101216;
   --bs-tertiary-bg: var(--pngx-bg-darker);
-  --pngx-bg-alt: #242529;
-  --pngx-bg-disabled: var(--pngx-bg-alt);
-  --pngx-focus-alpha: 0.6;
-  --pngx-primary-faded: var(--pngx-primary-darken-15);
-  --pngx-primary-text-contrast: var(--bs-body-color);
   --bs-dark-border-subtle: var(--pngx-bg-darker);
   --bs-border-color-translucent: rgba(0, 0, 0, .175); // override bs
 

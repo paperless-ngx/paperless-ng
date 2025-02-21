@@ -15,6 +15,7 @@ from urllib.parse import quote
 from urllib.parse import urlparse
 
 import pathvalidate
+from celery import states
 from django.conf import settings
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
@@ -104,6 +105,7 @@ from documents.filters import DocumentsOrderingFilter
 from documents.filters import DocumentTypeFilterSet
 from documents.filters import ObjectOwnedOrGrantedPermissionsFilter
 from documents.filters import ObjectOwnedPermissionsFilter
+from documents.filters import PaperlessTaskFilterSet
 from documents.filters import ShareLinkFilterSet
 from documents.filters import StoragePathFilterSet
 from documents.filters import TagFilterSet
@@ -2277,16 +2279,15 @@ class RemoteVersionView(GenericAPIView):
 class TasksViewSet(ReadOnlyModelViewSet):
     permission_classes = (IsAuthenticated, PaperlessObjectPermissions)
     serializer_class = TasksViewSerializer
-    filter_backends = (ObjectOwnedOrGrantedPermissionsFilter,)
+    filter_backends = (
+        DjangoFilterBackend,
+        OrderingFilter,
+        ObjectOwnedOrGrantedPermissionsFilter,
+    )
+    filterset_class = PaperlessTaskFilterSet
 
     def get_queryset(self):
-        queryset = (
-            PaperlessTask.objects.filter(
-                acknowledged=False,
-            )
-            .order_by("date_created")
-            .reverse()
-        )
+        queryset = PaperlessTask.objects.all().order_by("-date_created")
         task_id = self.request.query_params.get("task_id")
         if task_id is not None:
             queryset = PaperlessTask.objects.filter(task_id=task_id)
@@ -2615,6 +2616,14 @@ class CustomFieldViewSet(ModelViewSet):
                             "last_trained": serializers.DateTimeField(),
                         },
                     ),
+                    "sanity_check": inline_serializer(
+                        name="SanityCheck",
+                        fields={
+                            "status": serializers.CharField(),
+                            "error": serializers.CharField(),
+                            "last_run": serializers.DateTimeField(),
+                        },
+                    ),
                 },
             ),
         },
@@ -2675,13 +2684,20 @@ class SystemStatusView(PassUserMixin):
                 )
                 redis_error = "Error connecting to redis, check logs for more detail."
 
+        celery_error = None
+        celery_url = None
         try:
             celery_ping = celery_app.control.inspect().ping()
-            first_worker_ping = celery_ping[next(iter(celery_ping.keys()))]
+            celery_url = next(iter(celery_ping.keys()))
+            first_worker_ping = celery_ping[celery_url]
             if first_worker_ping["ok"] == "pong":
                 celery_active = "OK"
-        except Exception:
+        except Exception as e:
             celery_active = "ERROR"
+            logger.exception(
+                f"System status detected a possible problem while connecting to celery: {e}",
+            )
+            celery_error = "Error connecting to celery, check logs for more detail."
 
         index_error = None
         try:
@@ -2698,55 +2714,43 @@ class SystemStatusView(PassUserMixin):
             )
             index_last_modified = None
 
+        last_trained_task = (
+            PaperlessTask.objects.filter(
+                task_name=PaperlessTask.TaskName.TRAIN_CLASSIFIER,
+            )
+            .order_by("-date_done")
+            .first()
+        )
+        classifier_status = "OK"
         classifier_error = None
-        classifier_status = None
-        try:
-            classifier = load_classifier(raise_exception=True)
-            if classifier is None:
-                # Make sure classifier should exist
-                docs_queryset = Document.objects.exclude(
-                    tags__is_inbox_tag=True,
-                )
-                if (
-                    docs_queryset.count() > 0
-                    and (
-                        Tag.objects.filter(matching_algorithm=Tag.MATCH_AUTO).exists()
-                        or DocumentType.objects.filter(
-                            matching_algorithm=Tag.MATCH_AUTO,
-                        ).exists()
-                        or Correspondent.objects.filter(
-                            matching_algorithm=Tag.MATCH_AUTO,
-                        ).exists()
-                        or StoragePath.objects.filter(
-                            matching_algorithm=Tag.MATCH_AUTO,
-                        ).exists()
-                    )
-                    and not settings.MODEL_FILE.exists()
-                ):
-                    # if classifier file doesn't exist just classify as a warning
-                    classifier_error = "Classifier file does not exist (yet). Re-training may be pending."
-                    classifier_status = "WARNING"
-                    raise FileNotFoundError(classifier_error)
-            classifier_status = "OK"
-            classifier_last_trained = (
-                make_aware(
-                    datetime.fromtimestamp(classifier.get_last_checked()),
-                )
-                if settings.MODEL_FILE.exists()
-                and classifier.get_last_checked() is not None
-                else None
+        if last_trained_task is None:
+            classifier_status = "WARNING"
+            classifier_error = "No classifier training tasks found"
+        elif last_trained_task and last_trained_task.status == states.FAILURE:
+            classifier_status = "ERROR"
+            classifier_error = last_trained_task.result
+        classifier_last_trained = (
+            last_trained_task.date_done if last_trained_task else None
+        )
+
+        last_sanity_check = (
+            PaperlessTask.objects.filter(
+                task_name=PaperlessTask.TaskName.CHECK_SANITY,
             )
-        except Exception as e:
-            if classifier_status is None:
-                classifier_status = "ERROR"
-            classifier_last_trained = None
-            if classifier_error is None:
-                classifier_error = (
-                    "Unable to load classifier, check logs for more detail."
-                )
-            logger.exception(
-                f"System status detected a possible problem while loading the classifier: {e}",
-            )
+            .order_by("-date_done")
+            .first()
+        )
+        sanity_check_status = "OK"
+        sanity_check_error = None
+        if last_sanity_check is None:
+            sanity_check_status = "WARNING"
+            sanity_check_error = "No sanity check tasks found"
+        elif last_sanity_check and last_sanity_check.status == states.FAILURE:
+            sanity_check_status = "ERROR"
+            sanity_check_error = last_sanity_check.result
+        sanity_check_last_run = (
+            last_sanity_check.date_done if last_sanity_check else None
+        )
 
         return Response(
             {
@@ -2774,12 +2778,17 @@ class SystemStatusView(PassUserMixin):
                     "redis_status": redis_status,
                     "redis_error": redis_error,
                     "celery_status": celery_active,
+                    "celery_url": celery_url,
+                    "celery_error": celery_error,
                     "index_status": index_status,
                     "index_last_modified": index_last_modified,
                     "index_error": index_error,
                     "classifier_status": classifier_status,
                     "classifier_last_trained": classifier_last_trained,
                     "classifier_error": classifier_error,
+                    "sanity_check_status": sanity_check_status,
+                    "sanity_check_last_run": sanity_check_last_run,
+                    "sanity_check_error": sanity_check_error,
                 },
             },
         )

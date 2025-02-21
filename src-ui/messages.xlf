@@ -4100,6 +4100,18 @@
           <context context-type="linenumber">111</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/system-status-dialog/system-status-dialog.component.html</context>
+          <context context-type="linenumber">165</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/system-status-dialog/system-status-dialog.component.html</context>
+          <context context-type="linenumber">189</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/system-status-dialog/system-status-dialog.component.html</context>
+          <context context-type="linenumber">213</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/common/toast/toast.component.html</context>
           <context context-type="linenumber">30</context>
         </context-group>
@@ -5608,7 +5620,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/common/system-status-dialog/system-status-dialog.component.html</context>
-          <context context-type="linenumber">156</context>
+          <context context-type="linenumber">231</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/manage/mail/mail.component.html</context>
@@ -6003,77 +6015,98 @@
         <source>Migration Status</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/common/system-status-dialog/system-status-dialog.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">65</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7489316373554112115" datatype="html">
         <source>Up to date</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/common/system-status-dialog/system-status-dialog.component.html</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7881311375431899727" datatype="html">
         <source>Latest Migration</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/common/system-status-dialog/system-status-dialog.component.html</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4632965004151576238" datatype="html">
         <source>Pending Migrations</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/common/system-status-dialog/system-status-dialog.component.html</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">76</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6904866445262015585" datatype="html">
-        <source>Tasks</source>
+      <trans-unit id="2790343143501919450" datatype="html">
+        <source>Tasks Queue</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/common/system-status-dialog/system-status-dialog.component.html</context>
-          <context context-type="linenumber">83</context>
+          <context context-type="linenumber">94</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6911698235105017958" datatype="html">
         <source>Redis Status</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/common/system-status-dialog/system-status-dialog.component.html</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">98</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5349496739889768589" datatype="html">
         <source>Celery Status</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/common/system-status-dialog/system-status-dialog.component.html</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="linenumber">116</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2041675390931385838" datatype="html">
+        <source>Health</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/system-status-dialog/system-status-dialog.component.html</context>
+          <context context-type="linenumber">142</context>
         </context-group>
       </trans-unit>
       <trans-unit id="31377277941774469" datatype="html">
         <source>Search Index</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/common/system-status-dialog/system-status-dialog.component.html</context>
-          <context context-type="linenumber">105</context>
+          <context context-type="linenumber">146</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4089509911694721896" datatype="html">
         <source>Last Updated</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/common/system-status-dialog/system-status-dialog.component.html</context>
-          <context context-type="linenumber">119</context>
+          <context context-type="linenumber">163</context>
         </context-group>
       </trans-unit>
       <trans-unit id="46628344485199198" datatype="html">
         <source>Classifier</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/common/system-status-dialog/system-status-dialog.component.html</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">168</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6096684179126491743" datatype="html">
         <source>Last Trained</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/common/system-status-dialog/system-status-dialog.component.html</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">187</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6427836860962380759" datatype="html">
+        <source>Sanity Checker</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/system-status-dialog/system-status-dialog.component.html</context>
+          <context context-type="linenumber">192</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6578747070254776938" datatype="html">
+        <source>Last Run</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/system-status-dialog/system-status-dialog.component.html</context>
+          <context context-type="linenumber">211</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6732151329960766506" datatype="html">
