@@ -4,6 +4,8 @@ from allauth.account.adapter import get_adapter
 from allauth.core import context
 from allauth.socialaccount.adapter import get_adapter as get_social_adapter
 from django.conf import settings
+from django.contrib.auth.models import Group
+from django.contrib.auth.models import User
 from django.forms import ValidationError
 from django.http import HttpRequest
 from django.test import TestCase
@@ -81,6 +83,24 @@ class TestCustomAccountAdapter(TestCase):
                     expected_url,
                 )
 
+    @override_settings(ACCOUNT_DEFAULT_GROUPS=["group1", "group2"])
+    def test_save_user_adds_groups(self):
+        Group.objects.create(name="group1")
+        user = User.objects.create_user("testuser")
+        adapter = get_adapter()
+        form = mock.Mock(
+            cleaned_data={
+                "username": "testuser",
+                "email": "user@example.com",
+            },
+        )
+
+        user = adapter.save_user(HttpRequest(), user, form, commit=True)
+
+        self.assertEqual(user.groups.count(), 1)
+        self.assertTrue(user.groups.filter(name="group1").exists())
+        self.assertFalse(user.groups.filter(name="group2").exists())
+
 
 class TestCustomSocialAccountAdapter(TestCase):
     def test_is_open_for_signup(self):
@@ -105,3 +125,19 @@ class TestCustomSocialAccountAdapter(TestCase):
             adapter.get_connect_redirect_url(request, socialaccount),
             expected_url,
         )
+
+    @override_settings(SOCIAL_ACCOUNT_DEFAULT_GROUPS=["group1", "group2"])
+    def test_save_user_adds_groups(self):
+        Group.objects.create(name="group1")
+        adapter = get_social_adapter()
+        request = HttpRequest()
+        user = User.objects.create_user("testuser")
+        sociallogin = mock.Mock(
+            user=user,
+        )
+
+        user = adapter.save_user(request, sociallogin, None)
+
+        self.assertEqual(user.groups.count(), 1)
+        self.assertTrue(user.groups.filter(name="group1").exists())
+        self.assertFalse(user.groups.filter(name="group2").exists())

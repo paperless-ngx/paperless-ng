@@ -1,7 +1,13 @@
+from unittest.mock import Mock
+
+from django.contrib.auth.models import Group
+from django.contrib.auth.models import User
 from django.http import HttpRequest
 from django.test import TestCase
+from django.test import override_settings
 
 from paperless.signals import handle_failed_login
+from paperless.signals import handle_social_account_updated
 
 
 class TestFailedLoginLogging(TestCase):
@@ -99,3 +105,88 @@ class TestFailedLoginLogging(TestCase):
                     "INFO:paperless.auth:Login failed for user `john lennon` from private IP `10.0.0.1`.",
                 ],
             )
+
+
+class TestSyncSocialLoginGroups(TestCase):
+    @override_settings(SOCIAL_ACCOUNT_SYNC_GROUPS=True)
+    def test_sync_enabled(self):
+        """
+        GIVEN:
+            - Enabled group syncing, a user, and a social login
+        WHEN:
+            - The social login is updated via signal after login
+        THEN:
+            - The user's groups are updated to match the social login's groups
+        """
+        group = Group.objects.create(name="group1")
+        user = User.objects.create_user(username="testuser")
+        sociallogin = Mock(
+            user=user,
+            account=Mock(
+                extra_data={
+                    "groups": ["group1"],
+                },
+            ),
+        )
+        handle_social_account_updated(
+            sender=None,
+            request=HttpRequest(),
+            sociallogin=sociallogin,
+        )
+        self.assertEqual(list(user.groups.all()), [group])
+
+    @override_settings(SOCIAL_ACCOUNT_SYNC_GROUPS=False)
+    def test_sync_disabled(self):
+        """
+        GIVEN:
+            - Disabled group syncing, a user, and a social login
+        WHEN:
+            - The social login is updated via signal after login
+        THEN:
+            - The user's groups are not updated
+        """
+        Group.objects.create(name="group1")
+        user = User.objects.create_user(username="testuser")
+        sociallogin = Mock(
+            user=user,
+            account=Mock(
+                extra_data={
+                    "groups": ["group1"],
+                },
+            ),
+        )
+        handle_social_account_updated(
+            sender=None,
+            request=HttpRequest(),
+            sociallogin=sociallogin,
+        )
+        self.assertEqual(list(user.groups.all()), [])
+
+    @override_settings(SOCIAL_ACCOUNT_SYNC_GROUPS=True)
+    def test_no_groups(self):
+        """
+        GIVEN:
+            - Enabled group syncing, a user, and a social login with no groups
+        WHEN:
+            - The social login is updated via signal after login
+        THEN:
+            - The user's groups are cleared to match the social login's groups
+        """
+        group = Group.objects.create(name="group1")
+        user = User.objects.create_user(username="testuser")
+        user.groups.add(group)
+        user.save()
+        sociallogin = Mock(
+            user=user,
+            account=Mock(
+                extra_data={
+                    "groups": [],
+                },
+            ),
+        )
+        handle_social_account_updated(
+            sender=None,
+            request=HttpRequest(),
+            sociallogin=sociallogin,
+        )
+        self.assertEqual(list(user.groups.all()), [])

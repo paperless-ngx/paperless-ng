@@ -557,6 +557,20 @@ This is for use with self-signed certificates against local IMAP servers.
     Settings this value has security implications for the security of your email.
     Understand what it does and be sure you need to before setting.
 
+### Authentication & SSO {#authentication}
+
+#### [`PAPERLESS_ACCOUNT_ALLOW_SIGNUPS=<bool>`](#PAPERLESS_ACCOUNT_ALLOW_SIGNUPS) {#PAPERLESS_ACCOUNT_ALLOW_SIGNUPS}
+
+: Allow users to signup for a new Paperless-ngx account.
+
+    Defaults to False
+
+#### [`PAPERLESS_ACCOUNT_DEFAULT_GROUPS=<comma-separated-list>`](#PAPERLESS_ACCOUNT_DEFAULT_GROUPS) {#PAPERLESS_ACCOUNT_DEFAULT_GROUPS}
+
+: A list of group names that users will be added to when they sign up for a new account. Groups listed here must already exist.
+
+    Defaults to None
+
 #### [`PAPERLESS_SOCIALACCOUNT_PROVIDERS=<json>`](#PAPERLESS_SOCIALACCOUNT_PROVIDERS) {#PAPERLESS_SOCIALACCOUNT_PROVIDERS}
 
 : This variable is used to setup login and signup via social account providers which are compatible with django-allauth.
@@ -580,11 +594,24 @@ system. See the corresponding
 
     Defaults to True
 
-#### [`PAPERLESS_ACCOUNT_ALLOW_SIGNUPS=<bool>`](#PAPERLESS_ACCOUNT_ALLOW_SIGNUPS) {#PAPERLESS_ACCOUNT_ALLOW_SIGNUPS}
+#### [`PAPERLESS_SOCIAL_ACCOUNT_SYNC_GROUPS=<bool>`](#PAPERLESS_SOCIAL_ACCOUNT_SYNC_GROUPS) {#PAPERLESS_SOCIAL_ACCOUNT_SYNC_GROUPS}
 
-: Allow users to signup for a new Paperless-ngx account.
+: Sync groups from the third party authentication system (e.g. OIDC) to Paperless-ngx. When enabled, users will be added or removed from groups based on their group membership in the third party authentication system. Groups must already exist in Paperless-ngx and have the same name as in the third party authentication system. Groups are updated upon logging in via the third party authentication system, see the corresponding [django-allauth documentation](https://docs.allauth.org/en/dev/socialaccount/signals.html).
+
+: In order to pass groups from the authentication system you will need to update your [PAPERLESS_SOCIALACCOUNT_PROVIDERS](#PAPERLESS_SOCIALACCOUNT_PROVIDERS) setting by adding a top-level "SCOPES" setting which includes "groups", e.g.:
+
+    ```json
+    {"openid_connect":{"SCOPE": ["openid","profile","email","groups"]...
+    ```
 
     Defaults to False
+
+#### [`PAPERLESS_SOCIAL_ACCOUNT_DEFAULT_GROUPS=<comma-separated-list>`](#PAPERLESS_SOCIAL_ACCOUNT_DEFAULT_GROUPS) {#PAPERLESS_SOCIAL_ACCOUNT_DEFAULT_GROUPS}
+
+: A list of group names that users who signup via social accounts will be added to upon signup. Groups listed here must already exist.
+If both the [PAPERLESS_ACCOUNT_DEFAULT_GROUPS](#PAPERLESS_ACCOUNT_DEFAULT_GROUPS) setting and this setting are used, the user will be added to both sets of groups.
+
+    Defaults to None
 
 #### [`PAPERLESS_ACCOUNT_DEFAULT_HTTP_PROTOCOL=<string>`](#PAPERLESS_ACCOUNT_DEFAULT_HTTP_PROTOCOL) {#PAPERLESS_ACCOUNT_DEFAULT_HTTP_PROTOCOL}
 
