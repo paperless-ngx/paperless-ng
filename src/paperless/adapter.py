@@ -63,7 +63,7 @@ class CustomAccountAdapter(DefaultAccountAdapter):
             path = path.replace("UID-KEY", quote(key))
             return settings.PAPERLESS_URL + path
 
-    def save_user(self, request, user, form, commit):
+    def save_user(self, request, user, form, commit=True):  # noqa: FBT002
         """
         Save the user instance. Default groups are assigned to the user, if
         specified in the settings.
