@@ -6,7 +6,6 @@ from datetime import timedelta
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-import tqdm
 from celery import Task
 from celery import shared_task
 from django.conf import settings
@@ -16,6 +15,7 @@ from django.db import transaction
 from django.db.models.signals import post_save
 from django.utils import timezone
 from filelock import FileLock
+from rich.progress import track
 from whoosh.writing import AsyncWriter
 
 from documents import index
@@ -69,7 +69,12 @@ def index_reindex(*, progress_bar_disable=False):
     ix = index.open_index(recreate=True)
 
     with AsyncWriter(ix) as writer:
-        for document in tqdm.tqdm(documents, disable=progress_bar_disable):
+        for document in track(
+            documents,
+            total=documents.count(),
+            description="Indexing...",
+            disable=progress_bar_disable,
+        ):
             index.update_document(writer, document)
 
 

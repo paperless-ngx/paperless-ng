@@ -1,10 +1,10 @@
 import logging
 import multiprocessing
 
-import tqdm
 from django import db
 from django.conf import settings
 from django.core.management.base import BaseCommand
+from rich.progress import track
 
 from documents.management.commands.mixins import MultiProcessMixin
 from documents.management.commands.mixins import ProgressBarMixin
@@ -81,7 +81,7 @@ class Command(MultiProcessMixin, ProgressBarMixin, BaseCommand):
             else:  # pragma: no cover
                 with multiprocessing.Pool(self.process_count) as pool:
                     list(
-                        tqdm.tqdm(
+                        track(
                             pool.imap_unordered(
                                 update_document_content_maybe_archive_file,
                                 document_ids,

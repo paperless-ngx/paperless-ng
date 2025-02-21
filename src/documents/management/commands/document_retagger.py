@@ -1,7 +1,7 @@
 import logging
 
-import tqdm
 from django.core.management.base import BaseCommand
+from rich.progress import track
 
 from documents.classifier import load_classifier
 from documents.management.commands.mixins import ProgressBarMixin
@@ -84,7 +84,11 @@ class Command(ProgressBarMixin, BaseCommand):
 
         classifier = load_classifier()
 
-        for document in tqdm.tqdm(documents, disable=self.no_progress_bar):
+        for document in track(
+            documents,
+            total=documents.count(),
+            disable=self.no_progress_bar,
+        ):
             if options["correspondent"]:
                 set_correspondent(
                     sender=None,

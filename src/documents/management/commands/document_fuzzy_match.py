@@ -3,9 +3,9 @@ import multiprocessing
 from typing import Final
 
 import rapidfuzz
-import tqdm
 from django.core.management import BaseCommand
 from django.core.management import CommandError
+from rich.progress import track
 
 from documents.management.commands.mixins import MultiProcessMixin
 from documents.management.commands.mixins import ProgressBarMixin
@@ -105,12 +105,12 @@ class Command(MultiProcessMixin, ProgressBarMixin, BaseCommand):
         # Don't spin up a pool of 1 process
         if self.process_count == 1:
             results = []
-            for work in tqdm.tqdm(work_pkgs, disable=self.no_progress_bar):
+            for work in track(work_pkgs, disable=self.no_progress_bar):
                 results.append(_process_and_match(work))
         else:  # pragma: no cover
             with multiprocessing.Pool(processes=self.process_count) as pool:
                 results = list(
-                    tqdm.tqdm(
+                    track(
                         pool.imap_unordered(_process_and_match, work_pkgs),
                         total=len(work_pkgs),
                         disable=self.no_progress_bar,

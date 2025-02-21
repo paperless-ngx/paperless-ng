@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Final
 
 from django.conf import settings
-from tqdm import tqdm
+from rich.progress import track
 
 from documents.models import Document
 
@@ -68,7 +68,9 @@ def check_sanity(*, progress=False) -> SanityCheckMessages:
     if lockfile in present_files:
         present_files.remove(lockfile)
 
-    for doc in tqdm(Document.global_objects.all(), disable=not progress):
+    qs = Document.global_objects.all()
+
+    for doc in track(qs, total=qs.count(), disable=not progress):
         # Check sanity of the thumbnail
         thumbnail_path: Final[Path] = Path(doc.thumbnail_path).resolve()
         if not thumbnail_path.exists() or not thumbnail_path.is_file():

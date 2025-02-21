@@ -7,7 +7,6 @@ import time
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-import tqdm
 from allauth.mfa.models import Authenticator
 from allauth.socialaccount.models import SocialAccount
 from allauth.socialaccount.models import SocialApp
@@ -25,6 +24,11 @@ from django.utils import timezone
 from filelock import FileLock
 from guardian.models import GroupObjectPermission
 from guardian.models import UserObjectPermission
+from rich.progress import BarColumn
+from rich.progress import MofNCompleteColumn
+from rich.progress import Progress
+from rich.progress import TaskProgressColumn
+from rich.progress import TextColumn
 
 if TYPE_CHECKING:
     from django.db.models import QuerySet
@@ -229,8 +233,17 @@ class Command(CryptMixin, BaseCommand):
 
         try:
             # Prevent any ongoing changes in the documents
-            with FileLock(settings.MEDIA_LOCK):
-                self.dump()
+            with (
+                FileLock(settings.MEDIA_LOCK),
+                Progress(
+                    TextColumn("[progress.description]{task.description}"),
+                    BarColumn(),
+                    TaskProgressColumn(),
+                    MofNCompleteColumn(),
+                    disable=self.no_progress_bar,
+                ) as progress,
+            ):
+                self.dump(progress)
 
                 # We've written everything to the temporary directory in this case,
                 # now make an archive in the original target, with all files stored
@@ -249,7 +262,7 @@ class Command(CryptMixin, BaseCommand):
             if self.zip_export and temp_dir is not None:
                 temp_dir.cleanup()
 
-    def dump(self):
+    def dump(self, progress: Progress):
         # 1. Take a snapshot of what files exist in the current export folder
         for x in self.target.glob("**/*"):
             if x.is_file():
@@ -297,11 +310,17 @@ class Command(CryptMixin, BaseCommand):
         with transaction.atomic():
             manifest_dict = {}
 
+            serialize_task = progress.add_task(
+                "Serializing database",
+                total=len(manifest_key_to_object_query),
+            )
+
             # Build an overall manifest
             for key, object_query in manifest_key_to_object_query.items():
                 manifest_dict[key] = json.loads(
                     serializers.serialize("json", object_query),
                 )
+                progress.advance(serialize_task)
 
             self.encrypt_secret_fields(manifest_dict)
 
@@ -313,12 +332,10 @@ class Command(CryptMixin, BaseCommand):
             }
             document_manifest = manifest_dict["documents"]
 
+        copy_task = progress.add_task("Copying files", total=len(document_manifest))
+
         # 3. Export files from each document
-        for index, document_dict in tqdm.tqdm(
-            enumerate(document_manifest),
-            total=len(document_manifest),
-            disable=self.no_progress_bar,
-        ):
+        for index, document_dict in enumerate(document_manifest):
             # 3.1. store files unencrypted
             document_dict["fields"]["storage_type"] = Document.STORAGE_TYPE_UNENCRYPTED
 
@@ -365,6 +382,7 @@ class Command(CryptMixin, BaseCommand):
                     content,
                     manifest_name,
                 )
+            progress.advance(copy_task)
 
         # These were exported already
         if self.split_manifest:

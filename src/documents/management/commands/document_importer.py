@@ -5,7 +5,6 @@ from collections.abc import Generator
 from contextlib import contextmanager
 from pathlib import Path
 
-import tqdm
 from django.conf import settings
 from django.contrib.auth.models import Permission
 from django.contrib.auth.models import User
@@ -20,6 +19,7 @@ from django.db import transaction
 from django.db.models.signals import m2m_changed
 from django.db.models.signals import post_save
 from filelock import FileLock
+from rich.progress import Progress
 
 from documents.file_handling import create_source_path_directory
 from documents.management.commands.mixins import CryptMixin
@@ -138,7 +138,7 @@ class Command(CryptMixin, BaseCommand):
         pre_check_maybe_not_empty()
         pre_check_manifest_exists()
 
-    def load_manifest_files(self) -> None:
+    def load_manifest_files(self, progress: Progress) -> None:
         """
         Loads manifest data from the various JSON files for parsing and loading the database
         """
@@ -148,10 +148,15 @@ class Command(CryptMixin, BaseCommand):
             self.manifest = json.load(infile)
         self.manifest_paths.append(main_manifest_path)
 
+        split_manifest_task = progress.add_task("Parsing split manifests")
+
         for file in Path(self.source).glob("**/*-manifest.json"):
+            progress.update(split_manifest_task, visible=True)
             with file.open() as infile:
                 self.manifest += json.load(infile)
             self.manifest_paths.append(file)
+            progress.advance(split_manifest_task)
+        progress.update(split_manifest_task, total=1, completed=1)
 
     def load_metadata(self) -> None:
         """
@@ -191,7 +196,7 @@ class Command(CryptMixin, BaseCommand):
                 ),
             )
 
-    def load_data_to_database(self) -> None:
+    def load_data_to_database(self, progress: Progress) -> None:
         """
         As the name implies, loads data from the JSON file(s) into the database
         """
@@ -201,7 +206,7 @@ class Command(CryptMixin, BaseCommand):
                 ContentType.objects.all().delete()
                 Permission.objects.all().delete()
                 for manifest_path in self.manifest_paths:
-                    call_command("loaddata", manifest_path)
+                    call_command("loaddata", "-v", "0", manifest_path)
         except (FieldDoesNotExist, DeserializationError, IntegrityError) as e:
             self.stdout.write(self.style.ERROR("Database import failed"))
             if (
@@ -234,55 +239,56 @@ class Command(CryptMixin, BaseCommand):
         self.manifest_paths = []
         self.manifest = []
 
-        self.pre_check()
+        with Progress(disable=self.no_progress_bar) as progress:
+            self.pre_check()
 
-        self.load_metadata()
+            self.load_metadata()
 
-        self.load_manifest_files()
+            self.load_manifest_files(progress)
 
-        self.check_manifest_validity()
+            self.check_manifest_validity(progress)
 
-        self.decrypt_secret_fields()
+            self.decrypt_secret_fields()
 
-        # see /src/documents/signals/handlers.py
-        with (
-            disable_signal(
-                post_save,
-                receiver=update_filename_and_move_files,
-                sender=Document,
-            ),
-            disable_signal(
-                m2m_changed,
-                receiver=update_filename_and_move_files,
-                sender=Document.tags.through,
-            ),
-            disable_signal(
-                post_save,
-                receiver=update_filename_and_move_files,
-                sender=CustomFieldInstance,
-            ),
-            disable_signal(
-                post_save,
-                receiver=check_paths_and_prune_custom_fields,
-                sender=CustomField,
-            ),
-        ):
-            if settings.AUDIT_LOG_ENABLED:
-                auditlog.unregister(Document)
-                auditlog.unregister(Correspondent)
-                auditlog.unregister(Tag)
-                auditlog.unregister(DocumentType)
-                auditlog.unregister(Note)
-                auditlog.unregister(CustomField)
-                auditlog.unregister(CustomFieldInstance)
+            # see /src/documents/signals/handlers.py
+            with (
+                disable_signal(
+                    post_save,
+                    receiver=update_filename_and_move_files,
+                    sender=Document,
+                ),
+                disable_signal(
+                    m2m_changed,
+                    receiver=update_filename_and_move_files,
+                    sender=Document.tags.through,
+                ),
+                disable_signal(
+                    post_save,
+                    receiver=update_filename_and_move_files,
+                    sender=CustomFieldInstance,
+                ),
+                disable_signal(
+                    post_save,
+                    receiver=check_paths_and_prune_custom_fields,
+                    sender=CustomField,
+                ),
+            ):
+                if settings.AUDIT_LOG_ENABLED:
+                    auditlog.unregister(Document)
+                    auditlog.unregister(Correspondent)
+                    auditlog.unregister(Tag)
+                    auditlog.unregister(DocumentType)
+                    auditlog.unregister(Note)
+                    auditlog.unregister(CustomField)
+                    auditlog.unregister(CustomFieldInstance)
 
-            # Fill up the database with whatever is in the manifest
-            self.load_data_to_database()
+                # Fill up the database with whatever is in the manifest
+                self.load_data_to_database(progress)
 
-            if not self.data_only:
-                self._import_files_from_manifest()
-            else:
-                self.stdout.write(self.style.NOTICE("Data only import completed"))
+                if not self.data_only:
+                    self._import_files_from_manifest(progress)
+                else:
+                    self.stdout.write(self.style.NOTICE("Data only import completed"))
 
         self.stdout.write("Updating search index...")
         call_command(
@@ -291,7 +297,7 @@ class Command(CryptMixin, BaseCommand):
             no_progress_bar=self.no_progress_bar,
         )
 
-    def check_manifest_validity(self) -> None:
+    def check_manifest_validity(self, progress: Progress) -> None:
         """
         Attempts to verify the manifest is valid.  Namely checking the files
         referred to exist and the files can be read from
@@ -335,45 +341,56 @@ class Command(CryptMixin, BaseCommand):
                         f"Failed to read from archive file {doc_archive_path}",
                     ) from e
 
-        self.stdout.write("Checking the manifest")
+        manifest_valid_task = progress.add_task(
+            "Checking validity",
+            total=None,
+            visible=not self.data_only,
+        )
+
+        # self.stdout.write("Checking the manifest")
         for record in self.manifest:
             # Only check if the document files exist if this is not data only
             # We don't care about documents for a data only import
             if not self.data_only and record["model"] == "documents.document":
                 check_document_validity(record)
+                progress.advance(manifest_valid_task)
+        progress.update(manifest_valid_task, total=1, completed=1)
 
-    def _import_files_from_manifest(self) -> None:
+    def _import_files_from_manifest(self, progress: Progress) -> None:
         settings.ORIGINALS_DIR.mkdir(parents=True, exist_ok=True)
         settings.THUMBNAIL_DIR.mkdir(parents=True, exist_ok=True)
         settings.ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
 
-        self.stdout.write("Copy files into paperless...")
+        # self.stdout.write("Copy files into paperless...")
 
         manifest_documents = list(
             filter(lambda r: r["model"] == "documents.document", self.manifest),
         )
+        copy_file_task = progress.add_task(
+            "Copying files",
+            total=len(manifest_documents),
+        )
+        with FileLock(settings.MEDIA_LOCK):
+            for record in manifest_documents:
+                document = Document.objects.get(pk=record["pk"])
 
-        for record in tqdm.tqdm(manifest_documents, disable=self.no_progress_bar):
-            document = Document.objects.get(pk=record["pk"])
+                doc_file = record[EXPORTER_FILE_NAME]
+                document_path = self.source / doc_file
 
-            doc_file = record[EXPORTER_FILE_NAME]
-            document_path = self.source / doc_file
+                if EXPORTER_THUMBNAIL_NAME in record:
+                    thumb_file = record[EXPORTER_THUMBNAIL_NAME]
+                    thumbnail_path = (self.source / thumb_file).resolve()
+                else:
+                    thumbnail_path = None
 
-            if EXPORTER_THUMBNAIL_NAME in record:
-                thumb_file = record[EXPORTER_THUMBNAIL_NAME]
-                thumbnail_path = (self.source / thumb_file).resolve()
-            else:
-                thumbnail_path = None
+                if EXPORTER_ARCHIVE_NAME in record:
+                    archive_file = record[EXPORTER_ARCHIVE_NAME]
+                    archive_path = self.source / archive_file
+                else:
+                    archive_path = None
 
-            if EXPORTER_ARCHIVE_NAME in record:
-                archive_file = record[EXPORTER_ARCHIVE_NAME]
-                archive_path = self.source / archive_file
-            else:
-                archive_path = None
+                document.storage_type = Document.STORAGE_TYPE_UNENCRYPTED
 
-            document.storage_type = Document.STORAGE_TYPE_UNENCRYPTED
-
-            with FileLock(settings.MEDIA_LOCK):
                 if Path(document.source_path).is_file():
                     raise FileExistsError(document.source_path)
 
@@ -406,7 +423,8 @@ class Command(CryptMixin, BaseCommand):
                     #  archived files
                     copy_file_with_basic_stats(archive_path, document.archive_path)
 
-            document.save()
+                document.save()
+                progress.advance(copy_file_task)
 
     def decrypt_secret_fields(self) -> None:
         """
