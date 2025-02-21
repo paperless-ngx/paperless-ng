@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.core.management import call_command
 from django.core.management.base import CommandError
 from django.test import TestCase
+from rich.progress import Progress
 
 from documents.management.commands.document_importer import Command
 from documents.models import Document
@@ -126,15 +127,21 @@ class TestCommandImport(
                 },
             ]
             cmd.data_only = False
-            with self.assertRaises(CommandError) as cm:
-                cmd.check_manifest_validity()
+            with (
+                self.assertRaises(CommandError) as cm,
+                Progress(disable=True) as progress,
+            ):
+                cmd.check_manifest_validity(progress)
                 self.assertInt("Failed to read from original file", str(cm.exception))
 
             original_path.chmod(0o444)
             archive_path.chmod(0o222)
 
-            with self.assertRaises(CommandError) as cm:
-                cmd.check_manifest_validity()
+            with (
+                self.assertRaises(CommandError) as cm,
+                Progress(disable=True) as progress,
+            ):
+                cmd.check_manifest_validity(progress)
                 self.assertInt("Failed to read from archive file", str(cm.exception))
 
     def test_import_source_not_existing(self):
