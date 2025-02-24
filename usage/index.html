@@ -1,0 +1,2208 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../setup/">
+      
+      
+        <link rel="next" href="../configuration/">
+      
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>Basic Usage - Paperless-ngx</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#usage-overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Paperless-ngx" class="md-header__button md-logo" aria-label="Paperless-ngx" data-md-component="logo">
+      
+  <img src="../assets/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paperless-ngx
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Basic Usage
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/paperless-ngx/paperless-ngx" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    paperless-ngx/paperless-ngx
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../setup/" class="md-tabs__link">
+        
+  
+    
+  
+  Setup
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  Basic Usage
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../configuration/" class="md-tabs__link">
+        
+  
+    
+  
+  Configuration
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../administration/" class="md-tabs__link">
+        
+  
+    
+  
+  Administration
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../advanced_usage/" class="md-tabs__link">
+        
+  
+    
+  
+  Advanced Topics
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../api/" class="md-tabs__link">
+        
+  
+    
+  
+  REST API
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../development/" class="md-tabs__link">
+        
+  
+    
+  
+  Development
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../faq/" class="md-tabs__link">
+        
+  
+    
+  
+  FAQs
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../troubleshooting/" class="md-tabs__link">
+        
+  
+    
+  
+  Troubleshooting
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../changelog/" class="md-tabs__link">
+        
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Paperless-ngx" class="md-nav__button md-logo" aria-label="Paperless-ngx" data-md-component="logo">
+      
+  <img src="../assets/logo.svg" alt="logo">
+
+    </a>
+    Paperless-ngx
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/paperless-ngx/paperless-ngx" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    paperless-ngx/paperless-ngx
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Basic Usage
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Basic Usage
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#terms-and-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Terms and definitions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-web-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Web UI
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Web UI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dashboard
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document List
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document Detail
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#management-lists" class="md-nav__link">
+    <span class="md-ellipsis">
+      Management Lists
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-documents-to-paperless" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding documents to paperless
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adding documents to paperless">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-consumption-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      The consumption directory
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#web-ui-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      Web UI Upload
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-mobile_upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mobile upload
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-email" class="md-nav__link">
+    <span class="md-ellipsis">
+      Email
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Email">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#oauth-email-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      OAuth Email Setup
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rest-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      REST API
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Permissions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Permissions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#default-permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Default permissions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#users-and-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      Users and Groups
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Users and Groups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#superusers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Superusers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#admin-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      Admin Status
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#global-permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detailed Explanation of Global Permissions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#object-permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detailed Explanation of Object Permissions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#password-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Password reset
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#two-factor-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Two-factor authentication
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflows
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workflow-triggers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow Triggers
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow Triggers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workflow-trigger-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workflow-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow Actions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow Actions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#types_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assignment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Removal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#email" class="md-nav__link">
+    <span class="md-ellipsis">
+      Email
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhook" class="md-nav__link">
+    <span class="md-ellipsis">
+      Webhook
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workflow-placeholders" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow placeholders
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workflow-permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow permissions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Fields
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#share-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Share Links
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pdf-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      PDF Actions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#document-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document History
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#document-trash" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document Trash
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-searching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best practices
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-usage_searching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Searching
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Searching">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#global-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Global search
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document-searches" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document searches
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keyboard-shortcuts-hotkeys" class="md-nav__link">
+    <span class="md-ellipsis">
+      Keyboard shortcuts / hotkeys
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-recommended-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      The recommended workflow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The recommended workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preparations-in-paperless" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preparations in paperless
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#processing-of-the-physical-documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processing of the physical documents
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#processing-of-documents-in-paperless" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processing of documents in paperless
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task management
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../administration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Administration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advanced_usage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Advanced Topics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    REST API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Development
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Changelog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="usage-overview">Usage Overview</h1>
+<p>Paperless-ngx is an application that manages your personal documents. With
+the (optional) help of a document scanner (see <a href="https://github.com/paperless-ngx/paperless-ngx/wiki/Scanner-&amp;-Software-Recommendations">the scanners wiki</a>), Paperless-ngx transforms your unwieldy
+physical documents into a searchable archive and provides many utilities
+for finding and managing your documents.</p>
+<h2 id="terms-and-definitions">Terms and definitions</h2>
+<p>Paperless essentially consists of two different parts for managing your
+documents:</p>
+<ul>
+<li>The <em>consumer</em> watches a specified folder and adds all documents in
+    that folder to paperless.</li>
+<li>The <em>web server</em> (web UI) provides a UI that you use to manage and
+    search documents.</li>
+</ul>
+<p>Each document has data fields that you can assign to them:</p>
+<ul>
+<li>A <em>Document</em> is a piece of paper that sometimes contains valuable
+    information.</li>
+<li>The <em>correspondent</em> of a document is the person, institution or
+    company that a document either originates from, or is sent to.</li>
+<li>A <em>tag</em> is a label that you can assign to documents. Think of labels
+    as more powerful folders: Multiple documents can be grouped together
+    with a single tag, however, a single document can also have multiple
+    tags. This is not possible with folders. The reason folders are not
+    implemented in paperless is simply that tags are much more versatile
+    than folders.</li>
+<li>A <em>document type</em> is used to demarcate the type of a document such
+    as letter, bank statement, invoice, contract, etc. It is used to
+    identify what a document is about.</li>
+<li>The <em>date added</em> of a document is the date the document was scanned
+    into paperless. You cannot and should not change this date.</li>
+<li>The <em>date created</em> of a document is the date the document was
+    initially issued. This can be the date you bought a product, the
+    date you signed a contract, or the date a letter was sent to you.</li>
+<li>The <em>archive serial number</em> (short: ASN) of a document is the
+    identifier of the document in your physical document binders. See
+    <a href="#usage-recommended-workflow">recommended workflow</a> below.</li>
+<li>The <em>content</em> of a document is the text that was OCR'ed from the
+    document. This text is fed into the search engine and is used for
+    matching tags, correspondents and document types.</li>
+<li>Paperless-ngx also supports <em>custom fields</em> which can be used to
+    store additional metadata about a document.</li>
+</ul>
+<h2 id="the-web-ui">The Web UI</h2>
+<p>The web UI is the primary way to interact with Paperless-ngx. It is a
+single-page application that is built with modern web technologies and
+is designed to be fast and responsive. The web UI includes a robust
+interface for filtering, viewing, searching and editing documents.
+You can also manage tags, correspondents, document types, and other
+settings from the web UI.</p>
+<p>The web UI also includes a 'tour' feature that can be accessed from the
+settings page or from the dashboard for new users. The tour highlights
+some of the key features of the web UI and can be useful for new users.</p>
+<h3 id="dashboard">Dashboard</h3>
+<p>The dashboard is the first page you see when you log in. By default, it
+does not show any documents, but you can add saved views to the dashboard
+to show documents that match certain criteria. The dashboard also includes
+a button to upload documents to Paperless-ngx but you can also drag and
+drop files anywhere in the app to initiate the consumption process.</p>
+<h3 id="document-list">Document List</h3>
+<p>The document list is the primary way to view and interact with your documents.
+You can filter the list by tags, correspondents, document types, and other
+criteria. You can also edit documents in bulk including assigning tags,
+correspondents, document types, and custom fields. Selecting document(s) from
+the list will allow you to perform the various bulk edit operations. The
+document list also includes a search bar that allows you to search for documents
+by title, ASN, and use advanced search syntax.</p>
+<h3 id="document-detail">Document Detail</h3>
+<p>The document detail page shows all the information about a single document.
+You can view the document, edit its metadata, assign tags, correspondents,
+document types, and custom fields. You can also view the document history,
+download the document or share it via a share link.</p>
+<h3 id="management-lists">Management Lists</h3>
+<p>Paperless-ngx includes management lists for tags, correspondents, document types
+and more. These areas allow you to view, add, edit, delete and manage permissions
+for these objects. You can also manage saved views, mail accounts, mail rules,
+workflows and more from the management sections.</p>
+<h2 id="adding-documents-to-paperless">Adding documents to paperless</h2>
+<p>Once you've got Paperless setup, you need to start feeding documents
+into it. When adding documents to paperless, it will perform the
+following operations on your documents:</p>
+<ol>
+<li>OCR the document, if it has no text. Digital documents usually have
+    text, and this step will be skipped for those documents.</li>
+<li>Paperless will create an archivable PDF/A document from your
+    document. If this document is coming from your scanner, it will have
+    embedded selectable text.</li>
+<li>Paperless performs automatic matching of tags, correspondents and
+    types on the document before storing it in the database.</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This process can be configured to fit your needs. If you don't want
+paperless to create archived versions for digital documents, you can
+configure that by configuring
+<code>PAPERLESS_OCR_SKIP_ARCHIVE_FILE=with_text</code>. Please read the
+<a href="../configuration/#ocr">relevant section in the documentation</a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>No matter which options you choose, Paperless will always store the
+original document that it found in the consumption directory or in the
+mail and will never overwrite that document. Archived versions are
+stored alongside the original versions. Any files found in the
+consumption directory will stored inside the Paperless-ngx file
+structure and will not be retained in the consumption directory.</p>
+</div>
+<h3 id="the-consumption-directory">The consumption directory</h3>
+<p>The primary method of getting documents into your database is by putting
+them in the consumption directory. The consumer waits patiently, looking
+for new additions to this directory. When it finds them,
+the consumer goes about the process of parsing them with the OCR,
+indexing what it finds, and storing it in the media directory. You should
+think of this folder as a temporary location, as files will be re-created
+inside Paperless-ngx and removed from the consumption folder.</p>
+<p>Getting stuff into this directory is up to you. If you're running
+Paperless on your local computer, you might just want to drag and drop
+files there, but if you're running this on a server and want your
+scanner to automatically push files to this directory, you'll need to
+setup some sort of service to accept the files from the scanner.
+Typically, you're looking at an FTP server like
+<a href="http://www.proftpd.org/">Proftpd</a> or a Windows folder share with
+<a href="https://www.samba.org/">Samba</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Files found in the consumption directory that are consumed will be
+removed from the consumption directory and stored inside the
+Paperless-ngx file structure using any settings / storage paths
+you have specified. This action is performed as safely as possible
+but this means it is expected that files in the consumption
+directory will no longer exist (there) after being consumed.</p>
+</div>
+<h3 id="web-ui-upload">Web UI Upload</h3>
+<p>The dashboard has a button to upload documents to paperless or you
+can simply drag a file anywhere into the app to initiate the consumption
+process.</p>
+<h3 id="usage-mobile_upload">Mobile upload</h3>
+<p>Please see <a href="https://github.com/paperless-ngx/paperless-ngx/wiki/Related-Projects">the wiki</a> for a user-maintained list of related projects and
+software (e.g. for mobile devices) that is compatible with Paperless-ngx.</p>
+<h3 id="usage-email">Email</h3>
+<p>You can tell paperless-ngx to consume documents from your email
+accounts. This is a very flexible and powerful feature, if you regularly
+received documents via mail that you need to archive. The mail consumer
+can be configured via the frontend settings (/settings/mail) in the following
+manner:</p>
+<ol>
+<li>Define e-mail accounts.</li>
+<li>Define mail rules for your account.</li>
+</ol>
+<p>These rules perform the following:</p>
+<ol>
+<li>Connect to the mail server.</li>
+<li>Fetch all matching mails (as defined by folder, maximum age and the
+    filters)</li>
+<li>Check if there are any consumable attachments.</li>
+<li>If so, instruct paperless to consume the attachments and optionally
+    use the metadata provided in the rule for the new document.</li>
+<li>If documents were consumed from a mail, the rule action is performed
+    on that mail.</li>
+</ol>
+<p>Paperless will check all emails only once and completely ignore messages
+that do not match your filters. It will also only perform the rule action
+on e-mails that it has consumed documents from. The filename attachment
+patterns can include wildcards and multiple patterns separated by a comma.</p>
+<p>The actions all ensure that the same mail is not consumed twice by
+different means. These are as follows:</p>
+<ul>
+<li><strong>Delete:</strong> Immediately deletes mail that paperless has consumed
+    documents from. Use with caution.</li>
+<li><strong>Mark as read:</strong> Mark consumed mail as read. Paperless will not
+    consume documents from already read mails. If you read a mail before
+    paperless sees it, it will be ignored.</li>
+<li><strong>Flag:</strong> Sets the 'important' flag on mails with consumed
+    documents. Paperless will not consume flagged mails.</li>
+<li><strong>Move to folder:</strong> Moves consumed mails out of the way so that
+    paperless won't consume them again.</li>
+<li>
+<p><strong>Add custom Tag:</strong> Adds a custom tag to mails with consumed
+    documents (the IMAP standard calls these "keywords"). Paperless
+    will not consume mails already tagged. Not all mail servers support
+    this feature!</p>
+<ul>
+<li><strong>Apple Mail support:</strong> Apple Mail clients allow differently colored tags. For this to work use <code>apple:&lt;color&gt;</code> (e.g. <em>apple:green</em>) as a custom tag. Available colors are <em>red</em>, <em>orange</em>, <em>yellow</em>, <em>blue</em>, <em>green</em>, <em>violet</em> and <em>grey</em>.</li>
+</ul>
+</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The mail consumer will perform these actions on all mails it has
+consumed documents from. Keep in mind that the actual consumption
+process may fail for some reason, leaving you with missing documents in
+paperless.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>With the correct set of rules, you can completely automate your email
+documents. Create rules for every correspondent you receive digital
+documents from and paperless will read them automatically. The default
+action "mark as read" is pretty tame and will not cause any damage or
+data loss whatsoever.</p>
+<p>You can also setup a special folder in your mail account for paperless
+and use your favorite mail client to move to be consumed mails into that
+folder automatically or manually and tell paperless to move them to yet
+another folder after consumption. It's up to you.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When defining a mail rule with a folder, you may need to try different
+characters to define how the sub-folders are separated. Common values
+include ".", "/" or "|", but this varies by the mail server.
+Check the documentation for your mail server. In the event of an error
+fetching mail from a certain folder, check the Paperless logs. When a
+folder is not located, Paperless will attempt to list all folders found
+in the account to the Paperless logs.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Paperless will process the rules in the order defined in the admin page.</p>
+<p>You can define catch-all rules and have them executed last to consume
+any documents not matched by previous rules. Such a rule may assign an
+"Unknown mail document" tag to consumed documents so you can inspect
+them further.</p>
+</div>
+<p>Paperless is set up to check your mails every 10 minutes. This can be
+configured via <a href="../configuration/#PAPERLESS_EMAIL_TASK_CRON"><code>PAPERLESS_EMAIL_TASK_CRON</code></a></p>
+<h4 id="oauth-email-setup">OAuth Email Setup</h4>
+<p>Paperless-ngx supports OAuth2 authentication for Gmail and Outlook email accounts. To set up an email account with OAuth2, you will need to create a 'developer' app with the respective provider and obtain the client ID and client secret and set the appropriate <a href="../configuration/#email_oauth">configuration variables</a>. You will also need to set either <a href="../configuration/#PAPERLESS_OAUTH_CALLBACK_BASE_URL"><code>PAPERLESS_OAUTH_CALLBACK_BASE_URL</code></a> or <a href="../configuration/#PAPERLESS_URL"><code>PAPERLESS_URL</code></a> to the correct value for the OAuth2 flow to work correctly.</p>
+<p>Specific instructions for setting up the required 'developer' app with Google or Microsoft are beyond the scope of this documentation, but you can find user-maintained instructions in <a href="https://github.com/paperless-ngx/paperless-ngx/wiki/Email-OAuth-App-Setup">the wiki</a> or by searching the web.</p>
+<p>Once setup, navigating to the email settings page in Paperless-ngx will allow you to add an email account for Gmail or Outlook using OAuth2. After authenticating, you will be presented with the newly-created account where you will need to enter and save your email address. After this, the account will work as any other email account in Paperless-ngx and refreshing tokens will be handled automatically.</p>
+<h3 id="rest-api">REST API</h3>
+<p>You can also submit a document using the REST API, see <a href="../api/#file-uploads">POSTing documents</a>
+for details.</p>
+<h2 id="permissions">Permissions</h2>
+<p>Permissions in Paperless-ngx are based around <a href="#global-permissions">'global' permissions</a> as well as
+<a href="#object-permissions">'object-level' permissions</a>. Global permissions determine which parts of the
+application a user can access (e.g. Documents, Tags, Settings) and object-level determine which
+objects are visible or editable. All objects have an 'owner' and 'view' and 'edit' permissions which
+can be granted to other users or groups. The paperless-ngx permissions system uses the built-in user
+model of the backend framework, Django.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Object-level permissions only apply to the object itself. In other words, setting permissions
+for a Tag will <em>not</em> affect the permissions of documents that have the Tag.</p>
+</div>
+<p>Permissions can be set using the new "Permissions" tab when editing documents, or bulk-applied
+in the UI by selecting documents and choosing the "Permissions" button.</p>
+<h3 id="default-permissions">Default permissions</h3>
+<p><a href="#workflows">Workflows</a> provide advanced ways to control permissions.</p>
+<p>For objects created via the web UI (tags, doc types, etc.) the default is to set the current user
+as owner and no extra permissions, but you can explicitly set these under Settings &gt; Permissions.</p>
+<p>Documents consumed via the consumption directory do not have an owner or additional permissions set by default, but again, can be controlled with <a href="#workflows">Workflows</a>.</p>
+<h3 id="users-and-groups">Users and Groups</h3>
+<p>Paperless-ngx supports editing users and groups via the 'frontend' UI, which can be found under
+Settings &gt; Users &amp; Groups, assuming the user has access. If a user is designated
+as a member of a group those permissions will be inherited and this is reflected in the UI. Explicit
+permissions can be granted to limit access to certain parts of the UI (and corresponding API endpoints).</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>By default, new users are not granted any permissions, except those inherited from any group(s) of which they are a member.</p>
+</div>
+<h4 id="superusers">Superusers</h4>
+<p>Superusers can access all parts of the front and backend application as well as any and all objects. Superuser status can only be granted by another superuser.</p>
+<h4 id="admin-status">Admin Status</h4>
+<p>Admin status (Django 'staff status') grants access to viewing the paperless logs and the system status dialog
+as well as accessing the Django backend.</p>
+<h4 id="global-permissions">Detailed Explanation of Global Permissions</h4>
+<p>Global permissions define what areas of the app and API endpoints users can access. For example, they
+determine if a user can create, edit, delete or view <em>any</em> documents, but individual documents themselves
+still have "object-level" permissions.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AppConfig</td>
+<td><em>Change</em> or higher permissions grants access to the "Application Configuration" area.</td>
+</tr>
+<tr>
+<td>Correspondent</td>
+<td>Add, edit, delete or view Correspondents.</td>
+</tr>
+<tr>
+<td>CustomField</td>
+<td>Add, edit, delete or view Custom Fields.</td>
+</tr>
+<tr>
+<td>Document</td>
+<td>Add, edit, delete or view Documents.</td>
+</tr>
+<tr>
+<td>DocumentType</td>
+<td>Add, edit, delete or view Document Types.</td>
+</tr>
+<tr>
+<td>Group</td>
+<td>Add, edit, delete or view Groups.</td>
+</tr>
+<tr>
+<td>MailAccount</td>
+<td>Add, edit, delete or view Mail Accounts.</td>
+</tr>
+<tr>
+<td>MailRule</td>
+<td>Add, edit, delete or view Mail Rules.</td>
+</tr>
+<tr>
+<td>Note</td>
+<td>Add, edit, delete or view Notes.</td>
+</tr>
+<tr>
+<td>PaperlessTask</td>
+<td>View or dismiss (<em>Change</em>) File Tasks.</td>
+</tr>
+<tr>
+<td>SavedView</td>
+<td>Add, edit, delete or view Saved Views.</td>
+</tr>
+<tr>
+<td>ShareLink</td>
+<td>Add, delete or view Share Links.</td>
+</tr>
+<tr>
+<td>StoragePath</td>
+<td>Add, edit, delete or view Storage Paths.</td>
+</tr>
+<tr>
+<td>Tag</td>
+<td>Add, edit, delete or view Tags.</td>
+</tr>
+<tr>
+<td>UISettings</td>
+<td>Add, edit, delete or view the UI settings that are used by the web app.<br/><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:" /> <strong>Users that will access the web UI must be granted at least <em>View</em> permissions.</strong></td>
+</tr>
+<tr>
+<td>User</td>
+<td>Add, edit, delete or view Users.</td>
+</tr>
+<tr>
+<td>Workflow</td>
+<td>Add, edit, delete or view Workflows.<br/>Note that Workflows are global, in other words all users who can access workflows have access to the same set of them.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="object-permissions">Detailed Explanation of Object Permissions</h4>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Owner</td>
+<td>By default objects are only visible and editable by their owner.<br/>Only the object owner can grant permissions to other users or groups.<br/>Additionally, only document owners can create share links and add / remove custom fields.<br/>For backwards compatibility objects can have no owner which makes them visible to any user.</td>
+</tr>
+<tr>
+<td>View</td>
+<td>Confers the ability to view (not edit) a document, tag, etc.<br/>Users without 'view' (or higher) permissions will be shown <em>'Private'</em> in place of the object name for example when viewing a document with a tag for which the user doesn't have permissions.</td>
+</tr>
+<tr>
+<td>Edit</td>
+<td>Confers the ability to edit (and view) a document, tag, etc.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="password-reset">Password reset</h3>
+<p>In order to enable the password reset feature you will need to setup an SMTP backend, see
+<a href="../configuration/#PAPERLESS_EMAIL_HOST"><code>PAPERLESS_EMAIL_HOST</code></a>. If your installation does not have
+<a href="../configuration/#PAPERLESS_URL"><code>PAPERLESS_URL</code></a> set, the reset link included in emails will use the server host.</p>
+<h3 id="two-factor-authentication">Two-factor authentication</h3>
+<p>Users can enable two-factor authentication (2FA) for their accounts from the 'My Profile' dialog. Opening the dropdown reveals a QR code that can be scanned by a 2FA app (e.g. Google Authenticator) to generate a code. The code must then be entered in the dialog to enable 2FA. If the code is accepted and 2FA is enabled, the user will be shown a set of 10 recovery codes that can be used to login in the event that the 2FA device is lost or unavailable. These codes should be stored securely and cannot be retrieved again. Once enabled, users will be required to enter a code from their 2FA app when logging in.</p>
+<p>Should a user lose access to their 2FA device and all recovery codes, a superuser can disable 2FA for the user from the 'Users &amp; Groups' management screen.</p>
+<h2 id="workflows">Workflows</h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>v2.3 added "Workflows" and existing "Consumption Templates" were converted automatically to the new more powerful format.</p>
+</div>
+<p>Workflows allow hooking into the Paperless-ngx document pipeline, for example to alter what metadata (tags, doc types) and
+permissions (owner, privileges) are assigned to documents. Workflows can have multiple 'triggers' and 'actions'. Triggers
+are events (with optional filtering rules) that will cause the workflow to be run and actions are the set of sequential
+actions to apply.</p>
+<p>In general, workflows and any actions they contain are applied sequentially by sort order. For "assignment" actions, subsequent
+workflow actions will override previous assignments, except for assignments that accept multiple items e.g. tags, custom
+fields and permissions, which will be merged.</p>
+<h3 id="workflow-triggers">Workflow Triggers</h3>
+<h4 id="types">Types</h4>
+<p>Currently, there are three events that correspond to workflow trigger 'types':</p>
+<ol>
+<li><strong>Consumption Started</strong>: <em>before</em> a document is consumed, so events can include filters by source (mail, consumption
+   folder or API), file path, file name, mail rule</li>
+<li><strong>Document Added</strong>: <em>after</em> a document is added. At this time, file path and source information is no longer available,
+   but the document content has been extracted and metadata such as document type, tags, etc. have been set, so these can now
+   be used for filtering.</li>
+<li><strong>Document Updated</strong>: when a document is updated. Similar to 'added' events, triggers can include filtering by content matching,
+   tags, doc type, or correspondent.</li>
+<li><strong>Scheduled</strong>: a scheduled trigger that can be used to run workflows at a specific time. The date used can be either the document
+   added, created, updated date or you can specify a (date) custom field. You can also specify a day offset from the date.</li>
+</ol>
+<p>The following flow diagram illustrates the three document trigger types:</p>
+<pre class="mermaid"><code>flowchart TD
+    consumption{"Matching
+    'Consumption'
+    trigger(s)"}
+
+    added{"Matching
+    'Added'
+    trigger(s)"}
+
+    updated{"Matching
+    'Updated'
+    trigger(s)"}
+
+    A[New Document] --&gt; consumption
+    consumption --&gt; |Yes| C[Workflow Actions Run]
+    consumption --&gt; |No| D
+    C --&gt; D[Document Added]
+    D -- Paperless-ngx 'matching' of tags, etc. --&gt; added
+    added --&gt; |Yes| F[Workflow Actions Run]
+    added --&gt; |No| G
+    F --&gt; G[Document Finalized]
+    H[Existing Document Changed] --&gt; updated
+    updated --&gt; |Yes| J[Workflow Actions Run]
+    updated --&gt; |No| K
+    J --&gt; K[Document Saved]</code></pre>
+<h4 id="workflow-trigger-filters">Filters</h4>
+<p>Workflows allow you to filter by:</p>
+<ul>
+<li>Source, e.g. documents uploaded via consume folder, API (&amp; the web UI) and mail fetch</li>
+<li>File name, including wildcards e.g. *.pdf will apply to all pdfs</li>
+<li>File path, including wildcards. Note that enabling <code>PAPERLESS_CONSUMER_RECURSIVE</code> would allow, for
+    example, automatically assigning documents to different owners based on the upload directory.</li>
+<li>Mail rule. Choosing this option will force 'mail fetch' to be the workflow source.</li>
+<li>Content matching (<code>Added</code> and <code>Updated</code> triggers only). Filter document content using the matching settings.</li>
+<li>Tags (<code>Added</code> and <code>Updated</code> triggers only). Filter for documents with any of the specified tags</li>
+<li>Document type (<code>Added</code> and <code>Updated</code> triggers only). Filter documents with this doc type</li>
+<li>Correspondent (<code>Added</code> and <code>Updated</code> triggers only). Filter documents with this correspondent</li>
+</ul>
+<h3 id="workflow-actions">Workflow Actions</h3>
+<h4 id="types_1">Types</h4>
+<p>The following workflow action types are available:</p>
+<h5 id="assignment">Assignment</h5>
+<p>"Assignment" actions can assign:</p>
+<ul>
+<li>Title, see <a href="./#workflow-placeholders">workflow placeholders</a> below</li>
+<li>Tags, correspondent, document type and storage path</li>
+<li>Document owner</li>
+<li>View and / or edit permissions to users or groups</li>
+<li>Custom fields. Note that no value for the field will be set</li>
+</ul>
+<h5 id="removal">Removal</h5>
+<p>"Removal" actions can remove either all of or specific sets of the following:</p>
+<ul>
+<li>Tags, correspondents, document types or storage paths</li>
+<li>Document owner</li>
+<li>View and / or edit permissions</li>
+<li>Custom fields</li>
+</ul>
+<h5 id="email">Email</h5>
+<p>"Email" actions can send documents via email. This action requires a mail server to be <a href="../configuration/#email-sending">configured</a>. You can specify:</p>
+<ul>
+<li>The recipient email address(es) separated by commas</li>
+<li>The subject and body of the email, which can include placeholders, see <a href="./#workflow-placeholders">placeholders</a> below</li>
+<li>Whether to include the document as an attachment</li>
+</ul>
+<h5 id="webhook">Webhook</h5>
+<p>"Webhook" actions send a POST request to a specified URL. You can specify:</p>
+<ul>
+<li>The URL to send the request to</li>
+<li>The request body as text or as key-value pairs, which can include placeholders, see <a href="./#workflow-placeholders">placeholders</a> below.</li>
+<li>Encoding for the request body, either JSON or form data</li>
+<li>The request headers as key-value pairs</li>
+</ul>
+<h4 id="workflow-placeholders">Workflow placeholders</h4>
+<p>Some workflow text can include placeholders but the available options differ depending on the type of
+workflow trigger. This is because at the time of consumption (when the text is to be set), no automatic tags etc. have been
+applied. You can use the following placeholders with any trigger type:</p>
+<ul>
+<li><code>{correspondent}</code>: assigned correspondent name</li>
+<li><code>{document_type}</code>: assigned document type name</li>
+<li><code>{owner_username}</code>: assigned owner username</li>
+<li><code>{added}</code>: added datetime</li>
+<li><code>{added_year}</code>: added year</li>
+<li><code>{added_year_short}</code>: added year</li>
+<li><code>{added_month}</code>: added month</li>
+<li><code>{added_month_name}</code>: added month name</li>
+<li><code>{added_month_name_short}</code>: added month short name</li>
+<li><code>{added_day}</code>: added day</li>
+<li><code>{added_time}</code>: added time in HH:MM format</li>
+<li><code>{original_filename}</code>: original file name without extension</li>
+<li><code>{filename}</code>: current file name without extension</li>
+</ul>
+<p>The following placeholders are only available for "added" or "updated" triggers</p>
+<ul>
+<li><code>{created}</code>: created datetime</li>
+<li><code>{created_year}</code>: created year</li>
+<li><code>{created_year_short}</code>: created year</li>
+<li><code>{created_month}</code>: created month</li>
+<li><code>{created_month_name}</code>: created month name</li>
+<li><code>{created_month_name_short}</code>: created month short name</li>
+<li><code>{created_day}</code>: created day</li>
+<li><code>{created_time}</code>: created time in HH:MM format</li>
+<li><code>{doc_url}</code>: URL to the document in the web UI. Requires the <code>PAPERLESS_URL</code> setting to be set.</li>
+</ul>
+<h3 id="workflow-permissions">Workflow permissions</h3>
+<p>All users who have application permissions for editing workflows can see the same set
+of workflows. In other words, workflows themselves intentionally do not have an owner or permissions.</p>
+<p>Given their potentially far-reaching capabilities, you may want to restrict access to workflows.</p>
+<p>Upon migration, existing installs will grant access to workflows to users who can add
+documents (and superusers who can always access all parts of the app).</p>
+<h2 id="custom-fields">Custom Fields</h2>
+<p>Paperless-ngx supports the use of custom fields for documents as of v2.0, allowing a user
+to optionally attach data to documents which does not fit in the existing set of fields
+Paperless-ngx provides.</p>
+<ol>
+<li>First, create a custom field (under "Manage"), with a given name and data type. This could be something like "Invoice Number" or "Date Paid", with a data type of "Number", "Date", "String", etc.</li>
+<li>Once created, a field can be used with documents and data stored. To do so, use the "Custom Fields" menu on the document detail page, choose your existing field from the dropdown. Once the field is visible in the form you can enter the appropriate data which will be validated according to the custom field "data type".</li>
+<li>Fields can be removed by hovering over the field name revealing a "Remove" button.</li>
+</ol>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Added / removed fields, as well as any data, is not saved to the document until you
+actually hit the "Save" button, similar to other changes on the document details page.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Once the data type for a field is set, it cannot be changed.</p>
+</div>
+<p>Multiple fields may be attached to a document but the same field name cannot be assigned multiple times to the a single document.</p>
+<p>The following custom field types are supported:</p>
+<ul>
+<li><code>Text</code>: any text</li>
+<li><code>Boolean</code>: true / false (check / unchecked) field</li>
+<li><code>Date</code>: date</li>
+<li><code>URL</code>: a valid url</li>
+<li><code>Integer</code>: integer number e.g. 12</li>
+<li><code>Number</code>: float number e.g. 12.3456</li>
+<li><code>Monetary</code>: <a href="https://en.wikipedia.org/wiki/ISO_4217#List_of_ISO_4217_currency_codes">ISO 4217 currency code</a> and a number with exactly two decimals, e.g. USD12.30</li>
+<li><code>Document Link</code>: reference(s) to other document(s) displayed as links, automatically creates a symmetrical link in reverse</li>
+<li><code>Select</code>: a pre-defined list of strings from which the user can choose</li>
+</ul>
+<h2 id="share-links">Share Links</h2>
+<p>Paperless-ngx added the ability to create shareable links to files in version 2.0. You can find the button for this on the document detail screen.</p>
+<ul>
+<li>Share links do not require a user to login and thus link directly to a file.</li>
+<li>Links are unique and are of the form <code>{paperless-url}/share/{randomly-generated-slug}</code>.</li>
+<li>Links can optionally have an expiration time set.</li>
+<li>After a link expires or is deleted users will be redirected to the regular paperless-ngx login.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If your paperless-ngx instance is behind a reverse-proxy you may want to create an exception to bypass any authentication layers that are part of your setup in order to make links truly publicly-accessible. Of course, do so with caution.</p>
+</div>
+<h2 id="pdf-actions">PDF Actions</h2>
+<p>Paperless-ngx supports four basic editing operations for PDFs (these operations currently cannot be performed on non-PDF files):</p>
+<ul>
+<li>Merging documents: available when selecting multiple documents for 'bulk editing'.</li>
+<li>Rotating documents: available when selecting multiple documents for 'bulk editing' and from an individual document's details page.</li>
+<li>Splitting documents: available from an individual document's details page.</li>
+<li>Deleting pages: available from an individual document's details page.</li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Note that rotation and deleting pages alter the Paperless-ngx <em>original</em> file, which would, for example, invalidate a digital signature.</p>
+</div>
+<h2 id="document-history">Document History</h2>
+<p>As of version 2.7, Paperless-ngx automatically records all changes to a document and records this in an audit log. The feature requires <a href="../configuration/#PAPERLESS_AUDIT_LOG_ENABLED"><code>PAPERLESS_AUDIT_LOG_ENABLED</code></a> be enabled, which it is by default as of version 2.7.
+Changes to documents are visible under the "History" tab. Note that certain changes such as those made by workflows, record the 'actor'
+as "System".</p>
+<h2 id="document-trash">Document Trash</h2>
+<p>When you first delete a document it is moved to the 'trash' until either it is explicitly deleted or it is automatically removed after a set amount of time has passed.
+You can set how long documents remain in the trash before being automatically deleted with <a href="../configuration/#PAPERLESS_EMPTY_TRASH_DELAY"><code>PAPERLESS_EMPTY_TRASH_DELAY</code></a>, which defaults
+to 30 days. Until the file is actually deleted (e.g. the trash is emptied), all files and database content remains intact and can be restored at any point up until that time.</p>
+<p>Additionally you may configure a directory where deleted files are moved to when they the trash is emptied with <a href="../configuration/#PAPERLESS_EMPTY_TRASH_DIR"><code>PAPERLESS_EMPTY_TRASH_DIR</code></a>.
+Note that the empty trash directory only stores the original file, the archive file and all database information is permanently removed once a document is fully deleted.</p>
+<h2 id="basic-searching">Best practices</h2>
+<p>Paperless offers a couple tools that help you organize your document
+collection. However, it is up to you to use them in a way that helps you
+organize documents and find specific documents when you need them. This
+section offers a couple ideas for managing your collection.</p>
+<p>Document types allow you to classify documents according to what they
+are. You can define types such as "Receipt", "Invoice", or
+"Contract". If you used to collect all your receipts in a single
+binder, you can recreate that system in paperless by defining a document
+type, assigning documents to that type and then filtering by that type
+to only see all receipts.</p>
+<p>Not all documents need document types. Sometimes its hard to determine
+what the type of a document is or it is hard to justify creating a
+document type that you only need once or twice. This is okay. As long as
+the types you define help you organize your collection in the way you
+want, paperless is doing its job.</p>
+<p>Tags can be used in many different ways. Think of tags are more
+versatile folders or binders. If you have a binder for documents related
+to university / your car or health care, you can create these binders in
+paperless by creating tags and assigning them to relevant documents.
+Just as with documents, you can filter the document list by tags and
+only see documents of a certain topic.</p>
+<p>With physical documents, you'll often need to decide which folder the
+document belongs to. The advantage of tags over folders and binders is
+that a single document can have multiple tags. A physical document
+cannot magically appear in two different folders, but with tags, this is
+entirely possible.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This can be used in many different ways. One example: Imagine you're
+working on a particular task, such as signing up for university. Usually
+you'll need to collect a bunch of different documents that are already
+sorted into various folders. With the tag system of paperless, you can
+create a new group of documents that are relevant to this task without
+destroying the already existing organization. When you're done with the
+task, you could delete the tag again, which would be equal to sorting
+documents back into the folder they belong into. Or keep the tag, up to
+you.</p>
+</div>
+<p>All of the logic above applies to correspondents as well. Attach them to
+documents if you feel that they help you organize your collection.</p>
+<p>When you've started organizing your documents, create a couple saved
+views for document collections you regularly access. This is equal to
+having labeled physical binders on your desk, except that these saved
+views are dynamic and simply update themselves as you add documents to
+the system.</p>
+<p>Here are a couple examples of tags and types that you could use in your
+collection.</p>
+<ul>
+<li>An <code>inbox</code> tag for newly added documents that you haven't manually
+    edited yet.</li>
+<li>A tag <code>car</code> for everything car related (repairs, registration,
+    insurance, etc)</li>
+<li>A tag <code>todo</code> for documents that you still need to do something with,
+    such as reply, or perform some task online.</li>
+<li>A tag <code>bank account x</code> for all bank statement related to that
+    account.</li>
+<li>A tag <code>mail</code> for anything that you added to paperless via its mail
+    processing capabilities.</li>
+<li>A tag <code>missing_metadata</code> when you still need to add some metadata to
+    a document, but can't or don't want to do this right now.</li>
+</ul>
+<h2 id="basic-usage_searching">Searching</h2>
+<h3 id="global-search">Global search</h3>
+<p>The top search bar in the web UI performs a "global" search of the various
+objects Paperless-ngx uses, including documents, tags, workflows, etc. Only
+objects for which the user has appropriate permissions are returned. For
+documents, if there are &lt; 3 results, "advanced" search results (which use
+the document index) will also be included. This can be disabled under settings.</p>
+<h3 id="document-searches">Document searches</h3>
+<p>Paperless offers an extensive searching mechanism that is designed to
+allow you to quickly find a document you're looking for (for example,
+that thing that just broke and you bought a couple months ago, that
+contract you signed 8 years ago).</p>
+<p>When you search paperless for a document, it tries to match this query
+against your documents. Paperless will look for matching documents by
+inspecting their content, title, correspondent, type and tags. Paperless
+returns a scored list of results, so that documents matching your query
+better will appear further up in the search results.</p>
+<p>By default, paperless returns only documents which contain all words
+typed in the search bar. However, paperless also offers advanced search
+syntax if you want to drill down the results further.</p>
+<p>Matching documents with logical expressions:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>shopname AND (product1 OR product2)
+</code></pre></div>
+<p>Matching specific tags, correspondents or types:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>type:invoice tag:unpaid
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>correspondent:university certificate
+</code></pre></div>
+<p>Matching dates:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>created:[2005 to 2009]
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>added:yesterday
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>modified:today
+</code></pre></div>
+<p>Matching inexact words:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>produ*name
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Inexact terms are hard for search indexes. These queries might take a
+while to execute. That's why paperless offers auto complete and query
+correction.</p>
+</div>
+<p>All of these constructs can be combined as you see fit. If you want to
+learn more about the query language used by paperless, paperless uses
+Whoosh's default query language. Head over to <a href="https://whoosh.readthedocs.io/en/latest/querylang.html">Whoosh query
+language</a>. For
+details on what date parsing utilities are available, see <a href="https://whoosh.readthedocs.io/en/latest/dates.html#parsing-date-queries">Date
+parsing</a>.</p>
+<h2 id="keyboard-shortcuts-hotkeys">Keyboard shortcuts / hotkeys</h2>
+<p>A list of available hotkeys can be shown on any page using <kbd>Shift</kbd> +
+<kbd>?</kbd>. The help dialog shows only the keys that are currently available
+based on which area of Paperless-ngx you are using.</p>
+<h2 id="usage-recommended-workflow">The recommended workflow</h2>
+<p>Once you have familiarized yourself with paperless and are ready to use
+it for all your documents, the recommended workflow for managing your
+documents is as follows. This workflow also takes into account that some
+documents have to be kept in physical form, but still ensures that you
+get all the advantages for these documents as well.</p>
+<p>The following diagram shows how easy it is to manage your documents.</p>
+<p><a class="glightbox" href="../assets/recommended_workflow.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image" src="../assets/recommended_workflow.png" width="400" /></a></p>
+<h3 id="preparations-in-paperless">Preparations in paperless</h3>
+<ul>
+<li>Create an inbox tag that gets assigned to all new documents.</li>
+<li>Create a TODO tag.</li>
+</ul>
+<h3 id="processing-of-the-physical-documents">Processing of the physical documents</h3>
+<p>Keep a physical inbox. Whenever you receive a document that you need to
+archive, put it into your inbox. Regularly, do the following for all
+documents in your inbox:</p>
+<ol>
+<li>For each document, decide if you need to keep the document in
+    physical form. This applies to certain important documents, such as
+    contracts and certificates.</li>
+<li>If you need to keep the document, write a running number on the
+    document before scanning, starting at one and counting upwards. This
+    is the archive serial number, or ASN in short.</li>
+<li>Scan the document.</li>
+<li>If the document has an ASN assigned, store it in a <em>single</em> binder,
+    sorted by ASN. Don't order this binder in any other way.</li>
+<li>If the document has no ASN, throw it away. Yay!</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Instead of writing a number on the document by hand, you may also prepare
+a spool of labels with barcodes with an ascending serial number, that are
+formatted like <code>ASN00001</code>.
+This also enables Paperless to automatically parse and process the ASN
+(if enabled in the config), so that you don't need to manually assign it.</p>
+</div>
+<p>Over time, you will notice that your physical binder will fill up. If it
+is full, label the binder with the range of ASNs in this binder (i.e.,
+"Documents 1 to 343"), store the binder in your cellar or elsewhere,
+and start a new binder.</p>
+<p>The idea behind this process is that you will never have to use the
+physical binders to find a document. If you need a specific physical
+document, you may find this document by:</p>
+<ol>
+<li>Searching in paperless for the document.</li>
+<li>Identify the ASN of the document, since it appears on the scan.</li>
+<li>Grab the relevant document binder and get the document. This is easy
+    since they are sorted by ASN.</li>
+</ol>
+<h3 id="processing-of-documents-in-paperless">Processing of documents in paperless</h3>
+<p>Once you have scanned in a document, proceed in paperless as follows.</p>
+<ol>
+<li>If the document has an ASN, assign the ASN to the document.</li>
+<li>Assign a correspondent to the document (i.e., your employer, bank,
+    etc) This isn't strictly necessary but helps in finding a document
+    when you need it.</li>
+<li>Assign a document type (i.e., invoice, bank statement, etc) to the
+    document This isn't strictly necessary but helps in finding a
+    document when you need it.</li>
+<li>Assign a proper title to the document (the name of an item you
+    bought, the subject of the letter, etc)</li>
+<li>Check that the date of the document is correct. Paperless tries to
+    read the date from the content of the document, but this fails
+    sometimes if the OCR is bad or multiple dates appear on the
+    document.</li>
+<li>Remove inbox tags from the documents.</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can setup manual matching rules for your correspondents and tags and
+paperless will assign them automatically. After consuming a couple
+documents, you can even ask paperless to <em>learn</em> when to assign tags and
+correspondents by itself. For details on this feature, see
+<a href="../advanced_usage/#matching">advanced matching</a>.</p>
+</div>
+<h3 id="task-management">Task management</h3>
+<p>Some documents require attention and require you to act on the document.
+You may take two different approaches to handle these documents based on
+how regularly you intend to scan documents and use paperless.</p>
+<ul>
+<li>If you scan and process your documents in paperless regularly,
+    assign a TODO tag to all scanned documents that you need to process.
+    Create a saved view on the dashboard that shows all documents with
+    this tag.</li>
+<li>If you do not scan documents regularly and use paperless solely for
+    archiving, create a physical todo box next to your physical inbox
+    and put documents you need to process in the TODO box. When you
+    performed the task associated with the document, move it to the
+    inbox.</li>
+</ul>
+<h2 id="architecture">Architecture</h2>
+<p>Paperless-ngx consists of the following components:</p>
+<ul>
+<li>
+<p><strong>The webserver:</strong> This serves the administration pages, the API,
+    and the new frontend. This is the main tool you'll be using to interact
+    with paperless. You may start the webserver directly with</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">cd /path/to/paperless/src/</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">gunicorn -c ../gunicorn.conf.py paperless.wsgi</span>
+</code></pre></div>
+<p>or by any other means such as Apache <code>mod_wsgi</code>.</p>
+</li>
+<li>
+<p><strong>The consumer:</strong> This is what watches your consumption folder for
+    documents. However, the consumer itself does not really consume your
+    documents. Now it notifies a task processor that a new file is ready
+    for consumption. I suppose it should be named differently. This was
+    also used to check your emails, but that's now done elsewhere as
+    well.</p>
+<p>Start the consumer with the management command <code>document_consumer</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">cd /path/to/paperless/src/</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="go">python3 manage.py document_consumer</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>The task processor:</strong> Paperless relies on <a href="https://docs.celeryq.dev/en/stable/index.html">Celery - Distributed
+    Task Queue</a> for doing
+    most of the heavy lifting. This is a task queue that accepts tasks
+    from multiple sources and processes these in parallel. It also comes
+    with a scheduler that executes certain commands periodically.</p>
+<p>This task processor is responsible for:</p>
+<ul>
+<li>Consuming documents. When the consumer finds new documents, it
+    notifies the task processor to start a consumption task.</li>
+<li>The task processor also performs the consumption of any
+    documents you upload through the web interface.</li>
+<li>Consuming emails. It periodically checks your configured
+    accounts for new emails and notifies the task processor to
+    consume the attachment of an email.</li>
+<li>Maintaining the search index and the automatic matching
+    algorithm. These are things that paperless needs to do from time
+    to time in order to operate properly.</li>
+</ul>
+<p>This allows paperless to process multiple documents from your
+consumption folder in parallel! On a modern multi core system, this
+makes the consumption process with full OCR blazingly fast.</p>
+<p>The task processor comes with a built-in admin interface that you
+can use to check whenever any of the tasks fail and inspect the
+errors (i.e., wrong email credentials, errors during consuming a
+specific file, etc).</p>
+</li>
+<li>
+<p>A <a href="https://redis.io/">redis</a> message broker: This is a really
+    lightweight service that is responsible for getting the tasks from
+    the webserver and the consumer to the task scheduler. These run in a
+    different process (maybe even on different machines!), and
+    therefore, this is necessary.</p>
+</li>
+<li>
+<p>Optional: A database server. Paperless supports PostgreSQL, MariaDB
+    and SQLite for storing its data.</p>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2016 - 2023 Daniel Quinn, Jonas Winkler, and the Paperless-ngx team
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/paperless-ngx/paperless-ngx" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://hub.docker.com/r/paperlessngx/paperless-ngx" target="_blank" rel="noopener" title="hub.docker.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M349.9 236.3h-66.1v-59.4h66.1zm0-204.3h-66.1v60.7h66.1zm78.2 144.8H362v59.4h66.1zm-156.3-72.1h-66.1v60.1h66.1zm78.1 0h-66.1v60.1h66.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1zm78.1 0h-66.1v59.4h66.1zm-78.1-72.1h-66.1v60.1h66.1z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://matrix.to/#/#paperless:matrix.org" target="_blank" rel="noopener" title="matrix.to" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3c5.5 0 10 3.58 10 8s-4.5 8-10 8c-1.24 0-2.43-.18-3.53-.5C5.55 21 2 21 2 21c2.33-2.33 2.7-3.9 2.75-4.5C3.05 15.07 2 13.13 2 11c0-4.42 4.5-8 10-8"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "toc.integrate", "content.code.annotate"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

@@ -1,0 +1,100 @@
+:root > * {
+    --md-primary-fg-color: #17541f;
+    --md-primary-fg-color--dark: #17541f;
+    --md-primary-fg-color--light: #17541f;
+    --md-accent-fg-color: #2b8a38;
+    --md-typeset-a-color: #21652a;
+}
+
+[data-md-color-scheme="slate"] {
+    --md-hue: 222;
+}
+
+@media (min-width: 768px) {
+    .grid-left {
+        width: 33%;
+        float: left;
+    }
+    .grid-right {
+        width: 62%;
+        margin-left: 4%;
+        float: left;
+    }
+
+    .grid-flipped-left {
+        width: 66%;
+        float: left;
+    }
+
+    .grid-flipped-right {
+        width: 29%;
+        margin-left: 4%;
+        float: left;
+    }
+
+    .grid-half-left {
+        width: 48%;
+        float: left;
+    }
+
+    .grid-half-right {
+        width: 48%;
+        margin-left: 4%;
+        float: left;
+    }
+}
+
+.grid-left > p {
+    margin-bottom: 2rem;
+}
+
+
+.grid-right p {
+    margin: 0;
+}
+
+.clear {
+    clear: both;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.index-callout {
+    margin-right: .5rem;
+}
+
+/* make code in headers not bold */
+h4 code {
+    font-weight: normal;
+}
+
+/* Hide config vars from sidebar, toc and move the border on mobile case their hidden */
+.md-nav.md-nav--secondary .md-nav__item .md-nav__link[href*="PAPERLESS_"],
+.md-nav.md-nav--secondary .md-nav__item .md-nav__link[href*="USERMAP_"] {
+    display: none;
+}
+
+@media screen and (max-width: 76.1875em) {
+    .md-nav--primary .md-nav__item {
+        border-top: none;
+    }
+
+    .md-nav--primary .md-nav__link {
+        border-top: .05rem solid var(--md-default-fg-color--lightest);
+    }
+}
+
+/* Show search shortcut key */
+[data-md-toggle="search"]:not(:checked) ~ .md-header .md-search__form::after {
+    position: absolute;
+    top: .3rem;
+    right: .3rem;
+    display: block;
+    padding: .1rem .4rem;
+    color: var(--md-default-fg-color--lighter);
+    font-weight: bold;
+    font-size: .8rem;
+    border: .05rem solid var(--md-default-fg-color--lighter);
+    border-radius: .1rem;
+    content: "/";
+  }

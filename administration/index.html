@@ -1,0 +1,1621 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../configuration/">
+      
+      
+        <link rel="next" href="../advanced_usage/">
+      
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>Administration - Paperless-ngx</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#administration" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Paperless-ngx" class="md-header__button md-logo" aria-label="Paperless-ngx" data-md-component="logo">
+      
+  <img src="../assets/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paperless-ngx
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Administration
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/paperless-ngx/paperless-ngx" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    paperless-ngx/paperless-ngx
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../setup/" class="md-tabs__link">
+        
+  
+    
+  
+  Setup
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../usage/" class="md-tabs__link">
+        
+  
+    
+  
+  Basic Usage
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../configuration/" class="md-tabs__link">
+        
+  
+    
+  
+  Configuration
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  Administration
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../advanced_usage/" class="md-tabs__link">
+        
+  
+    
+  
+  Advanced Topics
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../api/" class="md-tabs__link">
+        
+  
+    
+  
+  REST API
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../development/" class="md-tabs__link">
+        
+  
+    
+  
+  Development
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../faq/" class="md-tabs__link">
+        
+  
+    
+  
+  FAQs
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../troubleshooting/" class="md-tabs__link">
+        
+  
+    
+  
+  Troubleshooting
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../changelog/" class="md-tabs__link">
+        
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Paperless-ngx" class="md-nav__button md-logo" aria-label="Paperless-ngx" data-md-component="logo">
+      
+  <img src="../assets/logo.svg" alt="logo">
+
+    </a>
+    Paperless-ngx
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/paperless-ngx/paperless-ngx" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    paperless-ngx/paperless-ngx
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Basic Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Administration
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Administration
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Making backups
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Making backups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#migrating-restoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restoring
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updating Paperless
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Updating Paperless">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker-updating" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docker Route
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bare-metal-updating" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bare Metal Route
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-upgrades" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database Upgrades
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#management-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Management utilities
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Management utilities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exporter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document exporter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document importer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retagger" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document retagger
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#managing-the-automatic-matching-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Managing the Automatic matching algorithm
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#thumbnails" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document thumbnails
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#index" class="md-nav__link">
+    <span class="md-ellipsis">
+      Managing the document search index
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#renamer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Managing filenames
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sanity-checker" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sanity checker
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fetching-e-mail" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fetching e-mail
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#archiver" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating archived documents
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#encryption" class="md-nav__link">
+    <span class="md-ellipsis">
+      Managing encryption
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Managing encryption">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enabling-encryption" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enabling encryption
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disabling-encryption" class="md-nav__link">
+    <span class="md-ellipsis">
+      Disabling encryption
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fuzzy_duplicate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detecting duplicates
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prune-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prune history (audit log) entries
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advanced_usage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Advanced Topics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    REST API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Development
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Changelog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="administration">Administration</h1>
+<h2 id="backup">Making backups</h2>
+<p>Multiple options exist for making backups of your paperless instance,
+depending on how you installed paperless.</p>
+<p>Before making a backup, it's probably best to make sure that paperless is not actively
+consuming documents at that time.</p>
+<p>Options available to any installation of paperless:</p>
+<ul>
+<li>
+<p>Use the <a href="#exporter">document exporter</a>. The document exporter exports all your documents,
+    thumbnails, metadata, and database contents to a specific folder. You may import your
+    documents and settings into a fresh instance of paperless again or store your
+    documents in another DMS with this export.</p>
+<p>The document exporter is also able to update an already existing
+export. Therefore, incremental backups with <code>rsync</code> are entirely
+possible.</p>
+<p>The exporter does not include API tokens and they will need to be re-generated after importing.</p>
+</li>
+</ul>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>You cannot import the export generated with one version of paperless in
+a different version of paperless. The export contains an exact image of
+the database, and migrations may change the database layout.</p>
+</div>
+<p>Options available to docker installations:</p>
+<ul>
+<li>
+<p>Backup the docker volumes. These usually reside within
+    <code>/var/lib/docker/volumes</code> on the host and you need to be root in
+    order to access them.</p>
+<p>Paperless uses 4 volumes:</p>
+<ul>
+<li><code>paperless_media</code>: This is where your documents are stored.</li>
+<li><code>paperless_data</code>: This is where auxiliary data is stored. This
+    folder also contains the SQLite database, if you use it.</li>
+<li><code>paperless_pgdata</code>: Exists only if you use PostgreSQL and
+    contains the database.</li>
+<li><code>paperless_dbdata</code>: Exists only if you use MariaDB and contains
+    the database.</li>
+</ul>
+</li>
+</ul>
+<p>Options available to bare-metal and non-docker installations:</p>
+<ul>
+<li>
+<p>Backup the entire paperless folder. This ensures that if your
+    paperless instance crashes at some point or your disk fails, you can
+    simply copy the folder back into place and it works.</p>
+<p>When using PostgreSQL or MariaDB, you'll also have to backup the
+database.</p>
+</li>
+</ul>
+<h3 id="migrating-restoring">Restoring</h3>
+<p>If you've backed-up Paperless-ngx using the <a href="#exporter">document exporter</a>,
+restoring can simply be done with the <a href="#importer">document importer</a>.</p>
+<p>Of course, other backup strategies require restoring any volumes, folders and database
+copies you created in the steps above.</p>
+<h2 id="updating">Updating Paperless</h2>
+<h3 id="docker-updating">Docker Route</h3>
+<p>If a new release of paperless-ngx is available, upgrading depends on how
+you installed paperless-ngx in the first place. The releases are
+available at the <a href="https://github.com/paperless-ngx/paperless-ngx/releases">release
+page</a>.</p>
+<p>First of all, make sure no active processes (like consumption) are running, then <a href="#backup">make a backup</a>.</p>
+<p>After that, ensure that paperless is stopped:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>/path/to/paperless
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">$ </span>docker<span class="w"> </span>compose<span class="w"> </span>down
+</code></pre></div>
+<ol>
+<li>
+<p>If you pull the image from the docker hub, all you need to do is:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go">docker compose pull</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="go">docker compose up</span>
+</code></pre></div>
+<p>The Docker Compose files refer to the <code>latest</code> version, which is
+always the latest stable release.</p>
+</li>
+<li>
+<p>If you built the image yourself, do the following:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">git pull</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">docker compose build</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">docker compose up</span>
+</code></pre></div>
+</li>
+</ol>
+<p>Running <code>docker compose up</code> will also apply any new database migrations.
+If you see everything working, press CTRL+C once to gracefully stop
+paperless. Then you can start paperless-ngx with <code>-d</code> to have it run in
+the background.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In version 0.9.14, the update process was changed. In 0.9.13 and
+earlier, the Docker Compose files specified exact versions and pull
+won't automatically update to newer versions. In order to enable
+updates as described above, either get the new <code>docker-compose.yml</code>
+file from
+<a href="https://github.com/paperless-ngx/paperless-ngx/tree/main/docker/compose">here</a>
+or edit the <code>docker-compose.yml</code> file, find the line that says</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>image: ghcr.io/paperless-ngx/paperless-ngx:0.9.x
+</code></pre></div>
+<p>and replace the version with <code>latest</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>image: ghcr.io/paperless-ngx/paperless-ngx:latest
+</code></pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In version 1.7.1 and onwards, the Docker image can now be pinned to a
+release series. This is often combined with automatic updaters such as
+Watchtower to allow safer unattended upgrading to new bugfix releases
+only. It is still recommended to always review release notes before
+upgrading. To pin your install to a release series, edit the
+<code>docker-compose.yml</code> find the line that says</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>image: ghcr.io/paperless-ngx/paperless-ngx:latest
+</code></pre></div>
+<p>and replace the version with the series you want to track, for
+example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>image: ghcr.io/paperless-ngx/paperless-ngx:1.7
+</code></pre></div>
+</div>
+<h3 id="bare-metal-updating">Bare Metal Route</h3>
+<p>After grabbing the new release and unpacking the contents, do the
+following:</p>
+<ol>
+<li>
+<p>Update dependencies. New paperless version may require additional
+    dependencies. The dependencies required are listed in the section
+    about
+    <a href="../setup/#bare_metal">bare metal installations</a>.</p>
+</li>
+<li>
+<p>Update python requirements. Keep in mind to activate your virtual
+    environment before that, if you use one.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="go">pip install -r requirements.txt</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>At times, some dependencies will be removed from requirements.txt.
+Comparing the versions and removing no longer needed dependencies
+will keep your system or virtual environment clean and prevent
+possible conflicts.</p>
+</div>
+</li>
+<li>
+<p>Migrate the database.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">cd src</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="go">python3 manage.py migrate # (1)</span>
+</code></pre></div>
+<ol>
+<li>Including <code>sudo -Hu &lt;paperless_user&gt;</code> may be required</li>
+</ol>
+<p>This might not actually do anything. Not every new paperless version
+comes with new database migrations.</p>
+</li>
+</ol>
+<h3 id="database-upgrades">Database Upgrades</h3>
+<p>In general, paperless does not require a specific version of PostgreSQL or MariaDB and it is
+safe to update them to newer versions. However, you should always take a backup and follow
+the instructions from your database's documentation for how to upgrade between major versions.</p>
+<p>For PostgreSQL, refer to <a href="https://www.postgresql.org/docs/current/upgrading.html">Upgrading a PostgreSQL Cluster</a>.</p>
+<p>For MariaDB, refer to <a href="https://mariadb.com/kb/en/upgrading/">Upgrading MariaDB</a></p>
+<p>You may also use the exporter and importer with the <code>--data-only</code> flag, after creating a new database with the updated version of PostgreSQL or MariaDB.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You should not change any settings, especially paths, when doing this or there is a
+risk of data loss</p>
+</div>
+<h2 id="management-commands">Management utilities</h2>
+<p>Paperless comes with some management commands that perform various
+maintenance tasks on your paperless instance. You can invoke these
+commands in the following way:</p>
+<p>With Docker Compose, while paperless is running:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>/path/to/paperless
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="gp">$ </span>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>webserver<span class="w"> </span>&lt;command&gt;<span class="w"> </span>&lt;arguments&gt;
+</code></pre></div>
+<p>With docker, while paperless is running:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="gp">$ </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;container-name&gt;<span class="w"> </span>&lt;command&gt;<span class="w"> </span>&lt;arguments&gt;
+</code></pre></div>
+<p>Bare metal:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>/path/to/paperless/src
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="gp">$ </span>python3<span class="w"> </span>manage.py<span class="w"> </span>&lt;command&gt;<span class="w"> </span>&lt;arguments&gt;<span class="w"> </span><span class="c1"># (1)</span>
+</code></pre></div>
+<ol>
+<li>Including <code>sudo -Hu &lt;paperless_user&gt;</code> may be required</li>
+</ol>
+<p>All commands have built-in help, which can be accessed by executing them
+with the argument <code>--help</code>.</p>
+<h3 id="exporter">Document exporter</h3>
+<p>The document exporter exports all your data (including your settings
+and database contents) from paperless into a folder for backup or
+migration to another DMS.</p>
+<p>If you use the document exporter within a cronjob to backup your data
+you might use the <code>-T</code> flag behind exec to suppress "The input device
+is not a TTY" errors. For example:
+<code>docker compose exec -T webserver document_exporter ../export</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>document_exporter target [-c] [-d] [-f] [-na] [-nt] [-p] [-sm] [-z]
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>optional arguments:
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>-c,  --compare-checksums
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>-cj, --compare-json
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>-d,  --delete
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>-f,  --use-filename-format
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>-na, --no-archive
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>-nt, --no-thumbnail
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>-p,  --use-folder-prefix
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>-sm, --split-manifest
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>-z,  --zip
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>-zn, --zip-name
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>--data-only
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>--no-progress-bar
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>--passphrase
+</code></pre></div>
+<p><code>target</code> is a folder to which the data gets written. This includes
+documents, thumbnails and a <code>manifest.json</code> file. The manifest contains
+all metadata from the database (correspondents, tags, etc).</p>
+<p>When you use the provided docker compose script, specify <code>../export</code> as
+the target. This path inside the container is automatically mounted on
+your host on the folder <code>export</code>.</p>
+<p>If the target directory already exists and contains files, paperless
+will assume that the contents of the export directory are a previous
+export and will attempt to update the previous export. Paperless will
+only export changed and added files. Paperless determines whether a file
+has changed by inspecting the file attributes "date/time modified" and
+"size". If that does not work out for you, specify <code>-c</code> or
+<code>--compare-checksums</code> and paperless will attempt to compare file
+checksums instead. This is slower. The manifest and metadata json files
+are always updated, unless <code>cj</code> or <code>--compare-json</code> is specified.</p>
+<p>Paperless will not remove any existing files in the export directory. If
+you want paperless to also remove files that do not belong to the
+current export such as files from deleted documents, specify <code>-d</code> or <code>--delete</code>.
+Be careful when pointing paperless to a directory that already contains
+other files.</p>
+<p>The filenames generated by this command follow the format
+<code>[date created] [correspondent] [title].[extension]</code>. If you want
+paperless to use <a href="../configuration/#PAPERLESS_FILENAME_FORMAT"><code>PAPERLESS_FILENAME_FORMAT</code></a> for exported filenames
+instead, specify <code>-f</code> or <code>--use-filename-format</code>.</p>
+<p>If <code>-na</code> or <code>--no-archive</code> is provided, no archive files will be exported,
+only the original files.</p>
+<p>If <code>-nt</code> or <code>--no-thumbnail</code> is provided, thumbnail files will not be exported.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using the <code>-na</code>/<code>--no-archive</code> or <code>-nt</code>/<code>--no-thumbnail</code> options
+the exporter will not output these files for backup.  After importing,
+the <a href="#sanity-checker">sanity checker</a> will warn about missing thumbnails and archive files
+until they are regenerated with <code>document_thumbnails</code> or <a href="#archiver"><code>document_archiver</code></a>.
+It can make sense to omit these files from backup as their content and checksum
+can change (new archiver algorithm) and may then cause additional used space in
+a deduplicated backup.</p>
+</div>
+<p>If <code>-p</code> or <code>--use-folder-prefix</code> is provided, files will be exported
+in dedicated folders according to their nature: <code>archive</code>, <code>originals</code>,
+<code>thumbnails</code> or <code>json</code></p>
+<p>If <code>-sm</code> or <code>--split-manifest</code> is provided, information about document
+will be placed in individual json files, instead of a single JSON file. The main
+manifest.json will still contain application wide information (e.g. tags, correspondent,
+documenttype, etc)</p>
+<p>If <code>-z</code> or <code>--zip</code> is provided, the export will be a zip file
+in the target directory, named according to the current local date or the
+value set in <code>-zn</code> or <code>--zip-name</code>.</p>
+<p>If <code>--data-only</code> is provided, only the database will be exported. This option is intended
+to facilitate database upgrades without needing to clean documents and thumbnails from the media directory.</p>
+<p>If <code>--no-progress-bar</code> is provided, the progress bar will be hidden, rendering the
+exporter quiet. This option is useful for scripting scenarios, such as when using the
+exporter with <code>crontab</code>.</p>
+<p>If <code>--passphrase</code> is provided, it will be used to encrypt certain fields in the export. This value
+must be provided to import. If this value is lost, the export cannot be imported.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If exporting with the file name format, there may be errors due to
+your operating system's maximum path lengths.  Try adjusting the export
+target or consider not using the filename format.</p>
+</div>
+<h3 id="importer">Document importer</h3>
+<p>The document importer takes the export produced by the <a href="#exporter">Document
+exporter</a> and imports it into paperless.</p>
+<p>The importer works just like the exporter. You point it at a directory,
+and the script does the rest of the work:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>document_importer<span class="w"> </span><span class="nb">source</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>source</td>
+<td>Yes</td>
+<td>N/A</td>
+<td>The directory containing an export</td>
+</tr>
+<tr>
+<td><code>--no-progress-bar</code></td>
+<td>No</td>
+<td>False</td>
+<td>If provided, the progress bar will be hidden</td>
+</tr>
+<tr>
+<td><code>--data-only</code></td>
+<td>No</td>
+<td>False</td>
+<td>If provided, only import data, do not import document files or thumbnails</td>
+</tr>
+<tr>
+<td><code>--passphrase</code></td>
+<td>No</td>
+<td>N/A</td>
+<td>If your export was encrypted with a passphrase, must be provided</td>
+</tr>
+</tbody>
+</table>
+<p>When you use the provided docker compose script, put the export inside
+the <code>export</code> folder in your paperless source directory. Specify
+<code>../export</code> as the <code>source</code>.</p>
+<p>Note that .zip files (as can be generated from the exporter) are not supported. You must unzip them into
+the target directory first.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Importing from a previous version of Paperless may work, but for best
+results it is suggested to match the versions.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The importer should be run against a completely empty installation (database and directories) of Paperless-ngx.
+If using a data only import, only the database must be empty.</p>
+</div>
+<h3 id="retagger">Document retagger</h3>
+<p>Say you've imported a few hundred documents and now want to introduce a
+tag or set up a new correspondent, and apply its matching to all of the
+currently-imported docs. This problem is common enough that there are
+tools for it.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>document_retagger [-h] [-c] [-T] [-t] [-i] [--id-range] [--use-first] [-f]
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>optional arguments:
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>-c, --correspondent
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>-T, --tags
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>-t, --document_type
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>-s, --storage_path
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>-i, --inbox-only
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>--id-range
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>--use-first
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>-f, --overwrite
+</code></pre></div>
+<p>Run this after changing or adding matching rules. It'll loop over all
+of the documents in your database and attempt to match documents
+according to the new rules.</p>
+<p>Specify any combination of <code>-c</code>, <code>-T</code>, <code>-t</code> and <code>-s</code> to have the
+retagger perform matching of the specified metadata type. If you don't
+specify any of these options, the document retagger won't do anything.</p>
+<p>Specify <code>-i</code> to have the document retagger work on documents tagged with
+inbox tags only. This is useful when you don't want to mess with your
+already processed documents.</p>
+<p>Specify <code>--id-range 1 100</code> to have the document retagger work only on a
+specific range of document id´s. This can be useful if you have a lot of
+documents and want to test the matching rules only on a subset of
+documents.</p>
+<p>When multiple document types or correspondents match a single document,
+the retagger won't assign these to the document. Specify <code>--use-first</code>
+to override this behavior and just use the first correspondent or type
+it finds. This option does not apply to tags, since any amount of tags
+can be applied to a document.</p>
+<p>Finally, <code>-f</code> specifies that you wish to overwrite already assigned
+correspondents, types and/or tags. The default behavior is to not assign
+correspondents and types to documents that have this data already
+assigned. <code>-f</code> works differently for tags: By default, only additional
+tags get added to documents, no tags will be removed. With <code>-f</code>, tags
+that don't match a document anymore get removed as well.</p>
+<h3 id="managing-the-automatic-matching-algorithm">Managing the Automatic matching algorithm</h3>
+<p>The <em>Auto</em> matching algorithm requires a trained neural network to work.
+This network needs to be updated whenever something in your data
+changes. The docker image takes care of that automatically with the task
+scheduler. You can manually renew the classifier by invoking the
+following management command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>document_create_classifier
+</code></pre></div>
+<p>This command takes no arguments.</p>
+<h3 id="thumbnails">Document thumbnails</h3>
+<p>Use this command to re-create document thumbnails. Optionally include the <code>--document {id}</code> option to generate thumbnails for a specific document only.</p>
+<p>You may also specify <code>--processes</code> to control the number of processes used to generate new thumbnails. The default is to utilize
+a quarter of the available processors.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>document_thumbnails
+</code></pre></div>
+<h3 id="index">Managing the document search index</h3>
+<p>The document search index is responsible for delivering search results
+for the website. The document index is automatically updated whenever
+documents get added to, changed, or removed from paperless. However, if
+the search yields non-existing documents or won't find anything, you
+may need to recreate the index manually.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>document_index {reindex,optimize}
+</code></pre></div>
+<p>Specify <code>reindex</code> to have the index created from scratch. This may take
+some time.</p>
+<p>Specify <code>optimize</code> to optimize the index. This updates certain aspects
+of the index and usually makes queries faster and also ensures that the
+autocompletion works properly. This command is regularly invoked by the
+task scheduler.</p>
+<h3 id="renamer">Managing filenames</h3>
+<p>If you use paperless' feature to
+<a href="../advanced_usage/#file-name-handling">assign custom filenames to your documents</a>, you can use this command to move all your files after
+changing the naming scheme.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Since this command moves your documents, it is advised to do a backup
+beforehand. The renaming logic is robust and will never overwrite or
+delete a file, but you can't ever be careful enough.</p>
+</div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>document_renamer
+</code></pre></div>
+<p>The command takes no arguments and processes all your documents at once.</p>
+<p>Learn how to use
+<a href="#management-commands">Management Utilities</a>.</p>
+<h3 id="sanity-checker">Sanity checker</h3>
+<p>Paperless has a built-in sanity checker that inspects your document
+collection for issues.</p>
+<p>The issues detected by the sanity checker are as follows:</p>
+<ul>
+<li>Missing original files.</li>
+<li>Missing archive files.</li>
+<li>Inaccessible original files due to improper permissions.</li>
+<li>Inaccessible archive files due to improper permissions.</li>
+<li>Corrupted original documents by comparing their checksum against
+    what is stored in the database.</li>
+<li>Corrupted archive documents by comparing their checksum against what
+    is stored in the database.</li>
+<li>Missing thumbnails.</li>
+<li>Inaccessible thumbnails due to improper permissions.</li>
+<li>Documents without any content (warning).</li>
+<li>Orphaned files in the media directory (warning). These are files
+    that are not referenced by any document in paperless.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>document_sanity_checker
+</code></pre></div>
+<p>The command takes no arguments. Depending on the size of your document
+archive, this may take some time.</p>
+<h3 id="fetching-e-mail">Fetching e-mail</h3>
+<p>Paperless automatically fetches your e-mail every 10 minutes by default.
+If you want to invoke the email consumer manually, call the following
+management command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>mail_fetcher
+</code></pre></div>
+<p>The command takes no arguments and processes all your mail accounts and
+rules.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To use OAuth access tokens for mail fetching,
+select the box to indicate the password is actually
+a token when creating or editing a mail account. The
+details for creating a token depend on your email
+provider.</p>
+</div>
+<h3 id="archiver">Creating archived documents</h3>
+<p>Paperless stores archived PDF/A documents alongside your original
+documents. These archived documents will also contain selectable text
+for image-only originals. These documents are derived from the
+originals, which are always stored unmodified. If coming from an earlier
+version of paperless, your documents won't have archived versions.</p>
+<p>This command creates PDF/A documents for your documents.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>document_archiver --overwrite --document &lt;id&gt;
+</code></pre></div>
+<p>This command will only attempt to create archived documents when no
+archived document exists yet, unless <code>--overwrite</code> is specified. If
+<code>--document &lt;id&gt;</code> is specified, the archiver will only process that
+document.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This command essentially performs OCR on all your documents again,
+according to your settings. If you run this with
+<code>PAPERLESS_OCR_MODE=redo</code>, it will potentially run for a very long time.
+You can cancel the command at any time, since this command will skip
+already archived versions the next time it is run.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some documents will cause errors and cannot be converted into PDF/A
+documents, such as encrypted PDF documents. The archiver will skip over
+these documents each time it sees them.</p>
+</div>
+<h3 id="encryption">Managing encryption</h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Encryption was removed in <a href="../changelog/#paperless-ng-090">paperless-ng 0.9</a>
+because it did not really provide any additional security, the passphrase
+was stored in a configuration file on the same system as the documents.
+Furthermore, the entire text content of the documents is stored plain in
+the database, even if your documents are encrypted. Filenames are not
+encrypted as well. Finally, the web server provides transparent access to
+your encrypted documents.</p>
+<p>Consider running paperless on an encrypted filesystem instead, which
+will then at least provide security against physical hardware theft.</p>
+</div>
+<h4 id="enabling-encryption">Enabling encryption</h4>
+<p>Enabling encryption is no longer supported.</p>
+<h4 id="disabling-encryption">Disabling encryption</h4>
+<p>Basic usage to disable encryption of your document store:</p>
+<p>(Note: If <code>PAPERLESS_PASSPHRASE</code> isn't set already, you need to specify
+it here)</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>decrypt_documents [--passphrase SECR3TP4SSPHRA$E]
+</code></pre></div>
+<h3 id="fuzzy_duplicate">Detecting duplicates</h3>
+<p>Paperless already catches and prevents upload of exactly matching documents,
+however a new scan of an existing document may not produce an exact bit for bit
+duplicate. But the content should be exact or close, allowing detection.</p>
+<p>This tool does a fuzzy match over document content, looking for
+those which look close according to a given ratio.</p>
+<p>At this time, other metadata (such as correspondent or type) is not
+taken into account by the detection.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>document_fuzzy_match [--ratio] [--processes N]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>--ratio</td>
+<td>No</td>
+<td>85.0</td>
+<td>a number between 0 and 100, setting how similar a document must be for it to be reported. Higher numbers mean more similarity.</td>
+</tr>
+<tr>
+<td>--processes</td>
+<td>No</td>
+<td>1/4 of system cores</td>
+<td>Number of processes to use for matching. Setting 1 disables multiple processes</td>
+</tr>
+<tr>
+<td>--delete</td>
+<td>No</td>
+<td>False</td>
+<td>If provided, one document of a matched pair above the ratio will be deleted.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If providing the <code>--delete</code> option, it is highly recommended to have a backup.
+While every effort has been taken to ensure proper operation, there is always the
+chance of deletion of a file you want to keep.</p>
+</div>
+<h3 id="prune-history">Prune history (audit log) entries</h3>
+<p>If the audit log is enabled Paperless-ngx keeps an audit log of all changes made to documents. Functionality to automatically remove entries for deleted documents was added but
+entries created prior to this are not removed. This command allows you to prune the audit log of entries that are no longer needed.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>prune_audit_logs
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2016 - 2023 Daniel Quinn, Jonas Winkler, and the Paperless-ngx team
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/paperless-ngx/paperless-ngx" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://hub.docker.com/r/paperlessngx/paperless-ngx" target="_blank" rel="noopener" title="hub.docker.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M349.9 236.3h-66.1v-59.4h66.1zm0-204.3h-66.1v60.7h66.1zm78.2 144.8H362v59.4h66.1zm-156.3-72.1h-66.1v60.1h66.1zm78.1 0h-66.1v60.1h66.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1zm78.1 0h-66.1v59.4h66.1zm-78.1-72.1h-66.1v60.1h66.1z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://matrix.to/#/#paperless:matrix.org" target="_blank" rel="noopener" title="matrix.to" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3c5.5 0 10 3.58 10 8s-4.5 8-10 8c-1.24 0-2.43-.18-3.53-.5C5.55 21 2 21 2 21c2.33-2.33 2.7-3.9 2.75-4.5C3.05 15.07 2 13.13 2 11c0-4.42 4.5-8 10-8"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "toc.integrate", "content.code.annotate"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

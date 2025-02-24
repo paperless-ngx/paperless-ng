@@ -1,0 +1,1655 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../advanced_usage/">
+      
+      
+        <link rel="next" href="../development/">
+      
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>REST API - Paperless-ngx</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-rest-api" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Paperless-ngx" class="md-header__button md-logo" aria-label="Paperless-ngx" data-md-component="logo">
+      
+  <img src="../assets/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paperless-ngx
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              REST API
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/paperless-ngx/paperless-ngx" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    paperless-ngx/paperless-ngx
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../setup/" class="md-tabs__link">
+        
+  
+    
+  
+  Setup
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../usage/" class="md-tabs__link">
+        
+  
+    
+  
+  Basic Usage
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../configuration/" class="md-tabs__link">
+        
+  
+    
+  
+  Configuration
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../administration/" class="md-tabs__link">
+        
+  
+    
+  
+  Administration
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../advanced_usage/" class="md-tabs__link">
+        
+  
+    
+  
+  Advanced Topics
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  REST API
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../development/" class="md-tabs__link">
+        
+  
+    
+  
+  Development
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../faq/" class="md-tabs__link">
+        
+  
+    
+  
+  FAQs
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../troubleshooting/" class="md-tabs__link">
+        
+  
+    
+  
+  Troubleshooting
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../changelog/" class="md-tabs__link">
+        
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Paperless-ngx" class="md-nav__button md-logo" aria-label="Paperless-ngx" data-md-component="logo">
+      
+  <img src="../assets/logo.svg" alt="logo">
+
+    </a>
+    Paperless-ngx
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/paperless-ngx/paperless-ngx" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    paperless-ngx/paperless-ngx
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Basic Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../administration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Administration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advanced_usage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Advanced Topics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    REST API
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    REST API
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#downloading-documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Downloading documents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-document-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting document metadata
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documents-additional-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documents additional endpoints
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authorization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#global-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Global search
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#searching-for-documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Searching for documents
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Searching for documents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filtering-by-custom-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filtering by custom fields
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apisearchautocomplete" class="md-nav__link">
+    <span class="md-ellipsis">
+      /api/search/autocomplete/
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-uploads" class="md-nav__link">
+    <span class="md-ellipsis">
+      POSTing documents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Permissions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Permissions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#retrieving-full-permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retrieving full permissions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bulk-editing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bulk Editing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bulk Editing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documents
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objects
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-versioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Versioning
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Versioning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-version-deprecation-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Version Deprecation Policy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-changelog" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Changelog
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Changelog">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#version-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Version 1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Version 2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Version 3
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Version 4
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Version 5
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Version 6
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Version 7
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Development
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Changelog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="the-rest-api">The REST API</h1>
+<p>Paperless makes use of the <a href="https://www.django-rest-framework.org/">Django REST
+Framework</a> standard API interface. It
+provides a browsable API for most of its endpoints, which you can
+inspect at <code>http://&lt;paperless-host&gt;:&lt;port&gt;/api/</code>. This also documents
+most of the available filters and ordering fields.</p>
+<p>The API provides the following main endpoints:</p>
+<ul>
+<li><code>/api/correspondents/</code>: Full CRUD support.</li>
+<li><code>/api/custom_fields/</code>: Full CRUD support.</li>
+<li><code>/api/documents/</code>: Full CRUD support, except POSTing new documents.
+    See <a href="#file-uploads">below</a>.</li>
+<li><code>/api/document_types/</code>: Full CRUD support.</li>
+<li><code>/api/groups/</code>: Full CRUD support.</li>
+<li><code>/api/logs/</code>: Read-Only.</li>
+<li><code>/api/mail_accounts/</code>: Full CRUD support.</li>
+<li><code>/api/mail_rules/</code>: Full CRUD support.</li>
+<li><code>/api/profile/</code>: GET, PATCH</li>
+<li><code>/api/share_links/</code>: Full CRUD support.</li>
+<li><code>/api/storage_paths/</code>: Full CRUD support.</li>
+<li><code>/api/tags/</code>: Full CRUD support.</li>
+<li><code>/api/tasks/</code>: Read-only.</li>
+<li><code>/api/users/</code>: Full CRUD support.</li>
+<li><code>/api/workflows/</code>: Full CRUD support.</li>
+<li><code>/api/search/</code> GET, see <a href="#global-search">below</a>.</li>
+</ul>
+<p>All of these endpoints except for the logging endpoint allow you to
+fetch (and edit and delete where appropriate) individual objects by
+appending their primary key to the path, e.g. <code>/api/documents/454/</code>.</p>
+<p>The objects served by the document endpoint contain the following
+fields:</p>
+<ul>
+<li><code>id</code>: ID of the document. Read-only.</li>
+<li><code>title</code>: Title of the document.</li>
+<li><code>content</code>: Plain text content of the document.</li>
+<li><code>tags</code>: List of IDs of tags assigned to this document, or empty
+    list.</li>
+<li><code>document_type</code>: Document type of this document, or null.</li>
+<li><code>correspondent</code>: Correspondent of this document or null.</li>
+<li><code>created</code>: The date time at which this document was created.</li>
+<li><code>created_date</code>: The date (YYYY-MM-DD) at which this document was
+    created. Optional. If also passed with created, this is ignored.</li>
+<li><code>modified</code>: The date at which this document was last edited in
+    paperless. Read-only.</li>
+<li><code>added</code>: The date at which this document was added to paperless.
+    Read-only.</li>
+<li><code>archive_serial_number</code>: The identifier of this document in a
+    physical document archive.</li>
+<li><code>original_file_name</code>: Verbose filename of the original document.
+    Read-only.</li>
+<li><code>archived_file_name</code>: Verbose filename of the archived document.
+    Read-only. Null if no archived document is available.</li>
+<li><code>notes</code>: Array of notes associated with the document.</li>
+<li><code>page_count</code>: Number of pages.</li>
+<li><code>set_permissions</code>: Allows setting document permissions. Optional,
+    write-only. See <a href="#permissions">below</a>.</li>
+<li><code>custom_fields</code>: Array of custom fields &amp; values, specified as
+    <code>{ field: CUSTOM_FIELD_ID, value: VALUE }</code></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that all endpoint URLs must end with a <code>/</code>slash.</p>
+</div>
+<h2 id="downloading-documents">Downloading documents</h2>
+<p>In addition to that, the document endpoint offers these additional
+actions on individual documents:</p>
+<ul>
+<li><code>/api/documents/&lt;pk&gt;/download/</code>: Download the document.</li>
+<li><code>/api/documents/&lt;pk&gt;/preview/</code>: Display the document inline, without
+    downloading it.</li>
+<li><code>/api/documents/&lt;pk&gt;/thumb/</code>: Download the PNG thumbnail of a
+    document.</li>
+</ul>
+<p>Paperless generates archived PDF/A documents from consumed files and
+stores both the original files as well as the archived files. By
+default, the endpoints for previews and downloads serve the archived
+file, if it is available. Otherwise, the original file is served. Some
+document cannot be archived.</p>
+<p>The endpoints correctly serve the response header fields
+<code>Content-Disposition</code> and <code>Content-Type</code> to indicate the filename for
+download and the type of content of the document.</p>
+<p>In order to download or preview the original document when an archived
+document is available, supply the query parameter <code>original=true</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Paperless used to provide these functionality at <code>/fetch/&lt;pk&gt;/preview</code>,
+<code>/fetch/&lt;pk&gt;/thumb</code> and <code>/fetch/&lt;pk&gt;/doc</code>. Redirects to the new URLs are
+in place. However, if you use these old URLs to access documents, you
+should update your app or script to use the new URLs.</p>
+</div>
+<h2 id="getting-document-metadata">Getting document metadata</h2>
+<p>The api also has an endpoint to retrieve read-only metadata about
+specific documents. this information is not served along with the
+document objects, since it requires reading files and would therefore
+slow down document lists considerably.</p>
+<p>Access the metadata of a document with an ID <code>id</code> at
+<code>/api/documents/&lt;id&gt;/metadata/</code>.</p>
+<p>The endpoint reports the following data:</p>
+<ul>
+<li><code>original_checksum</code>: MD5 checksum of the original document.</li>
+<li><code>original_size</code>: Size of the original document, in bytes.</li>
+<li><code>original_mime_type</code>: Mime type of the original document.</li>
+<li><code>media_filename</code>: Current filename of the document, under which it
+    is stored inside the media directory.</li>
+<li><code>has_archive_version</code>: True, if this document is archived, false
+    otherwise.</li>
+<li><code>original_metadata</code>: A list of metadata associated with the original
+    document. See below.</li>
+<li><code>archive_checksum</code>: MD5 checksum of the archived document, or null.</li>
+<li><code>archive_size</code>: Size of the archived document in bytes, or null.</li>
+<li><code>archive_metadata</code>: Metadata associated with the archived document,
+    or null. See below.</li>
+</ul>
+<p>File metadata is reported as a list of objects in the following form:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">[</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="nt">&quot;namespace&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://ns.adobe.com/pdf/1.3/&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">        </span><span class="nt">&quot;prefix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pdf&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">        </span><span class="nt">&quot;key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Producer&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SparklePDF, Fancy edition&quot;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">]</span>
+</code></pre></div>
+<p><code>namespace</code> and <code>prefix</code> can be null. The actual metadata reported
+depends on the file type and the metadata available in that specific
+document. Paperless only reports PDF metadata at this point.</p>
+<h2 id="documents-additional-endpoints">Documents additional endpoints</h2>
+<ul>
+<li><code>/api/documents/&lt;id&gt;/notes/</code>: Retrieve notes for a document.</li>
+<li><code>/api/documents/&lt;id&gt;/share_links/</code>: Retrieve share links for a document.</li>
+<li><code>/api/documents/&lt;id&gt;/history/</code>: Retrieve history of changes for a document.</li>
+</ul>
+<h2 id="authorization">Authorization</h2>
+<p>The REST api provides four different forms of authentication.</p>
+<ol>
+<li>
+<p>Basic authentication</p>
+<p>Authorize by providing a HTTP header in the form</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Authorization: Basic &lt;credentials&gt;
+</code></pre></div>
+<p>where <code>credentials</code> is a base64-encoded string of
+<code>&lt;username&gt;:&lt;password&gt;</code></p>
+</li>
+<li>
+<p>Session authentication</p>
+<p>When you're logged into paperless in your browser, you're
+automatically logged into the API as well and don't need to provide
+any authorization headers.</p>
+</li>
+<li>
+<p>Token authentication</p>
+<p>You can create (or re-create) an API token by opening the "My Profile"
+link in the user dropdown found in the web UI and clicking the circular
+arrow button.</p>
+<p>Paperless also offers an endpoint to acquire authentication tokens.</p>
+<p>POST a username and password as a form or json string to
+<code>/api/token/</code> and paperless will respond with a token, if the login
+data is correct. This token can be used to authenticate other
+requests with the following HTTP header:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Authorization: Token &lt;token&gt;
+</code></pre></div>
+<p>Tokens can also be managed in the Django admin.</p>
+</li>
+<li>
+<p>Remote User authentication</p>
+<p>If enabled (see
+<a href="../configuration/#PAPERLESS_ENABLE_HTTP_REMOTE_USER_API">configuration</a>),
+you can authenticate against the API using Remote User auth.</p>
+</li>
+</ol>
+<h2 id="global-search">Global search</h2>
+<p>A global search endpoint is available at <code>/api/search/</code> and requires a search term
+of &gt; 2 characters e.g. <code>?query=foo</code>. This endpoint returns a maximum of 3 results
+across nearly all objects, e.g. documents, tags, saved views, mail rules, etc.
+Results are only included if the requesting user has the appropriate permissions.</p>
+<p>Results are returned in the following format:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="kc">t</span><span class="err">o</span><span class="kc">tal</span><span class="p">:</span><span class="w"> </span><span class="kc">nu</span><span class="err">mber</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="err">docume</span><span class="kc">nts</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="err">saved_views</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="err">correspo</span><span class="kc">n</span><span class="err">de</span><span class="kc">nts</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="err">docume</span><span class="kc">nt</span><span class="err">_</span><span class="kc">t</span><span class="err">ypes</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span><span class="err">s</span><span class="kc">t</span><span class="err">orage_pa</span><span class="kc">t</span><span class="err">hs</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="kc">ta</span><span class="err">gs</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="err">users</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span><span class="err">groups</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span><span class="err">mail_accou</span><span class="kc">nts</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">  </span><span class="err">mail_rules</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">  </span><span class="err">cus</span><span class="kc">t</span><span class="err">om_</span><span class="kc">f</span><span class="err">ields</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">  </span><span class="err">work</span><span class="kc">fl</span><span class="err">ows</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="p">}</span>
+</code></pre></div>
+<p>Global search first searches objects by name (or title for documents) matching the query.
+If the optional <code>db_only</code> parameter is set, only document titles will be searched. Otherwise,
+if the amount of documents returned by a simple title string search is &lt; 3, results from the
+search index will also be included.</p>
+<h2 id="searching-for-documents">Searching for documents</h2>
+<p>Full text searching is available on the <code>/api/documents/</code> endpoint. Two
+specific query parameters cause the API to return full text search
+results:</p>
+<ul>
+<li><code>/api/documents/?query=your%20search%20query</code>: Search for a document
+    using a full text query. For details on the syntax, see <a href="../usage/#basic-usage_searching">Basic Usage - Searching</a>.</li>
+<li><code>/api/documents/?more_like_id=1234</code>: Search for documents similar to
+    the document with id 1234.</li>
+</ul>
+<p>Pagination works exactly the same as it does for normal requests on this
+endpoint.</p>
+<p>Furthermore, each returned document has an additional <code>__search_hit__</code>
+attribute with various information about the search results:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>{
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    &quot;count&quot;: 31,
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    &quot;next&quot;: &quot;http://localhost:8000/api/documents/?page=2&amp;query=test&quot;,
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    &quot;previous&quot;: null,
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    &quot;results&quot;: [
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        ...
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        {
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>            &quot;id&quot;: 123,
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>            &quot;title&quot;: &quot;title&quot;,
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>            &quot;content&quot;: &quot;content&quot;,
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>            ...
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>            &quot;__search_hit__&quot;: {
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>                &quot;score&quot;: 0.343,
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>                &quot;highlights&quot;: &quot;text &lt;span class=&quot;match&quot;&gt;Test&lt;/span&gt; text&quot;,
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>                &quot;rank&quot;: 23
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>            }
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>        },
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>        ...
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>    ]
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>}
+</code></pre></div>
+<ul>
+<li><code>score</code> is an indication how well this document matches the query
+    relative to the other search results.</li>
+<li><code>highlights</code> is an excerpt from the document content and highlights
+    the search terms with <code>&lt;span&gt;</code> tags as shown above.</li>
+<li><code>rank</code> is the index of the search results. The first result will
+    have rank 0.</li>
+</ul>
+<h3 id="filtering-by-custom-fields">Filtering by custom fields</h3>
+<p>You can filter documents by their custom field values by specifying the
+<code>custom_field_query</code> query parameter. Here are some recipes for common
+use cases:</p>
+<ol>
+<li>
+<p>Documents with a custom field "due" (date) between Aug 1, 2024 and
+   Sept 1, 2024 (inclusive):</p>
+<p><code>?custom_field_query=["due", "range", ["2024-08-01", "2024-09-01"]]</code></p>
+</li>
+<li>
+<p>Documents with a custom field "customer" (text) that equals "bob"
+   (case sensitive):</p>
+<p><code>?custom_field_query=["customer", "exact", "bob"]</code></p>
+</li>
+<li>
+<p>Documents with a custom field "answered" (boolean) set to <code>true</code>:</p>
+<p><code>?custom_field_query=["answered", "exact", true]</code></p>
+</li>
+<li>
+<p>Documents with a custom field "favorite animal" (select) set to either
+   "cat" or "dog":</p>
+<p><code>?custom_field_query=["favorite animal", "in", ["cat", "dog"]]</code></p>
+</li>
+<li>
+<p>Documents with a custom field "address" (text) that is empty:</p>
+<p><code>?custom_field_query=["OR", ["address", "isnull", true], ["address", "exact", ""]]</code></p>
+</li>
+<li>
+<p>Documents that don't have a field called "foo":</p>
+<p><code>?custom_field_query=["foo", "exists", false]</code></p>
+</li>
+<li>
+<p>Documents that have document links "references" to both document 3 and 7:</p>
+<p><code>?custom_field_query=["references", "contains", [3, 7]]</code></p>
+</li>
+</ol>
+<p>All field types support basic operations including <code>exact</code>, <code>in</code>, <code>isnull</code>,
+and <code>exists</code>. String, URL, and monetary fields support case-insensitive
+substring matching operations including <code>icontains</code>, <code>istartswith</code>, and
+<code>iendswith</code>. Integer, float, and date fields support arithmetic comparisons
+including <code>gt</code> (&gt;), <code>gte</code> (&gt;=), <code>lt</code> (&lt;), <code>lte</code> (&lt;=), and <code>range</code>.
+Lastly, document link fields support a <code>contains</code> operator that behaves
+like a "is superset of" check.</p>
+<h3 id="apisearchautocomplete"><code>/api/search/autocomplete/</code></h3>
+<p>Get auto completions for a partial search term.</p>
+<p>Query parameters:</p>
+<ul>
+<li><code>term</code>: The incomplete term.</li>
+<li><code>limit</code>: Amount of results. Defaults to 10.</li>
+</ul>
+<p>Results returned by the endpoint are ordered by importance of the term
+in the document index. The first result is the term that has the highest
+<a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">Tf/Idf</a> score in the index.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">[</span><span class="s2">&quot;term1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;term3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;term6&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;term4&quot;</span><span class="p">]</span>
+</code></pre></div>
+<h2 id="file-uploads">POSTing documents</h2>
+<p>The API provides a special endpoint for file uploads:</p>
+<p><code>/api/documents/post_document/</code></p>
+<p>POST a multipart form to this endpoint, where the form field <code>document</code>
+contains the document that you want to upload to paperless. The filename
+is sanitized and then used to store the document in a temporary
+directory, and the consumer will be instructed to consume the document
+from there.</p>
+<p>The endpoint supports the following optional form fields:</p>
+<ul>
+<li><code>title</code>: Specify a title that the consumer should use for the
+    document.</li>
+<li><code>created</code>: Specify a DateTime where the document was created (e.g.
+    "2016-04-19" or "2016-04-19 06:15:00+02:00").</li>
+<li><code>correspondent</code>: Specify the ID of a correspondent that the consumer
+    should use for the document.</li>
+<li><code>document_type</code>: Similar to correspondent.</li>
+<li><code>storage_path</code>: Similar to correspondent.</li>
+<li><code>tags</code>: Similar to correspondent. Specify this multiple times to
+    have multiple tags added to the document.</li>
+<li><code>archive_serial_number</code>: An optional archive serial number to set.</li>
+<li><code>custom_fields</code>: An array of custom field ids to assign (with an empty
+    value) to the document.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Sending a <code>Content-Length</code> header with correct size is mandatory.</p>
+</div>
+<p>The endpoint will immediately return HTTP 200 if the document consumption
+process was started successfully, with the UUID of the consumption task
+as the data. No additional status information about the consumption process
+itself is available immediately, since that happens in a different process.
+However, querying the tasks endpoint with the returned UUID e.g.
+<code>/api/tasks/?task_id={uuid}</code> will provide information on the state of the
+consumption including the ID of a created document if consumption succeeded.</p>
+<h2 id="permissions">Permissions</h2>
+<p>All objects (documents, tags, etc.) allow setting object-level permissions
+with optional <code>owner</code> and / or a <code>set_permissions</code> parameters which are of
+the form:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>&quot;owner&quot;: ...,
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>&quot;set_permissions&quot;: {
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    &quot;view&quot;: {
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>        &quot;users&quot;: [...],
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        &quot;groups&quot;: [...],
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    },
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    &quot;change&quot;: {
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        &quot;users&quot;: [...],
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>        &quot;groups&quot;: [...],
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>    },
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>}
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Arrays should contain user or group ID numbers.</p>
+</div>
+<p>If these parameters are supplied the object's permissions will be overwritten,
+assuming the authenticated user has permission to do so (the user must be
+the object owner or a superuser).</p>
+<h3 id="retrieving-full-permissions">Retrieving full permissions</h3>
+<p>By default, the API will return a truncated version of object-level
+permissions, returning <code>user_can_change</code> indicating whether the current user
+can edit the object (either because they are the object owner or have permissions
+granted). You can pass the parameter <code>full_perms=true</code> to API calls to view the
+full permissions of objects in a format that mirrors the <code>set_permissions</code>
+parameter above.</p>
+<h2 id="bulk-editing">Bulk Editing</h2>
+<p>The API supports various bulk-editing operations which are executed asynchronously.</p>
+<h3 id="documents">Documents</h3>
+<p>For bulk operations on documents, use the endpoint <code>/api/documents/bulk_edit/</code> which accepts
+a json payload of the format:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">&quot;documents&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">LIST_OF_DOCUMENT_IDS</span><span class="p">],</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">METHOD</span><span class="p">,</span><span class="w"> </span><span class="c1">// see below</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">args</span><span class="w"> </span><span class="c1">// see below</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">}</span>
+</code></pre></div>
+<p>The following methods are supported:</p>
+<ul>
+<li><code>set_correspondent</code><ul>
+<li>Requires <code>parameters</code>: <code>{ "correspondent": CORRESPONDENT_ID }</code></li>
+</ul>
+</li>
+<li><code>set_document_type</code><ul>
+<li>Requires <code>parameters</code>: <code>{ "document_type": DOCUMENT_TYPE_ID }</code></li>
+</ul>
+</li>
+<li><code>set_storage_path</code><ul>
+<li>Requires <code>parameters</code>: <code>{ "storage_path": STORAGE_PATH_ID }</code></li>
+</ul>
+</li>
+<li><code>add_tag</code><ul>
+<li>Requires <code>parameters</code>: <code>{ "tag": TAG_ID }</code></li>
+</ul>
+</li>
+<li><code>remove_tag</code><ul>
+<li>Requires <code>parameters</code>: <code>{ "tag": TAG_ID }</code></li>
+</ul>
+</li>
+<li><code>modify_tags</code><ul>
+<li>Requires <code>parameters</code>: <code>{ "add_tags": [LIST_OF_TAG_IDS] }</code> and <code>{ "remove_tags": [LIST_OF_TAG_IDS] }</code></li>
+</ul>
+</li>
+<li><code>delete</code><ul>
+<li>No <code>parameters</code> required</li>
+</ul>
+</li>
+<li><code>reprocess</code><ul>
+<li>No <code>parameters</code> required</li>
+</ul>
+</li>
+<li><code>set_permissions</code><ul>
+<li>Requires <code>parameters</code>:<ul>
+<li><code>"set_permissions": PERMISSIONS_OBJ</code> (see format <a href="#permissions">above</a>) and / or</li>
+<li><code>"owner": OWNER_ID or null</code></li>
+<li><code>"merge": true or false</code> (defaults to false)</li>
+</ul>
+</li>
+<li>The <code>merge</code> flag determines if the supplied permissions will overwrite all existing permissions (including
+    removing them) or be merged with existing permissions.</li>
+</ul>
+</li>
+<li><code>merge</code><ul>
+<li>No additional <code>parameters</code> required.</li>
+<li>The ordering of the merged document is determined by the list of IDs.</li>
+<li>Optional <code>parameters</code>:<ul>
+<li><code>"metadata_document_id": DOC_ID</code> apply metadata (tags, correspondent, etc.) from this document to the merged document.</li>
+<li><code>"delete_originals": true</code> to delete the original documents. This requires the calling user being the owner of
+    all documents that are merged.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>split</code><ul>
+<li>Requires <code>parameters</code>:<ul>
+<li><code>"pages": [..]</code> The list should be a list of pages and/or a ranges, separated by commas e.g. <code>"[1,2-3,4,5-7]"</code></li>
+</ul>
+</li>
+<li>Optional <code>parameters</code>:<ul>
+<li><code>"delete_originals": true</code> to delete the original document after consumption. This requires the calling user being the owner of
+    the document.</li>
+</ul>
+</li>
+<li>The split operation only accepts a single document.</li>
+</ul>
+</li>
+<li><code>rotate</code><ul>
+<li>Requires <code>parameters</code>:<ul>
+<li><code>"degrees": DEGREES</code>. Must be an integer i.e. 90, 180, 270</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>delete_pages</code><ul>
+<li>Requires <code>parameters</code>:<ul>
+<li><code>"pages": [..]</code> The list should be a list of integers e.g. <code>"[2,3,4]"</code></li>
+</ul>
+</li>
+<li>The delete_pages operation only accepts a single document.</li>
+</ul>
+</li>
+<li><code>modify_custom_fields</code><ul>
+<li>Requires <code>parameters</code>:<ul>
+<li><code>"add_custom_fields": { CUSTOM_FIELD_ID: VALUE }</code>: JSON object consisting of custom field id:value pairs to add to the document, can also be a list of custom field IDs
+    to add with empty values.</li>
+<li><code>"remove_custom_fields": [CUSTOM_FIELD_ID]</code>: custom field ids to remove from the document.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="objects">Objects</h3>
+<p>Bulk editing for objects (tags, document types etc.) currently supports set permissions or delete
+operations, using the endpoint: <code>/api/bulk_edit_objects/</code>, which requires a json payload of the format:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">&quot;objects&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">LIST_OF_OBJECT_IDS</span><span class="p">],</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">&quot;object_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tags&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;correspondents&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;document_types&quot;</span><span class="w"> </span><span class="err">or</span><span class="w"> </span><span class="s2">&quot;storage_paths&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="nt">&quot;operation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;set_permissions&quot;</span><span class="w"> </span><span class="err">or</span><span class="w"> </span><span class="s2">&quot;delete&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="nt">&quot;owner&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">OWNER_ID</span><span class="p">,</span><span class="w"> </span><span class="c1">// optional</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span><span class="nt">&quot;permissions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;view&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;users&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nt">&quot;change&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="c1">// (see &#39;set_permissions&#39; format above)</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span><span class="nt">&quot;merge&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="err">/</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="c1">// defaults to false, see above</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="api-versioning">API Versioning</h2>
+<p>The REST API is versioned since Paperless-ngx 1.3.0.</p>
+<ul>
+<li>Versioning ensures that changes to the API don't break older
+    clients.</li>
+<li>Clients specify the specific version of the API they wish to use
+    with every request and Paperless will handle the request using the
+    specified API version.</li>
+<li>Even if the underlying data model changes, older API versions will
+    always serve compatible data.</li>
+<li>If no version is specified, Paperless will serve version 1 to ensure
+    compatibility with older clients that do not request a specific API
+    version.</li>
+</ul>
+<p>API versions are specified by submitting an additional HTTP <code>Accept</code>
+header with every request:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Accept: application/json; version=6
+</code></pre></div>
+<p>If an invalid version is specified, Paperless 1.3.0 will respond with
+"406 Not Acceptable" and an error message in the body. Earlier
+versions of Paperless will serve API version 1 regardless of whether a
+version is specified via the <code>Accept</code> header.</p>
+<p>If a client wishes to verify whether it is compatible with any given
+server, the following procedure should be performed:</p>
+<ol>
+<li>
+<p>Perform an <em>authenticated</em> request against any API endpoint. If the
+    server is on version 1.3.0 or newer, the server will add two custom
+    headers to the response:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>X-Api-Version: 2
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>X-Version: 1.3.0
+</code></pre></div>
+</li>
+<li>
+<p>Determine whether the client is compatible with this server based on
+    the presence/absence of these headers and their values if present.</p>
+</li>
+</ol>
+<h3 id="api-version-deprecation-policy">API Version Deprecation Policy</h3>
+<p>Older API versions are guaranteed to be supported for at least one year
+after the release of a new API version. After that, support for older
+API versions may be (but is not guaranteed to be) dropped.</p>
+<h3 id="api-changelog">API Changelog</h3>
+<h4 id="version-1">Version 1</h4>
+<p>Initial API version.</p>
+<h4 id="version-2">Version 2</h4>
+<ul>
+<li>Added field <code>Tag.color</code>. This read/write string field contains a hex
+    color such as <code>#a6cee3</code>.</li>
+<li>Added read-only field <code>Tag.text_color</code>. This field contains the text
+    color to use for a specific tag, which is either black or white
+    depending on the brightness of <code>Tag.color</code>.</li>
+<li>Removed field <code>Tag.colour</code>.</li>
+</ul>
+<h4 id="version-3">Version 3</h4>
+<ul>
+<li>Permissions endpoints have been added.</li>
+<li>The format of the <code>/api/ui_settings/</code> has changed.</li>
+</ul>
+<h4 id="version-4">Version 4</h4>
+<ul>
+<li>Consumption templates were refactored to workflows and API endpoints
+    changed as such.</li>
+</ul>
+<h4 id="version-5">Version 5</h4>
+<ul>
+<li>Added bulk deletion methods for documents and objects.</li>
+</ul>
+<h4 id="version-6">Version 6</h4>
+<ul>
+<li>Moved acknowledge tasks endpoint to be under <code>/api/tasks/acknowledge/</code>.</li>
+</ul>
+<h4 id="version-7">Version 7</h4>
+<ul>
+<li>The format of select type custom fields has changed to return the options
+    as an array of objects with <code>id</code> and <code>label</code> fields as opposed to a simple
+    list of strings. When creating or updating a custom field value of a
+    document for a select type custom field, the value should be the <code>id</code> of
+    the option whereas previously was the index of the option.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2016 - 2023 Daniel Quinn, Jonas Winkler, and the Paperless-ngx team
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/paperless-ngx/paperless-ngx" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://hub.docker.com/r/paperlessngx/paperless-ngx" target="_blank" rel="noopener" title="hub.docker.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M349.9 236.3h-66.1v-59.4h66.1zm0-204.3h-66.1v60.7h66.1zm78.2 144.8H362v59.4h66.1zm-156.3-72.1h-66.1v60.1h66.1zm78.1 0h-66.1v60.1h66.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1zm78.1 0h-66.1v59.4h66.1zm-78.1-72.1h-66.1v60.1h66.1z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://matrix.to/#/#paperless:matrix.org" target="_blank" rel="noopener" title="matrix.to" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3c5.5 0 10 3.58 10 8s-4.5 8-10 8c-1.24 0-2.43-.18-3.53-.5C5.55 21 2 21 2 21c2.33-2.33 2.7-3.9 2.75-4.5C3.05 15.07 2 13.13 2 11c0-4.42 4.5-8 10-8"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "toc.integrate", "content.code.annotate"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

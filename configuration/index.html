@@ -1,0 +1,4207 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../usage/">
+      
+      
+        <link rel="next" href="../administration/">
+      
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>Configuration - Paperless-ngx</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#configuration" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Paperless-ngx" class="md-header__button md-logo" aria-label="Paperless-ngx" data-md-component="logo">
+      
+  <img src="../assets/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paperless-ngx
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Configuration
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/paperless-ngx/paperless-ngx" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    paperless-ngx/paperless-ngx
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../setup/" class="md-tabs__link">
+        
+  
+    
+  
+  Setup
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../usage/" class="md-tabs__link">
+        
+  
+    
+  
+  Basic Usage
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  Configuration
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../administration/" class="md-tabs__link">
+        
+  
+    
+  
+  Administration
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../advanced_usage/" class="md-tabs__link">
+        
+  
+    
+  
+  Advanced Topics
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../api/" class="md-tabs__link">
+        
+  
+    
+  
+  REST API
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../development/" class="md-tabs__link">
+        
+  
+    
+  
+  Development
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../faq/" class="md-tabs__link">
+        
+  
+    
+  
+  FAQs
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../troubleshooting/" class="md-tabs__link">
+        
+  
+    
+  
+  Troubleshooting
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../changelog/" class="md-tabs__link">
+        
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Paperless-ngx" class="md-nav__button md-logo" aria-label="Paperless-ngx" data-md-component="logo">
+      
+  <img src="../assets/logo.svg" alt="logo">
+
+    </a>
+    Paperless-ngx
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/paperless-ngx/paperless-ngx" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    paperless-ngx/paperless-ngx
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Basic Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#required-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Required services
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Required services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#redis-broker" class="md-nav__link">
+    <span class="md-ellipsis">
+      Redis Broker
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Redis Broker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_REDIS" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_REDIS=&lt;url&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_REDIS_PREFIX" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_REDIS_PREFIX=&lt;prefix&gt;
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Database">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_DBENGINE" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_DBENGINE=&lt;engine_name&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_DBHOST" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_DBHOST=&lt;hostname&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_DBPORT" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_DBPORT=&lt;port&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_DBNAME" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_DBNAME=&lt;name&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_DBUSER" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_DBUSER=&lt;name&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_DBPASS" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_DBPASS=&lt;password&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_DBSSLMODE" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_DBSSLMODE=&lt;mode&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_DBSSLROOTCERT" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_DBSSLROOTCERT=&lt;ca-path&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_DBSSLCERT" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_DBSSLCERT=&lt;client-cert-path&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_DBSSLKEY" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_DBSSLKEY=&lt;client-cert-key&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_DB_TIMEOUT" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_DB_TIMEOUT=&lt;int&gt;
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optional Services
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Optional Services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tika" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tika
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tika">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_TIKA_ENABLED" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_TIKA_ENABLED=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_TIKA_ENDPOINT" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_TIKA_ENDPOINT=&lt;url&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_TIKA_GOTENBERG_ENDPOINT" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_TIKA_GOTENBERG_ENDPOINT=&lt;url&gt;
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paths-and-folders" class="md-nav__link">
+    <span class="md-ellipsis">
+      Paths and folders
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Paths and folders">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMPTION_DIR" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMPTION_DIR=&lt;path&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_DATA_DIR" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_DATA_DIR=&lt;path&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_EMPTY_TRASH_DIR" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_EMPTY_TRASH_DIR=&lt;path&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_MEDIA_ROOT" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_MEDIA_ROOT=&lt;path&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_STATICDIR" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_STATICDIR=&lt;path&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_FILENAME_FORMAT" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_FILENAME_FORMAT=&lt;format&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_FILENAME_FORMAT_REMOVE_NONE" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_FILENAME_FORMAT_REMOVE_NONE=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_LOGGING_DIR" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_LOGGING_DIR=&lt;path&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_NLTK_DIR" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_NLTK_DIR=&lt;path&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_MODEL_FILE" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_MODEL_FILE=&lt;path&gt;
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logging
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Logging">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_LOGROTATE_MAX_SIZE" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_LOGROTATE_MAX_SIZE=&lt;num&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_LOGROTATE_MAX_BACKUPS" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_LOGROTATE_MAX_BACKUPS=&lt;num&gt;
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hosting-and-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hosting &amp; Security
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hosting & Security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_SECRET_KEY" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_SECRET_KEY=&lt;key&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_URL" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_URL=&lt;url&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CSRF_TRUSTED_ORIGINS" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CSRF_TRUSTED_ORIGINS=&lt;comma-separated-list&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_ALLOWED_HOSTS" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_ALLOWED_HOSTS=&lt;comma-separated-list&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CORS_ALLOWED_HOSTS" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CORS_ALLOWED_HOSTS=&lt;comma-separated-list&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_TRUSTED_PROXIES" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_TRUSTED_PROXIES=&lt;comma-separated-list&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_FORCE_SCRIPT_NAME" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_FORCE_SCRIPT_NAME=&lt;path&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_STATIC_URL" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_STATIC_URL=&lt;path&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_AUTO_LOGIN_USERNAME" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_AUTO_LOGIN_USERNAME=&lt;username&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_ADMIN_USER" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_ADMIN_USER=&lt;username&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_ADMIN_MAIL" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_ADMIN_MAIL=&lt;email&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_ADMIN_PASSWORD" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_ADMIN_PASSWORD=&lt;password&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_COOKIE_PREFIX" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_COOKIE_PREFIX=&lt;str&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_ENABLE_HTTP_REMOTE_USER" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_ENABLE_HTTP_REMOTE_USER=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_ENABLE_HTTP_REMOTE_USER_API" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_ENABLE_HTTP_REMOTE_USER_API=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME=&lt;str&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_LOGOUT_REDIRECT_URL" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_LOGOUT_REDIRECT_URL=&lt;str&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_USE_X_FORWARD_HOST" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_USE_X_FORWARD_HOST=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_USE_X_FORWARD_PORT" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_USE_X_FORWARD_PORT=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_PROXY_SSL_HEADER" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_PROXY_SSL_HEADER=&lt;json-list&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_EMAIL_CERTIFICATE_LOCATION" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_EMAIL_CERTIFICATE_LOCATION=&lt;path&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_SOCIALACCOUNT_PROVIDERS" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_SOCIALACCOUNT_PROVIDERS=&lt;json&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_SOCIAL_AUTO_SIGNUP" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_SOCIAL_AUTO_SIGNUP=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_SOCIALACCOUNT_ALLOW_SIGNUPS" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_SOCIALACCOUNT_ALLOW_SIGNUPS=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_ACCOUNT_ALLOW_SIGNUPS" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_ACCOUNT_ALLOW_SIGNUPS=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_ACCOUNT_DEFAULT_HTTP_PROTOCOL" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_ACCOUNT_DEFAULT_HTTP_PROTOCOL=&lt;string&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_ACCOUNT_EMAIL_VERIFICATION" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_ACCOUNT_EMAIL_VERIFICATION=&lt;string&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_DISABLE_REGULAR_LOGIN" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_DISABLE_REGULAR_LOGIN=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_REDIRECT_LOGIN_TO_SSO" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_REDIRECT_LOGIN_TO_SSO=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_ACCOUNT_SESSION_REMEMBER" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_ACCOUNT_SESSION_REMEMBER=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_SESSION_COOKIE_AGE" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_SESSION_COOKIE_AGE=&lt;int&gt;
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ocr" class="md-nav__link">
+    <span class="md-ellipsis">
+      OCR settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="OCR settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_OCR_LANGUAGE" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_OCR_LANGUAGE=&lt;lang&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_OCR_MODE" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_OCR_MODE=&lt;mode&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_OCR_SKIP_ARCHIVE_FILE" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_OCR_SKIP_ARCHIVE_FILE=&lt;mode&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_OCR_CLEAN" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_OCR_CLEAN=&lt;mode&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_OCR_DESKEW" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_OCR_DESKEW=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_OCR_ROTATE_PAGES" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_OCR_ROTATE_PAGES=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_OCR_ROTATE_PAGES_THRESHOLD" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_OCR_ROTATE_PAGES_THRESHOLD=&lt;num&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_OCR_OUTPUT_TYPE" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_OCR_OUTPUT_TYPE=&lt;type&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_OCR_PAGES" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_OCR_PAGES=&lt;num&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_OCR_IMAGE_DPI" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_OCR_IMAGE_DPI=&lt;num&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_OCR_MAX_IMAGE_PIXELS" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_OCR_MAX_IMAGE_PIXELS=&lt;num&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_OCR_COLOR_CONVERSION_STRATEGY" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_OCR_COLOR_CONVERSION_STRATEGY=&lt;RGB&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_OCR_USER_ARGS" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_OCR_USER_ARGS=&lt;json&gt;
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#software_tweaks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Software tweaks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Software tweaks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_TASK_WORKERS" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_TASK_WORKERS=&lt;num&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_THREADS_PER_WORKER" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_THREADS_PER_WORKER=&lt;num&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_WORKER_TIMEOUT" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_WORKER_TIMEOUT=&lt;num&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_TIME_ZONE" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_TIME_ZONE=&lt;timezone&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_ENABLE_NLTK" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_ENABLE_NLTK=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_EMAIL_TASK_CRON" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_EMAIL_TASK_CRON=&lt;cron expression&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_TRAIN_TASK_CRON" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_TRAIN_TASK_CRON=&lt;cron expression&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_INDEX_TASK_CRON" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_INDEX_TASK_CRON=&lt;cron expression&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_SANITY_TASK_CRON" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_SANITY_TASK_CRON=&lt;cron expression&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_ENABLE_COMPRESSION" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_ENABLE_COMPRESSION=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONVERT_MEMORY_LIMIT" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONVERT_MEMORY_LIMIT=&lt;num&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONVERT_TMPDIR" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONVERT_TMPDIR=&lt;path&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_APPS" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_APPS=&lt;string&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_MAX_IMAGE_PIXELS" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_MAX_IMAGE_PIXELS=&lt;number&gt;
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#consume_config" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document Consumption
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Document Consumption">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_DELETE_DUPLICATES" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_DELETE_DUPLICATES=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_RECURSIVE" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_RECURSIVE=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_IGNORE_PATTERNS" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_IGNORE_PATTERNS=&lt;json&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_BARCODE_SCANNER" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_BARCODE_SCANNER=&lt;string&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_PRE_CONSUME_SCRIPT" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_PRE_CONSUME_SCRIPT=&lt;filename&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_POST_CONSUME_SCRIPT" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_POST_CONSUME_SCRIPT=&lt;filename&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_FILENAME_DATE_ORDER" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_FILENAME_DATE_ORDER=&lt;format&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_NUMBER_OF_SUGGESTED_DATES" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_NUMBER_OF_SUGGESTED_DATES=&lt;num&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_THUMBNAIL_FONT_NAME" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_THUMBNAIL_FONT_NAME=&lt;filename&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_IGNORE_DATES" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_IGNORE_DATES=&lt;string&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_DATE_ORDER" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_DATE_ORDER=&lt;format&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_ENABLE_GPG_DECRYPTOR" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_ENABLE_GPG_DECRYPTOR=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#polling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Polling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Polling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_POLLING" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_POLLING=&lt;num&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_POLLING_RETRY_COUNT" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_POLLING_RETRY_COUNT=&lt;num&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_POLLING_DELAY" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_POLLING_DELAY=&lt;num&gt;
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inotify" class="md-nav__link">
+    <span class="md-ellipsis">
+      iNotify
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="iNotify">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_INOTIFY_DELAY" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_INOTIFY_DELAY=&lt;num&gt;
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#incoming_mail" class="md-nav__link">
+    <span class="md-ellipsis">
+      Incoming Mail
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Incoming Mail">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#email_oauth" class="md-nav__link">
+    <span class="md-ellipsis">
+      Email OAuth
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Email OAuth">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_OAUTH_CALLBACK_BASE_URL" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_OAUTH_CALLBACK_BASE_URL=&lt;str&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_GMAIL_OAUTH_CLIENT_ID" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_GMAIL_OAUTH_CLIENT_ID=&lt;str&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_GMAIL_OAUTH_CLIENT_SECRET" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_GMAIL_OAUTH_CLIENT_SECRET=&lt;str&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_OUTLOOK_OAUTH_CLIENT_ID" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_OUTLOOK_OAUTH_CLIENT_ID=&lt;str&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_OUTLOOK_OAUTH_CLIENT_SECRET" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_OUTLOOK_OAUTH_CLIENT_SECRET=&lt;str&gt;
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#encrypted_emails" class="md-nav__link">
+    <span class="md-ellipsis">
+      Encrypted Emails
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Encrypted Emails">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_EMAIL_GNUPG_HOME" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_EMAIL_GNUPG_HOME=&lt;str&gt;
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#barcodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Barcodes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Barcodes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_ENABLE_BARCODES" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_ENABLE_BARCODES=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_BARCODE_TIFF_SUPPORT" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_BARCODE_TIFF_SUPPORT=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_BARCODE_STRING" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_BARCODE_STRING=&lt;string&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_BARCODE_RETAIN_SPLIT_PAGES" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_BARCODE_RETAIN_SPLIT_PAGES=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_ENABLE_ASN_BARCODE" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_ENABLE_ASN_BARCODE=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_ASN_BARCODE_PREFIX" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_ASN_BARCODE_PREFIX=&lt;string&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_BARCODE_UPSCALE" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_BARCODE_UPSCALE=&lt;float&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_BARCODE_DPI" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_BARCODE_DPI=&lt;int&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_BARCODE_MAX_PAGES" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_BARCODE_MAX_PAGES=&lt;int&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_ENABLE_TAG_BARCODE" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_ENABLE_TAG_BARCODE=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_TAG_BARCODE_MAPPING" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_TAG_BARCODE_MAPPING=&lt;json dict&gt;
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#audit-trail" class="md-nav__link">
+    <span class="md-ellipsis">
+      Audit Trail
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Audit Trail">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_AUDIT_LOG_ENABLED" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_AUDIT_LOG_ENABLED=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collate Double-Sided Documents
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Collate Double-Sided Documents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_ENABLE_COLLATE_DOUBLE_SIDED" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_ENABLE_COLLATE_DOUBLE_SIDED=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_COLLATE_DOUBLE_SIDED_SUBDIR_NAME" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_COLLATE_DOUBLE_SIDED_SUBDIR_NAME=&lt;str&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONSUMER_COLLATE_DOUBLE_SIDED_TIFF_SUPPORT" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONSUMER_COLLATE_DOUBLE_SIDED_TIFF_SUPPORT=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trash" class="md-nav__link">
+    <span class="md-ellipsis">
+      Trash
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Trash">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_EMPTY_TRASH_DELAY" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_EMPTY_TRASH_DELAY=&lt;num&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_EMPTY_TRASH_TASK_CRON" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_EMPTY_TRASH_TASK_CRON=&lt;cron expression&gt;
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#binaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Binaries
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Binaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_CONVERT_BINARY" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_CONVERT_BINARY=&lt;path&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_GS_BINARY" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_GS_BINARY=&lt;path&gt;
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docker-specific options
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Docker-specific options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_WEBSERVER_WORKERS" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_WEBSERVER_WORKERS=&lt;num&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_BIND_ADDR" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_BIND_ADDR=&lt;ip address&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_PORT" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_PORT=&lt;port&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#USERMAP_UID" class="md-nav__link">
+    <span class="md-ellipsis">
+      USERMAP_UID=&lt;uid&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#USERMAP_GID" class="md-nav__link">
+    <span class="md-ellipsis">
+      USERMAP_GID=&lt;gid&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_OCR_LANGUAGES" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_OCR_LANGUAGES=&lt;list&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_ENABLE_FLOWER" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_ENABLE_FLOWER=&lt;defined&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_SUPERVISORD_WORKING_DIR" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_SUPERVISORD_WORKING_DIR=&lt;defined&gt;
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frontend-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Frontend Settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Frontend Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_APP_TITLE" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_APP_TITLE=&lt;str&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_APP_LOGO" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_APP_LOGO=&lt;path&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_ENABLE_UPDATE_CHECK" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_ENABLE_UPDATE_CHECK=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#email-sending" class="md-nav__link">
+    <span class="md-ellipsis">
+      Email sending
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Email sending">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_EMAIL_HOST" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_EMAIL_HOST=&lt;str&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_EMAIL_PORT" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_EMAIL_PORT=&lt;int&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_EMAIL_HOST_USER" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_EMAIL_HOST_USER=&lt;str&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_EMAIL_FROM" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_EMAIL_FROM=&lt;str&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_EMAIL_HOST_PASSWORD" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_EMAIL_HOST_PASSWORD=&lt;str&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_EMAIL_USE_TLS" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_EMAIL_USE_TLS=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#PAPERLESS_EMAIL_USE_SSL" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAPERLESS_EMAIL_USE_SSL=&lt;bool&gt;
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../administration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Administration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advanced_usage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Advanced Topics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    REST API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Development
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Changelog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="configuration">Configuration</h1>
+<p>Paperless provides a wide range of customizations. Depending on how you
+run paperless, these settings have to be defined in different places.</p>
+<p>Certain configuration options may be set via the UI. This currently includes
+common <a href="#ocr">OCR</a> related settings and some frontend settings. If set, these will take
+preference over the settings via environment variables. If not set, the environment setting
+or applicable default will be utilized instead.</p>
+<ul>
+<li>
+<p>If you run paperless on docker, <code>paperless.conf</code> is not used.
+    Rather, configure paperless by copying necessary options to
+    <code>docker-compose.env</code>.</p>
+</li>
+<li>
+<p>If you are running paperless on anything else, paperless will search
+    for the configuration file in these locations and use the first one
+    it finds:</p>
+<ul>
+<li>The environment variable <code>PAPERLESS_CONFIGURATION_PATH</code></li>
+<li><code>/path/to/paperless/paperless.conf</code></li>
+<li><code>/etc/paperless.conf</code></li>
+<li><code>/usr/local/etc/paperless.conf</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="required-services">Required services</h2>
+<h3 id="redis-broker">Redis Broker</h3>
+<h4 id="PAPERLESS_REDIS"><a href="#PAPERLESS_REDIS"><code>PAPERLESS_REDIS=&lt;url&gt;</code></a></h4>
+<dl>
+<dd>
+<p>This is required for processing scheduled tasks such as email
+fetching, index optimization and for training the automatic document
+matcher.</p>
+<ul>
+<li>If your Redis server needs login credentials PAPERLESS_REDIS =
+    <code>redis://&lt;username&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;</code></li>
+<li>With the requirepass option PAPERLESS_REDIS =
+    <code>redis://:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;</code></li>
+<li>To include the redis database index PAPERLESS_REDIS =
+    <code>redis://&lt;username&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;/&lt;DBIndex&gt;</code></li>
+</ul>
+<p><a href="https://redis.io/docs/latest/operate/oss_and_stack/management/security">More information on securing your Redis
+Instance</a>.</p>
+<p>Defaults to <code>redis://localhost:6379</code>.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_REDIS_PREFIX"><a href="#PAPERLESS_REDIS_PREFIX"><code>PAPERLESS_REDIS_PREFIX=&lt;prefix&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Prefix to be used in Redis for keys and channels. Useful for sharing one Redis server among multiple Paperless instances.</p>
+<p>Defaults to no prefix.</p>
+</dd>
+</dl>
+<h3 id="database">Database</h3>
+<h4 id="PAPERLESS_DBENGINE"><a href="#PAPERLESS_DBENGINE"><code>PAPERLESS_DBENGINE=&lt;engine_name&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Optional, gives the ability to choose Postgres or MariaDB for
+database engine. Available options are <code>postgresql</code> and
+<code>mariadb</code>.</p>
+<p>Default is <code>postgresql</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Using MariaDB comes with some caveats. See <a href="../advanced_usage/#mysql-caveats">MySQL Caveats</a>.</p>
+</div>
+</dd>
+</dl>
+<h4 id="PAPERLESS_DBHOST"><a href="#PAPERLESS_DBHOST"><code>PAPERLESS_DBHOST=&lt;hostname&gt;</code></a></h4>
+<dl>
+<dd>
+<p>By default, sqlite is used as the database backend. This can be
+changed here.</p>
+<p>Set PAPERLESS_DBHOST and another database will be used instead of
+sqlite.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_DBPORT"><a href="#PAPERLESS_DBPORT"><code>PAPERLESS_DBPORT=&lt;port&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Adjust port if necessary.</p>
+<p>Default is 5432.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_DBNAME"><a href="#PAPERLESS_DBNAME"><code>PAPERLESS_DBNAME=&lt;name&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Database name in PostgreSQL or MariaDB.</p>
+<p>Defaults to "paperless".</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_DBUSER"><a href="#PAPERLESS_DBUSER"><code>PAPERLESS_DBUSER=&lt;name&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Database user in PostgreSQL or MariaDB.</p>
+<p>Defaults to "paperless".</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_DBPASS"><a href="#PAPERLESS_DBPASS"><code>PAPERLESS_DBPASS=&lt;password&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Database password for PostgreSQL or MariaDB.</p>
+<p>Defaults to "paperless".</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_DBSSLMODE"><a href="#PAPERLESS_DBSSLMODE"><code>PAPERLESS_DBSSLMODE=&lt;mode&gt;</code></a></h4>
+<dl>
+<dd>
+<p>SSL mode to use when connecting to PostgreSQL or MariaDB.</p>
+<p>See <a href="https://www.postgresql.org/docs/current/libpq-ssl.html">the official documentation about
+sslmode for PostgreSQL</a>.</p>
+<p>See <a href="https://dev.mysql.com/doc/refman/8.0/en/connection-options.html#option_general_ssl-mode">the official documentation about
+sslmode for MySQL and MariaDB</a>.</p>
+<p><em>Note</em>: SSL mode values differ between PostgreSQL and MariaDB.</p>
+<p>Default is <code>prefer</code> for PostgreSQL and <code>PREFERRED</code> for MariaDB.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_DBSSLROOTCERT"><a href="#PAPERLESS_DBSSLROOTCERT"><code>PAPERLESS_DBSSLROOTCERT=&lt;ca-path&gt;</code></a></h4>
+<dl>
+<dd>
+<p>SSL root certificate path</p>
+<p>See <a href="https://www.postgresql.org/docs/current/libpq-ssl.html">the official documentation about
+sslmode for PostgreSQL</a>.
+Changes path of <code>root.crt</code>.</p>
+<p>See <a href="https://dev.mysql.com/doc/refman/8.0/en/connection-options.html#option_general_ssl-ca">the official documentation about
+sslmode for MySQL and MariaDB</a>.</p>
+<p>Defaults to unset, using the documented path in the home directory.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_DBSSLCERT"><a href="#PAPERLESS_DBSSLCERT"><code>PAPERLESS_DBSSLCERT=&lt;client-cert-path&gt;</code></a></h4>
+<dl>
+<dd>
+<p>SSL client certificate path</p>
+<p>See <a href="https://www.postgresql.org/docs/current/libpq-ssl.html">the official documentation about
+sslmode for PostgreSQL</a>.</p>
+<p>See <a href="https://dev.mysql.com/doc/refman/8.0/en/connection-options.html#option_general_ssl-cert">the official documentation about
+sslmode for MySQL and MariaDB</a>.</p>
+<p>Changes path of <code>postgresql.crt</code>.</p>
+<p>Defaults to unset, using the documented path in the home directory.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_DBSSLKEY"><a href="#PAPERLESS_DBSSLKEY"><code>PAPERLESS_DBSSLKEY=&lt;client-cert-key&gt;</code></a></h4>
+<dl>
+<dd>
+<p>SSL client key path</p>
+<p>See <a href="https://www.postgresql.org/docs/current/libpq-ssl.html">the official documentation about
+sslmode for PostgreSQL</a>.</p>
+<p>See <a href="https://dev.mysql.com/doc/refman/8.0/en/connection-options.html#option_general_ssl-key">the official documentation about
+sslmode for MySQL and MariaDB</a>.</p>
+<p>Changes path of <code>postgresql.key</code>.</p>
+<p>Defaults to unset, using the documented path in the home directory.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_DB_TIMEOUT"><a href="#PAPERLESS_DB_TIMEOUT"><code>PAPERLESS_DB_TIMEOUT=&lt;int&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Amount of time for a database connection to wait for the database to
+unlock. Mostly applicable for sqlite based installation. Consider changing
+to postgresql if you are having concurrency problems with sqlite.</p>
+<p>Defaults to unset, keeping the Django defaults.</p>
+</dd>
+</dl>
+<h2 id="optional-services">Optional Services</h2>
+<h3 id="tika">Tika</h3>
+<p>Paperless can make use of <a href="https://tika.apache.org/">Tika</a> and
+<a href="https://gotenberg.dev/">Gotenberg</a> for parsing and converting
+"Office" documents (such as ".doc", ".xlsx" and ".odt").
+Tika and Gotenberg are also needed to allow parsing of E-Mails (.eml).</p>
+<p>If you wish to use this, you must provide a Tika server and a Gotenberg server,
+configure their endpoints, and enable the feature.</p>
+<h4 id="PAPERLESS_TIKA_ENABLED"><a href="#PAPERLESS_TIKA_ENABLED"><code>PAPERLESS_TIKA_ENABLED=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Enable (or disable) the Tika parser.</p>
+<p>Defaults to false.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_TIKA_ENDPOINT"><a href="#PAPERLESS_TIKA_ENDPOINT"><code>PAPERLESS_TIKA_ENDPOINT=&lt;url&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Set the endpoint URL where Paperless can reach your Tika server.</p>
+<p>Defaults to "<a href="http://localhost:9998">http://localhost:9998</a>".</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_TIKA_GOTENBERG_ENDPOINT"><a href="#PAPERLESS_TIKA_GOTENBERG_ENDPOINT"><code>PAPERLESS_TIKA_GOTENBERG_ENDPOINT=&lt;url&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Set the endpoint URL where Paperless can reach your Gotenberg server.</p>
+<p>Defaults to "<a href="http://localhost:3000">http://localhost:3000</a>".</p>
+</dd>
+</dl>
+<p>If you run paperless on docker, you can add those services to the
+Docker Compose file (see the provided
+<a href="https://github.com/paperless-ngx/paperless-ngx/blob/main/docker/compose/docker-compose.sqlite-tika.yml"><code>docker-compose.sqlite-tika.yml</code></a>
+file for reference).</p>
+<p>Add all three configuration parameters to your configuration. If using
+Docker, this may be the <code>environment</code> key of the webserver or a
+<code>docker-compose.env</code> file. Bare metal installations may have a <code>.conf</code> file
+containing the configuration parameters. Be sure to use the correct format
+and watch out for indentation if editing the YAML file.</p>
+<h2 id="paths-and-folders">Paths and folders</h2>
+<h4 id="PAPERLESS_CONSUMPTION_DIR"><a href="#PAPERLESS_CONSUMPTION_DIR"><code>PAPERLESS_CONSUMPTION_DIR=&lt;path&gt;</code></a></h4>
+<dl>
+<dd>
+<p>This is where your documents should go to be consumed. Make sure that
+it exists and that the user running the paperless service can
+read/write its contents before you start Paperless.</p>
+<p>Don't change this when using docker, as it only changes the path
+within the container. Change the local consumption directory in the
+docker-compose.yml file instead.</p>
+<p>Defaults to "../consume/", relative to the "src" directory.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_DATA_DIR"><a href="#PAPERLESS_DATA_DIR"><code>PAPERLESS_DATA_DIR=&lt;path&gt;</code></a></h4>
+<dl>
+<dd>
+<p>This is where paperless stores all its data (search index, SQLite
+database, classification model, etc).</p>
+<p>Defaults to "../data/", relative to the "src" directory.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_EMPTY_TRASH_DIR"><a href="#PAPERLESS_EMPTY_TRASH_DIR"><code>PAPERLESS_EMPTY_TRASH_DIR=&lt;path&gt;</code></a></h4>
+<dl>
+<dd>
+<p>When documents are deleted (e.g. after emptying the trash) the original files will be moved here
+instead of being removed from the filesystem. Only the original version is kept.</p>
+<p>This must be writeable by the user running paperless. When running
+inside docker, ensure that this path is within a permanent volume
+(such as "../media/trash") so it won't get lost on upgrades.</p>
+<p>Note that the directory must exist prior to using this setting.</p>
+<p>Defaults to empty (i.e. really delete files).</p>
+<p>This setting was previously named PAPERLESS_TRASH_DIR.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_MEDIA_ROOT"><a href="#PAPERLESS_MEDIA_ROOT"><code>PAPERLESS_MEDIA_ROOT=&lt;path&gt;</code></a></h4>
+<dl>
+<dd>
+<p>This is where your documents and thumbnails are stored.</p>
+<p>You can set this and PAPERLESS_DATA_DIR to the same folder to have
+paperless store all its data within the same volume.</p>
+<p>Defaults to "../media/", relative to the "src" directory.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_STATICDIR"><a href="#PAPERLESS_STATICDIR"><code>PAPERLESS_STATICDIR=&lt;path&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Override the default STATIC_ROOT here. This is where all static
+files created using "collectstatic" manager command are stored.</p>
+<p>Unless you're doing something fancy, there is no need to override
+this.  If this is changed, you may need to run
+<code>collectstatic</code> again.</p>
+<p>Defaults to "../static/", relative to the "src" directory.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_FILENAME_FORMAT"><a href="#PAPERLESS_FILENAME_FORMAT"><code>PAPERLESS_FILENAME_FORMAT=&lt;format&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Changes the filenames paperless uses to store documents in the media
+directory. See <a href="../advanced_usage/#file-name-handling">File name handling</a> for details.</p>
+<p>Default is none, which disables this feature.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_FILENAME_FORMAT_REMOVE_NONE"><a href="#PAPERLESS_FILENAME_FORMAT_REMOVE_NONE"><code>PAPERLESS_FILENAME_FORMAT_REMOVE_NONE=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Tells paperless to replace placeholders in
+<code>PAPERLESS_FILENAME_FORMAT</code> that would resolve to
+'none' to be omitted from the resulting filename. This also holds
+true for directory names. See <a href="../advanced_usage/#empty-placeholders">File name handling</a> for
+details.</p>
+<p>Defaults to <code>false</code> which disables this feature.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_LOGGING_DIR"><a href="#PAPERLESS_LOGGING_DIR"><code>PAPERLESS_LOGGING_DIR=&lt;path&gt;</code></a></h4>
+<dl>
+<dd>
+<p>This is where paperless will store log files.</p>
+<p>Defaults to <code>PAPERLESS_DATA_DIR/log/</code>.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_NLTK_DIR"><a href="#PAPERLESS_NLTK_DIR"><code>PAPERLESS_NLTK_DIR=&lt;path&gt;</code></a></h4>
+<dl>
+<dd>This is where paperless will search for the data required for NLTK
+processing, if you are using it. If you are using the Docker image,
+this should not be changed, as the data is included in the image
+already.</dd>
+</dl>
+<p>Previously, the location defaulted to <code>PAPERLESS_DATA_DIR/nltk</code>.
+Unless you are using this in a bare metal install or other setup,
+this folder is no longer needed and can be removed manually.</p>
+<p>Defaults to <code>/usr/share/nltk_data</code></p>
+<h4 id="PAPERLESS_MODEL_FILE"><a href="#PAPERLESS_MODEL_FILE"><code>PAPERLESS_MODEL_FILE=&lt;path&gt;</code></a></h4>
+<dl>
+<dd>
+<p>This is where paperless will store the classification model.</p>
+<p>Defaults to <code>PAPERLESS_DATA_DIR/classification_model.pickle</code>.</p>
+</dd>
+</dl>
+<h2 id="logging">Logging</h2>
+<h4 id="PAPERLESS_LOGROTATE_MAX_SIZE"><a href="#PAPERLESS_LOGROTATE_MAX_SIZE"><code>PAPERLESS_LOGROTATE_MAX_SIZE=&lt;num&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Maximum file size for log files before they are rotated, in bytes.</p>
+<p>Defaults to 1 MiB.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_LOGROTATE_MAX_BACKUPS"><a href="#PAPERLESS_LOGROTATE_MAX_BACKUPS"><code>PAPERLESS_LOGROTATE_MAX_BACKUPS=&lt;num&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Number of rotated log files to keep.</p>
+<p>Defaults to 20.</p>
+</dd>
+</dl>
+<h2 id="hosting-and-security">Hosting &amp; Security</h2>
+<h4 id="PAPERLESS_SECRET_KEY"><a href="#PAPERLESS_SECRET_KEY"><code>PAPERLESS_SECRET_KEY=&lt;key&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Paperless uses this to make session tokens. If you expose paperless
+on the internet, you need to change this, since the default secret
+is well known.</p>
+<p>Use any sequence of characters. The more, the better. You don't
+need to remember this. Just face-roll your keyboard.</p>
+<p>Default is listed in the file <code>src/paperless/settings.py</code>.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_URL"><a href="#PAPERLESS_URL"><code>PAPERLESS_URL=&lt;url&gt;</code></a></h4>
+<dl>
+<dd>
+<p>This setting can be used to set the three options below
+(ALLOWED_HOSTS, CORS_ALLOWED_HOSTS and CSRF_TRUSTED_ORIGINS). If the
+other options are set the values will be combined with this one. Do
+not include a trailing slash. E.g. <a href="https://paperless.domain.com">https://paperless.domain.com</a></p>
+<p>Defaults to empty string, leaving the other settings unaffected.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This value cannot contain a path (e.g. domain.com/path), even if
+you are installing paperless-ngx at a subpath.</p>
+</div>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CSRF_TRUSTED_ORIGINS"><a href="#PAPERLESS_CSRF_TRUSTED_ORIGINS"><code>PAPERLESS_CSRF_TRUSTED_ORIGINS=&lt;comma-separated-list&gt;</code></a></h4>
+<dl>
+<dd>
+<p>A list of trusted origins for unsafe requests (e.g. POST). As of
+Django 4.0 this is required to access the Django admin via the web.
+See the <a href="https://docs.djangoproject.com/en/4.1/ref/settings/#csrf-trusted-origins">Django project documentation on the settings</a></p>
+<p>Can also be set using PAPERLESS_URL (see above).</p>
+<p>Defaults to empty string, which does not add any origins to the
+trusted list.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_ALLOWED_HOSTS"><a href="#PAPERLESS_ALLOWED_HOSTS"><code>PAPERLESS_ALLOWED_HOSTS=&lt;comma-separated-list&gt;</code></a></h4>
+<dl>
+<dd>
+<p>If you're planning on putting Paperless on the open internet, then
+you really should set this value to the domain name you're using.
+Failing to do so leaves you open to HTTP host header attacks.
+You can read more about this in <a href="https://docs.djangoproject.com/en/4.1/topics/security/#host-header-validation">the Django project's documentation</a></p>
+<p>Just remember that this is a comma-separated list, so
+"example.com" is fine, as is "example.com,www.example.com", but
+NOT " example.com" or "example.com,"</p>
+<p>Can also be set using PAPERLESS_URL (see above).</p>
+<p>"localhost" is always allowed for docker healthcheck</p>
+<p>Defaults to "*", which is all hosts.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CORS_ALLOWED_HOSTS"><a href="#PAPERLESS_CORS_ALLOWED_HOSTS"><code>PAPERLESS_CORS_ALLOWED_HOSTS=&lt;comma-separated-list&gt;</code></a></h4>
+<dl>
+<dd>
+<p>You need to add your servers to the list of allowed hosts that can
+do CORS calls. Set this to your public domain name.</p>
+<p>Can also be set using PAPERLESS_URL (see above).</p>
+<p>Defaults to "<a href="http://localhost:8000">http://localhost:8000</a>".</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_TRUSTED_PROXIES"><a href="#PAPERLESS_TRUSTED_PROXIES"><code>PAPERLESS_TRUSTED_PROXIES=&lt;comma-separated-list&gt;</code></a></h4>
+<dl>
+<dd>
+<p>This may be needed to prevent IP address spoofing if you are using e.g.
+fail2ban with log entries for failed authorization attempts. Value should be
+IP address(es).</p>
+<p>Defaults to empty string.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_FORCE_SCRIPT_NAME"><a href="#PAPERLESS_FORCE_SCRIPT_NAME"><code>PAPERLESS_FORCE_SCRIPT_NAME=&lt;path&gt;</code></a></h4>
+<dl>
+<dd>
+<p>To host paperless under a subpath url like example.com/paperless you
+set this value to /paperless. No trailing slash!</p>
+<p>Defaults to none, which hosts paperless at "/".</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_STATIC_URL"><a href="#PAPERLESS_STATIC_URL"><code>PAPERLESS_STATIC_URL=&lt;path&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Override the STATIC_URL here. Unless you're hosting Paperless off a
+subdomain like /paperless/, you probably don't need to change this.
+If you do change it, be sure to include the trailing slash.</p>
+<p>Defaults to "/static/".</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When hosting paperless behind a reverse proxy like Traefik or Nginx
+at a subpath e.g. example.com/paperlessngx you will also need to set
+<code>PAPERLESS_FORCE_SCRIPT_NAME</code> (see above).</p>
+</div>
+</dd>
+</dl>
+<h4 id="PAPERLESS_AUTO_LOGIN_USERNAME"><a href="#PAPERLESS_AUTO_LOGIN_USERNAME"><code>PAPERLESS_AUTO_LOGIN_USERNAME=&lt;username&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Specify a username here so that paperless will automatically perform
+login with the selected user.</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Do not use this when exposing paperless on the internet. There are
+no checks in place that would prevent you from doing this.</p>
+</div>
+<p>Defaults to none, which disables this feature.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_ADMIN_USER"><a href="#PAPERLESS_ADMIN_USER"><code>PAPERLESS_ADMIN_USER=&lt;username&gt;</code></a></h4>
+<dl>
+<dd>
+<p>If this environment variable is specified, Paperless automatically
+creates a superuser with the provided username at start. This is
+useful in cases where you can not run the
+<code>createsuperuser</code> command separately, such as Kubernetes
+or AWS ECS.</p>
+<p>Requires PAPERLESS_ADMIN_PASSWORD be set.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This will not change an existing [super]user's password, nor will
+it recreate a user that already exists. You can leave this
+throughout the lifecycle of the containers.</p>
+</div>
+</dd>
+</dl>
+<h4 id="PAPERLESS_ADMIN_MAIL"><a href="#PAPERLESS_ADMIN_MAIL"><code>PAPERLESS_ADMIN_MAIL=&lt;email&gt;</code></a></h4>
+<dl>
+<dd>
+<p>(Optional) Specify superuser email address. Only used when
+PAPERLESS_ADMIN_USER is set.</p>
+<p>Defaults to <code>root@localhost</code>.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_ADMIN_PASSWORD"><a href="#PAPERLESS_ADMIN_PASSWORD"><code>PAPERLESS_ADMIN_PASSWORD=&lt;password&gt;</code></a></h4>
+<dl>
+<dd>Only used when PAPERLESS_ADMIN_USER is set. This will
+be the password of the automatically created superuser.</dd>
+</dl>
+<h4 id="PAPERLESS_COOKIE_PREFIX"><a href="#PAPERLESS_COOKIE_PREFIX"><code>PAPERLESS_COOKIE_PREFIX=&lt;str&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Specify a prefix that is added to the cookies used by paperless to
+identify the currently logged in user. This is useful for when
+you're running two instances of paperless on the same host.</p>
+<p>After changing this, you will have to login again.</p>
+<p>Defaults to <code>""</code>, which does not alter the cookie names.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_ENABLE_HTTP_REMOTE_USER"><a href="#PAPERLESS_ENABLE_HTTP_REMOTE_USER"><code>PAPERLESS_ENABLE_HTTP_REMOTE_USER=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Allows authentication via HTTP_REMOTE_USER which is used by some SSO
+applications.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This will allow authentication by simply adding a
+<code>Remote-User: &lt;username&gt;</code> header to a request. Use with care! You
+especially <em>must</em> ensure that any such header is not passed from
+external requests to your reverse-proxy to paperless (that would
+effectively bypass all authentication).</p>
+<p>If you're exposing paperless to the internet directly (i.e.
+without a reverse proxy), do not use this.</p>
+<p>Also see the warning <a href="https://docs.djangoproject.com/en/4.1/howto/auth-remote-user/#configuration">in the official documentation</a>.</p>
+</div>
+<p>Defaults to "false" which disables this feature.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_ENABLE_HTTP_REMOTE_USER_API"><a href="#PAPERLESS_ENABLE_HTTP_REMOTE_USER_API"><code>PAPERLESS_ENABLE_HTTP_REMOTE_USER_API=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Allows authentication via HTTP_REMOTE_USER directly against the API</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>See the warning above about securing your installation when using remote user header authentication. This setting is separate from
+<code>PAPERLESS_ENABLE_HTTP_REMOTE_USER</code> to avoid introducing a security vulnerability to existing reverse proxy setups. As above,
+ensure that your reverse proxy does not simply pass the <code>Remote-User</code> header from the internet to paperless.</p>
+</div>
+<p>Defaults to "false" which disables this feature.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME"><a href="#PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME"><code>PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME=&lt;str&gt;</code></a></h4>
+<dl>
+<dd>
+<p>If "PAPERLESS_ENABLE_HTTP_REMOTE_USER" or <code>PAPERLESS_ENABLE_HTTP_REMOTE_USER_API</code> are enabled, this
+property allows to customize the name of the HTTP header from which
+the authenticated username is extracted. Values are in terms of
+<a href="https://docs.djangoproject.com/en/4.1/ref/request-response/#django.http.HttpRequest.META">HttpRequest.META</a>.
+Thus, the configured value must start with <code>HTTP*</code>
+followed by the normalized actual header name.</p>
+<p>Defaults to "HTTP_REMOTE_USER".</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_LOGOUT_REDIRECT_URL"><a href="#PAPERLESS_LOGOUT_REDIRECT_URL"><code>PAPERLESS_LOGOUT_REDIRECT_URL=&lt;str&gt;</code></a></h4>
+<dl>
+<dd>
+<p>URL to redirect the user to after a logout. This can be used
+together with PAPERLESS_ENABLE_HTTP_REMOTE_USER and SSO to
+redirect the user back to the SSO application's logout page to
+complete the logout process.</p>
+<p>Defaults to None, which disables this feature.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_USE_X_FORWARD_HOST"><a href="#PAPERLESS_USE_X_FORWARD_HOST"><code>PAPERLESS_USE_X_FORWARD_HOST=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Configures the Django setting <a href="https://docs.djangoproject.com/en/4.2/ref/settings/#use-x-forwarded-host">USE_X_FORWARDED_HOST</a>
+which may be needed for hosting behind a proxy.</p>
+<p>Defaults to False</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_USE_X_FORWARD_PORT"><a href="#PAPERLESS_USE_X_FORWARD_PORT"><code>PAPERLESS_USE_X_FORWARD_PORT=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Configures the Django setting <a href="https://docs.djangoproject.com/en/4.2/ref/settings/#use-x-forwarded-port">USE_X_FORWARDED_PORT</a>
+which may be needed for hosting behind a proxy.</p>
+<p>Defaults to False</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_PROXY_SSL_HEADER"><a href="#PAPERLESS_PROXY_SSL_HEADER"><code>PAPERLESS_PROXY_SSL_HEADER=&lt;json-list&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Configures the Django setting <a href="https://docs.djangoproject.com/en/4.2/ref/settings/#secure-proxy-ssl-header">SECURE_PROXY_SSL_HEADER</a>
+which may be needed for hosting behind a proxy. The two values in the list will form the tuple of
+HTTP header/value expected by Django, eg <code>'["HTTP_X_FORWARDED_PROTO", "https"]'</code>.</p>
+<p>Defaults to None</p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Settings this value has security implications.  Read the Django documentation
+and be sure you understand its usage before setting it.</p>
+</div>
+<h4 id="PAPERLESS_EMAIL_CERTIFICATE_LOCATION"><a href="#PAPERLESS_EMAIL_CERTIFICATE_LOCATION"><code>PAPERLESS_EMAIL_CERTIFICATE_LOCATION=&lt;path&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Configures an additional SSL certificate file containing a <a href="https://docs.python.org/3/library/ssl.html#certificates">certificate</a>
+or certificate chain which should be trusted for validating SSL connections against mail providers.
+This is for use with self-signed certificates against local IMAP servers.</p>
+<p>Defaults to None.</p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Settings this value has security implications for the security of your email.
+Understand what it does and be sure you need to before setting.</p>
+</div>
+<h4 id="PAPERLESS_SOCIALACCOUNT_PROVIDERS"><a href="#PAPERLESS_SOCIALACCOUNT_PROVIDERS"><code>PAPERLESS_SOCIALACCOUNT_PROVIDERS=&lt;json&gt;</code></a></h4>
+<dl>
+<dd>
+<p>This variable is used to setup login and signup via social account providers which are compatible with django-allauth.
+See the corresponding <a href="https://docs.allauth.org/en/latest/socialaccount/providers/index.html">django-allauth documentation</a>
+for a list of provider configurations. You will also need to include the relevant Django 'application' inside the
+<a href="#PAPERLESS_APPS">PAPERLESS_APPS</a> setting to activate that specific authentication provider (e.g. <code>allauth.socialaccount.providers.openid_connect</code> for the <a href="https://docs.allauth.org/en/latest/socialaccount/providers/openid_connect.html">OIDC Connect provider</a>).</p>
+<p>Defaults to None, which does not enable any third party authentication systems.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_SOCIAL_AUTO_SIGNUP"><a href="#PAPERLESS_SOCIAL_AUTO_SIGNUP"><code>PAPERLESS_SOCIAL_AUTO_SIGNUP=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Attempt to signup the user using retrieved email, username etc from the third party authentication
+system. See the corresponding
+<a href="https://docs.allauth.org/en/latest/socialaccount/configuration.html">django-allauth documentation</a></p>
+<p>Defaults to False</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_SOCIALACCOUNT_ALLOW_SIGNUPS"><a href="#PAPERLESS_SOCIALACCOUNT_ALLOW_SIGNUPS"><code>PAPERLESS_SOCIALACCOUNT_ALLOW_SIGNUPS=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Allow users to signup for a new Paperless-ngx account using any setup third party authentication systems.</p>
+<p>Defaults to True</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_ACCOUNT_ALLOW_SIGNUPS"><a href="#PAPERLESS_ACCOUNT_ALLOW_SIGNUPS"><code>PAPERLESS_ACCOUNT_ALLOW_SIGNUPS=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Allow users to signup for a new Paperless-ngx account.</p>
+<p>Defaults to False</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_ACCOUNT_DEFAULT_HTTP_PROTOCOL"><a href="#PAPERLESS_ACCOUNT_DEFAULT_HTTP_PROTOCOL"><code>PAPERLESS_ACCOUNT_DEFAULT_HTTP_PROTOCOL=&lt;string&gt;</code></a></h4>
+<dl>
+<dd>
+<p>The protocol used when generating URLs, e.g. login callback URLs. See the corresponding
+<a href="https://docs.allauth.org/en/latest/account/configuration.html">django-allauth documentation</a></p>
+<p>Defaults to 'https'</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_ACCOUNT_EMAIL_VERIFICATION"><a href="#PAPERLESS_ACCOUNT_EMAIL_VERIFICATION"><code>PAPERLESS_ACCOUNT_EMAIL_VERIFICATION=&lt;string&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Determines whether email addresses are verified during signup (as performed by Django allauth). See the relevant
+<a href="#PAPERLESS_EMAIL_HOST">paperless settings</a> and <a href="https://docs.allauth.org/en/latest/account/configuration.html">the allauth docs</a></p>
+<p>Defaults to 'optional'</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you do not have a working email server set up you should set this to 'none'.</p>
+</div>
+<h4 id="PAPERLESS_DISABLE_REGULAR_LOGIN"><a href="#PAPERLESS_DISABLE_REGULAR_LOGIN"><code>PAPERLESS_DISABLE_REGULAR_LOGIN=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Disables the regular frontend username / password login, i.e. once you have setup SSO. Note that this setting does not disable the Django admin login nor logging in with local credentials via the API. To prevent access to the Django admin, consider blocking <code>/admin/</code> in your <a href="https://github.com/paperless-ngx/paperless-ngx/wiki/Using-a-Reverse-Proxy-with-Paperless-ngx">web server or reverse proxy configuration</a>.</p>
+<p>You can optionally also automatically redirect users to the SSO login with <a href="#PAPERLESS_REDIRECT_LOGIN_TO_SSO">PAPERLESS_REDIRECT_LOGIN_TO_SSO</a></p>
+<p>Defaults to False</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_REDIRECT_LOGIN_TO_SSO"><a href="#PAPERLESS_REDIRECT_LOGIN_TO_SSO"><code>PAPERLESS_REDIRECT_LOGIN_TO_SSO=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>When this setting is enabled users will automatically be redirected (using javascript) to the first SSO provider login. You may still want to disable the frontend login form for clarity.</p>
+<p>Defaults to False</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_ACCOUNT_SESSION_REMEMBER"><a href="#PAPERLESS_ACCOUNT_SESSION_REMEMBER"><code>PAPERLESS_ACCOUNT_SESSION_REMEMBER=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>If false, sessions will expire at browser close, if true will use <code>PAPERLESS_SESSION_COOKIE_AGE</code> for expiration. See the corresponding
+<a href="https://docs.allauth.org/en/latest/account/configuration.html">django-allauth documentation</a></p>
+<p>Defaults to True</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_SESSION_COOKIE_AGE"><a href="#PAPERLESS_SESSION_COOKIE_AGE"><code>PAPERLESS_SESSION_COOKIE_AGE=&lt;int&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Login session cookie expiration. Applies if <code>PAPERLESS_ACCOUNT_SESSION_REMEMBER</code> is enabled. See the corresponding
+<a href="https://docs.djangoproject.com/en/5.1/ref/settings/#std-setting-SESSION_COOKIE_AGE">django documentation</a></p>
+<p>Defaults to 1209600 (2 weeks)</p>
+</dd>
+</dl>
+<h2 id="ocr">OCR settings</h2>
+<p>Paperless uses <a href="https://ocrmypdf.readthedocs.io/en/latest/">OCRmyPDF</a>
+for performing OCR on documents and images. Paperless uses sensible
+defaults for most settings, but all of them can be configured to your
+needs.</p>
+<h4 id="PAPERLESS_OCR_LANGUAGE"><a href="#PAPERLESS_OCR_LANGUAGE"><code>PAPERLESS_OCR_LANGUAGE=&lt;lang&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Customize the language that paperless will attempt to use when
+parsing documents.</p>
+<p>It should be a 3-letter code, see the list of <a href="https://tesseract-ocr.github.io/tessdoc/Data-Files-in-different-versions.html">languages Tesseract supports</a>.</p>
+<p>Set this to the language most of your documents are written in.</p>
+<p>This can be a combination of multiple languages such as <code>deu+eng</code>,
+in which case Tesseract will use whatever language matches best.
+Keep in mind that Tesseract uses much more CPU time with multiple
+languages enabled.</p>
+<p>If you are including languages that are not installed by default, you will need to also set <a href="./#PAPERLESS_OCR_LANGUAGES"><code>PAPERLESS_OCR_LANGUAGES</code></a> for docker deployments or install the tesseract language packages manually for bare metal installations.</p>
+<p>Defaults to "eng".</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If your language contains a '-' such as chi-sim, you must use <code>chi_sim</code>.</p>
+</div>
+</dd>
+</dl>
+<h4 id="PAPERLESS_OCR_MODE"><a href="#PAPERLESS_OCR_MODE"><code>PAPERLESS_OCR_MODE=&lt;mode&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Tell paperless when and how to perform ocr on your documents. Three
+modes are available:</p>
+<ul>
+<li>
+<p><code>skip</code>: Paperless skips all pages and will perform ocr only on
+    pages where no text is present. This is the safest option.</p>
+</li>
+<li>
+<p><code>redo</code>: Paperless will OCR all pages of your documents and
+    attempt to replace any existing text layers with new text. This
+    will be useful for documents from scanners that already
+    performed OCR with insufficient results. It will also perform
+    OCR on purely digital documents.</p>
+<p>This option may fail on some documents that have features that
+cannot be removed, such as forms. In this case, the text from
+the document is used instead.</p>
+</li>
+<li>
+<p><code>force</code>: Paperless rasterizes your documents, converting any
+    text into images and puts the OCRed text on top. This works for
+    all documents, however, the resulting document may be
+    significantly larger and text won't appear as sharp when zoomed
+    in.</p>
+</li>
+</ul>
+<p>The default is <code>skip</code>, which only performs OCR when necessary and
+always creates archived documents.</p>
+<p>Read more about this in the <a href="https://ocrmypdf.readthedocs.io/en/latest/advanced.html#when-ocr-is-skipped">OCRmyPDF
+documentation</a>.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_OCR_SKIP_ARCHIVE_FILE"><a href="#PAPERLESS_OCR_SKIP_ARCHIVE_FILE"><code>PAPERLESS_OCR_SKIP_ARCHIVE_FILE=&lt;mode&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Specify when you would like paperless to skip creating an archived
+version of your documents. This is useful if you don't want to have two
+almost-identical versions of your documents in the media folder.</p>
+<ul>
+<li><code>never</code>: Never skip creating an archived version.</li>
+<li><code>with_text</code>: Skip creating an archived version for documents
+that already have embedded text.</li>
+<li><code>always</code>: Always skip creating an archived version.</li>
+</ul>
+<p>The default is <code>never</code>.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_OCR_CLEAN"><a href="#PAPERLESS_OCR_CLEAN"><code>PAPERLESS_OCR_CLEAN=&lt;mode&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Tells paperless to use <code>unpaper</code> to clean any input document before
+sending it to tesseract. This uses more resources, but generally
+results in better OCR results. The following modes are available:</p>
+<ul>
+<li><code>clean</code>: Apply unpaper.</li>
+<li><code>clean-final</code>: Apply unpaper, and use the cleaned images to
+    build the output file instead of the original images.</li>
+<li><code>none</code>: Do not apply unpaper.</li>
+</ul>
+<p>Defaults to <code>clean</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>clean-final</code> is incompatible with ocr mode <code>redo</code>. When both
+<code>clean-final</code> and the ocr mode <code>redo</code> is configured, <code>clean</code> is used
+instead.</p>
+</div>
+</dd>
+</dl>
+<h4 id="PAPERLESS_OCR_DESKEW"><a href="#PAPERLESS_OCR_DESKEW"><code>PAPERLESS_OCR_DESKEW=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Tells paperless to correct skewing (slight rotation of input images
+mainly due to improper scanning)</p>
+<p>Defaults to <code>true</code>, which enables this feature.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Deskewing is incompatible with ocr mode <code>redo</code>. Deskewing will get
+disabled automatically if <code>redo</code> is used as the ocr mode.</p>
+</div>
+</dd>
+</dl>
+<h4 id="PAPERLESS_OCR_ROTATE_PAGES"><a href="#PAPERLESS_OCR_ROTATE_PAGES"><code>PAPERLESS_OCR_ROTATE_PAGES=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Tells paperless to correct page rotation (90°, 180° and 270°
+rotation).</p>
+<p>If you notice that paperless is not rotating incorrectly rotated
+pages (or vice versa), try adjusting the threshold up or down (see
+below).</p>
+<p>Defaults to <code>true</code>, which enables this feature.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_OCR_ROTATE_PAGES_THRESHOLD"><a href="#PAPERLESS_OCR_ROTATE_PAGES_THRESHOLD"><code>PAPERLESS_OCR_ROTATE_PAGES_THRESHOLD=&lt;num&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Adjust the threshold for automatic page rotation by
+<code>PAPERLESS_OCR_ROTATE_PAGES</code>. This is an arbitrary value reported by
+tesseract. "15" is a very conservative value, whereas "2" is a
+very aggressive option and will often result in correctly rotated
+pages being rotated as well.</p>
+<p>Defaults to "12".</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_OCR_OUTPUT_TYPE"><a href="#PAPERLESS_OCR_OUTPUT_TYPE"><code>PAPERLESS_OCR_OUTPUT_TYPE=&lt;type&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Specify the the type of PDF documents that paperless should produce.</p>
+<ul>
+<li><code>pdf</code>: Modify the PDF document as little as possible.</li>
+<li><code>pdfa</code>: Convert PDF documents into PDF/A-2b documents, which is
+    a subset of the entire PDF specification and meant for storing
+    documents long term.</li>
+<li><code>pdfa-1</code>, <code>pdfa-2</code>, <code>pdfa-3</code> to specify the exact version of
+    PDF/A you wish to use.</li>
+</ul>
+<p>If not specified, <code>pdfa</code> is used. Remember that paperless also keeps
+the original input file as well as the archived version.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_OCR_PAGES"><a href="#PAPERLESS_OCR_PAGES"><code>PAPERLESS_OCR_PAGES=&lt;num&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Tells paperless to use only the specified amount of pages for OCR.
+Documents with less than the specified amount of pages get OCR'ed
+completely.</p>
+<p>Specifying 1 here will only use the first page.</p>
+<p>The value must be greater than or equal to 1 to be used.</p>
+<p>When combined with <code>PAPERLESS_OCR_MODE=redo</code> or
+<code>PAPERLESS_OCR_MODE=force</code>, paperless will not modify any text it
+finds on excluded pages and copy it verbatim.</p>
+<p>Defaults to unset, which disables this feature and always uses all
+pages.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_OCR_IMAGE_DPI"><a href="#PAPERLESS_OCR_IMAGE_DPI"><code>PAPERLESS_OCR_IMAGE_DPI=&lt;num&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Paperless will OCR any images you put into the system and convert
+them into PDF documents. This is useful if your scanner produces
+images. In order to do so, paperless needs to know the DPI of the
+image. Most images from scanners will have this information embedded
+and paperless will detect and use that information. In case this
+fails, it uses this value as a fallback.</p>
+<p>Set this to the DPI your scanner produces images at.</p>
+<p>Defaults to unset, which will automatically calculate image DPI so
+that the produced PDF documents are A4 sized.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_OCR_MAX_IMAGE_PIXELS"><a href="#PAPERLESS_OCR_MAX_IMAGE_PIXELS"><code>PAPERLESS_OCR_MAX_IMAGE_PIXELS=&lt;num&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Paperless will raise a warning when OCRing images which are over
+this limit and will not OCR images which are more than twice this
+limit. Note this does not prevent the document from being consumed,
+but could result in missing text content.</p>
+<p>If unset, will default to the value determined by
+<a href="https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.MAX_IMAGE_PIXELS">Pillow</a>.</p>
+<p>Setting this value to 0 will entirely disable the limit.  See the below warning.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Increasing this limit could cause Paperless to consume additional
+resources when consuming a file. Be sure you have sufficient system
+resources.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The limit is intended to prevent malicious files from consuming
+system resources and causing crashes and other errors. Only change
+this value if you are certain your documents are not malicious and
+you need the text which was not OCRed</p>
+</div>
+</dd>
+</dl>
+<h4 id="PAPERLESS_OCR_COLOR_CONVERSION_STRATEGY"><a href="#PAPERLESS_OCR_COLOR_CONVERSION_STRATEGY"><code>PAPERLESS_OCR_COLOR_CONVERSION_STRATEGY=&lt;RGB&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Controls the Ghostscript color conversion strategy when creating the archive file. This setting
+will only be utilized if the output is a version of PDF/A.</p>
+<p>Valid options are CMYK, Gray, LeaveColorUnchanged, RGB or UseDeviceIndependentColor.</p>
+<p>You can find more on the settings <a href="https://ghostscript.readthedocs.io/en/latest/VectorDevices.html#color-conversion-and-management">here</a> in the Ghostscript documentation.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Utilizing some of the options may result in errors when creating archive
+files from PDFs.</p>
+</div>
+</dd>
+</dl>
+<h4 id="PAPERLESS_OCR_USER_ARGS"><a href="#PAPERLESS_OCR_USER_ARGS"><code>PAPERLESS_OCR_USER_ARGS=&lt;json&gt;</code></a></h4>
+<dl>
+<dd>
+<p>OCRmyPDF offers many more options. Use this parameter to specify any
+additional arguments you wish to pass to OCRmyPDF. Since Paperless
+uses the API of OCRmyPDF, you have to specify these in a format that
+can be passed to the API. See <a href="https://ocrmypdf.readthedocs.io/en/latest/api.html#reference">the API reference of
+OCRmyPDF</a>
+for valid parameters. All command line options are supported, but
+they use underscores instead of dashes.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Paperless has been tested to work with the OCR options provided
+above. There are many options that are incompatible with each other,
+so specifying invalid options may prevent paperless from consuming
+any documents.  Use with caution!</p>
+</div>
+<p>Specify arguments as a JSON dictionary. Keep note of lower case
+booleans and double quoted parameter names and strings. Examples:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span><span class="nt">&quot;deskew&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;optimize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;unpaper_args&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;--pre-rotate 90&quot;</span><span class="p">}</span>
+</code></pre></div>
+</dd>
+</dl>
+<h2 id="software_tweaks">Software tweaks</h2>
+<h4 id="PAPERLESS_TASK_WORKERS"><a href="#PAPERLESS_TASK_WORKERS"><code>PAPERLESS_TASK_WORKERS=&lt;num&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Paperless does multiple things in the background: Maintain the
+search index, maintain the automatic matching algorithm, check
+emails, consume documents, etc. This variable specifies how many
+things it will do in parallel.</p>
+<p>Defaults to 1</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_THREADS_PER_WORKER"><a href="#PAPERLESS_THREADS_PER_WORKER"><code>PAPERLESS_THREADS_PER_WORKER=&lt;num&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Furthermore, paperless uses multiple threads when consuming
+documents to speed up OCR. This variable specifies how many pages
+paperless will process in parallel on a single document.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Ensure that the product</p>
+<p><code>PAPERLESS_TASK_WORKERS * PAPERLESS_THREADS_PER_WORKER</code></p>
+<p>does not exceed your CPU core count or else paperless will be
+extremely slow. If you want paperless to process many documents in
+parallel, choose a high worker count. If you want paperless to
+process very large documents faster, use a higher thread per worker
+count.</p>
+</div>
+<p>The default is a balance between the two, according to your CPU core
+count, with a slight favor towards threads per worker:</p>
+<table>
+<thead>
+<tr>
+<th>CPU core count</th>
+<th>Workers</th>
+<th>Threads</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&gt; 1</td>
+<td>&gt; 1</td>
+<td>&gt; 1</td>
+</tr>
+<tr>
+<td>&gt; 2</td>
+<td>&gt; 2</td>
+<td>&gt; 1</td>
+</tr>
+<tr>
+<td>&gt; 4</td>
+<td>&gt; 2</td>
+<td>&gt; 2</td>
+</tr>
+<tr>
+<td>&gt; 6</td>
+<td>&gt; 2</td>
+<td>&gt; 3</td>
+</tr>
+<tr>
+<td>&gt; 8</td>
+<td>&gt; 2</td>
+<td>&gt; 4</td>
+</tr>
+<tr>
+<td>&gt; 12</td>
+<td>&gt; 3</td>
+<td>&gt; 4</td>
+</tr>
+<tr>
+<td>&gt; 16</td>
+<td>&gt; 4</td>
+<td>&gt; 4</td>
+</tr>
+</tbody>
+</table>
+<p>If you only specify PAPERLESS_TASK_WORKERS, paperless will adjust
+PAPERLESS_THREADS_PER_WORKER automatically.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_WORKER_TIMEOUT"><a href="#PAPERLESS_WORKER_TIMEOUT"><code>PAPERLESS_WORKER_TIMEOUT=&lt;num&gt;</code></a></h4>
+<dl>
+<dd>Machines with few cores or weak ones might not be able to finish OCR
+on large documents within the default 1800 seconds. So extending
+this timeout may prove to be useful on weak hardware setups.</dd>
+</dl>
+<h4 id="PAPERLESS_TIME_ZONE"><a href="#PAPERLESS_TIME_ZONE"><code>PAPERLESS_TIME_ZONE=&lt;timezone&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Set the time zone here. See more details on
+why and how to set it <a href="https://docs.djangoproject.com/en/4.1/ref/settings/#std:setting-TIME_ZONE">in the Django project documentation</a>
+for details on how to set it.</p>
+<p>Defaults to UTC.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_ENABLE_NLTK"><a href="#PAPERLESS_ENABLE_NLTK"><code>PAPERLESS_ENABLE_NLTK=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>Enables or disables the advanced natural language processing
+used during automatic classification. If disabled, paperless will
+still perform some basic text pre-processing before matching.</dd>
+<dd>
+<p>See also <code>PAPERLESS_NLTK_DIR</code>.</p>
+<p>Defaults to 1.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_EMAIL_TASK_CRON"><a href="#PAPERLESS_EMAIL_TASK_CRON"><code>PAPERLESS_EMAIL_TASK_CRON=&lt;cron expression&gt;</code></a></h4>
+<dl>
+<dd>Configures the scheduled email fetching frequency. The value
+should be a valid crontab(5) expression describing when to run.</dd>
+<dd>
+<p>If set to the string "disable", no emails will be fetched automatically.</p>
+<p>Defaults to <code>*/10 * * * *</code> or every ten minutes.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_TRAIN_TASK_CRON"><a href="#PAPERLESS_TRAIN_TASK_CRON"><code>PAPERLESS_TRAIN_TASK_CRON=&lt;cron expression&gt;</code></a></h4>
+<dl>
+<dd>Configures the scheduled automatic classifier training frequency. The value
+should be a valid crontab(5) expression describing when to run.</dd>
+<dd>
+<p>If set to the string "disable", the classifier will not be trained automatically.</p>
+<p>Defaults to <code>5 */1 * * *</code> or every hour at 5 minutes past the hour.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_INDEX_TASK_CRON"><a href="#PAPERLESS_INDEX_TASK_CRON"><code>PAPERLESS_INDEX_TASK_CRON=&lt;cron expression&gt;</code></a></h4>
+<dl>
+<dd>Configures the scheduled search index update frequency. The value
+should be a valid crontab(5) expression describing when to run.</dd>
+<dd>
+<p>If set to the string "disable", the search index will not be automatically updated.</p>
+<p>Defaults to <code>0 0 * * *</code> or daily at midnight.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_SANITY_TASK_CRON"><a href="#PAPERLESS_SANITY_TASK_CRON"><code>PAPERLESS_SANITY_TASK_CRON=&lt;cron expression&gt;</code></a></h4>
+<dl>
+<dd>Configures the scheduled sanity checker frequency.</dd>
+<dd>
+<p>If set to the string "disable", the sanity checker will not run automatically.</p>
+<p>Defaults to <code>30 0 * * sun</code> or Sunday at 30 minutes past midnight.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_ENABLE_COMPRESSION"><a href="#PAPERLESS_ENABLE_COMPRESSION"><code>PAPERLESS_ENABLE_COMPRESSION=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>Enables compression of the responses from the webserver.</dd>
+<dd>
+<p>Defaults to 1, enabling compression.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are using a proxy such as nginx, it is likely more efficient
+to enable compression in your proxy configuration rather than
+the webserver</p>
+</div>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CONVERT_MEMORY_LIMIT"><a href="#PAPERLESS_CONVERT_MEMORY_LIMIT"><code>PAPERLESS_CONVERT_MEMORY_LIMIT=&lt;num&gt;</code></a></h4>
+<dl>
+<dd>
+<p>On smaller systems, or even in the case of Very Large Documents, the
+consumer may explode, complaining about how it's "unable to extend
+pixel cache". In such cases, try setting this to a reasonably low
+value, like 32. The default is to use whatever is necessary to do
+everything without writing to disk, and units are in megabytes.</p>
+<p>For more information on how to use this value, you should search the
+web for "MAGICK_MEMORY_LIMIT".</p>
+<p>Defaults to 0, which disables the limit.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CONVERT_TMPDIR"><a href="#PAPERLESS_CONVERT_TMPDIR"><code>PAPERLESS_CONVERT_TMPDIR=&lt;path&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Similar to the memory limit, if you've got a small system and your
+OS mounts /tmp as tmpfs, you should set this to a path that's on a
+physical disk, like /home/your_user/tmp or something. ImageMagick
+will use this as scratch space when crunching through very large
+documents.</p>
+<p>For more information on how to use this value, you should search the
+web for "MAGICK_TMPDIR".</p>
+<p>Default is none, which disables the temporary directory.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_APPS"><a href="#PAPERLESS_APPS"><code>PAPERLESS_APPS=&lt;string&gt;</code></a></h4>
+<dl>
+<dd>
+<p>A comma-separated list of Django apps to be included in Django's
+<a href="https://docs.djangoproject.com/en/5.0/ref/applications/"><code>INSTALLED_APPS</code></a>. This setting should
+be used with caution!</p>
+<p>Defaults to None, which does not add any additional apps.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_MAX_IMAGE_PIXELS"><a href="#PAPERLESS_MAX_IMAGE_PIXELS"><code>PAPERLESS_MAX_IMAGE_PIXELS=&lt;number&gt;</code></a></h4>
+<dl>
+<dd>Configures the maximum size of an image PIL will allow to load without warning or error.</dd>
+<dd>
+<p>If unset, will default to the value determined by
+<a href="https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.MAX_IMAGE_PIXELS">Pillow</a>.</p>
+<p>Defaults to None, which does change the limit</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This limit is designed to prevent denial of service from malicious files.
+It should only be raised or disabled in certain circumstances and with great care.</p>
+</div>
+</dd>
+</dl>
+<h2 id="consume_config">Document Consumption</h2>
+<h4 id="PAPERLESS_CONSUMER_DELETE_DUPLICATES"><a href="#PAPERLESS_CONSUMER_DELETE_DUPLICATES"><code>PAPERLESS_CONSUMER_DELETE_DUPLICATES=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>When the consumer detects a duplicate document, it will not touch
+the original document. This default behavior can be changed here.</p>
+<p>Defaults to false.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CONSUMER_RECURSIVE"><a href="#PAPERLESS_CONSUMER_RECURSIVE"><code>PAPERLESS_CONSUMER_RECURSIVE=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Enable recursive watching of the consumption directory. Paperless
+will then pickup files from files in subdirectories within your
+consumption directory as well.</p>
+<p>Defaults to false.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS"><a href="#PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS"><code>PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Set the names of subdirectories as tags for consumed files. E.g.
+<code>&lt;CONSUMPTION_DIR&gt;/foo/bar/file.pdf</code> will add the tags "foo" and
+"bar" to the consumed file. Paperless will create any tags that
+don't exist yet.</p>
+<p>This is useful for sorting documents with certain tags such as <code>car</code>
+or <code>todo</code> prior to consumption. These folders won't be deleted.</p>
+<p>PAPERLESS_CONSUMER_RECURSIVE must be enabled for this to work.</p>
+<p>Defaults to false.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CONSUMER_IGNORE_PATTERNS"><a href="#PAPERLESS_CONSUMER_IGNORE_PATTERNS"><code>PAPERLESS_CONSUMER_IGNORE_PATTERNS=&lt;json&gt;</code></a></h4>
+<dl>
+<dd>
+<p>By default, paperless ignores certain files and folders in the
+consumption directory, such as system files created by the Mac OS
+or hidden folders some tools use to store data.</p>
+<p>This can be adjusted by configuring a custom json array with
+patterns to exclude.</p>
+<p>For example, <code>.DS_STORE/*</code> will ignore any files found in a folder
+named <code>.DS_STORE</code>, including <code>.DS_STORE/bar.pdf</code> and <code>foo/.DS_STORE/bar.pdf</code></p>
+<p>A pattern like <code>._*</code> will ignore anything starting with <code>._</code>, including:
+<code>._foo.pdf</code> and <code>._bar/foo.pdf</code></p>
+<p>Defaults to
+<code>[".DS_Store", ".DS_STORE", "._*", ".stfolder/*", ".stversions/*", ".localized/*", "desktop.ini", "@eaDir/*", "Thumbs.db"]</code>.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CONSUMER_BARCODE_SCANNER"><a href="#PAPERLESS_CONSUMER_BARCODE_SCANNER"><code>PAPERLESS_CONSUMER_BARCODE_SCANNER=&lt;string&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Sets the barcode scanner used for barcode functionality.</p>
+<p>Currently, "PYZBAR" (the default) or "ZXING" might be selected.
+If you have problems that your Barcodes/QR-Codes are not detected
+(especially with bad scan quality and/or small codes), try the other one.</p>
+<p>zxing is not available on all platforms.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_PRE_CONSUME_SCRIPT"><a href="#PAPERLESS_PRE_CONSUME_SCRIPT"><code>PAPERLESS_PRE_CONSUME_SCRIPT=&lt;filename&gt;</code></a></h4>
+<dl>
+<dd>
+<p>After some initial validation, Paperless can trigger an arbitrary
+script if you like before beginning consumption. This script will be provided
+data for it to work with via the environment.</p>
+<p>For more information, take a look at <a href="../advanced_usage/#pre-consume-script">pre-consumption script</a>.</p>
+<p>The default is blank, which means nothing will be executed.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_POST_CONSUME_SCRIPT"><a href="#PAPERLESS_POST_CONSUME_SCRIPT"><code>PAPERLESS_POST_CONSUME_SCRIPT=&lt;filename&gt;</code></a></h4>
+<dl>
+<dd>
+<p>After a document is consumed, Paperless can trigger an arbitrary
+script if you like. This script will be provided
+data for it to work with via the environment.</p>
+<p>For more information, take a look at <a href="../advanced_usage/#post-consume-script">Post-consumption script</a>.</p>
+<p>The default is blank, which means nothing will be executed.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_FILENAME_DATE_ORDER"><a href="#PAPERLESS_FILENAME_DATE_ORDER"><code>PAPERLESS_FILENAME_DATE_ORDER=&lt;format&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Paperless will check the document text for document date
+information. Use this setting to enable checking the document
+filename for date information. The date order can be set to any
+option as specified in
+<a href="https://dateparser.readthedocs.io/en/latest/settings.html#date-order">https://dateparser.readthedocs.io/en/latest/settings.html#date-order</a>.
+The filename will be checked first, and if nothing is found, the
+document text will be checked as normal.</p>
+<p>A date in a filename must have some separators (<code>.</code>, <code>,</code>, <code>-</code>, <code>/</code>, etc) for it to be parsed.</p>
+<p>Defaults to none, which disables this feature.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_NUMBER_OF_SUGGESTED_DATES"><a href="#PAPERLESS_NUMBER_OF_SUGGESTED_DATES"><code>PAPERLESS_NUMBER_OF_SUGGESTED_DATES=&lt;num&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Paperless searches an entire document for dates. The first date
+found will be used as the initial value for the created date. When
+this variable is greater than 0 (or left to its default value),
+paperless will also suggest other dates found in the document, up to
+a maximum of this setting. Note that duplicates will be removed,
+which can result in fewer dates displayed in the frontend than this
+setting value.</p>
+<p>The task to find all dates can be time-consuming and increases with
+a higher (maximum) number of suggested dates and slower hardware.</p>
+<p>Defaults to 3. Set to 0 to disable this feature.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_THUMBNAIL_FONT_NAME"><a href="#PAPERLESS_THUMBNAIL_FONT_NAME"><code>PAPERLESS_THUMBNAIL_FONT_NAME=&lt;filename&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Paperless creates thumbnails for plain text files by rendering the
+content of the file on an image and uses a predefined font for that.
+This font can be changed here.</p>
+<p>Note that this won't have any effect on already generated
+thumbnails.</p>
+<p>Defaults to
+<code>/usr/share/fonts/liberation/LiberationSerif-Regular.ttf</code>.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_IGNORE_DATES"><a href="#PAPERLESS_IGNORE_DATES"><code>PAPERLESS_IGNORE_DATES=&lt;string&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Paperless parses a document's creation date from filename and file
+content. You may specify a comma separated list of dates that should
+be ignored during this process. This is useful for special dates
+(like date of birth) that appear in documents regularly but are very
+unlikely to be the document's creation date.</p>
+<p>The date is parsed using the order specified in PAPERLESS_DATE_ORDER</p>
+<p>Defaults to an empty string to not ignore any dates.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_DATE_ORDER"><a href="#PAPERLESS_DATE_ORDER"><code>PAPERLESS_DATE_ORDER=&lt;format&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Paperless will try to determine the document creation date from its
+contents. Specify the date format Paperless should expect to see
+within your documents.</p>
+<p>This option defaults to DMY which translates to day first, month
+second, and year last order. Characters D, M, or Y can be shuffled
+to meet the required order.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_ENABLE_GPG_DECRYPTOR"><a href="#PAPERLESS_ENABLE_GPG_DECRYPTOR"><code>PAPERLESS_ENABLE_GPG_DECRYPTOR=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Enable or disable the GPG decryptor for encrypted emails. See <a href="../advanced_usage/#gpg-decryptor">GPG Decryptor</a> for more information.</p>
+<p>Defaults to false.</p>
+</dd>
+</dl>
+<h3 id="polling">Polling</h3>
+<h4 id="PAPERLESS_CONSUMER_POLLING"><a href="#PAPERLESS_CONSUMER_POLLING"><code>PAPERLESS_CONSUMER_POLLING=&lt;num&gt;</code></a></h4>
+<dl>
+<dd>
+<p>If paperless won't find documents added to your consume folder, it
+might not be able to automatically detect filesystem changes. In
+that case, specify a polling interval in seconds here, which will
+then cause paperless to periodically check your consumption
+directory for changes. This will also disable listening for file
+system changes with <code>inotify</code>.</p>
+<p>Defaults to 0, which disables polling and uses filesystem
+notifications.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CONSUMER_POLLING_RETRY_COUNT"><a href="#PAPERLESS_CONSUMER_POLLING_RETRY_COUNT"><code>PAPERLESS_CONSUMER_POLLING_RETRY_COUNT=&lt;num&gt;</code></a></h4>
+<dl>
+<dd>
+<p>If consumer polling is enabled, sets the maximum number of times
+paperless will check for a file to remain unmodified. If a file's
+modification time and size are identical for two consecutive checks, it
+will be consumed.</p>
+<p>Defaults to 5.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CONSUMER_POLLING_DELAY"><a href="#PAPERLESS_CONSUMER_POLLING_DELAY"><code>PAPERLESS_CONSUMER_POLLING_DELAY=&lt;num&gt;</code></a></h4>
+<dl>
+<dd>
+<p>If consumer polling is enabled, sets the delay in seconds between
+each check (above) paperless will do while waiting for a file to
+remain unmodified.</p>
+<p>Defaults to 5.</p>
+</dd>
+</dl>
+<h3 id="inotify">iNotify</h3>
+<h4 id="PAPERLESS_CONSUMER_INOTIFY_DELAY"><a href="#PAPERLESS_CONSUMER_INOTIFY_DELAY"><code>PAPERLESS_CONSUMER_INOTIFY_DELAY=&lt;num&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Sets the time in seconds the consumer will wait for additional
+events from inotify before the consumer will consider a file ready
+and begin consumption. Certain scanners or network setups may
+generate multiple events for a single file, leading to multiple
+consumers working on the same file. Configure this to prevent that.</p>
+<p>Defaults to 0.5 seconds.</p>
+</dd>
+</dl>
+<h2 id="incoming_mail">Incoming Mail</h2>
+<h3 id="email_oauth">Email OAuth</h3>
+<h4 id="PAPERLESS_OAUTH_CALLBACK_BASE_URL"><a href="#PAPERLESS_OAUTH_CALLBACK_BASE_URL"><code>PAPERLESS_OAUTH_CALLBACK_BASE_URL=&lt;str&gt;</code></a></h4>
+<dl>
+<dd>
+<p>The base URL for the OAuth callback. This is used to construct the full URL for the OAuth callback. This should be the URL that the Paperless instance is accessible at. If not set, defaults to the <code>PAPERLESS_URL</code> setting. At least one of these settings must be set to enable OAuth Email setup.</p>
+<p>Defaults to none (thus will use <a href="#PAPERLESS_URL">PAPERLESS_URL</a>).</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This setting only applies to OAuth Email setup (not to the SSO setup).</p>
+</div>
+<h4 id="PAPERLESS_GMAIL_OAUTH_CLIENT_ID"><a href="#PAPERLESS_GMAIL_OAUTH_CLIENT_ID"><code>PAPERLESS_GMAIL_OAUTH_CLIENT_ID=&lt;str&gt;</code></a></h4>
+<dl>
+<dd>
+<p>The OAuth client ID for Gmail. This is required for Gmail OAuth Email setup. See <a href="../usage/#oauth-email-setup">OAuth Email Setup</a> for more information.</p>
+<p>Defaults to none.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_GMAIL_OAUTH_CLIENT_SECRET"><a href="#PAPERLESS_GMAIL_OAUTH_CLIENT_SECRET"><code>PAPERLESS_GMAIL_OAUTH_CLIENT_SECRET=&lt;str&gt;</code></a></h4>
+<dl>
+<dd>
+<p>The OAuth client secret for Gmail. This is required for Gmail OAuth Email setup. See <a href="../usage/#oauth-email-setup">OAuth Email Setup</a> for more information.</p>
+<p>Defaults to none.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_OUTLOOK_OAUTH_CLIENT_ID"><a href="#PAPERLESS_OUTLOOK_OAUTH_CLIENT_ID"><code>PAPERLESS_OUTLOOK_OAUTH_CLIENT_ID=&lt;str&gt;</code></a></h4>
+<dl>
+<dd>
+<p>The OAuth client ID for Outlook. This is required for Outlook OAuth Email setup. See <a href="../usage/#oauth-email-setup">OAuth Email Setup</a> for more information.</p>
+<p>Defaults to none.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_OUTLOOK_OAUTH_CLIENT_SECRET"><a href="#PAPERLESS_OUTLOOK_OAUTH_CLIENT_SECRET"><code>PAPERLESS_OUTLOOK_OAUTH_CLIENT_SECRET=&lt;str&gt;</code></a></h4>
+<dl>
+<dd>
+<p>The OAuth client secret for Outlook. This is required for Outlook OAuth Email setup. See <a href="../usage/#oauth-email-setup">OAuth Email Setup</a> for more information.</p>
+<p>Defaults to none.</p>
+</dd>
+</dl>
+<h3 id="encrypted_emails">Encrypted Emails</h3>
+<h4 id="PAPERLESS_EMAIL_GNUPG_HOME"><a href="#PAPERLESS_EMAIL_GNUPG_HOME"><code>PAPERLESS_EMAIL_GNUPG_HOME=&lt;str&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Optional, sets the <code>GNUPG_HOME</code> path to use with GPG decryptor for encrypted emails. See <a href="../advanced_usage/#gpg-decryptor">GPG Decryptor</a> for more information. If not set, defaults to the default <code>GNUPG_HOME</code> path.</p>
+<p>Defaults to <not set>.</p>
+</dd>
+</dl>
+<h2 id="barcodes">Barcodes</h2>
+<h4 id="PAPERLESS_CONSUMER_ENABLE_BARCODES"><a href="#PAPERLESS_CONSUMER_ENABLE_BARCODES"><code>PAPERLESS_CONSUMER_ENABLE_BARCODES=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Enables the scanning and page separation based on detected barcodes.
+This allows for scanning and adding multiple documents per uploaded
+file, which are separated by one or multiple barcode pages.</p>
+<p>For ease of use, it is suggested to use a standardized separation
+page, e.g. <a href="https://www.alliancegroup.co.uk/patch-codes.htm">here</a>.</p>
+<p>If no barcodes are detected in the uploaded file, no page separation
+will happen.</p>
+<p>The original document will be removed and the separated pages will
+be saved as pdf.</p>
+<p>See additional information in the <a href="../advanced_usage/#barcodes">advanced usage documentation</a></p>
+<p>Defaults to false.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CONSUMER_BARCODE_TIFF_SUPPORT"><a href="#PAPERLESS_CONSUMER_BARCODE_TIFF_SUPPORT"><code>PAPERLESS_CONSUMER_BARCODE_TIFF_SUPPORT=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Whether TIFF image files should be scanned for barcodes. This will
+automatically convert any TIFF image(s) to pdfs for later
+processing. This only has an effect, if
+PAPERLESS_CONSUMER_ENABLE_BARCODES has been enabled.</p>
+<p>Defaults to false.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CONSUMER_BARCODE_STRING"><a href="#PAPERLESS_CONSUMER_BARCODE_STRING"><code>PAPERLESS_CONSUMER_BARCODE_STRING=&lt;string&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Defines the string to be detected as a separator barcode. If
+paperless is used with the PATCH-T separator pages, users shouldn't
+change this.</p>
+<p>Defaults to "PATCHT"</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CONSUMER_BARCODE_RETAIN_SPLIT_PAGES"><a href="#PAPERLESS_CONSUMER_BARCODE_RETAIN_SPLIT_PAGES"><code>PAPERLESS_CONSUMER_BARCODE_RETAIN_SPLIT_PAGES=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>If set to true, all pages that are split by a barcode (such as PATCHT) will be kept.</p>
+<p>Defaults to false.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CONSUMER_ENABLE_ASN_BARCODE"><a href="#PAPERLESS_CONSUMER_ENABLE_ASN_BARCODE"><code>PAPERLESS_CONSUMER_ENABLE_ASN_BARCODE=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Enables the detection of barcodes in the scanned document and
+setting the ASN (archive serial number) if a properly formatted
+barcode is detected.</p>
+<p>The barcode must consist of a (configurable) prefix and the ASN
+to be set, for instance <code>ASN00123</code>. The content after the prefix
+is cleaned of non-numeric characters.</p>
+<p>This option is compatible with barcode page separation, since
+pages will be split up before reading the ASN.</p>
+<p>If no ASN barcodes are detected in the uploaded file, no ASN will
+be set. If a barcode with an existing ASN is detected, the
+document will not be consumed and an error logged.</p>
+<p>Defaults to false.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CONSUMER_ASN_BARCODE_PREFIX"><a href="#PAPERLESS_CONSUMER_ASN_BARCODE_PREFIX"><code>PAPERLESS_CONSUMER_ASN_BARCODE_PREFIX=&lt;string&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Defines the prefix that is used to identify a barcode as an ASN
+barcode.</p>
+<p>Defaults to "ASN"</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CONSUMER_BARCODE_UPSCALE"><a href="#PAPERLESS_CONSUMER_BARCODE_UPSCALE"><code>PAPERLESS_CONSUMER_BARCODE_UPSCALE=&lt;float&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Defines the upscale factor used in barcode detection.
+Improves the detection of small barcodes, i.e. with a value of 1.5 by
+upscaling the document before the detection process. Upscaling will
+only take place if value is bigger than 1.0. Otherwise upscaling will
+not be performed to save resources. Try using in combination with
+PAPERLESS_CONSUMER_BARCODE_DPI set to a value higher than default.</p>
+<p>Defaults to 0.0</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CONSUMER_BARCODE_DPI"><a href="#PAPERLESS_CONSUMER_BARCODE_DPI"><code>PAPERLESS_CONSUMER_BARCODE_DPI=&lt;int&gt;</code></a></h4>
+<dl>
+<dd>
+<p>During barcode detection every page from a PDF document needs
+to be converted to an image. A dpi value can be specified in the
+conversion process. Default is 300. If the detection of small barcodes
+fails a bigger dpi value i.e. 600 can fix the issue. Try using in
+combination with PAPERLESS_CONSUMER_BARCODE_UPSCALE bigger than 1.0.</p>
+<p>Defaults to "300"</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CONSUMER_BARCODE_MAX_PAGES"><a href="#PAPERLESS_CONSUMER_BARCODE_MAX_PAGES"><code>PAPERLESS_CONSUMER_BARCODE_MAX_PAGES=&lt;int&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Because barcode detection is a computationally-intensive operation, this setting
+limits the detection of barcodes to a number of first pages. If your scanner has
+a limit for the number of pages that can be scanned it would be sensible to set this
+as the limit here.</p>
+<p>Defaults to "0", allowing all pages to be checked for barcodes.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CONSUMER_ENABLE_TAG_BARCODE"><a href="#PAPERLESS_CONSUMER_ENABLE_TAG_BARCODE"><code>PAPERLESS_CONSUMER_ENABLE_TAG_BARCODE=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Enables the detection of barcodes in the scanned document and
+assigns or creates tags if a properly formatted barcode is detected.</p>
+<p>The barcode must match one of the (configurable) regular expressions.
+If the barcode text contains ',' (comma), it is split into multiple
+barcodes which are individually processed for tagging.</p>
+<p>Matching is case insensitive.</p>
+<p>Defaults to false.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CONSUMER_TAG_BARCODE_MAPPING"><a href="#PAPERLESS_CONSUMER_TAG_BARCODE_MAPPING"><code>PAPERLESS_CONSUMER_TAG_BARCODE_MAPPING=&lt;json dict&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Defines a dictionary of filter regex and substitute expressions.</p>
+<p>Syntax: <code>{"&lt;regex&gt;": "&lt;substitute&gt;" [,...]]}</code></p>
+<p>A barcode is considered for tagging if the barcode text matches
+at least one of the provided <regex> pattern.</p>
+<p>If a match is found, the <substitute> rule is applied. This allows very
+versatile reformatting and mapping of barcode pattern to tag values.</p>
+<p>If a tag is not found it will be created.</p>
+<p>Defaults to:</p>
+<p><code>{"TAG:(.*)": "\\g&lt;1&gt;"}</code> which defines
+- a regex TAG:(.*) which includes barcodes beginning with TAG:
+  followed by any text that gets stored into match group #1 and
+- a substitute <code>\\g&lt;1&gt;</code> that replaces the original barcode text
+  by the content in match group #1.
+Consequently, the tag is the barcode text without its TAG: prefix.</p>
+<p>More examples:</p>
+<p><code>{"ASN12.*": "JOHN", "ASN13.*": "SMITH"}</code> for example maps
+- ASN12nnnn barcodes to the tag JOHN and
+- ASN13nnnn barcodes to the tag SMITH.</p>
+<p><code>{"T-J": "JOHN", "T-S": "SMITH", "T-D": "DOE"}</code> directly maps
+- T-J barcodes to the tag JOHN,
+- T-S barcodes to the tag SMITH and
+- T-D barcodes to the tag DOE.</p>
+<p>Please refer to the Python regex documentation for more information.</p>
+</dd>
+</dl>
+<h2 id="audit-trail">Audit Trail</h2>
+<h4 id="PAPERLESS_AUDIT_LOG_ENABLED"><a href="#PAPERLESS_AUDIT_LOG_ENABLED"><code>PAPERLESS_AUDIT_LOG_ENABLED=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Enables the audit trail for documents, document types, correspondents, and tags.</p>
+<p>Defaults to true.</p>
+</dd>
+</dl>
+<h2 id="collate">Collate Double-Sided Documents</h2>
+<h4 id="PAPERLESS_CONSUMER_ENABLE_COLLATE_DOUBLE_SIDED"><a href="#PAPERLESS_CONSUMER_ENABLE_COLLATE_DOUBLE_SIDED"><code>PAPERLESS_CONSUMER_ENABLE_COLLATE_DOUBLE_SIDED=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Enables automatic collation of two single-sided scans into a double-sided
+document.</p>
+<p>This is useful if you have an automatic document feeder that only supports
+single-sided scans, but you need to scan a double-sided document. If your
+ADF supports double-sided scans natively, you do not need this feature.</p>
+<p><code>PAPERLESS_CONSUMER_RECURSIVE</code> must be enabled for this to work.</p>
+<p>For more information, read the <a href="../advanced_usage/#collate">corresponding section in the advanced
+documentation</a>.</p>
+<p>Defaults to false.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CONSUMER_COLLATE_DOUBLE_SIDED_SUBDIR_NAME"><a href="#PAPERLESS_CONSUMER_COLLATE_DOUBLE_SIDED_SUBDIR_NAME"><code>PAPERLESS_CONSUMER_COLLATE_DOUBLE_SIDED_SUBDIR_NAME=&lt;str&gt;</code></a></h4>
+<dl>
+<dd>
+<p>The name of the subdirectory that the collate feature expects documents to
+arrive.</p>
+<p>This only has an effect if <code>PAPERLESS_CONSUMER_ENABLE_COLLATE_DOUBLE_SIDED</code>
+has been enabled. Note that Paperless will not automatically create the
+directory.</p>
+<p>Defaults to "double-sided".</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_CONSUMER_COLLATE_DOUBLE_SIDED_TIFF_SUPPORT"><a href="#PAPERLESS_CONSUMER_COLLATE_DOUBLE_SIDED_TIFF_SUPPORT"><code>PAPERLESS_CONSUMER_COLLATE_DOUBLE_SIDED_TIFF_SUPPORT=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Whether TIFF image files should be supported when collating documents.
+This will automatically convert any TIFF image(s) to pdfs for later
+processing. This only has an effect if
+<code>PAPERLESS_CONSUMER_ENABLE_COLLATE_DOUBLE_SIDED</code> has been enabled.</p>
+<p>Defaults to false.</p>
+</dd>
+</dl>
+<h2 id="trash">Trash</h2>
+<h4 id="PAPERLESS_EMPTY_TRASH_DELAY"><a href="#PAPERLESS_EMPTY_TRASH_DELAY"><code>PAPERLESS_EMPTY_TRASH_DELAY=&lt;num&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Sets how long in days documents remain in the 'trash' before they are permanently deleted.</p>
+<p>Defaults to 30 days, minimum of 1 day.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_EMPTY_TRASH_TASK_CRON"><a href="#PAPERLESS_EMPTY_TRASH_TASK_CRON"><code>PAPERLESS_EMPTY_TRASH_TASK_CRON=&lt;cron expression&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Configures the schedule to empty the trash of expired deleted documents.</p>
+<p>Defaults to <code>0 1 * * *</code>, once per day.</p>
+</dd>
+</dl>
+<h2 id="binaries">Binaries</h2>
+<p>There are a few external software packages that Paperless expects to
+find on your system when it starts up. Unless you've done something
+creative with their installation, you probably won't need to edit any
+of these. However, if you've installed these programs somewhere where
+simply typing the name of the program doesn't automatically execute it
+(ie. the program isn't in your $PATH), then you'll need to specify
+the literal path for that program.</p>
+<h4 id="PAPERLESS_CONVERT_BINARY"><a href="#PAPERLESS_CONVERT_BINARY"><code>PAPERLESS_CONVERT_BINARY=&lt;path&gt;</code></a></h4>
+<dl>
+<dd>Defaults to "convert".</dd>
+</dl>
+<h4 id="PAPERLESS_GS_BINARY"><a href="#PAPERLESS_GS_BINARY"><code>PAPERLESS_GS_BINARY=&lt;path&gt;</code></a></h4>
+<dl>
+<dd>Defaults to "gs".</dd>
+</dl>
+<h2 id="docker">Docker-specific options</h2>
+<p>These options don't have any effect in <code>paperless.conf</code>. These options
+adjust the behavior of the docker container. Configure these in
+<code>docker-compose.env</code>.</p>
+<h4 id="PAPERLESS_WEBSERVER_WORKERS"><a href="#PAPERLESS_WEBSERVER_WORKERS"><code>PAPERLESS_WEBSERVER_WORKERS=&lt;num&gt;</code></a></h4>
+<dl>
+<dd>
+<p>The number of worker processes the webserver should spawn. More
+worker processes usually result in the front end to load data much
+quicker. However, each worker process also loads the entire
+application into memory separately, so increasing this value will
+increase RAM usage.</p>
+<p>Defaults to 1.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_BIND_ADDR"><a href="#PAPERLESS_BIND_ADDR"><code>PAPERLESS_BIND_ADDR=&lt;ip address&gt;</code></a></h4>
+<dl>
+<dd>
+<p>The IP address the webserver will listen on inside the container.
+There are special setups where you may need to configure this value
+to restrict the Ip address or interface the webserver listens on.</p>
+<p>Defaults to <code>[::]</code>, meaning all interfaces, including IPv6.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_PORT"><a href="#PAPERLESS_PORT"><code>PAPERLESS_PORT=&lt;port&gt;</code></a></h4>
+<dl>
+<dd>
+<p>The port number the webserver will listen on inside the container.
+There are special setups where you may need this to avoid collisions
+with other services (like using podman with multiple containers in
+one pod).</p>
+<p>Don't change this when using Docker. To change the port the
+webserver is reachable outside of the container, instead refer to
+the "ports" key in <code>docker-compose.yml</code>.</p>
+<p>Defaults to 8000.</p>
+</dd>
+</dl>
+<h4 id="USERMAP_UID"><a href="#USERMAP_UID"><code>USERMAP_UID=&lt;uid&gt;</code></a></h4>
+<dl>
+<dd>
+<p>The ID of the paperless user in the container. Set this to your
+actual user ID on the host system, which you can get by executing</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go">id -u</span>
+</code></pre></div>
+<p>Paperless will change ownership on its folders to this user, so you
+need to get this right in order to be able to write to the
+consumption directory.</p>
+<p>Defaults to 1000.</p>
+</dd>
+</dl>
+<h4 id="USERMAP_GID"><a href="#USERMAP_GID"><code>USERMAP_GID=&lt;gid&gt;</code></a></h4>
+<dl>
+<dd>
+<p>The ID of the paperless Group in the container. Set this to your
+actual group ID on the host system, which you can get by executing</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">id -g</span>
+</code></pre></div>
+<p>Paperless will change ownership on its folders to this group, so you
+need to get this right in order to be able to write to the
+consumption directory.</p>
+<p>Defaults to 1000.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_OCR_LANGUAGES"><a href="#PAPERLESS_OCR_LANGUAGES"><code>PAPERLESS_OCR_LANGUAGES=&lt;list&gt;</code></a></h4>
+<dl>
+<dd>
+<p>Additional OCR languages to install. By default, paperless comes
+with English, German, Italian, Spanish and French. If your language
+is not in this list, install additional languages with this
+configuration option. You will need to <a href="https://tesseract-ocr.github.io/tessdoc/Data-Files-in-different-versions.html">find the right LangCodes</a>
+but note that <a href="https://packages.debian.org/bullseye/graphics/">tesseract-ocr-* package names</a>
+do not always correspond with the language codes e.g. "chi_tra" should be
+specified as "chi-tra".</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">PAPERLESS_OCR_LANGUAGES</span><span class="o">=</span>tur<span class="w"> </span>ces<span class="w"> </span>chi-tra
+</code></pre></div>
+<p>Make sure it's a space-separated list when using several values.</p>
+<p>To actually use these languages, also set the default OCR language
+of paperless:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">PAPERLESS_OCR_LANGUAGE</span><span class="o">=</span>tur
+</code></pre></div>
+<p>Defaults to none, which does not install any additional languages.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This option must not be used in rootless containers.</p>
+</div>
+</dd>
+</dl>
+<h4 id="PAPERLESS_ENABLE_FLOWER"><a href="#PAPERLESS_ENABLE_FLOWER"><code>PAPERLESS_ENABLE_FLOWER=&lt;defined&gt;</code></a></h4>
+<dl>
+<dd>
+<p>If this environment variable is defined, the Celery monitoring tool
+<a href="https://flower.readthedocs.io/en/latest/index.html">Flower</a> will be
+started by the container.</p>
+<p>You can read more about this in the <a href="../advanced_usage/#celery-monitoring">advanced documentation</a>.</p>
+</dd>
+</dl>
+<h4 id="PAPERLESS_SUPERVISORD_WORKING_DIR"><a href="#PAPERLESS_SUPERVISORD_WORKING_DIR"><code>PAPERLESS_SUPERVISORD_WORKING_DIR=&lt;defined&gt;</code></a></h4>
+<dl>
+<dd>
+<p>If this environment variable is defined, the <code>supervisord.log</code> and <code>supervisord.pid</code> file will be created under the specified path in <code>PAPERLESS_SUPERVISORD_WORKING_DIR</code>. Setting <code>PAPERLESS_SUPERVISORD_WORKING_DIR=/tmp</code> and <code>PYTHONPYCACHEPREFIX=/tmp/pycache</code> would allow paperless to work on a read-only filesystem.</p>
+<p>Please take note that the <code>PAPERLESS_DATA_DIR</code> and <code>PAPERLESS_MEDIA_ROOT</code> paths still have to be writable, just like the <code>PAPERLESS_SUPERVISORD_WORKING_DIR</code>. The can be archived by using bind or volume mounts. Only works in the container is run as user <em>paperless</em></p>
+</dd>
+</dl>
+<h2 id="frontend-settings">Frontend Settings</h2>
+<h4 id="PAPERLESS_APP_TITLE"><a href="#PAPERLESS_APP_TITLE"><code>PAPERLESS_APP_TITLE=&lt;str&gt;</code></a></h4>
+<dl>
+<dd>If set, overrides the default name "Paperless-ngx"</dd>
+</dl>
+<h4 id="PAPERLESS_APP_LOGO"><a href="#PAPERLESS_APP_LOGO"><code>PAPERLESS_APP_LOGO=&lt;path&gt;</code></a></h4>
+<dl>
+<dd>Path to an image file in the /media/logo directory, must include 'logo', e.g. <code>/logo/Atari_logo.svg</code></dd>
+</dl>
+<h4 id="PAPERLESS_ENABLE_UPDATE_CHECK"><a href="#PAPERLESS_ENABLE_UPDATE_CHECK"><code>PAPERLESS_ENABLE_UPDATE_CHECK=&lt;bool&gt;</code></a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This setting was deprecated in favor of a frontend setting after
+v1.9.2. A one-time migration is performed for users who have this
+setting set. This setting is always ignored if the corresponding
+frontend setting has been set.</p>
+</div>
+<h2 id="email-sending">Email sending</h2>
+<p>Setting an SMTP server for the backend will allow you to reset your
+password. All of these options come from their similarly-named <a href="https://docs.djangoproject.com/en/4.2/ref/settings/#email-host">Django settings</a></p>
+<h4 id="PAPERLESS_EMAIL_HOST"><a href="#PAPERLESS_EMAIL_HOST"><code>PAPERLESS_EMAIL_HOST=&lt;str&gt;</code></a></h4>
+<dl>
+<dd>Defaults to 'localhost'.</dd>
+</dl>
+<h4 id="PAPERLESS_EMAIL_PORT"><a href="#PAPERLESS_EMAIL_PORT"><code>PAPERLESS_EMAIL_PORT=&lt;int&gt;</code></a></h4>
+<dl>
+<dd>Defaults to port 25.</dd>
+</dl>
+<h4 id="PAPERLESS_EMAIL_HOST_USER"><a href="#PAPERLESS_EMAIL_HOST_USER"><code>PAPERLESS_EMAIL_HOST_USER=&lt;str&gt;</code></a></h4>
+<dl>
+<dd>Defaults to ''.</dd>
+</dl>
+<h4 id="PAPERLESS_EMAIL_FROM"><a href="#PAPERLESS_EMAIL_FROM"><code>PAPERLESS_EMAIL_FROM=&lt;str&gt;</code></a></h4>
+<dl>
+<dd>Defaults to PAPERLESS_EMAIL_HOST_USER if not set.</dd>
+</dl>
+<h4 id="PAPERLESS_EMAIL_HOST_PASSWORD"><a href="#PAPERLESS_EMAIL_HOST_PASSWORD"><code>PAPERLESS_EMAIL_HOST_PASSWORD=&lt;str&gt;</code></a></h4>
+<dl>
+<dd>Defaults to ''.</dd>
+</dl>
+<h4 id="PAPERLESS_EMAIL_USE_TLS"><a href="#PAPERLESS_EMAIL_USE_TLS"><code>PAPERLESS_EMAIL_USE_TLS=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>Defaults to false.</dd>
+</dl>
+<h4 id="PAPERLESS_EMAIL_USE_SSL"><a href="#PAPERLESS_EMAIL_USE_SSL"><code>PAPERLESS_EMAIL_USE_SSL=&lt;bool&gt;</code></a></h4>
+<dl>
+<dd>Defaults to false.</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2016 - 2023 Daniel Quinn, Jonas Winkler, and the Paperless-ngx team
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/paperless-ngx/paperless-ngx" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://hub.docker.com/r/paperlessngx/paperless-ngx" target="_blank" rel="noopener" title="hub.docker.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M349.9 236.3h-66.1v-59.4h66.1zm0-204.3h-66.1v60.7h66.1zm78.2 144.8H362v59.4h66.1zm-156.3-72.1h-66.1v60.1h66.1zm78.1 0h-66.1v60.1h66.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1zm78.1 0h-66.1v59.4h66.1zm-78.1-72.1h-66.1v60.1h66.1z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://matrix.to/#/#paperless:matrix.org" target="_blank" rel="noopener" title="matrix.to" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3c5.5 0 10 3.58 10 8s-4.5 8-10 8c-1.24 0-2.43-.18-3.53-.5C5.55 21 2 21 2 21c2.33-2.33 2.7-3.9 2.75-4.5C3.05 15.07 2 13.13 2 11c0-4.42 4.5-8 10-8"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "toc.integrate", "content.code.annotate"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

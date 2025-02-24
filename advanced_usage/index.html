@@ -1,0 +1,2007 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../administration/">
+      
+      
+        <link rel="next" href="../api/">
+      
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>Advanced Topics - Paperless-ngx</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.a40c8224.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#advanced-topics" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Paperless-ngx" class="md-header__button md-logo" aria-label="Paperless-ngx" data-md-component="logo">
+      
+  <img src="../assets/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Paperless-ngx
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Advanced Topics
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/paperless-ngx/paperless-ngx" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    paperless-ngx/paperless-ngx
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../setup/" class="md-tabs__link">
+        
+  
+    
+  
+  Setup
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../usage/" class="md-tabs__link">
+        
+  
+    
+  
+  Basic Usage
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../configuration/" class="md-tabs__link">
+        
+  
+    
+  
+  Configuration
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../administration/" class="md-tabs__link">
+        
+  
+    
+  
+  Administration
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  Advanced Topics
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../api/" class="md-tabs__link">
+        
+  
+    
+  
+  REST API
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../development/" class="md-tabs__link">
+        
+  
+    
+  
+  Development
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../faq/" class="md-tabs__link">
+        
+  
+    
+  
+  FAQs
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../troubleshooting/" class="md-tabs__link">
+        
+  
+    
+  
+  Troubleshooting
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../changelog/" class="md-tabs__link">
+        
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Paperless-ngx" class="md-nav__button md-logo" aria-label="Paperless-ngx" data-md-component="logo">
+      
+  <img src="../assets/logo.svg" alt="logo">
+
+    </a>
+    Paperless-ngx
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/paperless-ngx/paperless-ngx" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    paperless-ngx/paperless-ngx
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Basic Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../administration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Administration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Advanced Topics
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Advanced Topics
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#matching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Matching tags, correspondents, document types, and storage paths
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Matching tags, correspondents, document types, and storage paths">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#automatic-matching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Automatic matching
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#consume-hooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hooking into the consumption process
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hooking into the consumption process">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pre-consume-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pre-consumption script
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-consume-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      Post-consumption script
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-consume-hooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docker
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-name-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      File name handling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="File name handling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filename-format-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Placeholders
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Placeholders">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#empty-placeholders" class="md-nav__link">
+    <span class="md-ellipsis">
+      Empty placeholders
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storage-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      Storage paths
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filename-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filename Templates
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Filename Templates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#additional-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additional Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pdf-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      Automatic recovery of invalid PDFs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#celery-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      Celery Monitoring
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-container-initialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Container Initialization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mysql-caveats" class="md-nav__link">
+    <span class="md-ellipsis">
+      MySQL Caveats
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MySQL Caveats">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#case-sensitivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Case Sensitivity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#missing-timezones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Missing timezones
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#barcodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Barcodes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Barcodes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#document-splitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document Splitting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#archive-serial-number-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Archive Serial Number Assignment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tag-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tag Assignment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Automatic collation of double-sided documents
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Automatic collation of double-sided documents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#things-that-could-go-wrong" class="md-nav__link">
+    <span class="md-ellipsis">
+      Things that could go wrong
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interaction-with-subdirs-as-tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interaction with "subdirs as tags"
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interaction-with-document-splitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interaction with document splitting
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sso-and-third-party-authentication-with-paperless-ngx" class="md-nav__link">
+    <span class="md-ellipsis">
+      SSO and third party authentication with Paperless-ngx
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SSO and third party authentication with Paperless-ngx">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#remote-user-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remote User authentication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openid-connect-and-social-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenID Connect and social authentication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disabling-regular-login" class="md-nav__link">
+    <span class="md-ellipsis">
+      Disabling Regular Login
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gpg-decryptor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decryption of encrypted emails before consumption
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decryption of encrypted emails before consumption">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requirements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    REST API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Development
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Changelog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="advanced-topics">Advanced Topics</h1>
+<p>Paperless offers a couple of features that automate certain tasks and make
+your life easier.</p>
+<h2 id="matching">Matching tags, correspondents, document types, and storage paths</h2>
+<p>Paperless will compare the matching algorithms defined by every tag,
+correspondent, document type, and storage path in your database to see
+if they apply to the text in a document. In other words, if you define a
+tag called <code>Home Utility</code> that had a <code>match</code> property of <code>bc hydro</code> and
+a <code>matching_algorithm</code> of <code>Exact</code>, Paperless will automatically tag
+your newly-consumed document with your <code>Home Utility</code> tag so long as the
+text <code>bc hydro</code> appears in the body of the document somewhere.</p>
+<p>The matching logic is quite powerful. It supports searching the text of
+your document with different algorithms, and as such, some
+experimentation may be necessary to get things right.</p>
+<p>In order to have a tag, correspondent, document type, or storage path
+assigned automatically to newly consumed documents, assign a match and
+matching algorithm using the web interface. These settings define when
+to assign tags, correspondents, document types, and storage paths to
+documents.</p>
+<p>The following algorithms are available:</p>
+<ul>
+<li><strong>None:</strong> No matching will be performed.</li>
+<li><strong>Any:</strong> Looks for any occurrence of any word provided in match in
+    the PDF. If you define the match as <code>Bank1 Bank2</code>, it will match
+    documents containing either of these terms.</li>
+<li><strong>All:</strong> Requires that every word provided appears in the PDF,
+    albeit not in the order provided.</li>
+<li><strong>Exact:</strong> Matches only if the match appears exactly as provided
+    (i.e. preserve ordering) in the PDF.</li>
+<li><strong>Regular expression:</strong> Parses the match as a regular expression and
+    tries to find a match within the document.</li>
+<li><strong>Fuzzy match:</strong> Uses a partial matching based on locating the tag text
+    inside the document, using a <a href="https://rapidfuzz.github.io/RapidFuzz/Usage/fuzz.html#partial-ratio">partial ratio</a></li>
+<li><strong>Auto:</strong> Tries to automatically match new documents. This does not
+    require you to set a match. See the <a href="#automatic-matching">notes below</a>.</li>
+</ul>
+<p>When using the <em>any</em> or <em>all</em> matching algorithms, you can search for
+terms that consist of multiple words by enclosing them in double quotes.
+For example, defining a match text of <code>"Bank of America" BofA</code> using the
+<em>any</em> algorithm, will match documents that contain either "Bank of
+America" or "BofA", but will not match documents containing "Bank of
+South America".</p>
+<p>Then just save your tag, correspondent, document type, or storage path
+and run another document through the consumer. Once complete, you should
+see the newly-created document, automatically tagged with the
+appropriate data.</p>
+<h3 id="automatic-matching">Automatic matching</h3>
+<p>Paperless-ngx comes with a new matching algorithm called <em>Auto</em>. This
+matching algorithm tries to assign tags, correspondents, document types,
+and storage paths to your documents based on how you have already
+assigned these on existing documents. It uses a neural network under the
+hood.</p>
+<p>If, for example, all your bank statements of your account 123 at the
+Bank of America are tagged with the tag "bofa123" and the matching
+algorithm of this tag is set to <em>Auto</em>, this neural network will examine
+your documents and automatically learn when to assign this tag.</p>
+<p>Paperless tries to hide much of the involved complexity with this
+approach. However, there are a couple caveats you need to keep in mind
+when using this feature:</p>
+<ul>
+<li>Changes to your documents are not immediately reflected by the
+    matching algorithm. The neural network needs to be <em>trained</em> on your
+    documents after changes. Paperless periodically (default: once each
+    hour) checks for changes and does this automatically for you.</li>
+<li>The Auto matching algorithm only takes documents into account which
+    are NOT placed in your inbox (i.e. have any inbox tags assigned to
+    them). This ensures that the neural network only learns from
+    documents which you have correctly tagged before.</li>
+<li>The matching algorithm can only work if there is a correlation
+    between the tag, correspondent, document type, or storage path and
+    the document itself. Your bank statements usually contain your bank
+    account number and the name of the bank, so this works reasonably
+    well, However, tags such as "TODO" cannot be automatically
+    assigned.</li>
+<li>The matching algorithm needs a reasonable number of documents to
+    identify when to assign tags, correspondents, storage paths, and
+    types. If one out of a thousand documents has the correspondent
+    "Very obscure web shop I bought something five years ago", it will
+    probably not assign this correspondent automatically if you buy
+    something from them again. The more documents, the better.</li>
+<li>Paperless also needs a reasonable amount of negative examples to
+    decide when not to assign a certain tag, correspondent, document
+    type, or storage path. This will usually be the case as you start
+    filling up paperless with documents. Example: If all your documents
+    are either from "Webshop" or "Bank", paperless will assign one
+    of these correspondents to ANY new document, if both are set to
+    automatic matching.</li>
+</ul>
+<h2 id="consume-hooks">Hooking into the consumption process</h2>
+<p>Sometimes you may want to do something arbitrary whenever a document is
+consumed. Rather than try to predict what you may want to do, Paperless
+lets you execute scripts of your own choosing just before or after a
+document is consumed using a couple of simple hooks.</p>
+<p>Just write a script, put it somewhere that Paperless can read &amp; execute,
+and then put the path to that script in <code>paperless.conf</code> or
+<code>docker-compose.env</code> with the variable name of either
+<a href="../configuration/#PAPERLESS_PRE_CONSUME_SCRIPT"><code>PAPERLESS_PRE_CONSUME_SCRIPT</code></a> or <a href="../configuration/#PAPERLESS_POST_CONSUME_SCRIPT"><code>PAPERLESS_POST_CONSUME_SCRIPT</code></a>.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>These scripts are executed in a <strong>blocking</strong> process, which means that
+if a script takes a long time to run, it can significantly slow down
+your document consumption flow. If you want things to run
+asynchronously, you'll have to fork the process in your script and
+exit.</p>
+</div>
+<h3 id="pre-consume-script">Pre-consumption script</h3>
+<p>Executed after the consumer sees a new document in the consumption
+folder, but before any processing of the document is performed. This
+script can access the following relevant environment variables set:</p>
+<table>
+<thead>
+<tr>
+<th>Environment Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DOCUMENT_SOURCE_PATH</code></td>
+<td>Original path of the consumed document</td>
+</tr>
+<tr>
+<td><code>DOCUMENT_WORKING_PATH</code></td>
+<td>Path to a copy of the original that consumption will work on</td>
+</tr>
+<tr>
+<td><code>TASK_ID</code></td>
+<td>UUID of the task used to process the new document (if any)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Pre-consume scripts which modify the document should only change
+the <code>DOCUMENT_WORKING_PATH</code> file or a second consume task may
+be triggered, leading to failures as two tasks work on the
+same document path</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If your script modifies <code>DOCUMENT_WORKING_PATH</code> in a non-deterministic
+way, this may allow duplicate documents to be stored</p>
+</div>
+<p>A simple but common example for this would be creating a simple script
+like this:</p>
+<p><code>/usr/local/bin/ocr-pdf</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="ch">#!/usr/bin/env bash</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>pdf2pdfocr.py<span class="w"> </span>-i<span class="w"> </span><span class="si">${</span><span class="nv">DOCUMENT_WORKING_PATH</span><span class="si">}</span>
+</code></pre></div>
+<p><code>/etc/paperless.conf</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>...
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">PAPERLESS_PRE_CONSUME_SCRIPT</span><span class="o">=</span><span class="s2">&quot;/usr/local/bin/ocr-pdf&quot;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>...
+</code></pre></div>
+<p>This will pass the path to the document about to be consumed to
+<code>/usr/local/bin/ocr-pdf</code>, which will in turn call
+<a href="https://github.com/LeoFCardoso/pdf2pdfocr">pdf2pdfocr.py</a> on your
+document, which will then overwrite the file with an OCR'd version of
+the file and exit. At which point, the consumption process will begin
+with the newly modified file.</p>
+<p>The script's stdout and stderr will be logged line by line to the
+webserver log, along with the exit code of the script.</p>
+<h3 id="post-consume-script">Post-consumption script</h3>
+<p>Executed after the consumer has successfully processed a document and
+has moved it into paperless. It receives the following environment
+variables:</p>
+<table>
+<thead>
+<tr>
+<th>Environment Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DOCUMENT_ID</code></td>
+<td>Database primary key of the document</td>
+</tr>
+<tr>
+<td><code>DOCUMENT_FILE_NAME</code></td>
+<td>Formatted filename, not including paths</td>
+</tr>
+<tr>
+<td><code>DOCUMENT_CREATED</code></td>
+<td>Date &amp; time when document created</td>
+</tr>
+<tr>
+<td><code>DOCUMENT_MODIFIED</code></td>
+<td>Date &amp; time when document was last modified</td>
+</tr>
+<tr>
+<td><code>DOCUMENT_ADDED</code></td>
+<td>Date &amp; time when document was added</td>
+</tr>
+<tr>
+<td><code>DOCUMENT_SOURCE_PATH</code></td>
+<td>Path to the original document file</td>
+</tr>
+<tr>
+<td><code>DOCUMENT_ARCHIVE_PATH</code></td>
+<td>Path to the generate archive file (if any)</td>
+</tr>
+<tr>
+<td><code>DOCUMENT_THUMBNAIL_PATH</code></td>
+<td>Path to the generated thumbnail</td>
+</tr>
+<tr>
+<td><code>DOCUMENT_DOWNLOAD_URL</code></td>
+<td>URL for document download</td>
+</tr>
+<tr>
+<td><code>DOCUMENT_THUMBNAIL_URL</code></td>
+<td>URL for the document thumbnail</td>
+</tr>
+<tr>
+<td><code>DOCUMENT_OWNER</code></td>
+<td>Username of the document owner (if any)</td>
+</tr>
+<tr>
+<td><code>DOCUMENT_CORRESPONDENT</code></td>
+<td>Assigned correspondent (if any)</td>
+</tr>
+<tr>
+<td><code>DOCUMENT_TAGS</code></td>
+<td>Comma separated list of tags applied (if any)</td>
+</tr>
+<tr>
+<td><code>DOCUMENT_ORIGINAL_FILENAME</code></td>
+<td>Filename of original document</td>
+</tr>
+<tr>
+<td><code>TASK_ID</code></td>
+<td>Task UUID used to import the document (if any)</td>
+</tr>
+</tbody>
+</table>
+<p>The script can be in any language, A simple shell script example:</p>
+<div class="highlight"><span class="filename">post-consumption-example</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="ch">#!/usr/bin/env bash</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="s2">A document with an id of </span><span class="si">${</span><span class="nv">DOCUMENT_ID</span><span class="si">}</span><span class="s2"> was just consumed.  I know the</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="s2">following additional information about it:</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="s2">* Generated File Name: </span><span class="si">${</span><span class="nv">DOCUMENT_FILE_NAME</span><span class="si">}</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="s2">* Archive Path: </span><span class="si">${</span><span class="nv">DOCUMENT_ARCHIVE_PATH</span><span class="si">}</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="s2">* Source Path: </span><span class="si">${</span><span class="nv">DOCUMENT_SOURCE_PATH</span><span class="si">}</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="s2">* Created: </span><span class="si">${</span><span class="nv">DOCUMENT_CREATED</span><span class="si">}</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="s2">* Added: </span><span class="si">${</span><span class="nv">DOCUMENT_ADDED</span><span class="si">}</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="s2">* Modified: </span><span class="si">${</span><span class="nv">DOCUMENT_MODIFIED</span><span class="si">}</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="s2">* Thumbnail Path: </span><span class="si">${</span><span class="nv">DOCUMENT_THUMBNAIL_PATH</span><span class="si">}</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="s2">* Download URL: </span><span class="si">${</span><span class="nv">DOCUMENT_DOWNLOAD_URL</span><span class="si">}</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="s2">* Thumbnail URL: </span><span class="si">${</span><span class="nv">DOCUMENT_THUMBNAIL_URL</span><span class="si">}</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="s2">* Owner Name: </span><span class="si">${</span><span class="nv">DOCUMENT_OWNER</span><span class="si">}</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="s2">* Correspondent: </span><span class="si">${</span><span class="nv">DOCUMENT_CORRESPONDENT</span><span class="si">}</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="s2">* Tags: </span><span class="si">${</span><span class="nv">DOCUMENT_TAGS</span><span class="si">}</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="s2">It was consumed with the passphrase </span><span class="si">${</span><span class="nv">PASSPHRASE</span><span class="si">}</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="s2">&quot;</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The post consumption script cannot cancel the consumption process.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The post consumption script should not modify the document files
+directly.</p>
+</div>
+<p>The script's stdout and stderr will be logged line by line to the
+webserver log, along with the exit code of the script.</p>
+<h3 id="docker-consume-hooks">Docker</h3>
+<p>To hook into the consumption process when using Docker, you
+will need to pass the scripts into the container via a host mount
+in your <code>docker-compose.yml</code>.</p>
+<p>Assuming you have
+<code>/home/paperless-ngx/scripts/post-consumption-example.sh</code> as a
+script which you'd like to run.</p>
+<p>You can pass that script into the consumer container via a host mount:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nn">...</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">webserver</span><span class="p">:</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">volumes</span><span class="p p-Indicator">:</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">- /home/paperless-ngx/scripts:/path/in/container/scripts/</span><span class="w"> </span><span class="c1"># (1)!</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="c1"># (3)!</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">PAPERLESS_POST_CONSUME_SCRIPT</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/in/container/scripts/post-consumption-example.sh</span><span class="w"> </span><span class="c1"># (2)!</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="nn">...</span>
+</code></pre></div>
+<ol>
+<li>The external scripts directory is mounted to a location inside the container.</li>
+<li>The internal location of the script is used to set the script to run</li>
+<li>This can also be set in <code>docker-compose.env</code></li>
+</ol>
+<p>Troubleshooting:</p>
+<ul>
+<li>Monitor the Docker Compose log
+    <code>cd ~/paperless-ngx; docker compose logs -f</code></li>
+<li>Check your script's permission e.g. in case of permission error
+    <code>sudo chmod 755 post-consumption-example.sh</code></li>
+<li>Pipe your scripts's output to a log file e.g.
+    <code>echo "${DOCUMENT_ID}" | tee --append /usr/src/paperless/scripts/post-consumption-example.log</code></li>
+</ul>
+<h2 id="file-name-handling">File name handling</h2>
+<p>By default, paperless stores your documents in the media directory and
+renames them using the identifier which it has assigned to each
+document. You will end up getting files like <code>0000123.pdf</code> in your media
+directory. This isn't necessarily a bad thing, because you normally
+don't have to access these files manually. However, if you wish to name
+your files differently, you can do that by adjusting the
+<a href="../configuration/#PAPERLESS_FILENAME_FORMAT"><code>PAPERLESS_FILENAME_FORMAT</code></a> configuration option
+or using <a href="#storage-paths">storage paths (see below)</a>. Paperless adds the
+correct file extension e.g. <code>.pdf</code>, <code>.jpg</code> automatically.</p>
+<p>This variable allows you to configure the filename (folders are allowed)
+using placeholders. For example, configuring this to</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">PAPERLESS_FILENAME_FORMAT</span><span class="o">={{</span><span class="w"> </span>created_year<span class="w"> </span><span class="o">}}</span>/<span class="o">{{</span><span class="w"> </span>correspondent<span class="w"> </span><span class="o">}}</span>/<span class="o">{{</span><span class="w"> </span>title<span class="w"> </span><span class="o">}}</span>
+</code></pre></div>
+<p>will create a directory structure as follows:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>2019/
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  My bank/
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    Statement January.pdf
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    Statement February.pdf
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>2020/
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>  My bank/
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    Statement January.pdf
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    Letter.pdf
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    Letter_01.pdf
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>  Shoe store/
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    My new shoes.pdf
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not manually move your files in the media folder. Paperless remembers
+the last filename a document was stored as. If you do rename a file,
+paperless will report your files as missing and won't be able to find
+them.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Paperless checks the filename of a document whenever it is saved. Changing (or deleting)
+a <a href="#storage-paths">storage path</a> will automatically be reflected in the file system. However,
+when changing <code>PAPERLESS_FILENAME_FORMAT</code> you will need to manually run the
+<a href="../administration/#renamer"><code>document renamer</code></a> to move any existing documents.</p>
+</div>
+<h3 id="filename-format-variables">Placeholders</h3>
+<p>Paperless provides the following variables for use within filenames:</p>
+<ul>
+<li><code>{{ asn }}</code>: The archive serial number of the document, or "none".</li>
+<li><code>{{ correspondent }}</code>: The name of the correspondent, or "none".</li>
+<li><code>{{ document_type }}</code>: The name of the document type, or "none".</li>
+<li><code>{{ tag_list }}</code>: A comma separated list of all tags assigned to the
+    document.</li>
+<li><code>{{ title }}</code>: The title of the document.</li>
+<li><code>{{ created }}</code>: The full date (ISO 8601 format, e.g. <code>2024-03-14</code>) the document was created.</li>
+<li><code>{{ created_year }}</code>: Year created only, formatted as the year with
+    century.</li>
+<li><code>{{ created_year_short }}</code>: Year created only, formatted as the year
+    without century, zero padded.</li>
+<li><code>{{ created_month }}</code>: Month created only (number 01-12).</li>
+<li><code>{{ created_month_name }}</code>: Month created name, as per locale</li>
+<li><code>{{ created_month_name_short }}</code>: Month created abbreviated name, as per
+    locale</li>
+<li><code>{{ created_day }}</code>: Day created only (number 01-31).</li>
+<li><code>{{ added }}</code>: The full date (ISO format) the document was added to
+    paperless.</li>
+<li><code>{{ added_year }}</code>: Year added only.</li>
+<li><code>{{ added_year_short }}</code>: Year added only, formatted as the year without
+    century, zero padded.</li>
+<li><code>{{ added_month }}</code>: Month added only (number 01-12).</li>
+<li><code>{{ added_month_name }}</code>: Month added name, as per locale</li>
+<li><code>{{ added_month_name_short }}</code>: Month added abbreviated name, as per
+    locale</li>
+<li><code>{{ added_day }}</code>: Day added only (number 01-31).</li>
+<li><code>{{ owner_username }}</code>: Username of document owner, if any, or "none"</li>
+<li><code>{{ original_name }}</code>: Document original filename, minus the extension, if any, or "none"</li>
+<li><code>{{ doc_pk }}</code>: The paperless identifier (primary key) for the document.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When using file name placeholders, in particular when using <code>{tag_list}</code>,
+you may run into the limits of your operating system's maximum path lengths.
+In that case, files will retain the previous path instead and the issue logged.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>These variables are all simple strings, but the format can be a full template.
+See <a href="#filename-templates">Filename Templates</a> for even more advanced formatting.</p>
+</div>
+<p>Paperless will try to conserve the information from your database as
+much as possible. However, some characters that you can use in document
+titles and correspondent names (such as <code>: \ /</code> and a couple more) are
+not allowed in filenames and will be replaced with dashes.</p>
+<p>If paperless detects that two documents share the same filename,
+paperless will automatically append <code>_01</code>, <code>_02</code>, etc to the filename.
+This happens if all the placeholders in a filename evaluate to the same
+value.</p>
+<p>If there are any errors in the placeholders included in <code>PAPERLESS_FILENAME_FORMAT</code>,
+paperless will fall back to using the default naming scheme instead.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>As of now, you could potentially tell paperless to store your files anywhere
+outside the media directory by setting</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>PAPERLESS_FILENAME_FORMAT=../../my/custom/location/{title}
+</code></pre></div>
+<p>However, keep in mind that inside docker, if files get stored outside of
+the predefined volumes, they will be lost after a restart.</p>
+</div>
+<h4 id="empty-placeholders">Empty placeholders</h4>
+<p>You can affect how empty placeholders are treated by changing the
+<a href="../configuration/#PAPERLESS_FILENAME_FORMAT_REMOVE_NONE"><code>PAPERLESS_FILENAME_FORMAT_REMOVE_NONE</code></a> setting.</p>
+<p>Enabling this results in all empty placeholders resolving to "" instead of "none" as stated above. Spaces
+before empty placeholders are removed as well, empty directories are omitted.</p>
+<h3 id="storage-paths">Storage paths</h3>
+<p>When a single storage layout is not sufficient for your use case, storage paths allow for more complex
+structure to set precisely where each document is stored in the file system.</p>
+<ul>
+<li>Each storage path is a <a href="../configuration/#PAPERLESS_FILENAME_FORMAT"><code>PAPERLESS_FILENAME_FORMAT</code></a> and
+    follows the rules described above</li>
+<li>Each document is assigned a storage path using the matching algorithms described above, but can be
+    overwritten at any time</li>
+</ul>
+<p>For example, you could define the following two storage paths:</p>
+<ol>
+<li>Normal communications are put into a folder structure sorted by
+    <code>year/correspondent</code></li>
+<li>Communications with insurance companies are stored in a flat
+    structure with longer file names, but containing the full date of
+    the correspondence.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>By Year = {{ created_year }}/{{ correspondent }}/{{ title }}
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>Insurances = Insurances/{{ correspondent }}/{{ created_year }}-{{ created_month }}-{{ created_day }} {{ title }}
+</code></pre></div>
+<p>If you then map these storage paths to the documents, you might get the
+following result. For simplicity, <code>By Year</code> defines the same
+structure as in the previous example above.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>2019/                                   # By Year
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>   My bank/
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>     Statement January.pdf
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>     Statement February.pdf
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>Insurances/                             # Insurances
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>   Healthcare 123/
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>     2022-01-01 Statement January.pdf
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>     2022-02-02 Letter.pdf
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>     2022-02-03 Letter.pdf
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>   Dental 456/
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>     2021-12-01 New Conditions.pdf
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Defining a storage path is optional. If no storage path is defined for a
+document, the global <a href="../configuration/#PAPERLESS_FILENAME_FORMAT"><code>PAPERLESS_FILENAME_FORMAT</code></a> is applied.</p>
+</div>
+<h3 id="filename-templates">Filename Templates</h3>
+<p>The filename formatting uses <a href="https://jinja.palletsprojects.com/en/3.1.x/templates/">Jinja templates</a> to build the filename.
+This allows for complex logic to be included in the format, including <a href="https://jinja.palletsprojects.com/en/3.1.x/templates/#list-of-control-structures">logical structures</a>
+and <a href="https://jinja.palletsprojects.com/en/3.1.x/templates/#id11">filters</a> to manipulate the <a href="#filename-format-variables">variables</a>
+provided. The template is provided as a string, potentially multiline, and rendered into a single line.</p>
+<p>In addition, the entire Document instance is available to be utilized in a more advanced way, as well as some variables which only make sense to be accessed
+with more complex logic.</p>
+<h4 id="additional-variables">Additional Variables</h4>
+<ul>
+<li><code>{{ tag_name_list }}</code>: A list of tag names applied to the document, ordered by the tag name. Note this is a list, not a single string</li>
+<li><code>{{ custom_fields }}</code>: A mapping of custom field names to their type and value. A user can access the mapping by field name or check if a field is applied by checking its existence in the variable.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To access a custom field which has a space in the name, use the <code>get_cf_value</code> filter.  See the examples below.
+This helps get fields by name and handle a default value if the named field is not attached to a Document.</p>
+</div>
+<h4 id="examples">Examples</h4>
+<p>This example will construct a path based on the archive serial number range:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="x">somepath/</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="cp">{%</span> <span class="k">if</span> <span class="nv">document.archive_serial_number</span> <span class="o">&gt;=</span> <span class="m">0</span> <span class="k">and</span> <span class="nv">document.archive_serial_number</span> <span class="o">&lt;=</span> <span class="m">200</span> <span class="cp">%}</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="x">  asn-000-200/</span><span class="cp">{{</span><span class="nv">title</span><span class="cp">}}</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">document.archive_serial_number</span> <span class="o">&gt;=</span> <span class="m">201</span> <span class="k">and</span> <span class="nv">document.archive_serial_number</span> <span class="o">&lt;=</span> <span class="m">400</span> <span class="cp">%}</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="x">  asn-201-400</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="x">  </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">document.archive_serial_number</span> <span class="o">&gt;=</span> <span class="m">201</span> <span class="k">and</span> <span class="nv">document.archive_serial_number</span> <span class="o">&lt;</span> <span class="m">300</span> <span class="cp">%}</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="x">    /asn-2xx</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="x">  </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">document.archive_serial_number</span> <span class="o">&gt;=</span> <span class="m">300</span> <span class="k">and</span> <span class="nv">document.archive_serial_number</span> <span class="o">&lt;</span> <span class="m">400</span> <span class="cp">%}</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="x">    /asn-3xx</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="x">  </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="x">/</span><span class="cp">{{</span> <span class="nv">title</span> <span class="cp">}}</span>
+</code></pre></div>
+<p>For a document with an ASN of 205, it would result in <code>somepath/asn-201-400/asn-2xx/Title.pdf</code>, but
+a document with an ASN of 355 would be placed in <code>somepath/asn-201-400/asn-3xx/Title.pdf</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="cp">{%</span> <span class="k">if</span> <span class="nv">document.mime_type</span> <span class="o">==</span> <span class="s2">&quot;application/pdf&quot;</span> <span class="cp">%}</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="x">  pdfs</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">document.mime_type</span> <span class="o">==</span> <span class="s2">&quot;image/png&quot;</span> <span class="cp">%}</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="x">  pngs</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="x">  others</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="x">/</span><span class="cp">{{</span> <span class="nv">title</span> <span class="cp">}}</span>
+</code></pre></div>
+<p>For a PDF document, it would result in <code>pdfs/Title.pdf</code>, but for a PNG document, the path would be <code>pngs/Title.png</code>.</p>
+<p>To use custom fields:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="cp">{%</span> <span class="k">if</span> <span class="s2">&quot;Invoice&quot;</span> <span class="k">in</span> <span class="nv">custom_fields</span> <span class="cp">%}</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="x">  invoices/</span><span class="cp">{{</span> <span class="nv">custom_fields.Invoice.value</span> <span class="cp">}}</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="x">  not-invoices/</span><span class="cp">{{</span> <span class="nv">title</span> <span class="cp">}}</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+</code></pre></div>
+<p>If the document has a custom field named "Invoice" with a value of 123, it would be filed into the <code>invoices/123.pdf</code>, but a document without the custom field
+would be filed to <code>not-invoices/Title.pdf</code></p>
+<p>If the custom field is named "Invoice Number", you would access the value of it via the <code>get_cf_value</code> filter due to quirks of the Django Template Language:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="x">&quot;invoices/</span><span class="cp">{{</span> <span class="nv">custom_fields</span><span class="o">|</span><span class="nf">get_cf_value</span><span class="o">(</span><span class="s1">&#39;Invoice Number&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;</span>
+</code></pre></div>
+<p>You can also use a custom <code>datetime</code> filter to format dates:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="x">invoices/</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="cp">{{</span> <span class="nv">custom_fields</span><span class="o">|</span><span class="nf">get_cf_value</span><span class="o">(</span><span class="s2">&quot;Date Field&quot;</span><span class="o">,</span><span class="s2">&quot;2024-01-01&quot;</span><span class="o">)|</span><span class="nf">datetime</span><span class="o">(</span><span class="s1">&#39;%Y&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">/</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="cp">{{</span> <span class="nv">custom_fields</span><span class="o">|</span><span class="nf">get_cf_value</span><span class="o">(</span><span class="s2">&quot;Date Field&quot;</span><span class="o">,</span><span class="s2">&quot;2024-01-01&quot;</span><span class="o">)|</span><span class="nf">datetime</span><span class="o">(</span><span class="s1">&#39;%m&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">/</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="cp">{{</span> <span class="nv">custom_fields</span><span class="o">|</span><span class="nf">get_cf_value</span><span class="o">(</span><span class="s2">&quot;Date Field&quot;</span><span class="o">,</span><span class="s2">&quot;2024-01-01&quot;</span><span class="o">)|</span><span class="nf">datetime</span><span class="o">(</span><span class="s1">&#39;%d&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">/</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="x">Invoice_</span><span class="cp">{{</span> <span class="nv">custom_fields</span><span class="o">|</span><span class="nf">get_cf_value</span><span class="o">(</span><span class="s2">&quot;Select Field&quot;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">_</span><span class="cp">{{</span> <span class="nv">custom_fields</span><span class="o">|</span><span class="nf">get_cf_value</span><span class="o">(</span><span class="s2">&quot;Date Field&quot;</span><span class="o">,</span><span class="s2">&quot;2024-01-01&quot;</span><span class="o">)|</span><span class="nf">replace</span><span class="o">(</span><span class="s2">&quot;-&quot;</span><span class="o">,</span> <span class="s2">&quot;&quot;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">.pdf</span>
+</code></pre></div>
+<p>This will create a path like <code>invoices/2022/01/01/Invoice_OptionTwo_20220101.pdf</code> if the custom field "Date Field" is set to January 1, 2022 and "Select Field" is set to <code>OptionTwo</code>.</p>
+<h2 id="pdf-recovery">Automatic recovery of invalid PDFs</h2>
+<p>Paperless will attempt to "clean" certain invalid PDFs with <code>qpdf</code> before processing if, for example, the mime_type
+detection is incorrect. This can happen if the PDF is not properly formatted or contains errors.</p>
+<h2 id="celery-monitoring">Celery Monitoring</h2>
+<p>The monitoring tool
+<a href="https://flower.readthedocs.io/en/latest/index.html">Flower</a> can be used
+to view more detailed information about the health of the celery workers
+used for asynchronous tasks. This includes details on currently running,
+queued and completed tasks, timing and more. Flower can also be used
+with Prometheus, as it exports metrics. For details on its capabilities,
+refer to the <a href="https://flower.readthedocs.io/en/latest/index.html">Flower</a>
+documentation.</p>
+<p>Flower can be enabled with the setting <a href="../configuration/#PAPERLESS_ENABLE_FLOWER">PAPERLESS_ENABLE_FLOWER</a>.
+To configure Flower further, create a <code>flowerconfig.py</code> and
+place it into the <code>src/paperless</code> directory. For a Docker
+installation, you can use volumes to accomplish this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">services</span><span class="p">:</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="c1"># ...</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="nt">webserver</span><span class="p">:</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">        </span><span class="nt">environment</span><span class="p">:</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PAPERLESS_ENABLE_FLOWER</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">        </span><span class="nt">ports</span><span class="p">:</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5555:5555</span><span class="w"> </span><span class="c1"># (2)!</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">        </span><span class="c1"># ...</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/my/flowerconfig.py:/usr/src/paperless/src/paperless/flowerconfig.py:ro</span><span class="w"> </span><span class="c1"># (1)!</span>
+</code></pre></div>
+<ol>
+<li>Note the <code>:ro</code> tag means the file will be mounted as read only.</li>
+<li>By default, Flower runs on port 5555, but this can be configured.</li>
+</ol>
+<h2 id="custom-container-initialization">Custom Container Initialization</h2>
+<p>The Docker image includes the ability to run custom user scripts during
+startup. This could be utilized for installing additional tools or
+Python packages, for example. Scripts are expected to be shell scripts.</p>
+<p>To utilize this, mount a folder containing your scripts to the custom
+initialization directory, <code>/custom-cont-init.d</code> and place
+scripts you wish to run inside. For security, the folder must be owned
+by <code>root</code> and should have permissions of <code>a=rx</code>. Additionally, scripts
+must only be writable by <code>root</code>.</p>
+<p>Your scripts will be run directly before the webserver completes
+startup. Scripts will be run by the <code>root</code> user.
+If you would like to switch users, the utility <code>gosu</code> is available and
+preferred over <code>sudo</code>.</p>
+<p>This is an advanced functionality with which you could break functionality
+or lose data. If you experience issues, please disable any custom scripts
+and try again before reporting an issue.</p>
+<p>For example, using Docker Compose:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">services</span><span class="p">:</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="c1"># ...</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="nt">webserver</span><span class="p">:</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">        </span><span class="c1"># ...</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/my/scripts:/custom-cont-init.d:ro</span><span class="w"> </span><span class="c1"># (1)!</span>
+</code></pre></div>
+<ol>
+<li>Note the <code>:ro</code> tag means the folder will be mounted as read only. This is for extra security against changes</li>
+</ol>
+<h2 id="mysql-caveats">MySQL Caveats</h2>
+<h3 id="case-sensitivity">Case Sensitivity</h3>
+<p>The database interface does not provide a method to configure a MySQL
+database to be case-sensitive. A case-<strong>in</strong>sensitive database prevents a user from creating a
+tag <code>Name</code> and <code>NAME</code> as they are considered the same.</p>
+<p>However, there is a downside to turning on case sensitivity, as it also makes searches case-sensitive,
+so for example a document with the title <code>Invoice</code> won't be found when searching for <code>invoice</code>.</p>
+<p>Per Django documentation, making a database case-sensitive requires manual intervention.
+To enable case sensitive tables, you can execute the following command
+against each table:</p>
+<p><code>ALTER TABLE &lt;table_name&gt; CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;</code></p>
+<p>You can also set the default for new tables (this does NOT affect
+existing tables) with:</p>
+<p><code>ALTER DATABASE &lt;db_name&gt; CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;</code></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Using mariadb version 10.4+ is recommended. Using the <code>utf8mb3</code> character set on
+an older system may fix issues that can arise while setting up Paperless-ngx but
+<code>utf8mb3</code> can cause issues with consumption (where <code>utf8mb4</code> does not).</p>
+</div>
+<p>For more information on this topic, you can refer to <a href="https://code.djangoproject.com/ticket/9682">this</a> Django issue.</p>
+<h3 id="missing-timezones">Missing timezones</h3>
+<p>MySQL as well as MariaDB do not have any timezone information by default (though some
+docker images such as the official MariaDB image take care of this for you) which will
+cause unexpected behavior with date-based queries.</p>
+<p>To fix this, execute one of the following commands:</p>
+<p>MySQL: <code>mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql -p</code></p>
+<p>MariaDB: <code>mariadb-tzinfo-to-sql /usr/share/zoneinfo | mariadb -u root mysql -p</code></p>
+<h2 id="barcodes">Barcodes</h2>
+<p>Paperless is able to utilize barcodes for automatically performing some tasks.</p>
+<p>At this time, the library utilized for detection of barcodes supports the following types:</p>
+<ul>
+<li>AN-13/UPC-A</li>
+<li>UPC-E</li>
+<li>EAN-8</li>
+<li>Code 128</li>
+<li>Code 93</li>
+<li>Code 39</li>
+<li>Codabar</li>
+<li>Interleaved 2 of 5</li>
+<li>QR Code</li>
+<li>SQ Code</li>
+</ul>
+<p>You may check for updates on the <a href="https://github.com/mchehab/zbar">zbar library homepage</a>.
+For usage in Paperless, the type of barcode does not matter, only the contents of it.</p>
+<p>For how to enable barcode usage, see <a href="../configuration/#barcodes">the configuration</a>.
+The two settings may be enabled independently, but do have interactions as explained
+below.</p>
+<h3 id="document-splitting">Document Splitting</h3>
+<p>When enabled, Paperless will look for a barcode with the configured value and create a new document
+starting from the next page. The page with the barcode on it will <em>not</em> be retained. It
+is expected to be a page existing only for triggering the split.</p>
+<h3 id="archive-serial-number-assignment">Archive Serial Number Assignment</h3>
+<p>When enabled, the value of the barcode (as an integer) will be used to set the document's
+archive serial number, allowing quick reference back to the original, paper document.</p>
+<p>If document splitting via barcode is also enabled, documents will be split when an ASN
+barcode is located. However, differing from the splitting, the page with the
+barcode <em>will</em> be retained. This allows application of a barcode to any page, including
+one which holds data to keep in the document.</p>
+<h3 id="tag-assignment">Tag Assignment</h3>
+<p>When enabled, Paperless will parse barcodes and attempt to interpret and assign tags.</p>
+<p>See the relevant settings <a href="../configuration/#PAPERLESS_CONSUMER_ENABLE_TAG_BARCODE"><code>PAPERLESS_CONSUMER_ENABLE_TAG_BARCODE</code></a>
+and <a href="../configuration/#PAPERLESS_CONSUMER_TAG_BARCODE_MAPPING"><code>PAPERLESS_CONSUMER_TAG_BARCODE_MAPPING</code></a>
+for more information.</p>
+<h2 id="collate">Automatic collation of double-sided documents</h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If your scanner supports double-sided scanning natively, you do not need this feature.</p>
+</div>
+<p>This feature is turned off by default, see <a href="../configuration/#collate">configuration</a> on how to turn it on.</p>
+<h3 id="summary">Summary</h3>
+<p>If you have a scanner with an automatic document feeder (ADF) that only scans a single side,
+this feature makes scanning double-sided documents much more convenient by automatically
+collating two separate scans into one document, reordering the pages as necessary.</p>
+<h3 id="usage-example">Usage example</h3>
+<p>Suppose you have a double-sided document with 6 pages (3 sheets of paper). First,
+put the stack into your ADF as normal, ensuring that page 1 is scanned first. Your ADF
+will now scan pages 1, 3, and 5. Then you (or your scanner, if it supports it) upload
+the scan into the correct sub-directory of the consume folder (<code>double-sided</code> by default;
+keep in mind that Paperless will <em>not</em> automatically create the directory for you.)
+Paperless will then process the scan and move it into an internal staging area.</p>
+<p>The next step is to turn your stack upside down (without reordering the sheets of paper),
+and scan it once again, your ADF will now scan pages 6, 4, and 2, in that order. Once this
+scan is copied into the sub-directory, Paperless will collate the previous scan with the
+new one, reversing the order of the pages on the second, "even numbered" scan. The
+resulting document will have the pages 1-6 in the correct order, and this new file will
+then be processed as normal.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When scanning the even numbered pages, you can omit the last empty pages, if there are
+any. For example, if page 6 is empty, you only need to scan pages 2 and 4. <em>Do not</em> omit
+empty pages in the middle of the document.</p>
+</div>
+<h3 id="things-that-could-go-wrong">Things that could go wrong</h3>
+<p>Paperless will notice when the first, "odd numbered" scan has less pages than the second
+scan (this can happen when e.g. the ADF skipped a few pages in the first pass). In that
+case, Paperless will remove the staging copy as well as the scan, and give you an error
+message asking you to restart the process from scratch, by scanning the odd pages again,
+followed by the even pages.</p>
+<p>It's important that the scan files get consumed in the correct order, and one at a time.
+You therefore need to make sure that Paperless is running while you upload the files into
+the directory; and if you're using <a href="../configuration/#polling">polling</a>, make sure that
+<code>CONSUMER_POLLING</code> is set to a value lower than it takes for the second scan to appear,
+like 5-10 or even lower.</p>
+<p>Another thing that might happen is that you start a double sided scan, but then forget
+to upload the second file. To avoid collating the wrong documents if you then come back
+a day later to scan a new double-sided document, Paperless will only keep an "odd numbered
+pages" file for up to 30 minutes. If more time passes, it will consider the next incoming
+scan a completely new "odd numbered pages" one. The old staging file will get discarded.</p>
+<h3 id="interaction-with-subdirs-as-tags">Interaction with "subdirs as tags"</h3>
+<p>The collation feature can be used together with the <a href="../configuration/#consume_config">subdirs as tags</a>
+feature (but this is not a requirement). Just create a correctly named double-sided subdir
+in the hierarchy and upload your scans there. For example, both <code>double-sided/foo/bar</code> as
+well as <code>foo/bar/double-sided</code> will cause the collated document to be treated as if it
+were uploaded into <code>foo/bar</code> and receive both <code>foo</code> and <code>bar</code> tags, but not <code>double-sided</code>.</p>
+<h3 id="interaction-with-document-splitting">Interaction with document splitting</h3>
+<p>You can use the <a href="#document-splitting">document splitting</a> feature, but if you use a normal
+single-sided split marker page, the split document(s) will have an empty page at the front (or
+whatever else was on the backside of the split marker page.) You can work around that by having
+a split marker page that has the split barcode on <em>both</em> sides. This way, the extra page will
+get automatically removed.</p>
+<h2 id="sso-and-third-party-authentication-with-paperless-ngx">SSO and third party authentication with Paperless-ngx</h2>
+<p>Paperless-ngx has a built-in authentication system from Django but you can easily integrate an
+external authentication solution using one of the following methods:</p>
+<h3 id="remote-user-authentication">Remote User authentication</h3>
+<p>This is a simple option that uses remote user authentication made available by certain SSO
+applications. See the relevant configuration options for more information:
+<a href="../configuration/#PAPERLESS_ENABLE_HTTP_REMOTE_USER">PAPERLESS_ENABLE_HTTP_REMOTE_USER</a>,
+<a href="../configuration/#PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME">PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME</a>
+and <a href="../configuration/#PAPERLESS_LOGOUT_REDIRECT_URL">PAPERLESS_LOGOUT_REDIRECT_URL</a></p>
+<h3 id="openid-connect-and-social-authentication">OpenID Connect and social authentication</h3>
+<p>Version 2.5.0 of Paperless-ngx added support for integrating other authentication systems via
+the <a href="https://github.com/pennersr/django-allauth">django-allauth</a> package. Once set up, users
+can either log in or (optionally) sign up using any third party systems you integrate. See the
+relevant <a href="../configuration/#PAPERLESS_SOCIALACCOUNT_PROVIDERS">configuration settings</a> and
+<a href="https://docs.allauth.org/en/latest/socialaccount/configuration.html">django-allauth docs</a>
+for more information.</p>
+<p>To associate an existing Paperless-ngx account with a social account, first login with your
+regular credentials and then choose "My Profile" from the user dropdown in the app and you
+will see options to connect social account(s). If enabled, signup options will be available
+on the login page.</p>
+<p>As an example, to set up login via Github, the following environment variables would need to be
+set:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>PAPERLESS_APPS=&quot;allauth.socialaccount.providers.github&quot;
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>PAPERLESS_SOCIALACCOUNT_PROVIDERS=&#39;{&quot;github&quot;: {&quot;APPS&quot;: [{&quot;provider_id&quot;: &quot;github&quot;,&quot;name&quot;: &quot;Github&quot;,&quot;client_id&quot;: &quot;&lt;CLIENT_ID&gt;&quot;,&quot;secret&quot;: &quot;&lt;CLIENT_SECRET&gt;&quot;}]}}&#39;
+</code></pre></div>
+<p>Or, to use OpenID Connect ("OIDC"), via Keycloak in this example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>PAPERLESS_APPS=&quot;allauth.socialaccount.providers.openid_connect&quot;
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>PAPERLESS_SOCIALACCOUNT_PROVIDERS=&#39;
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>{&quot;openid_connect&quot;: {&quot;APPS&quot;: [{&quot;provider_id&quot;: &quot;keycloak&quot;,&quot;name&quot;: &quot;Keycloak&quot;,&quot;client_id&quot;: &quot;paperless&quot;,&quot;secret&quot;: &quot;&lt;CLIENT_SECRET&gt;&quot;,&quot;settings&quot;: { &quot;server_url&quot;: &quot;https://&lt;KEYCLOAK_SERVER&gt;/realms/&lt;REALM&gt;/.well-known/openid-configuration&quot;}}]}}&#39;
+</code></pre></div>
+<p>More details about configuration option for various providers can be found in the <a href="https://docs.allauth.org/en/latest/socialaccount/providers/index.html#provider-specifics">allauth documentation</a>.</p>
+<h3 id="disabling-regular-login">Disabling Regular Login</h3>
+<p>Once external auth is set up, 'regular' login can be disabled with the <a href="../configuration/#PAPERLESS_DISABLE_REGULAR_LOGIN">PAPERLESS_DISABLE_REGULAR_LOGIN</a> setting and / or users can be automatically
+redirected with the <a href="../configuration/#PAPERLESS_REDIRECT_LOGIN_TO_SSO">PAPERLESS_REDIRECT_LOGIN_TO_SSO</a> setting.</p>
+<h2 id="gpg-decryptor">Decryption of encrypted emails before consumption</h2>
+<p>Paperless-ngx can be configured to decrypt gpg encrypted emails before consumption.</p>
+<h3 id="requirements">Requirements</h3>
+<p>You need a recent version of <code>gpg-agent &gt;= 2.1.1</code> installed on your host.
+Your host needs to be setup for decrypting your emails via <code>gpg-agent</code>, see this <a href="https://www.digitalocean.com/community/tutorials/how-to-use-gpg-to-encrypt-and-sign-messages#encrypt-and-decrypt-messages-with-gpg">tutorial</a> for instance.
+Test your setup and make sure that you can encrypt and decrypt files using your key</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>gpg --encrypt --armor -r person@email.com name_of_file
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>gpg --decrypt name_of_file.asc
+</code></pre></div>
+<h3 id="setup">Setup</h3>
+<p>First, enable the <a href="../configuration/#PAPERLESS_ENABLE_GPG_DECRYPTOR">PAPERLESS_ENABLE_GPG_DECRYPTOR environment variable</a>.</p>
+<p>Then determine your local <code>gpg-agent</code> socket by invoking</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>gpgconf --list-dir agent-socket
+</code></pre></div>
+<p>on your host. A possible output is <code>~/.gnupg/S.gpg-agent</code>.
+Also find the location of your public keyring.</p>
+<p>If using docker, you'll need to add the following volume mounts to your <code>docker-compose.yml</code> file:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nt">webserver</span><span class="p">:</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/user/.gnupg/pubring.gpg:/usr/src/paperless/.gnupg/pubring.gpg</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;path to gpg-agent socket&gt;:/usr/src/paperless/.gnupg/S.gpg-agent</span>
+</code></pre></div>
+<p>For a 'bare-metal' installation no further configuration is necessary. If you
+want to use a separate <code>GNUPG_HOME</code>, you can do so by configuring the <a href="../configuration/#PAPERLESS_EMAIL_GNUPG_HOME">PAPERLESS_EMAIL_GNUPG_HOME environment variable</a>.</p>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+<li>Make sure, that <code>gpg-agent</code> is running on your host machine</li>
+<li>Make sure, that encryption and decryption works from inside the container using the <code>gpg</code> commands from above.</li>
+<li>Check that all files in <code>/usr/src/paperless/.gnupg</code> have correct permissions</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>paperless@9da1865df327:~/.gnupg$<span class="w"> </span>ls<span class="w"> </span>-al
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>drwx------<span class="w"> </span><span class="m">1</span><span class="w"> </span>paperless<span class="w"> </span>paperless<span class="w">   </span><span class="m">4096</span><span class="w"> </span>Aug<span class="w"> </span><span class="m">18</span><span class="w"> </span><span class="m">17</span>:52<span class="w"> </span>.
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>drwxr-xr-x<span class="w"> </span><span class="m">1</span><span class="w"> </span>paperless<span class="w"> </span>paperless<span class="w">   </span><span class="m">4096</span><span class="w"> </span>Aug<span class="w"> </span><span class="m">18</span><span class="w"> </span><span class="m">17</span>:52<span class="w"> </span>..
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>srw-------<span class="w"> </span><span class="m">1</span><span class="w"> </span>paperless<span class="w"> </span>paperless<span class="w">      </span><span class="m">0</span><span class="w"> </span>Aug<span class="w"> </span><span class="m">18</span><span class="w"> </span><span class="m">17</span>:22<span class="w"> </span>S.gpg-agent
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>-rw-------<span class="w"> </span><span class="m">1</span><span class="w"> </span>paperless<span class="w"> </span>paperless<span class="w"> </span><span class="m">147940</span><span class="w"> </span>Jul<span class="w"> </span><span class="m">24</span><span class="w"> </span><span class="m">10</span>:23<span class="w"> </span>pubring.gpg
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2016 - 2023 Daniel Quinn, Jonas Winkler, and the Paperless-ngx team
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/paperless-ngx/paperless-ngx" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://hub.docker.com/r/paperlessngx/paperless-ngx" target="_blank" rel="noopener" title="hub.docker.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M349.9 236.3h-66.1v-59.4h66.1zm0-204.3h-66.1v60.7h66.1zm78.2 144.8H362v59.4h66.1zm-156.3-72.1h-66.1v60.1h66.1zm78.1 0h-66.1v60.1h66.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1zm78.1 0h-66.1v59.4h66.1zm-78.1-72.1h-66.1v60.1h66.1z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://matrix.to/#/#paperless:matrix.org" target="_blank" rel="noopener" title="matrix.to" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3c5.5 0 10 3.58 10 8s-4.5 8-10 8c-1.24 0-2.43-.18-3.53-.5C5.55 21 2 21 2 21c2.33-2.33 2.7-3.9 2.75-4.5C3.05 15.07 2 13.13 2 11c0-4.42 4.5-8 10-8"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "toc.integrate", "content.code.annotate"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
