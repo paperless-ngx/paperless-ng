@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5460bb283a0dad9fcce0a3d800297aa3bfb445b469d9ef1497e8ba12f4a6ce9c"
+            "sha256": "6a6d9178cd8e67dd47711941dadfb785a85da74beefe3eb6dd8e2ae729371fb4"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -37,6 +37,14 @@
             ],
             "markers": "python_version >= '3.8'",
             "version": "==3.8.1"
+        },
+        "async-timeout": {
+            "hashes": [
+                "sha256:39e3809566ff85354557ec2398b55e096c8364bacac9405a7a1fa429e77fe76c",
+                "sha256:d9321a7a3d5a6a5e187e824d2fa0793ce379a202935782d555d6e9d2735677d3"
+            ],
+            "markers": "python_version >= '3.8'",
+            "version": "==5.0.1"
         },
         "attrs": {
             "hashes": [
@@ -644,6 +652,14 @@
             "index": "pypi",
             "markers": "python_version >= '3.8'",
             "version": "==0.7.1"
+        },
+        "exceptiongroup": {
+            "hashes": [
+                "sha256:3111b9d131c238bec2f8f516e123e14ba243563fb135d3fe885990585aa7795b",
+                "sha256:47c2edf7c6738fafb49fd34290706d1a1a2f4d1c6df275526b62cbb4aa5393cc"
+            ],
+            "markers": "python_version >= '3.7'",
+            "version": "==1.2.2"
         },
         "fido2": {
             "hashes": [
