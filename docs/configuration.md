@@ -1538,13 +1538,23 @@ increase RAM usage.
 
     Defaults to 1.
 
+    !!! note
+
+         This option may also be set with `GRANIAN_WORKERS` and
+         this option may be removed in the future
+
 #### [`PAPERLESS_BIND_ADDR=<ip address>`](#PAPERLESS_BIND_ADDR) {#PAPERLESS_BIND_ADDR}
 
 : The IP address the webserver will listen on inside the container.
 There are special setups where you may need to configure this value
 to restrict the Ip address or interface the webserver listens on.
 
-    Defaults to `[::]`, meaning all interfaces, including IPv6.
+    Defaults to `::`, meaning all interfaces, including IPv6.
+
+    !!! note
+
+         This option may also be set with `GRANIAN_HOST` and
+         this option may be removed in the future
 
 #### [`PAPERLESS_PORT=<port>`](#PAPERLESS_PORT) {#PAPERLESS_PORT}
 
@@ -1558,6 +1568,11 @@ one pod).
     the "ports" key in `docker-compose.yml`.
 
     Defaults to 8000.
+
+    !!! note
+
+         This option may also be set with `GRANIAN_PORT` and
+         this option may be removed in the future
 
 #### [`USERMAP_UID=<uid>`](#USERMAP_UID) {#USERMAP_UID}
 
