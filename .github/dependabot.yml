@@ -47,8 +47,6 @@ updates:
     # Add reviewers
     reviewers:
       - "paperless-ngx/backend"
-    ignore:
-      - dependency-name: "uvicorn"
     groups:
       development:
         patterns:

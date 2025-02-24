@@ -195,34 +195,6 @@ This might have multiple reasons.
     is not, you need to compile the front end yourself or download the
     release archive instead of cloning the repository.
 
-2.  Check the output of the web server. You might see errors like this:
-
-    ```
-    [2021-01-25 10:08:04 +0000] [40] [ERROR] Socket error processing request.
-    Traceback (most recent call last):
-    File "/usr/local/lib/python3.7/site-packages/gunicorn/workers/sync.py", line 134, in handle
-        self.handle_request(listener, req, client, addr)
-    File "/usr/local/lib/python3.7/site-packages/gunicorn/workers/sync.py", line 190, in handle_request
-        util.reraise(*sys.exc_info())
-    File "/usr/local/lib/python3.7/site-packages/gunicorn/util.py", line 625, in reraise
-        raise value
-    File "/usr/local/lib/python3.7/site-packages/gunicorn/workers/sync.py", line 178, in handle_request
-        resp.write_file(respiter)
-    File "/usr/local/lib/python3.7/site-packages/gunicorn/http/wsgi.py", line 396, in write_file
-        if not self.sendfile(respiter):
-    File "/usr/local/lib/python3.7/site-packages/gunicorn/http/wsgi.py", line 386, in sendfile
-        sent += os.sendfile(sockno, fileno, offset + sent, count)
-    OSError: [Errno 22] Invalid argument
-    ```
-
-    To fix this issue, add
-
-    ```
-    SENDFILE=0
-    ```
-
-    to your `docker-compose.env` file.
-
 ## Error while reading metadata
 
 You might find messages like these in your log files:
@@ -322,12 +294,12 @@ many documents at once often. Otherwise, try tweaking the
 [`PAPERLESS_DB_TIMEOUT`](configuration.md#PAPERLESS_DB_TIMEOUT) setting to allow more time for the database to
 unlock. This may have minor performance implications.
 
-## gunicorn fails to start with "is not a valid port number"
+## granian fails to start with "is not a valid port number"
 
 You are likely running using Kubernetes, which automatically creates an
 environment variable named `${serviceName}_PORT`. This is
 the same environment variable which is used by Paperless to optionally
-change the port gunicorn listens on.
+change the port granian listens on.
 
 To fix this, set [`PAPERLESS_PORT`](configuration.md#PAPERLESS_PORT) again to your desired port, or the
 default of 8000.

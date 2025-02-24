@@ -426,31 +426,20 @@ are released, dependency support is confirmed, etc.
 
     !!! note
 
-        The `socket` script enables `gunicorn` to run on port 80 without
+        The `socket` script enables `granian` to run on port 80 without
         root privileges. For this you need to uncomment the
         `Require=paperless-webserver.socket` in the `webserver` script
-        and configure `gunicorn` to listen on port 80 (see
-        `paperless/gunicorn.conf.py`).
-
-    You may need to adjust the path to the `gunicorn` executable. This
-    will be installed as part of the python dependencies, and is either
-    located in the `bin` folder of your virtual environment, or in
-    `~/.local/bin/` if no virtual environment is used.
+        and configure `granian` to listen on port 80 (set `GRANIAN_PORT`).
 
     These services rely on redis and optionally the database server, but
     don't need to be started in any particular order. The example files
     depend on redis being started. If you use a database server, you
     should add additional dependencies.
 
-    !!! warning
+    !!! note
 
-        The included scripts run a `gunicorn` standalone server, which is
-        fine for running paperless. It does support SSL, however, the
-        documentation of GUnicorn states that you should use a proxy server
-        in front of gunicorn instead.
-
-        For instructions on how to use nginx for that,
-        [see the wiki](https://github.com/paperless-ngx/paperless-ngx/wiki/Using-a-Reverse-Proxy-with-Paperless-ngx#nginx).
+        For instructions on using a reverse proxy,
+        [see the wiki](https://github.com/paperless-ngx/paperless-ngx/wiki/Using-a-Reverse-Proxy-with-Paperless-ngx#).
 
     !!! warning
 

@@ -837,7 +837,7 @@ Paperless-ngx consists of the following components:
 
     ```shell-session
     cd /path/to/paperless/src/
-    gunicorn -c ../gunicorn.conf.py paperless.wsgi
+    python3 webserver.py
     ```
 
     or by any other means such as Apache `mod_wsgi`.

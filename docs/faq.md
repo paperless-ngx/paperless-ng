@@ -133,6 +133,9 @@ Multiple options for ASGI servers exist:
     implementation for ASGI.
 -   `uvicorn` as a standalone server
 
+You may also find the [Django documentation](https://docs.djangoproject.com/en/5.1/howto/deployment/asgi/) on ASGI
+useful to review.
+
 ## _What about the Redis licensing change and using one of the open source forks_?
 
 Currently (October 2024), forks of Redis such as Valkey or Redirect are not officially supported by our upstream
