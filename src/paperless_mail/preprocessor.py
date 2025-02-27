@@ -1,8 +1,8 @@
 import abc
-import os
 from email import message_from_bytes
 from email import policy
 from email.message import Message
+from pathlib import Path
 
 from django.conf import settings
 from gnupg import GPG
@@ -50,7 +50,7 @@ class MailMessageDecryptor(MailMessagePreprocessor, LoggingMixin):
             return False
         if settings.EMAIL_GNUPG_HOME is None:
             return True
-        return os.path.isdir(settings.EMAIL_GNUPG_HOME)
+        return Path(settings.EMAIL_GNUPG_HOME).is_dir()
 
     def run(self, message: MailMessage) -> MailMessage:
         if not hasattr(message, "obj"):

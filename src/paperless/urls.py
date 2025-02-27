@@ -1,4 +1,4 @@
-import os
+from pathlib import Path
 
 from allauth.account import views as allauth_account_views
 from allauth.mfa.base import views as allauth_mfa_views
@@ -270,7 +270,7 @@ urlpatterns = [
     re_path(
         r"^logo(?P<path>.*)$",
         serve,
-        kwargs={"document_root": os.path.join(settings.MEDIA_ROOT, "logo")},
+        kwargs={"document_root": Path(settings.MEDIA_ROOT) / "logo"},
     ),
     # allauth
     path(

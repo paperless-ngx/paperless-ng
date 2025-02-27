@@ -1,5 +1,5 @@
-import os
 import shutil
+from pathlib import Path
 from unittest import mock
 
 from django.core.management import call_command
@@ -22,7 +22,7 @@ class TestMakeThumbnails(DirectoriesMixin, FileSystemAssertsMixin, TestCase):
             filename="test.pdf",
         )
         shutil.copy(
-            os.path.join(os.path.dirname(__file__), "samples", "simple.pdf"),
+            Path(__file__).parent / "samples" / "simple.pdf",
             self.d1.source_path,
         )
 
@@ -34,7 +34,7 @@ class TestMakeThumbnails(DirectoriesMixin, FileSystemAssertsMixin, TestCase):
             filename="test2.pdf",
         )
         shutil.copy(
-            os.path.join(os.path.dirname(__file__), "samples", "simple.pdf"),
+            Path(__file__).parent / "samples" / "simple.pdf",
             self.d2.source_path,
         )
 
@@ -46,7 +46,7 @@ class TestMakeThumbnails(DirectoriesMixin, FileSystemAssertsMixin, TestCase):
             filename="test3.pdf",
         )
         shutil.copy(
-            os.path.join(os.path.dirname(__file__), "samples", "password-is-test.pdf"),
+            Path(__file__).parent / "samples" / "password-is-test.pdf",
             self.d3.source_path,
         )
 

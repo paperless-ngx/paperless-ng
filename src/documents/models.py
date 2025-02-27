@@ -1,6 +1,5 @@
 import datetime
 import logging
-import os
 import re
 from collections import OrderedDict
 from pathlib import Path
@@ -320,7 +319,7 @@ class Document(SoftDeleteModel, ModelWithOwner):
 
     @property
     def source_file(self):
-        return open(self.source_path, "rb")
+        return Path(self.source_path).open("rb")
 
     @property
     def has_archive_version(self) -> bool:
@@ -335,7 +334,7 @@ class Document(SoftDeleteModel, ModelWithOwner):
 
     @property
     def archive_file(self):
-        return open(self.archive_path, "rb")
+        return Path(self.archive_path).open("rb")
 
     def get_public_filename(self, *, archive=False, counter=0, suffix=None) -> str:
         """
@@ -372,7 +371,7 @@ class Document(SoftDeleteModel, ModelWithOwner):
 
     @property
     def thumbnail_file(self):
-        return open(self.thumbnail_path, "rb")
+        return Path(self.thumbnail_path).open("rb")
 
     @property
     def created_date(self):
@@ -608,7 +607,7 @@ class FileInfo:
 
         # do this after the transforms so that the transforms can do whatever
         # with the file extension.
-        filename_no_ext = os.path.splitext(filename)[0]
+        filename_no_ext = Path(filename).stem
 
         if filename_no_ext == filename and filename.startswith("."):
             # This is a very special case where there is no text before the

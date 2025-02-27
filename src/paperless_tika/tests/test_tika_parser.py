@@ -38,7 +38,7 @@ class TestTikaParser:
 
         assert tika_parser.text == "the content"
         assert tika_parser.archive_path is not None
-        with open(tika_parser.archive_path, "rb") as f:
+        with Path(tika_parser.archive_path).open("rb") as f:
             assert f.read() == b"PDF document"
 
         assert tika_parser.date == datetime.datetime(

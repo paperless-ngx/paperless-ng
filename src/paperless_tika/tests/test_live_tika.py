@@ -75,7 +75,7 @@ class TestTikaParserAgainstServer:
             == "This is an DOCX test document, also made September 14, 2022"
         )
         assert tika_parser.archive_path is not None
-        with open(tika_parser.archive_path, "rb") as f:
+        with Path(tika_parser.archive_path).open("rb") as f:
             assert b"PDF-" in f.read()[:10]
 
         # self.assertEqual(tika_parser.date, datetime.datetime(2022, 9, 14))
@@ -104,7 +104,7 @@ class TestTikaParserAgainstServer:
             in tika_parser.text
         )
         assert tika_parser.archive_path is not None
-        with open(tika_parser.archive_path, "rb") as f:
+        with Path(tika_parser.archive_path).open("rb") as f:
             assert b"PDF-" in f.read()[:10]
 
     def test_tika_fails_multi_part(
@@ -130,5 +130,5 @@ class TestTikaParserAgainstServer:
         )
 
         assert tika_parser.archive_path is not None
-        with open(tika_parser.archive_path, "rb") as f:
+        with Path(tika_parser.archive_path).open("rb") as f:
             assert b"PDF-" in f.read()[:10]
