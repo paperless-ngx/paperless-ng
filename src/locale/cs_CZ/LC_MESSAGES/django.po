@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: paperless-ngx\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-27 08:19-0800\n"
-"PO-Revision-Date: 2025-01-27 16:20\n"
+"POT-Creation-Date: 2025-02-25 11:07-0800\n"
+"PO-Revision-Date: 2025-02-26 22:12\n"
 "Last-Translator: \n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
@@ -21,67 +21,67 @@ msgstr ""
 msgid "Documents"
 msgstr "Dokumenty"
 
-#: documents/filters.py:344
+#: documents/filters.py:370
 msgid "Value must be valid JSON."
 msgstr "Hodnota musí být platný JSON."
 
-#: documents/filters.py:363
+#: documents/filters.py:389
 msgid "Invalid custom field query expression"
 msgstr "Neplatný výraz dotazu na vlastní pole"
 
-#: documents/filters.py:373
+#: documents/filters.py:399
 msgid "Invalid expression list. Must be nonempty."
 msgstr "Neplatný seznam výrazů. Nesmí být prázdný."
 
-#: documents/filters.py:394
+#: documents/filters.py:420
 msgid "Invalid logical operator {op!r}"
 msgstr "Neplatný logický operátor {op!r}"
 
-#: documents/filters.py:408
+#: documents/filters.py:434
 msgid "Maximum number of query conditions exceeded."
 msgstr "Překročen maximální počet podmínek dotazu."
 
-#: documents/filters.py:473
+#: documents/filters.py:499
 msgid "{name!r} is not a valid custom field."
 msgstr "{name!r} není platné vlastní pole."
 
-#: documents/filters.py:510
+#: documents/filters.py:536
 msgid "{data_type} does not support query expr {expr!r}."
 msgstr "{data_type} nepodporuje výraz dotazu {expr!r}."
 
-#: documents/filters.py:618
+#: documents/filters.py:644
 msgid "Maximum nesting depth exceeded."
 msgstr "Překročena maximální hloubka větvení."
 
-#: documents/filters.py:785
+#: documents/filters.py:829
 msgid "Custom field not found"
-msgstr ""
+msgstr "Vlastní pole nebylo nalezeno"
 
-#: documents/models.py:41 documents/models.py:801
+#: documents/models.py:41 documents/models.py:830
 msgid "owner"
 msgstr "vlastník"
 
-#: documents/models.py:58 documents/models.py:1012
+#: documents/models.py:58 documents/models.py:1041
 msgid "None"
 msgstr "Žádný"
 
-#: documents/models.py:59 documents/models.py:1013
+#: documents/models.py:59 documents/models.py:1042
 msgid "Any word"
 msgstr "Jakékoliv slovo"
 
-#: documents/models.py:60 documents/models.py:1014
+#: documents/models.py:60 documents/models.py:1043
 msgid "All words"
 msgstr "Všechna slova"
 
-#: documents/models.py:61 documents/models.py:1015
+#: documents/models.py:61 documents/models.py:1044
 msgid "Exact match"
 msgstr "Přesná shoda"
 
-#: documents/models.py:62 documents/models.py:1016
+#: documents/models.py:62 documents/models.py:1045
 msgid "Regular expression"
 msgstr "Regulární výraz"
 
-#: documents/models.py:63 documents/models.py:1017
+#: documents/models.py:63 documents/models.py:1046
 msgid "Fuzzy word"
 msgstr "Nejasné slovo"
 
@@ -89,20 +89,20 @@ msgstr "Nejasné slovo"
 msgid "Automatic"
 msgstr "Automaticky"
 
-#: documents/models.py:67 documents/models.py:433 documents/models.py:1493
-#: paperless_mail/models.py:23 paperless_mail/models.py:136
+#: documents/models.py:67 documents/models.py:433 documents/models.py:1526
+#: paperless_mail/models.py:23 paperless_mail/models.py:143
 msgid "name"
 msgstr "název"
 
-#: documents/models.py:69 documents/models.py:1080
+#: documents/models.py:69 documents/models.py:1110
 msgid "match"
 msgstr "shoda"
 
-#: documents/models.py:72 documents/models.py:1083
+#: documents/models.py:72 documents/models.py:1113
 msgid "matching algorithm"
 msgstr "algoritmus pro shodu"
 
-#: documents/models.py:77 documents/models.py:1088
+#: documents/models.py:77 documents/models.py:1118
 msgid "is insensitive"
 msgstr "je ignorováno"
 
@@ -166,7 +166,7 @@ msgstr "Šifrované pomocí GNU Privacy Guard"
 msgid "title"
 msgstr "název"
 
-#: documents/models.py:175 documents/models.py:715
+#: documents/models.py:175 documents/models.py:744
 msgid "content"
 msgstr "obsah"
 
@@ -202,8 +202,8 @@ msgstr "počet stránek"
 msgid "The number of pages of the document."
 msgstr "Počet stránek dokumentu."
 
-#: documents/models.py:221 documents/models.py:401 documents/models.py:721
-#: documents/models.py:759 documents/models.py:830 documents/models.py:888
+#: documents/models.py:221 documents/models.py:401 documents/models.py:750
+#: documents/models.py:788 documents/models.py:859 documents/models.py:917
 msgid "created"
 msgstr "vytvořeno"
 
@@ -251,8 +251,8 @@ msgstr "sériové číslo archivu"
 msgid "The position of this document in your physical document archive."
 msgstr "Pozice tohoto dokumentu ve vašem fyzickém archivu dokumentů."
 
-#: documents/models.py:295 documents/models.py:732 documents/models.py:786
-#: documents/models.py:1536
+#: documents/models.py:295 documents/models.py:761 documents/models.py:815
+#: documents/models.py:1569
 msgid "document"
 msgstr "dokument"
 
@@ -272,7 +272,7 @@ msgstr "informace"
 msgid "warning"
 msgstr "varování"
 
-#: documents/models.py:387 paperless_mail/models.py:350
+#: documents/models.py:387 paperless_mail/models.py:363
 msgid "error"
 msgstr "chyba"
 
@@ -316,11 +316,11 @@ msgstr "Velké karty"
 msgid "Title"
 msgstr "Název"
 
-#: documents/models.py:420 documents/models.py:1032
+#: documents/models.py:420 documents/models.py:1062
 msgid "Created"
 msgstr "Vytvořeno"
 
-#: documents/models.py:421 documents/models.py:1031
+#: documents/models.py:421 documents/models.py:1061
 msgid "Added"
 msgstr "Přidáno"
 
@@ -388,7 +388,7 @@ msgstr "Zobrazit režim zobrazení"
 msgid "Document display fields"
 msgstr "Pole zobrazení dokumentu"
 
-#: documents/models.py:473 documents/models.py:531
+#: documents/models.py:473 documents/models.py:536
 msgid "saved view"
 msgstr "uložený pohled"
 
@@ -568,589 +568,649 @@ msgstr "nemá vlastní pole"
 msgid "custom fields query"
 msgstr "dotazy na vlastní pole"
 
-#: documents/models.py:534
+#: documents/models.py:525
+msgid "created to"
+msgstr ""
+
+#: documents/models.py:526
+msgid "created from"
+msgstr ""
+
+#: documents/models.py:527
+msgid "added to"
+msgstr ""
+
+#: documents/models.py:528
+msgid "added from"
+msgstr ""
+
+#: documents/models.py:529
+msgid "mime type is"
+msgstr ""
+
+#: documents/models.py:539
 msgid "rule type"
 msgstr "typ pravidla"
 
-#: documents/models.py:536
+#: documents/models.py:541
 msgid "value"
 msgstr "hodnota"
 
-#: documents/models.py:539
+#: documents/models.py:544
 msgid "filter rule"
 msgstr "filtrovací pravidlo"
 
-#: documents/models.py:540
+#: documents/models.py:545
 msgid "filter rules"
 msgstr "filtrovací pravidla"
 
-#: documents/models.py:651
+#: documents/models.py:654
+msgid "Auto Task"
+msgstr ""
+
+#: documents/models.py:655
+msgid "Scheduled Task"
+msgstr ""
+
+#: documents/models.py:656
+msgid "Manual Task"
+msgstr ""
+
+#: documents/models.py:659
+msgid "Consume File"
+msgstr ""
+
+#: documents/models.py:660
+msgid "Train Classifier"
+msgstr ""
+
+#: documents/models.py:661
+msgid "Check Sanity"
+msgstr ""
+
+#: documents/models.py:662
+msgid "Index Optimize"
+msgstr ""
+
+#: documents/models.py:667
 msgid "Task ID"
 msgstr "ID úlohy"
 
-#: documents/models.py:652
+#: documents/models.py:668
 msgid "Celery ID for the Task that was run"
 msgstr "Celery ID pro úlohu, která byla spuštěna"
 
-#: documents/models.py:657
+#: documents/models.py:673
 msgid "Acknowledged"
 msgstr "Potvrzeno"
 
-#: documents/models.py:658
+#: documents/models.py:674
 msgid "If the task is acknowledged via the frontend or API"
 msgstr "Pokud je úloha potvrzena prostřednictvím webu nebo API"
 
-#: documents/models.py:664
+#: documents/models.py:680
 msgid "Task Filename"
 msgstr "Název souboru úlohy"
 
-#: documents/models.py:665
+#: documents/models.py:681
 msgid "Name of the file which the Task was run for"
 msgstr "Název souboru, pro který byla úloha spuštěna"
 
-#: documents/models.py:671
+#: documents/models.py:688
 msgid "Task Name"
 msgstr "Název úlohy"
 
-#: documents/models.py:672
-msgid "Name of the Task which was run"
-msgstr "Název úlohy, která byla spuštěna"
+#: documents/models.py:689
+msgid "Name of the task that was run"
+msgstr ""
 
-#: documents/models.py:679
+#: documents/models.py:696
 msgid "Task State"
 msgstr "Stav úlohy"
 
-#: documents/models.py:680
+#: documents/models.py:697
 msgid "Current state of the task being run"
 msgstr "Aktuální stav spuštěné úlohy"
 
-#: documents/models.py:685
+#: documents/models.py:703
 msgid "Created DateTime"
 msgstr "Datum a čas vytvoření"
 
-#: documents/models.py:686
+#: documents/models.py:704
 msgid "Datetime field when the task result was created in UTC"
 msgstr "Datum a čas, kdy byl výsledek úlohy vytvořen v UTC"
 
-#: documents/models.py:691
+#: documents/models.py:710
 msgid "Started DateTime"
 msgstr "Datum a čas zahájení"
 
-#: documents/models.py:692
+#: documents/models.py:711
 msgid "Datetime field when the task was started in UTC"
 msgstr "Datum a čas, kdy byla úloha spuštěna v UTC"
 
-#: documents/models.py:697
+#: documents/models.py:717
 msgid "Completed DateTime"
 msgstr "Datum a čas dokončení"
 
-#: documents/models.py:698
+#: documents/models.py:718
 msgid "Datetime field when the task was completed in UTC"
 msgstr "Datum a čas, kdy byla úloha dokončena v UTC"
 
-#: documents/models.py:703
+#: documents/models.py:724
 msgid "Result Data"
 msgstr "Data výsledku"
 
-#: documents/models.py:705
+#: documents/models.py:726
 msgid "The data returned by the task"
 msgstr "Data vrácena úlohou"
 
-#: documents/models.py:717
+#: documents/models.py:734
+msgid "Task Type"
+msgstr ""
+
+#: documents/models.py:735
+msgid "The type of task that was run"
+msgstr ""
+
+#: documents/models.py:746
 msgid "Note for the document"
 msgstr "Poznámka k dokumentu"
 
-#: documents/models.py:741
+#: documents/models.py:770
 msgid "user"
 msgstr "uživatel"
 
-#: documents/models.py:746
+#: documents/models.py:775
 msgid "note"
 msgstr "poznámka"
 
-#: documents/models.py:747
+#: documents/models.py:776
 msgid "notes"
 msgstr "poznámky"
 
-#: documents/models.py:755
+#: documents/models.py:784
 msgid "Archive"
 msgstr "Archiv"
 
-#: documents/models.py:756
+#: documents/models.py:785
 msgid "Original"
 msgstr "Původní"
 
-#: documents/models.py:767 paperless_mail/models.py:75
+#: documents/models.py:796 paperless_mail/models.py:75
 msgid "expiration"
 msgstr "vypršení"
 
-#: documents/models.py:774
+#: documents/models.py:803
 msgid "slug"
 msgstr "slug"
 
-#: documents/models.py:806
+#: documents/models.py:835
 msgid "share link"
 msgstr "odkaz ke sdílení"
 
-#: documents/models.py:807
+#: documents/models.py:836
 msgid "share links"
 msgstr "odkazy ke sdílení"
 
-#: documents/models.py:819
+#: documents/models.py:848
 msgid "String"
 msgstr "Řetězec"
 
-#: documents/models.py:820
+#: documents/models.py:849
 msgid "URL"
 msgstr "Adresa URL"
 
-#: documents/models.py:821
+#: documents/models.py:850
 msgid "Date"
 msgstr "Datum"
 
-#: documents/models.py:822
+#: documents/models.py:851
 msgid "Boolean"
 msgstr "Logická hodnota"
 
-#: documents/models.py:823
+#: documents/models.py:852
 msgid "Integer"
 msgstr "Celé číslo"
 
-#: documents/models.py:824
+#: documents/models.py:853
 msgid "Float"
 msgstr "Plovoucí"
 
-#: documents/models.py:825
+#: documents/models.py:854
 msgid "Monetary"
 msgstr "Peněžní"
 
-#: documents/models.py:826
+#: documents/models.py:855
 msgid "Document Link"
 msgstr "Odkaz na dokument"
 
-#: documents/models.py:827
+#: documents/models.py:856
 msgid "Select"
 msgstr "Vybrat"
 
-#: documents/models.py:839
+#: documents/models.py:868
 msgid "data type"
 msgstr "datový typ"
 
-#: documents/models.py:846
+#: documents/models.py:875
 msgid "extra data"
 msgstr "dodatečná data"
 
-#: documents/models.py:850
+#: documents/models.py:879
 msgid "Extra data for the custom field, such as select options"
 msgstr "Dodatečná data pro vlastní pole, jako jsou možnosti výběru"
 
-#: documents/models.py:856
+#: documents/models.py:885
 msgid "custom field"
 msgstr "vlastní pole"
 
-#: documents/models.py:857
+#: documents/models.py:886
 msgid "custom fields"
 msgstr "vlastní pole"
 
-#: documents/models.py:954
+#: documents/models.py:983
 msgid "custom field instance"
 msgstr "instance vlastního pole"
 
-#: documents/models.py:955
+#: documents/models.py:984
 msgid "custom field instances"
 msgstr "instance vlastních polí"
 
-#: documents/models.py:1020
+#: documents/models.py:1049
 msgid "Consumption Started"
 msgstr "Spuštěno zpracování"
 
-#: documents/models.py:1021
+#: documents/models.py:1050
 msgid "Document Added"
 msgstr "Dokument přidán"
 
-#: documents/models.py:1022
+#: documents/models.py:1051
 msgid "Document Updated"
 msgstr "Dokument aktualizován"
 
-#: documents/models.py:1023
+#: documents/models.py:1052
 msgid "Scheduled"
 msgstr "Naplánováno"
 
-#: documents/models.py:1026
+#: documents/models.py:1055
 msgid "Consume Folder"
 msgstr "Složka zpracování"
 
-#: documents/models.py:1027
+#: documents/models.py:1056
 msgid "Api Upload"
 msgstr "Nahrání pomocí API"
 
-#: documents/models.py:1028
+#: documents/models.py:1057
 msgid "Mail Fetch"
 msgstr "Načíst poštu"
 
-#: documents/models.py:1033
+#: documents/models.py:1058
+msgid "Web UI"
+msgstr ""
+
+#: documents/models.py:1063
 msgid "Modified"
 msgstr "Upraveno"
 
-#: documents/models.py:1034
+#: documents/models.py:1064
 msgid "Custom Field"
 msgstr "Vlastní pole"
 
-#: documents/models.py:1037
+#: documents/models.py:1067
 msgid "Workflow Trigger Type"
 msgstr "Typ spouštěče pracovního postupu"
 
-#: documents/models.py:1049
+#: documents/models.py:1079
 msgid "filter path"
 msgstr "filtr cesty"
 
-#: documents/models.py:1054
+#: documents/models.py:1084
 msgid "Only consume documents with a path that matches this if specified. Wildcards specified as * are allowed. Case insensitive."
 msgstr "Zpracovávat pouze dokumenty s cestou, která odpovídá tomuto, pokud je zadáno. Jsou povoleny zástupné znaky zadané jako *. Nerozlišuje malá a velká písmena."
 
-#: documents/models.py:1061
+#: documents/models.py:1091
 msgid "filter filename"
 msgstr "filtr názvu souboru"
 
-#: documents/models.py:1066 paperless_mail/models.py:193
+#: documents/models.py:1096 paperless_mail/models.py:200
 msgid "Only consume documents which entirely match this filename if specified. Wildcards such as *.pdf or *invoice* are allowed. Case insensitive."
 msgstr "Zpracovávat pouze dokumenty, které zcela odpovídají tomuto názvu souboru, pokud je zadán. Jsou povoleny zástupné znaky jako *.pdf nebo *faktura*. Nerozlišuje malá a velká písmena."
 
-#: documents/models.py:1077
+#: documents/models.py:1107
 msgid "filter documents from this mail rule"
 msgstr "filtrovat dokumenty z tohoto pravidla pošty"
 
-#: documents/models.py:1093
+#: documents/models.py:1123
 msgid "has these tag(s)"
 msgstr "má tyto štítky"
 
-#: documents/models.py:1101
+#: documents/models.py:1131
 msgid "has this document type"
 msgstr "má tento typ dokumentu"
 
-#: documents/models.py:1109
+#: documents/models.py:1139
 msgid "has this correspondent"
 msgstr "má tohoto korespondenta"
 
-#: documents/models.py:1113
+#: documents/models.py:1143
 msgid "schedule offset days"
 msgstr "počet dní posunu plánu"
 
-#: documents/models.py:1116
+#: documents/models.py:1146
 msgid "The number of days to offset the schedule trigger by."
 msgstr "Počet dní, o které se má spouštěč plánu posunout."
 
-#: documents/models.py:1121
+#: documents/models.py:1151
 msgid "schedule is recurring"
 msgstr "plán se opakuje"
 
-#: documents/models.py:1124
+#: documents/models.py:1154
 msgid "If the schedule should be recurring."
 msgstr "Jestli by se měl plán opakovat."
 
-#: documents/models.py:1129
+#: documents/models.py:1159
 msgid "schedule recurring delay in days"
 msgstr "zpoždění opakování plánu ve dnech"
 
-#: documents/models.py:1133
+#: documents/models.py:1163
 msgid "The number of days between recurring schedule triggers."
 msgstr "Počet dní mezi opakovanými spouštěči plánu."
 
-#: documents/models.py:1138
+#: documents/models.py:1168
 msgid "schedule date field"
 msgstr "pole data plánu"
 
-#: documents/models.py:1143
+#: documents/models.py:1173
 msgid "The field to check for a schedule trigger."
 msgstr "Pole pro kontrolu spouštěče plánu."
 
-#: documents/models.py:1152
+#: documents/models.py:1182
 msgid "schedule date custom field"
 msgstr "vlastní pole data plánu"
 
-#: documents/models.py:1156
+#: documents/models.py:1186
 msgid "workflow trigger"
 msgstr "spouštěč pracovního postupu"
 
-#: documents/models.py:1157
+#: documents/models.py:1187
 msgid "workflow triggers"
 msgstr "spouštěče pracovního postupu"
 
-#: documents/models.py:1165
+#: documents/models.py:1195
 msgid "email subject"
 msgstr "předmět e-mailu"
 
-#: documents/models.py:1169
+#: documents/models.py:1199
 msgid "The subject of the email, can include some placeholders, see documentation."
 msgstr "Předmět e-mailu, může obsahovat některé zástupné znaky, viz dokumentace."
 
-#: documents/models.py:1175
+#: documents/models.py:1205
 msgid "email body"
 msgstr "tělo e-mailu"
 
-#: documents/models.py:1178
+#: documents/models.py:1208
 msgid "The body (message) of the email, can include some placeholders, see documentation."
 msgstr "Tělo (zpráva) e-mailu, může obsahovat některé zástupné znaky, viz dokumentace."
 
-#: documents/models.py:1184
+#: documents/models.py:1214
 msgid "emails to"
 msgstr "e-maily komu"
 
-#: documents/models.py:1187
+#: documents/models.py:1217
 msgid "The destination email addresses, comma separated."
 msgstr "Cílové e-mailové adresy, oddělené čárkou."
 
-#: documents/models.py:1193
+#: documents/models.py:1223
 msgid "include document in email"
 msgstr "zahrnout dokument v e-mailu"
 
-#: documents/models.py:1202
+#: documents/models.py:1234
 msgid "webhook url"
 msgstr "url webhooku"
 
-#: documents/models.py:1204
+#: documents/models.py:1237
 msgid "The destination URL for the notification."
 msgstr "Cílová URL pro oznámení."
 
-#: documents/models.py:1209
+#: documents/models.py:1242
 msgid "use parameters"
 msgstr "použít parametry"
 
-#: documents/models.py:1214
+#: documents/models.py:1247
 msgid "send as JSON"
-msgstr ""
+msgstr "poslat jako JSON"
 
-#: documents/models.py:1218
+#: documents/models.py:1251
 msgid "webhook parameters"
 msgstr "parametry webhooku"
 
-#: documents/models.py:1221
+#: documents/models.py:1254
 msgid "The parameters to send with the webhook URL if body not used."
 msgstr "Parametry pro odeslání s URL webhooku, pokud není použito tělo."
 
-#: documents/models.py:1225
+#: documents/models.py:1258
 msgid "webhook body"
 msgstr "tělo webhooku"
 
-#: documents/models.py:1228
+#: documents/models.py:1261
 msgid "The body to send with the webhook URL if parameters not used."
 msgstr "Tělo pro odeslání s URL webhooku, pokud nejsou použity parametry."
 
-#: documents/models.py:1232
+#: documents/models.py:1265
 msgid "webhook headers"
 msgstr "hlavičky webhooku"
 
-#: documents/models.py:1235
+#: documents/models.py:1268
 msgid "The headers to send with the webhook URL."
 msgstr "Záhlaví pro odeslání s URL webhooku."
 
-#: documents/models.py:1240
+#: documents/models.py:1273
 msgid "include document in webhook"
 msgstr "zahrnout dokument ve webhooku"
 
-#: documents/models.py:1251
+#: documents/models.py:1284
 msgid "Assignment"
 msgstr "Přiřazení"
 
-#: documents/models.py:1255
+#: documents/models.py:1288
 msgid "Removal"
 msgstr "Odstranění"
 
-#: documents/models.py:1259 documents/templates/account/password_reset.html:15
+#: documents/models.py:1292 documents/templates/account/password_reset.html:15
 msgid "Email"
 msgstr "E-mail"
 
-#: documents/models.py:1263
+#: documents/models.py:1296
 msgid "Webhook"
 msgstr "Webhook"
 
-#: documents/models.py:1267
+#: documents/models.py:1300
 msgid "Workflow Action Type"
 msgstr "Typ akce pracovního postupu"
 
-#: documents/models.py:1273
+#: documents/models.py:1306
 msgid "assign title"
 msgstr "přiřadit název"
 
-#: documents/models.py:1278
+#: documents/models.py:1311
 msgid "Assign a document title, can include some placeholders, see documentation."
 msgstr "Přiřadit název dokumentu, může zahrnovat některé zástupné znaky, viz dokumentace."
 
-#: documents/models.py:1287 paperless_mail/models.py:261
+#: documents/models.py:1320 paperless_mail/models.py:274
 msgid "assign this tag"
 msgstr "přiřadit tento tag"
 
-#: documents/models.py:1296 paperless_mail/models.py:269
+#: documents/models.py:1329 paperless_mail/models.py:282
 msgid "assign this document type"
 msgstr "přiřadit tento typ dokumentu"
 
-#: documents/models.py:1305 paperless_mail/models.py:283
+#: documents/models.py:1338 paperless_mail/models.py:296
 msgid "assign this correspondent"
 msgstr "přiřadit tohoto korespondenta"
 
-#: documents/models.py:1314
+#: documents/models.py:1347
 msgid "assign this storage path"
 msgstr "přiřadit tuto cestu k úložišti"
 
-#: documents/models.py:1323
+#: documents/models.py:1356
 msgid "assign this owner"
 msgstr "přiřadit tohoto vlastníka"
 
-#: documents/models.py:1330
+#: documents/models.py:1363
 msgid "grant view permissions to these users"
 msgstr "udělit oprávnění k zobrazení těmto uživatelům"
 
-#: documents/models.py:1337
+#: documents/models.py:1370
 msgid "grant view permissions to these groups"
 msgstr "udělit oprávnění k zobrazení těmto skupinám"
 
-#: documents/models.py:1344
+#: documents/models.py:1377
 msgid "grant change permissions to these users"
 msgstr "udělit oprávnění ke změně těmto uživatelům"
 
-#: documents/models.py:1351
+#: documents/models.py:1384
 msgid "grant change permissions to these groups"
 msgstr "udělit oprávnění ke změně těmto skupinám"
 
-#: documents/models.py:1358
+#: documents/models.py:1391
 msgid "assign these custom fields"
 msgstr "přiřadit tato vlastní pole"
 
-#: documents/models.py:1365
+#: documents/models.py:1398
 msgid "remove these tag(s)"
 msgstr "odstranit tyto štítky"
 
-#: documents/models.py:1370
+#: documents/models.py:1403
 msgid "remove all tags"
 msgstr "odstranit všechny štítky"
 
-#: documents/models.py:1377
+#: documents/models.py:1410
 msgid "remove these document type(s)"
 msgstr "odstranit tyto typy dokumentů"
 
-#: documents/models.py:1382
+#: documents/models.py:1415
 msgid "remove all document types"
 msgstr "odstranit všechny typy dokumentů"
 
-#: documents/models.py:1389
+#: documents/models.py:1422
 msgid "remove these correspondent(s)"
 msgstr "odstranit tyto korespondenty"
 
-#: documents/models.py:1394
+#: documents/models.py:1427
 msgid "remove all correspondents"
 msgstr "odstranit všechny korespondenty"
 
-#: documents/models.py:1401
+#: documents/models.py:1434
 msgid "remove these storage path(s)"
 msgstr "odstranit tyto cesty k úložišti"
 
-#: documents/models.py:1406
+#: documents/models.py:1439
 msgid "remove all storage paths"
 msgstr "odstranit všechny cesty k úložišti"
 
-#: documents/models.py:1413
+#: documents/models.py:1446
 msgid "remove these owner(s)"
 msgstr "odstranit tyto vlastníky"
 
-#: documents/models.py:1418
+#: documents/models.py:1451
 msgid "remove all owners"
 msgstr "odstranit všechny vlastníky"
 
-#: documents/models.py:1425
+#: documents/models.py:1458
 msgid "remove view permissions for these users"
 msgstr "odstranit oprávnění k zobrazení pro tyto uživatele"
 
-#: documents/models.py:1432
+#: documents/models.py:1465
 msgid "remove view permissions for these groups"
 msgstr "odstranit oprávnění k zobrazení pro tyto skupiny"
 
-#: documents/models.py:1439
+#: documents/models.py:1472
 msgid "remove change permissions for these users"
 msgstr "odstranit oprávnění ke změně pro tyto uživatele"
 
-#: documents/models.py:1446
+#: documents/models.py:1479
 msgid "remove change permissions for these groups"
 msgstr "odstranit oprávnění ke změně pro tyto skupiny"
 
-#: documents/models.py:1451
+#: documents/models.py:1484
 msgid "remove all permissions"
 msgstr "odstranit všechna oprávnění"
 
-#: documents/models.py:1458
+#: documents/models.py:1491
 msgid "remove these custom fields"
 msgstr "odstranit tato vlastní pole"
 
-#: documents/models.py:1463
+#: documents/models.py:1496
 msgid "remove all custom fields"
 msgstr "odstranit všechna vlastní pole"
 
-#: documents/models.py:1472
+#: documents/models.py:1505
 msgid "email"
 msgstr "e-mail"
 
-#: documents/models.py:1481
+#: documents/models.py:1514
 msgid "webhook"
 msgstr "webhook"
 
-#: documents/models.py:1485
+#: documents/models.py:1518
 msgid "workflow action"
 msgstr "akce pracovního postupu"
 
-#: documents/models.py:1486
+#: documents/models.py:1519
 msgid "workflow actions"
 msgstr "akce pracovního postupu"
 
-#: documents/models.py:1495 paperless_mail/models.py:138
+#: documents/models.py:1528 paperless_mail/models.py:145
 msgid "order"
 msgstr "pořadí"
 
-#: documents/models.py:1501
+#: documents/models.py:1534
 msgid "triggers"
 msgstr "spouštěče"
 
-#: documents/models.py:1508
+#: documents/models.py:1541
 msgid "actions"
 msgstr "akce"
 
-#: documents/models.py:1511 paperless_mail/models.py:147
+#: documents/models.py:1544 paperless_mail/models.py:154
 msgid "enabled"
 msgstr "povoleno"
 
-#: documents/models.py:1522
+#: documents/models.py:1555
 msgid "workflow"
 msgstr "pracovní postup"
 
-#: documents/models.py:1526
+#: documents/models.py:1559
 msgid "workflow trigger type"
 msgstr "typ spouštěče pracovního postupu"
 
-#: documents/models.py:1540
+#: documents/models.py:1573
 msgid "date run"
 msgstr "spouštění data"
 
-#: documents/models.py:1546
+#: documents/models.py:1579
 msgid "workflow run"
 msgstr "spuštění pracovního postupu"
 
-#: documents/models.py:1547
+#: documents/models.py:1580
 msgid "workflow runs"
 msgstr "spuštění pracovních postupů"
 
-#: documents/serialisers.py:127
+#: documents/serialisers.py:128
 #, python-format
 msgid "Invalid regular expression: %(error)s"
 msgstr "Neplatný regulární výraz: %(error)s"
 
-#: documents/serialisers.py:474
+#: documents/serialisers.py:554
 msgid "Invalid color."
 msgstr "Neplatná barva."
 
-#: documents/serialisers.py:1559
+#: documents/serialisers.py:1570
 #, python-format
 msgid "File type %(type)s not supported"
 msgstr "Typ souboru %(type)s není podporován"
 
-#: documents/serialisers.py:1648
+#: documents/serialisers.py:1659
 msgid "Invalid variable detected."
 msgstr "Zjištěna neplatná proměnná."
 
@@ -1360,17 +1420,21 @@ msgstr "Chystáte se použít svůj účet %(provider_name)s k přihlášení."
 msgid "As a final step, please complete the following form:"
 msgstr "Jako poslední krok vyplňte následující formulář:"
 
-#: documents/validators.py:17
+#: documents/validators.py:24
 #, python-brace-format
 msgid "Unable to parse URI {value}, missing scheme"
 msgstr "Nelze analyzovat URI {value}, chybí schéma"
 
-#: documents/validators.py:22
+#: documents/validators.py:29
 #, python-brace-format
 msgid "Unable to parse URI {value}, missing net location or path"
 msgstr "Nelze analyzovat URI {value}, chybí umístění sítě nebo cesta"
 
-#: documents/validators.py:27
+#: documents/validators.py:36
+msgid "URI scheme '{parts.scheme}' is not allowed. Allowed schemes: {', '.join(allowed_schemes)}"
+msgstr ""
+
+#: documents/validators.py:45
 #, python-brace-format
 msgid "Unable to parse URI {value}"
 msgstr "Nelze analyzovat URI {value}"
@@ -1523,139 +1587,143 @@ msgstr "Logo aplikace"
 msgid "paperless application settings"
 msgstr "nastavení aplikace paperless"
 
-#: paperless/settings.py:698
+#: paperless/settings.py:721
 msgid "English (US)"
 msgstr "Angličtina (US)"
 
-#: paperless/settings.py:699
+#: paperless/settings.py:722
 msgid "Arabic"
 msgstr "Arabština"
 
-#: paperless/settings.py:700
+#: paperless/settings.py:723
 msgid "Afrikaans"
 msgstr "Afrikánština"
 
-#: paperless/settings.py:701
+#: paperless/settings.py:724
 msgid "Belarusian"
 msgstr "Běloruština"
 
-#: paperless/settings.py:702
+#: paperless/settings.py:725
 msgid "Bulgarian"
 msgstr "Bulharština"
 
-#: paperless/settings.py:703
+#: paperless/settings.py:726
 msgid "Catalan"
 msgstr "Katalánština"
 
-#: paperless/settings.py:704
+#: paperless/settings.py:727
 msgid "Czech"
 msgstr "Čeština"
 
-#: paperless/settings.py:705
+#: paperless/settings.py:728
 msgid "Danish"
 msgstr "Dánština"
 
-#: paperless/settings.py:706
+#: paperless/settings.py:729
 msgid "German"
 msgstr "Němčina"
 
-#: paperless/settings.py:707
+#: paperless/settings.py:730
 msgid "Greek"
 msgstr "Řečtina"
 
-#: paperless/settings.py:708
+#: paperless/settings.py:731
 msgid "English (GB)"
 msgstr "Angličtina (GB)"
 
-#: paperless/settings.py:709
+#: paperless/settings.py:732
 msgid "Spanish"
 msgstr "Španělština"
 
-#: paperless/settings.py:710
+#: paperless/settings.py:733
 msgid "Finnish"
 msgstr "Finština"
 
-#: paperless/settings.py:711
+#: paperless/settings.py:734
 msgid "French"
 msgstr "Francouzština"
 
-#: paperless/settings.py:712
+#: paperless/settings.py:735
 msgid "Hungarian"
 msgstr "Maďarština"
 
-#: paperless/settings.py:713
+#: paperless/settings.py:736
 msgid "Italian"
 msgstr "Italština"
 
-#: paperless/settings.py:714
+#: paperless/settings.py:737
 msgid "Japanese"
 msgstr "Japonština"
 
-#: paperless/settings.py:715
+#: paperless/settings.py:738
 msgid "Korean"
 msgstr "Korejština"
 
-#: paperless/settings.py:716
+#: paperless/settings.py:739
 msgid "Luxembourgish"
 msgstr "Lucemburština"
 
-#: paperless/settings.py:717
+#: paperless/settings.py:740
 msgid "Norwegian"
 msgstr "Norština"
 
-#: paperless/settings.py:718
+#: paperless/settings.py:741
 msgid "Dutch"
 msgstr "Holandština"
 
-#: paperless/settings.py:719
+#: paperless/settings.py:742
 msgid "Polish"
 msgstr "Polština"
 
-#: paperless/settings.py:720
+#: paperless/settings.py:743
 msgid "Portuguese (Brazil)"
 msgstr "Portugalština (Brazílie)"
 
-#: paperless/settings.py:721
+#: paperless/settings.py:744
 msgid "Portuguese"
 msgstr "Portugalština"
 
-#: paperless/settings.py:722
+#: paperless/settings.py:745
 msgid "Romanian"
 msgstr "Rumunština"
 
-#: paperless/settings.py:723
+#: paperless/settings.py:746
 msgid "Russian"
 msgstr "Ruština"
 
-#: paperless/settings.py:724
+#: paperless/settings.py:747
 msgid "Slovak"
 msgstr "Slovenština"
 
-#: paperless/settings.py:725
+#: paperless/settings.py:748
 msgid "Slovenian"
 msgstr "Slovinština"
 
-#: paperless/settings.py:726
+#: paperless/settings.py:749
 msgid "Serbian"
 msgstr "Srbština"
 
-#: paperless/settings.py:727
+#: paperless/settings.py:750
 msgid "Swedish"
 msgstr "Švédština"
 
-#: paperless/settings.py:728
+#: paperless/settings.py:751
 msgid "Turkish"
 msgstr "Turečtina"
 
-#: paperless/settings.py:729
+#: paperless/settings.py:752
 msgid "Ukrainian"
 msgstr "Ukrajinština"
 
-#: paperless/settings.py:730
+#: paperless/settings.py:753
 msgid "Chinese Simplified"
 msgstr "Čínština (zjednodušená)"
 
-#: paperless/urls.py:341
+#: paperless/settings.py:754
+msgid "Chinese Traditional"
+msgstr ""
+
+#: paperless/urls.py:369
 msgid "Paperless-ngx administration"
 msgstr "Administrace Paperless-ngx"
 
@@ -1741,7 +1809,7 @@ msgstr "Toto je většinou 143 pro nešifrovaná připojení/připojení použí
 
 #: paperless_mail/models.py:38
 msgid "IMAP security"
-msgstr "IMAP bezpečnost"
+msgstr "Zabezpečení IMAP"
 
 #: paperless_mail/models.py:43
 msgid "username"
@@ -1801,157 +1869,181 @@ msgstr "Zpracovat celou poštu (s vloženými přílohami v souboru) jako .eml +
 
 #: paperless_mail/models.py:116
 msgid "Process all files, including 'inline' attachments."
-msgstr "Zpracovat všechny soubory, včetně vložených příloh"
+msgstr "Zpracovat všechny soubory, včetně ‚vložených‘ příloh."
 
 #: paperless_mail/models.py:119
+msgid "System default"
+msgstr ""
+
+#: paperless_mail/models.py:120
+msgid "Text, then HTML"
+msgstr ""
+
+#: paperless_mail/models.py:121
+msgid "HTML, then text"
+msgstr ""
+
+#: paperless_mail/models.py:122
+msgid "HTML only"
+msgstr ""
+
+#: paperless_mail/models.py:123
+msgid "Text only"
+msgstr ""
+
+#: paperless_mail/models.py:126
 msgid "Delete"
 msgstr "Odstranit"
 
-#: paperless_mail/models.py:120
+#: paperless_mail/models.py:127
 msgid "Move to specified folder"
 msgstr "Přesunout do specifikované složky"
 
-#: paperless_mail/models.py:121
+#: paperless_mail/models.py:128
 msgid "Mark as read, don't process read mails"
 msgstr "Označit jako přečtené, nezpracovávat přečtené e-maily"
 
-#: paperless_mail/models.py:122
+#: paperless_mail/models.py:129
 msgid "Flag the mail, don't process flagged mails"
 msgstr "Označit e-mail, nezpracovávat označené e-maily"
 
-#: paperless_mail/models.py:123
+#: paperless_mail/models.py:130
 msgid "Tag the mail with specified tag, don't process tagged mails"
 msgstr "Označit e-mail zadaným štítkem, nezpracovávat označené e-maily"
 
-#: paperless_mail/models.py:126
+#: paperless_mail/models.py:133
 msgid "Use subject as title"
 msgstr "Použít předmět jako titulek"
 
-#: paperless_mail/models.py:127
+#: paperless_mail/models.py:134
 msgid "Use attachment filename as title"
 msgstr "Použít název souboru u přílohy jako titulek"
 
-#: paperless_mail/models.py:128
+#: paperless_mail/models.py:135
 msgid "Do not assign title from rule"
 msgstr "Nepřiřazovat název z pravidla"
 
-#: paperless_mail/models.py:131
+#: paperless_mail/models.py:138
 msgid "Do not assign a correspondent"
 msgstr "Nepřiřazovat korespondenta"
 
-#: paperless_mail/models.py:132
+#: paperless_mail/models.py:139
 msgid "Use mail address"
 msgstr "Použít e-mailovou adresu"
 
-#: paperless_mail/models.py:133
+#: paperless_mail/models.py:140
 msgid "Use name (or mail address if not available)"
-msgstr "Použít jméno (nebo e-mailovou adresu, pokud není jméno dostupné)"
+msgstr "Použít jméno (nebo e-mailovou adresu, pokud není dostupné)"
 
-#: paperless_mail/models.py:134
+#: paperless_mail/models.py:141
 msgid "Use correspondent selected below"
-msgstr "Použít korespondenta vybraného níže"
+msgstr "Použít níže vybraného korespondenta"
 
-#: paperless_mail/models.py:144
+#: paperless_mail/models.py:151
 msgid "account"
 msgstr "účet"
 
-#: paperless_mail/models.py:150 paperless_mail/models.py:305
+#: paperless_mail/models.py:157 paperless_mail/models.py:318
 msgid "folder"
 msgstr "složka"
 
-#: paperless_mail/models.py:154
+#: paperless_mail/models.py:161
 msgid "Subfolders must be separated by a delimiter, often a dot ('.') or slash ('/'), but it varies by mail server."
 msgstr "Podsložky musí být odděleny oddělovačem, často tečkou (‚.‘) nebo lomítkem (‚/‘), ale liší se to podle e-mailového serveru."
 
-#: paperless_mail/models.py:160
+#: paperless_mail/models.py:167
 msgid "filter from"
 msgstr "filtrovat z"
 
-#: paperless_mail/models.py:167
+#: paperless_mail/models.py:174
 msgid "filter to"
 msgstr "filtrovat podle příjemce"
 
-#: paperless_mail/models.py:174
+#: paperless_mail/models.py:181
 msgid "filter subject"
 msgstr "název filtru"
 
-#: paperless_mail/models.py:181
-msgid "filter body"
-msgstr "tělo filtru"
-
 #: paperless_mail/models.py:188
+msgid "filter body"
+msgstr "filtrovat podle těla"
+
+#: paperless_mail/models.py:195
 msgid "filter attachment filename inclusive"
 msgstr "filtr názvu souboru přílohy zahrnující"
 
-#: paperless_mail/models.py:200
+#: paperless_mail/models.py:207
 msgid "filter attachment filename exclusive"
 msgstr "filtr názvu souboru přílohy nezahrnující"
 
-#: paperless_mail/models.py:205
+#: paperless_mail/models.py:212
 msgid "Do not consume documents which entirely match this filename if specified. Wildcards such as *.pdf or *invoice* are allowed. Case insensitive."
 msgstr "Nezpracovávat dokumenty, které zcela odpovídají tomuto názvu souboru, pokud je zadán. Jsou povoleny zástupné symboly jako *.pdf nebo *faktura*. Nerozlišuje velká a malá písmena."
 
-#: paperless_mail/models.py:212
+#: paperless_mail/models.py:219
 msgid "maximum age"
 msgstr "maximální stáří"
 
-#: paperless_mail/models.py:214
+#: paperless_mail/models.py:221
 msgid "Specified in days."
 msgstr "Specifikováno ve dnech."
 
-#: paperless_mail/models.py:218
+#: paperless_mail/models.py:225
 msgid "attachment type"
 msgstr "typ přílohy"
 
-#: paperless_mail/models.py:222
+#: paperless_mail/models.py:229
 msgid "Inline attachments include embedded images, so it's best to combine this option with a filename filter."
 msgstr "Vložené přílohy zahrnují vložené obrázky, takže je nejlepší tuto možnost kombinovat s filtrem na název souboru"
 
-#: paperless_mail/models.py:228
+#: paperless_mail/models.py:235
 msgid "consumption scope"
 msgstr "rozsah zpracování"
 
-#: paperless_mail/models.py:234
+#: paperless_mail/models.py:241
+msgid "pdf layout"
+msgstr ""
+
+#: paperless_mail/models.py:247
 msgid "action"
 msgstr "akce"
 
-#: paperless_mail/models.py:240
+#: paperless_mail/models.py:253
 msgid "action parameter"
 msgstr "parametr akce"
 
-#: paperless_mail/models.py:245
+#: paperless_mail/models.py:258
 msgid "Additional parameter for the action selected above, i.e., the target folder of the move to folder action. Subfolders must be separated by dots."
 msgstr "Další parametr pro výše vybranou akci, například cílová složka akce přesunutí do složky. Podsložky musí být odděleny tečkou."
 
-#: paperless_mail/models.py:253
+#: paperless_mail/models.py:266
 msgid "assign title from"
 msgstr "nastavit titulek z"
 
-#: paperless_mail/models.py:273
+#: paperless_mail/models.py:286
 msgid "assign correspondent from"
 msgstr "přiřadit korespondenta z"
 
-#: paperless_mail/models.py:287
+#: paperless_mail/models.py:300
 msgid "Assign the rule owner to documents"
 msgstr "Přiřadit vlastníka pravidla k dokumentům"
 
-#: paperless_mail/models.py:313
+#: paperless_mail/models.py:326
 msgid "uid"
 msgstr "uid"
 
-#: paperless_mail/models.py:321
+#: paperless_mail/models.py:334
 msgid "subject"
 msgstr "předmět"
 
-#: paperless_mail/models.py:329
+#: paperless_mail/models.py:342
 msgid "received"
 msgstr "přijato"
 
-#: paperless_mail/models.py:336
+#: paperless_mail/models.py:349
 msgid "processed"
 msgstr "zpracováno"
 
-#: paperless_mail/models.py:342
+#: paperless_mail/models.py:355
 msgid "status"
 msgstr "stav"
 
