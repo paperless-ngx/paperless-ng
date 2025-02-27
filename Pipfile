@@ -31,7 +31,7 @@ concurrent-log-handler = "*"
 filelock = "*"
 flower = "*"
 gotenberg-client = "*"
-gunicorn = "*"
+granian = "*"
 httpx-oauth = "*"
 imap-tools = "*"
 inotifyrecursive = "~=0.3"
@@ -55,20 +55,17 @@ scikit-learn = "~=1.6"
 setproctitle = "*"
 tika-client = "*"
 tqdm = "*"
-# See https://github.com/paperless-ngx/paperless-ngx/issues/5494
-uvicorn = {extras = ["standard"], version = "==0.25.0"}
 watchdog = "~=6.0"
 whitenoise = "~=6.9"
 whoosh = "~=2.7"
 zxing-cpp = "*"
 
-
 [dev-packages]
 # Linting
 pre-commit = "*"
 ruff = "*"
-factory-boy = "*"
 # Testing
+factory-boy = "*"
 pytest = "*"
 pytest-cov = "*"
 pytest-django = "*"
